@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 
 class SchoolsListViewModel(val appRepo: AppRepo) : ViewModel() {
 // test git
+    //test git again
     var schoolsList = MutableLiveData<SchoolListUIModel>()
     var message = MutableLiveData<String>()
     var anApiFailed = MutableLiveData<Boolean>()
