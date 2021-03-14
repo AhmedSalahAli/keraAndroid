@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+
+    <fragment
+        android:id="@+id/schoolDetailsFragment"
+        android:name="com.example.kera.schoolDetails.ui.SchoolDetailsActivity"
+        android:label="school_details_fragment"
+        tools:layout="@layout/school_details_fragment" />
+    <fragment
+        android:id="@+id/schoolsListFragment"
+        android:name="com.example.kera.schoolsList.SchoolsListFragment"
+        android:label="schools_list_fragment"
+        tools:layout="@layout/schools_list_fragment" />
+    <fragment
+        android:id="@+id/sideMenuFragment"
+        android:name="com.example.kera.sideMenu.SideMenuFragment"
+        android:label="side_menu_fragment"
+        tools:layout="@layout/side_menu_fragment" />
+    <fragment
+        android:id="@+id/homeMapFragment"
+        android:name="com.example.kera.navigation.ui.NavigationMapFragment"
+        android:label="home_map_fragment"
+        tools:layout="@layout/navigation_map_fragment" />
+    <fragment
+        android:id="@+id/educationFragment"
+        android:name="com.example.kera.education.EducationActivity"
+        android:label="education_fragment"
+        tools:layout="@layout/activity_education" />
+    <activity
+        android:id="@+id/eventsActivity"
+        android:name="com.example.kera.events.ui.EventsActivity"
+        android:label="EventsActivity" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.kera.home.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_educationFragment"
+            app:destination="@id/educationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_eventsActivity"
+            app:destination="@id/eventsActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.kera.notification.NotificationFragment"
+        android:label="NotificationFragment" />
+    <fragment
+        android:id="@+id/navigationFragment"
+        android:name="com.example.kera.navigation.NavigationFragment"
+        android:label="navigation_fragment"
+        tools:layout="@layout/navigation_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.kera.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/teacherProfileFragment"
+        android:name="com.example.kera.teacherProfile.TeacherProfileFragment"
+        android:label="TeacherProfileFragment" />
+
+</navigation>

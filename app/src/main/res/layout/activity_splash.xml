@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".splash.ui.SplashActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.kera.splash.ui.SplashViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash">
+
+        <io.alterac.blurkit.BlurLayout
+            android:id="@+id/blurLayout"
+            android:layout_width="157dp"
+            android:layout_height="185dp"
+            android:elevation="5dp"
+            app:blk_blurRadius="18"
+            app:blk_cornerRadius="30dp"
+            app:blk_downscaleFactor="0.3"
+            app:blk_fps="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/kera" />
+        </io.alterac.blurkit.BlurLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

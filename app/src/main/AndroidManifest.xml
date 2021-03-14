@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.kera">
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:name=".app.MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.Fab_Bottom_app_bar">
+        <activity android:name=".dailyReport.ui.DailyReportActivity" />
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
+        <activity
+            android:name=".teacherDailyReport.writeReport.WriteReportActivity"
+            android:label="@string/title_activity_write_report" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity android:name=".events.ui.eventsdetails.EventsDetailsActivity" />
+        <activity android:name=".events.ui.EventsActivity" />
+        <activity android:name=".registration.screen4.Registration4Activity" />
+        <activity android:name=".registration.screen3.Registration3Activity" />
+        <activity android:name=".registration.screen1.Registration1Activity" />
+        <activity
+            android:name=".pincode.PinCodeActivity"
+            android:label="@string/title_activity_pin_code"
+            android:theme="@style/Theme.Fab_Bottom_app_bar.NoActionBar" />
+        <activity android:name=".main.ui.MainActivity" />
+        <activity
+            android:name=".login.ui.LoginActivity"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity> <!-- <activity android:name=".main.ui.MainActivity" /> -->
+        <activity android:name=".registration.screen2.Registration2Activity" />
+        <activity android:name=".meals.MealsActivity" />
+        <activity android:name=".medical.MedicalReportActivity" />
+        <activity android:name=".education.EducationActivity" />
+        <activity android:name=".schoolDetails.ui.SchoolDetailsActivity" />
+        <activity android:name=".meals.details.MealsDetailsActivity" />
+        <activity android:name=".splash.ui.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".teacherMedicalReport.TeacherMedicalReportActivity" />
+        <activity android:name=".teacherDailyReport.ui.TeacherDailyReportActivity" />
+        <activity android:name=".contactUs.ContactUsActivity" />
+        <activity android:name=".teacherMedicalReport.writeMedicalReport.WriteMedicalReportActivity" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+</manifest>

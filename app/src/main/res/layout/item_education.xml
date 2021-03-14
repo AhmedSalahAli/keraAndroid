@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.example.kera.education.model.EducationListItemModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_transparent_light_grey_stroke_dae2eb"
+        android:elevation="2dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="30dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="30dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <TextView
+            android:id="@+id/textView91"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/sf_ui_display_regular"
+            android:text="@{model.title}"
+            android:textColor="#0093DE"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="@+id/guideline32"
+            app:layout_constraintTop_toTopOf="@+id/guideline34"
+            tools:text="Booklet Title" />
+
+        <ImageView
+            android:id="@+id/imageView58"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView94"
+            app:layout_constraintEnd_toStartOf="@+id/textView94"
+            app:layout_constraintTop_toTopOf="@+id/guideline34"
+            app:srcCompat="@drawable/ic_line_pink" />
+
+        <TextView
+            android:id="@+id/textView94"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:fontFamily="@font/sf_ui_display_regular"
+            android:text="@{model.date}"
+            android:textColor="#1A2F50"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline33"
+            app:layout_constraintTop_toTopOf="@+id/guideline34"
+            tools:text="Wed, April 15" />
+
+        <TextView
+            android:id="@+id/textView95"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="6dp"
+            android:fontFamily="@font/sf_ui_display_regular"
+            android:text="@{model.description}"
+            android:textColor="#5881A4"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline33"
+            app:layout_constraintStart_toStartOf="@+id/guideline32"
+            app:layout_constraintTop_toBottomOf="@+id/textView91"
+            tools:text="The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz." />
+
+
+        <com.example.kera.utils.RoundCornerLayout
+            android:id="@+id/roundCornerLayout6"
+            android:layout_width="@dimen/_67sdp"
+            android:layout_height="@dimen/_67sdp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_white_pink_stroke_f2818a"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/roundCornerLayout7"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/guideline32"
+            app:layout_constraintTop_toBottomOf="@+id/textView95">
+
+            <ImageView
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/kera"
+                app:image="@{model.image1}" />
+        </com.example.kera.utils.RoundCornerLayout>
+
+        <com.example.kera.utils.RoundCornerLayout
+            android:id="@+id/roundCornerLayout7"
+            android:layout_width="@dimen/_67sdp"
+            android:layout_height="@dimen/_67sdp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/rounded_white_pink_stroke_f2818a"
+            app:layout_constraintBottom_toBottomOf="@+id/roundCornerLayout6"
+            app:layout_constraintEnd_toStartOf="@+id/roundCornerLayout8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/roundCornerLayout6"
+            app:layout_constraintTop_toTopOf="@+id/roundCornerLayout6">
+
+            <ImageView
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/kera"
+                app:image="@{model.image2}" />
+        </com.example.kera.utils.RoundCornerLayout>
+
+        <com.example.kera.utils.RoundCornerLayout
+            android:id="@+id/roundCornerLayout8"
+            android:layout_width="@dimen/_67sdp"
+            android:layout_height="@dimen/_67sdp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/rounded_white_pink_stroke_f2818a"
+            app:layout_constraintBottom_toBottomOf="@+id/roundCornerLayout7"
+            app:layout_constraintEnd_toStartOf="@+id/guideline33"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/roundCornerLayout7"
+            app:layout_constraintTop_toTopOf="@+id/roundCornerLayout7">
+
+            <ImageView
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/kera"
+                app:image="@{model.image3}" />
+        </com.example.kera.utils.RoundCornerLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
