@@ -76,9 +76,9 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
         viewDataBinding.recyclerView.setAdapter(viewDataBinding.adapter) // sets your own adapter
         viewDataBinding.recyclerView.addVeiledItems(15)
         viewDataBinding.recyclerView.veil()
-        viewDataBinding.recyclerView.getRecyclerView().setPadding(0,500,0,150)
+        viewDataBinding.recyclerView.getRecyclerView().setPadding(0,180,0,150)
         viewDataBinding.recyclerView .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView.getVeiledRecyclerView().setPadding(0,500,0,150)
+        viewDataBinding.recyclerView.getVeiledRecyclerView().setPadding(0,180,0,150)
         viewDataBinding.recyclerView .getVeiledRecyclerView().clipToPadding = false
         viewDataBinding.recyclerView.getRecyclerView().addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
