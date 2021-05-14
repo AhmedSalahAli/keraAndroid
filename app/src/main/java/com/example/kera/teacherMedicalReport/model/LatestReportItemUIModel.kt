@@ -27,7 +27,7 @@ class LatestReportItemUIModel(
                 responseModel.docs?.map {
                     ReportModel(
                         it.id,
-                        CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyy(it.date!!),
+                        CommonUtils.getTimeDateFromTimeStamp(it.date!!.toLong()),
                         it.text,
                         it.profileImage,
                         "Sent to ${it.sent}"

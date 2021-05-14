@@ -17,7 +17,11 @@
         <variable
             name="viewModel"
             type="com.example.kera.meals.MealsViewModel" />
+        <variable
+            name="childrenAdapter"
+            type="com.example.kera.profile.adapter.ChildrenAdapter" />
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -41,7 +45,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout19"
             android:layout_width="0dp"
-            android:layout_height="118dp"
+            android:layout_height="90dp"
             android:background="@drawable/rounded_bottom_left_right_corners"
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,19 +77,52 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView_back" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView_profile"
+                android:layout_width="41dp"
+                android:layout_height="41dp"
+                 android:layout_margin="15dp"
+                app:image="@{viewModel.selectedUser.profileImage}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                 />
 
+            <ImageView
+                android:id="@+id/imageView_exchange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_profile"
+                app:layout_constraintEnd_toStartOf="@+id/imageView_profile"
+                app:layout_constraintStart_toStartOf="@+id/imageView_profile"
+                app:layout_constraintTop_toTopOf="@+id/imageView_profile"
+                app:srcCompat="@drawable/ic_exchange" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/dates_constraint"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_130sdp"
+        <com.skydoves.androidveil.VeilLayout
+            android:id="@+id/veilLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:veilLayout_veiled="true"
+            app:veilLayout_shimmerEnable="true"
+            app:veilLayout_baseColor="@color/gray_D2DCE8"
+            app:veilLayout_highlightColor="@color/white"
+            app:veilLayout_baseAlpha="0.6"
+            app:veilLayout_highlightAlpha="1.0"
+            app:veilLayout_dropOff="0.5"
+            app:veilLayout_radius="6dp"
             android:layout_marginTop="29dp"
-            android:background="@drawable/rounded_grey_d2dce8_grey_stroke"
-            android:elevation="5dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline31"
             app:layout_constraintStart_toStartOf="@+id/guideline30"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout19">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dates_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+
+            android:background="@drawable/rounded_grey_d2dce8_grey_stroke"
+            android:elevation="10dp"
+          >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dates_recycler"
@@ -176,23 +213,61 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
+        </com.skydoves.androidveil.VeilLayout>
+        <com.skydoves.androidveil.VeilRecyclerFrameView
+            android:id="@+id/recycler_meals"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
-            android:orientation="horizontal"
-            app:adapter="@{mealsAdapter}"
+
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline31"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline30"
-            app:layout_constraintTop_toBottomOf="@+id/dates_constraint"
+            app:layout_constraintTop_toBottomOf="@+id/veilLayout"
+
             app:layout_constraintVertical_bias="1.0"
             app:spanCount="1"
-            tools:listitem="@layout/item_meals" />
+            android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+            app:veilFrame_layout="@layout/item_meals"
+        app:veilFrame_veiled="true"
+        app:veilFrame_shimmerEnable="true"
+            app:veilLayout_baseColor="@color/gray_D2DCE8"
+            app:veilLayout_highlightColor="@color/white"
+        app:veilFrame_baseAlpha="0.6"
+        app:veilFrame_highlightAlpha="1.0"
+        app:veilFrame_radius="8dp"
+             />
+
+        <FrameLayout
+            android:id="@+id/children_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_chiled_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout19"
+            android:layout_marginEnd="15dp"
+            android:visibility="gone"
+            android:elevation="@dimen/_15sdp"
+            android:layout_marginTop="10dp"
+            >
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_students"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                app:adapter="@{childrenAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+
+                app:spanCount="1"
+                tools:listitem="@layout/item_student" />
+
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>

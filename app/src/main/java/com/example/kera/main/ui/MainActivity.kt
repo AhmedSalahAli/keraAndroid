@@ -7,10 +7,14 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.kera.R
 import com.example.kera.databinding.ActivityMainBinding
+import com.example.kera.home.HomeFragment
 import com.example.kera.navigation.NavigationFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.shape.CornerFamily.ROUNDED
@@ -24,16 +28,24 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
     private val mainViewModel: MainViewModel by viewModel()
     lateinit var viewDataBinding: ActivityMainBinding
     lateinit var accessType: String
+    var teacher : Int = 0
+    private var mViewPagerAdapter: ViewPagerAdapter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.viewModel = mainViewModel
-
+        teacher = R.id.teacherProfileFragment
         accessType = mainViewModel.getUserType()
         val navController = findNavController(R.id.fragment)
         viewDataBinding.bottomNavigationView.uncheckAllItems()
+
         viewDataBinding.bottomNavigationView.setupWithNavController(navController)
+
+
+
+
         viewDataBinding.bottomNavigationView.background = null
         viewDataBinding.bottomNavigationView.menu.getItem(2).isEnabled = false
 
@@ -50,21 +62,31 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
         window.statusBarColor = ContextCompat.getColor(this, R.color.white);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
-
+        viewDataBinding.floatingActionButton2.setOnClickListener(View.OnClickListener {
+            navController.navigate(R.id.homeFragment)
+            viewDataBinding.bottomNavigationView.uncheckAllItems()
+        })
 
         viewDataBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigationFragment -> {
                     navController.navigate(R.id.navigationFragment)
+
+
                 }
                 R.id.notificationFragment -> {
                     navController.navigate(R.id.notificationFragment)
+
+
                 }
+
                 R.id.profileFragment -> {
                     if (accessType == "user") {
                         navController.navigate(R.id.profileFragment)
+
                     } else {
                         navController.navigate(R.id.teacherProfileFragment)
+
                     }
                 }
                 R.id.sideMenuFragment -> {
@@ -74,10 +96,10 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
             true
         }
 
-        viewDataBinding.floatingActionButton2.setOnClickListener {
-            viewDataBinding.bottomNavigationView.uncheckAllItems()
-            navController.navigate(R.id.homeFragment)
-        }
+//        viewDataBinding.floatingActionButton2.setOnClickListener {
+//            viewDataBinding.bottomNavigationView.uncheckAllItems()
+//            navController.navigate(R.id.homeFragment)
+//        }
 
 
 //        viewDataBinding.nearbyConstraint.setOnClickListener {
@@ -169,8 +191,21 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
 
     override fun onBottomBarActionClicked(position: Int) {
 //        handlingBottomBarClicks(position)
-    }
 
+    }
+//    fun switchFragment(fragment: Fragment) {
+//
+//
+//        val fm: FragmentManager = supportFragmentManager
+//        val transaction: FragmentTransaction = fm.beginTransaction().setCustomAnimations(
+//            R.anim.fade_in,
+//            R.anim.fade_out
+//        )
+//
+//        transaction.replace(R.id.fragment, fragment)
+//        transaction.commit()
+
+//    }
     fun BottomNavigationView.uncheckAllItems() {
         menu.setGroupCheckable(0, true, false)
         for (i in 0 until menu.size()) {

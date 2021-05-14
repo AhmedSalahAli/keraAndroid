@@ -52,6 +52,8 @@ class SchoolsListResponseModel {
 
             @SerializedName("favorites")
             var favorites = 0
+            @SerializedName("isFavourite")
+            var isFavourite : Boolean = false
 
             @SerializedName("shortDescription")
             var shortDescription: String? = null

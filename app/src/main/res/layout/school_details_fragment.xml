@@ -28,17 +28,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
+        <com.skydoves.androidveil.VeilLayout
+            android:id="@+id/veilLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:veilLayout_veiled="true"
+            app:veilLayout_shimmerEnable="true"
+            app:veilLayout_baseColor="@color/gray_D2DCE8"
+            app:veilLayout_highlightColor="@color/white"
+            app:veilLayout_baseAlpha="0.6"
+            app:veilLayout_highlightAlpha="1.0"
+            app:veilLayout_dropOff="0.5"
+            app:veilLayout_radius="6dp" >
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white">
+            android:background="#FCFDFD">
 
 
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_180sdp"
+                android:layout_height="250dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,14 +59,16 @@
                 app:sliderAutoCycleDirection="right"
                 app:sliderAutoCycleEnabled="true"
                 app:sliderIndicatorAnimationDuration="600"
-                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorGravity="bottom|center"
                 app:sliderIndicatorMargin="13dp"
                 app:sliderIndicatorOrientation="horizontal"
                 app:sliderIndicatorPadding="3dp"
                 app:sliderIndicatorRadius="2dp"
                 app:sliderIndicatorSelectedColor="#0093DE"
                 app:sliderIndicatorUnselectedColor="#D2DCE8"
-                app:sliderStartAutoCycle="true" />
+                app:sliderStartAutoCycle="true"
+
+                />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline13"
@@ -289,6 +304,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView15"
                 app:srcCompat="@drawable/ic_line_yellow" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.skydoves.androidveil.VeilLayout>
     </androidx.core.widget.NestedScrollView>
 
 </layout>

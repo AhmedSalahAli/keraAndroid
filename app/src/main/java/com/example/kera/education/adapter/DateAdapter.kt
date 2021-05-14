@@ -44,7 +44,8 @@ class DateAdapter(
             } else {
                 binding.viewDateIndicator.setBackgroundResource(R.drawable.rounded_blue_d2dce8_stroke_97b4d8)
             }
-            binding.date = datesList[position].displayDate[0].toString()
+            binding.date = datesList[position].displayDate
+
         }
     }
 

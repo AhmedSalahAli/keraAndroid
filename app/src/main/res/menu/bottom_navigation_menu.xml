@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigationFragment"
         android:enabled="true"
         android:icon="@drawable/ic_nearby"
+
+
         android:title="@string/nearby" />
+
 
     <item
         android:id="@+id/notificationFragment"
         android:enabled="true"
         android:icon="@drawable/ic_notifications"
+        app:showAsAction="never"
         android:title="@string/notification" />
     <item
         android:id="@+id/textinput_placeholder"
@@ -19,10 +24,12 @@
         android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/ic_person"
+        app:showAsAction="never"
         android:title="@string/profile" />
     <item
         android:id="@+id/sideMenuFragment"
         android:enabled="true"
+        app:showAsAction="never"
         android:icon="@drawable/ic_menu"
         android:title="@string/settings" />
 </menu>

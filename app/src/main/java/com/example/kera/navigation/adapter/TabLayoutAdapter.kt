@@ -20,7 +20,7 @@ class TabLayoutAdapter(
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
-                return NavigationMapFragment()
+                return  NavigationMapFragment()
             }
             1 -> {
                 return SchoolsListFragment()

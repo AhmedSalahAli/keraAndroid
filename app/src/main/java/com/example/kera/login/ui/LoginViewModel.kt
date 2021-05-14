@@ -36,4 +36,7 @@ class LoginViewModel(val appRepo: AppRepo) : ViewModel() {
             }
         }
     }
+    fun saveTokenToSharedPref(token: String) {
+        appRepo.saveTokenInSharedPref(token)
+    }
 }

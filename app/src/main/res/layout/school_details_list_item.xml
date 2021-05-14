@@ -11,36 +11,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="20dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="20dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="20dp" />
+        android:layout_height="235dp">
 
         <com.example.kera.utils.RoundCornerLayout
-            android:id="@+id/roundCornerLayout2"
+            android:id="@+id/roundCornerLayout3"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_180sdp"
+            android:layout_height="0dp"
             app:bottomLeftEnabled="true"
             app:bottomRightEnabled="true"
-            app:cornerRadius="@dimen/_15sdp"
+            app:cornerRadius="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,12 +28,15 @@
             app:topRightEnabled="false">
 
             <ImageView
+                android:id="@+id/image_slider"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:image="@{model}"
-                android:src="@drawable/picture" />
+                />
         </com.example.kera.utils.RoundCornerLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

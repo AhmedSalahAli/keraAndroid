@@ -8,23 +8,25 @@
         <variable
             name="model"
             type="com.example.kera.profile.StudentsData" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="7dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:src="@drawable/kera"
             app:civ_border_color="#FFBB3B"
-            app:civ_border_width="1dp"
+
             app:image="@{model.profileImage}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

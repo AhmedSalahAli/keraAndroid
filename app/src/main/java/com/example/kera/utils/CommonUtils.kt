@@ -230,4 +230,14 @@ object CommonUtils {
         val date = DateFormat.format("EEE,MMM MM,yyyy ", calendar).toString()
         return date
     }
+    fun getTimeDateFromTimeStamp(timestamp: Long): String? {
+        return try {
+            val dateFormat = java.text.DateFormat.getDateTimeInstance()
+            val netDate = Date(timestamp)
+            dateFormat.format(netDate)
+        } catch (e: Exception) {
+            "date"
+        }
+    }
+
 }

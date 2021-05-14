@@ -28,302 +28,347 @@
         android:layout_height="match_parent"
         android:background="@drawable/background">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/constraintLayout7"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_100sdp"
-            android:background="@drawable/rounded_bottom_left_right_corners_fbfaf9"
-            android:elevation="10dp"
+            style="@style/CustomCardCorners"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="@color/blue_fcfdfd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
 
-            <ImageView
-                android:id="@+id/imageView_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="33dp"
-                android:layout_marginTop="33dp"
-                android:layout_marginBottom="12dp"
-                android:src="@drawable/ic_rounded_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                >
 
-            <TextView
-                android:id="@+id/textView103"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sf_ui_display_regular"
-                android:text="@string/daily_reports"
-                android:textColor="#152D4A"
-                android:textSize="@dimen/_13ssp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView_back" />
+                <ImageView
+                    android:id="@+id/imageView_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginTop="33dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/ic_rounded_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView103"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_ui_display_regular"
+                    android:text="@string/daily_reports"
+                    android:textColor="#152D4A"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView_back" />
 
 
-            <ImageView
-                android:id="@+id/imageView_writeReport"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:src="@drawable/ic_send_report_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView_back" />
+                <ImageView
+                    android:id="@+id/imageView_writeReport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:src="@drawable/ic_send_report_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView_back" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScroll1"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/rounded_top_left_right_corners"
-            android:fillViewport="true"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_daily_report_data"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rounded_top_left_right_corners"
-                android:elevation="5dp"
+                style="@style/TopCustomCardCorners"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/blue_fcfdfd"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
-
-                <ImageView
-                    android:id="@+id/imageView72"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_left_arrow_grey"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="@+id/guideline43"
-                    app:layout_constraintTop_toTopOf="@+id/guideline42" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline42"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="25dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline43"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="23dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline44"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="23dp" />
-
-                <ImageView
-                    android:id="@+id/imageView73"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_right_arrow_grey"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline44"
-                    app:layout_constraintTop_toTopOf="@+id/guideline42" />
-
-                <TextView
-                    android:id="@+id/textView_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_ui_display_semibold"
-                    android:textColor="#152D4A"
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView73"
-                    app:layout_constraintStart_toEndOf="@+id/imageView72"
-                    app:layout_constraintTop_toTopOf="@+id/guideline42"
-                    tools:text="Monday, May 11, 2020" />
-
-                <TextView
-                    android:id="@+id/textView_number_of_classes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="1 Class Today"
-                    android:textColor="#8C99A7"
-                    android:textSize="@dimen/_8ssp"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView73"
-                    app:layout_constraintStart_toEndOf="@+id/imageView72"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_date" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal"
-                    app:adapter="@{classesAdapter}"
-                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline44"
-                    app:layout_constraintStart_toStartOf="@+id/guideline43"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_number_of_classes"
-                    app:spanCount="1"
-                    tools:listitem="@layout/item_teacher_report_classes" />
-
-                <TextView
-                    android:id="@+id/textView120"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@string/students"
-                    android:textColor="#5881A4"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/guideline43"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerView7" />
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/search_constraint"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@drawable/rounded_white_light_grey_eeeff0_stroke"
-                    app:layout_constraintEnd_toStartOf="@+id/select_all"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/guideline43"
-                    app:layout_constraintTop_toBottomOf="@+id/textView120">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="10dp"
+                    >
 
                     <ImageView
-                        android:id="@+id/imageView74"
+                        android:id="@+id/imageView72"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="7dp"
-                        android:src="@drawable/ic_search"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_left_arrow_grey"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="@+id/guideline43"
+                        app:layout_constraintTop_toTopOf="@+id/guideline42" />
 
-                    <EditText
-                        android:id="@+id/search_edit_text"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:background="@android:color/transparent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/imageView74"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView9"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_200sdp"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal"
-                    app:adapter="@{studentsAdapter}"
-                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline44"
-                    app:layout_constraintStart_toStartOf="@+id/guideline43"
-                    app:layout_constraintTop_toBottomOf="@+id/search_constraint"
-                    app:spanCount="3"
-                    tools:listitem="@layout/item_student_name_image" />
-
-                <TextView
-                    android:id="@+id/textView_students_selected"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:textColor="#50C4FF"
-                    android:textSize="@dimen/_9ssp"
-                    app:layout_constraintStart_toStartOf="@+id/guideline43"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerView9"
-                    tools:text="12 Students are selected" />
-
-                <TextView
-                    android:id="@+id/textView123"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="@font/sf_ui_display_medium"
-                    android:text="Latest reports"
-                    android:textColor="#ADBBC7"
-                    android:textSize="@dimen/_10ssp"
-                    app:layout_constraintStart_toStartOf="@+id/guideline43"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_students_selected" />
-
-                <TextView
-                    android:id="@+id/textView_mark_as_absent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_ui_display_medium"
-                    android:text="@string/mark_as_abscent"
-                    android:textColor="#1A2F50"
-                    android:textSize="@dimen/_11ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView_students_selected"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline44"
-                    app:layout_constraintTop_toTopOf="@+id/textView_students_selected" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_latest_reports"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_350sdp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="32dp"
-                    android:orientation="vertical"
-                    app:adapter="@{latestReportsAdapter}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline44"
-                    app:layout_constraintStart_toStartOf="@+id/guideline43"
-                    app:layout_constraintTop_toBottomOf="@+id/textView123"
-                    app:spanCount="1"
-                    tools:listitem="@layout/item_teacher_medical_report_report" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/select_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/search_constraint"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline44"
-                    app:layout_constraintTop_toTopOf="@+id/search_constraint">
-
-                    <CheckBox
-                        android:id="@+id/checkBox_select_all"
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline42"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:scaleX="0.7"
-                        android:scaleY="0.7"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView21"
-                        app:layout_constraintEnd_toStartOf="@+id/textView21"
-                        app:layout_constraintTop_toTopOf="@+id/textView21" />
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_begin="25dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline43"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="23dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline44"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="23dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView73"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_right_arrow_grey"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+                        app:layout_constraintTop_toTopOf="@+id/guideline42" />
 
                     <TextView
-                        android:id="@+id/textView21"
+                        android:id="@+id/textView_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/sf_ui_display_light"
-                        android:text="@string/select_all"
-                        android:textColor="#8C99A7"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:fontFamily="@font/sf_ui_display_semibold"
+                        android:textColor="#152D4A"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView73"
+                        app:layout_constraintStart_toEndOf="@+id/imageView72"
+                        app:layout_constraintTop_toTopOf="@+id/guideline42"
+                        tools:text="Monday, May 11, 2020" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/textView_number_of_classes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="1 Class Today"
+                        android:textColor="#8C99A7"
+                        android:textSize="@dimen/_8ssp"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView73"
+                        app:layout_constraintStart_toEndOf="@+id/imageView72"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_date" />
+
+                    <com.skydoves.androidveil.VeilRecyclerFrameView
+                        android:id="@+id/recyclerView7"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        app:adapter="@{classesAdapter}"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+                        app:layout_constraintStart_toStartOf="@+id/guideline43"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_number_of_classes"
+                        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+                        app:veilFrame_layout="@layout/item_teacher_report_classes"
+                        app:veilFrame_veiled="true"
+                        app:veilFrame_shimmerEnable="true"
+                        app:veilLayout_baseColor="@color/gray_D2DCE8"
+                        app:veilLayout_highlightColor="@color/white"
+                        app:veilFrame_baseAlpha="0.6"
+                        app:veilFrame_highlightAlpha="1.0"
+                        app:veilFrame_radius="8dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView120"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="35dp"
+                        android:fontFamily="@font/sf_ui_display_black"
+                        android:text="@string/students"
+                        android:textColor="#5881A4"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/guideline43"
+                        app:layout_constraintTop_toBottomOf="@+id/recyclerView7" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/search_constraint"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/rounded_white_light_grey_eeeff0_stroke"
+                        app:layout_constraintEnd_toStartOf="@+id/select_all"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/guideline43"
+                        app:layout_constraintTop_toBottomOf="@+id/textView120">
+
+                        <ImageView
+                            android:id="@+id/imageView74"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:src="@drawable/ic_search"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/search_edit_text"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@android:color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/imageView74"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.skydoves.androidveil.VeilRecyclerFrameView
+                        android:id="@+id/recyclerView9"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_200sdp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        app:adapter="@{studentsAdapter}"
+                        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+
+                        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+                        app:layout_constraintStart_toStartOf="@+id/guideline43"
+                        app:layout_constraintTop_toBottomOf="@+id/search_constraint"
+                        app:veilFrame_layout="@layout/item_student_name_image"
+                        app:veilFrame_veiled="true"
+                        app:veilFrame_shimmerEnable="true"
+                        app:veilLayout_baseColor="@color/gray_D2DCE8"
+                        app:veilLayout_highlightColor="@color/white"
+                        app:veilFrame_baseAlpha="0.6"
+                        app:veilFrame_highlightAlpha="1.0"
+                        app:veilFrame_radius="8dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView_students_selected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="32dp"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:textColor="#50C4FF"
+                        android:textSize="@dimen/_9ssp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline43"
+                        app:layout_constraintTop_toBottomOf="@+id/recyclerView9"
+                        tools:text="12 Students are selected" />
+
+                    <TextView
+                        android:id="@+id/textView123"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:fontFamily="@font/sf_ui_display_medium"
+                        android:text="Latest reports"
+                        android:textColor="#ADBBC7"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline43"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_students_selected" />
+
+                    <TextView
+                        android:id="@+id/textView_mark_as_absent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_medium"
+                        android:text="@string/mark_as_abscent"
+                        android:textColor="#1A2F50"
+                        android:textSize="@dimen/_11ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_students_selected"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+                        app:layout_constraintTop_toTopOf="@+id/textView_students_selected" />
+
+                    <com.skydoves.androidveil.VeilRecyclerFrameView
+                        android:id="@+id/recycler_latest_reports"
+                        android:layout_width="match_parent"
+                        android:layout_height="500dp"
+                        android:layout_marginTop="8dp"
+                        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+
+                        android:orientation="vertical"
+                        app:adapter="@{latestReportsAdapter}"
+
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline43"
+                        app:layout_constraintTop_toBottomOf="@+id/textView123"
+                        app:spanCount="1"
+                        app:veilFrame_layout="@layout/item_teacher_medical_report_report"
+                        app:veilFrame_veiled="true"
+                        app:veilFrame_shimmerEnable="true"
+                        app:veilLayout_baseColor="@color/gray_D2DCE8"
+                        app:veilLayout_highlightColor="@color/white"
+                        app:veilFrame_baseAlpha="0.6"
+                        app:veilFrame_highlightAlpha="1.0"
+                        app:veilFrame_radius="8dp"
+                      />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/select_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/search_constraint"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+                        app:layout_constraintTop_toTopOf="@+id/search_constraint">
+
+                        <CheckBox
+                            android:id="@+id/checkBox_select_all"
+
+
+                            android:layout_alignParentLeft="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select All"
+
+                            android:buttonTint="@color/orange_FFBB3B"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="#152D4A"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView21"
+                            app:layout_constraintEnd_toStartOf="@+id/textView21"
+                            app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sf_ui_display_light"
+                            android:text="@string/select_all"
+                            android:textColor="#8C99A7"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
         </androidx.core.widget.NestedScrollView>
 
 

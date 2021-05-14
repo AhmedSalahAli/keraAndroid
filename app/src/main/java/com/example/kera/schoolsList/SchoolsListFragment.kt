@@ -67,15 +67,20 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
         window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
-        mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
+        //mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
         viewModel.getSchoolsList(page)
-        viewDataBinding.adapter = SchoolListAdapter(ArrayList(), this)
+        viewDataBinding.adapter = SchoolListAdapter(ArrayList(), this,requireContext())
 
         manager = LinearLayoutManager(requireActivity())
-
-        viewDataBinding.recyclerView.layoutManager = manager
-
-        viewDataBinding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        viewDataBinding.recyclerView.setLayoutManager(manager)
+        viewDataBinding.recyclerView.setAdapter(viewDataBinding.adapter) // sets your own adapter
+        viewDataBinding.recyclerView.addVeiledItems(15)
+        viewDataBinding.recyclerView.veil()
+        viewDataBinding.recyclerView.getRecyclerView().setPadding(0,500,0,150)
+        viewDataBinding.recyclerView .getRecyclerView().clipToPadding = false
+        viewDataBinding.recyclerView.getVeiledRecyclerView().setPadding(0,500,0,150)
+        viewDataBinding.recyclerView .getVeiledRecyclerView().clipToPadding = false
+        viewDataBinding.recyclerView.getRecyclerView().addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
@@ -92,10 +97,12 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
                     isScrolling = false
                     if (page < totalNumberOfPages) {
                         page += 1
-                        mProgressDialog = CommonUtils.showLoadingDialog(
-                            requireActivity(),
-                            R.layout.progress_dialog
-                        )
+//                        mProgressDialog = CommonUtils.showLoadingDialog(
+//                            requireActivity(),
+//                            R.layout.progress_dialog
+//                        )
+                      //  viewDataBinding.recyclerView.veil()
+
                         viewModel.getSchoolsList(page)
                     }
                 }
@@ -103,13 +110,17 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
         })
 
         viewModel.anApiFailed.observe(viewLifecycleOwner, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+            //CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.recyclerView.unVeil()
+
         })
 
         messageObserver()
 
         viewModel.schoolsList.observe(viewLifecycleOwner, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+           // CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.recyclerView.unVeil()
+
             isScrolling = false
             schoolsList.addAll(it.schools)
             totalNumberOfPages = it.pages
@@ -121,6 +132,8 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
     companion object {
         fun newInstance() = SchoolsListFragment()
     }
+
+
 
     override fun onItemClicked(schoolID: String?) {
         val myIntent = Intent(requireContext(), SchoolDetailsActivity::class.java)

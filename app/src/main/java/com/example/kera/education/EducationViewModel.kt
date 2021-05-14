@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.kera.data.network.AppRepo
 import com.example.kera.education.model.EducationListItemModel
 import com.example.kera.meals.model.ClassMealsDates
+import com.example.kera.profile.ProfileUIModel
 import com.example.kera.profile.StudentsData
 import kotlinx.coroutines.launch
 
@@ -15,7 +16,8 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
     var monthAndYearTitleLiveData = MutableLiveData<String>()
     private var calendarDate: String? = null
     var message = MutableLiveData<String>()
-
+    var selectedUser = MutableLiveData<StudentsData>()
+    var profileUIModel = MutableLiveData<ProfileUIModel>()
     val language = "en"
     val version = 1
     fun getEducationList(classID: String, date: String) {
@@ -37,10 +39,30 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
         }
     }
 
-    fun getSelectedChildDataFromSharedPref(): StudentsData? {
-        return appRepo.getSelectedChildData()
-    }
+
     fun getUserType() : String{
         return appRepo.getUserTypeFromSharedPref()
+    }
+    fun getSelectedChildDataFromSharedPref(): StudentsData? {
+        var response = appRepo.getSelectedChildData()
+        selectedUser.value = response!!
+        return appRepo.getSelectedChildData()
+    }
+
+    fun getAppRepoInstance() :AppRepo{
+        return appRepo
+    }
+    fun saveChildToSharedPref(studentData: StudentsData) {
+        appRepo.saveSelectedChildData(studentData)
+    }
+    fun getProfileData() {
+        viewModelScope.launch {
+            try {
+                val response = appRepo.getProfileData("en", 1, "user")
+                profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
+            } catch (e: Exception) {
+                message.value = e.toString()
+            }
+        }
     }
 }

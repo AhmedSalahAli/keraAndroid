@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addLocation.AddLocation">
+    <FrameLayout
+        android:id="@+id/frameMap2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <fragment
+            android:id="@+id/AddMap2"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:transitionName="Map"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginBottom="170dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/BmyLocationCard"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="10dp"
+
+
+
+                >
+                <ImageView
+                    android:id="@+id/BmyLocation"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+
+                    android:layout_gravity="center"
+
+                    android:layout_margin="15dp"
+                    android:src="@drawable/ic_baseline_my_location_24"
+                    />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginStart="13dp"
+            android:src="@drawable/ic_rounded_back"
+
+            />
+
+        <Button
+            android:id="@+id/DoneLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="50dp"
+            android:background="@drawable/rounded_blue_1a2f50"
+
+            android:text="@string/add_your_location"
+            android:textColor="@color/blue_152d4a"/>
+    </FrameLayout>
+    <View
+        android:layout_width="7dp"
+        android:layout_height="7dp"
+        android:background="@color/white"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+</RelativeLayout>

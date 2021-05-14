@@ -40,10 +40,11 @@
     <string name="settings">Settings</string>
     <string name="full_name">Full name</string>
     <string name="job_title">Job title</string>
-    <string name="write_your_address_here">Write your address here</string>
+    <string name="write_your_address_here">Write your address here...</string>
     <string name="add_your_location">Add your Location</string>
     <string name="medical_history_and_requirements">Medical history and requirements</string>
-    <string name="kid_s_especial_medical_requirement_to_be_written_here">Kid’s especial medical requirement to be written here…</string>
+    <string name="kid_s_especial_medical_requirement_to_be_written_here">Kid’s especial medical requirement to
+        be written here…</string>
     <string name="submit">Submit</string>
     <string name="i_agree_the_mentioned_payment_policy_and_remarks">I agree the mentioned payment policy, and remarks.</string>
     <string name="upcoming_events">Upcoming Events</string>
@@ -103,5 +104,14 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="daily_meals">Daily Meals</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_add_location">Please add your location</string>
+    <string name="id_copy">ID copy</string>
+    <string name="birth_cirt">Birth Cert</string>
+    <string name="policy_remarks"><![CDATA[Policy & Remarks]]></string>
+    <string name="please_select_at_least_one_student">Please select at least one studnet</string>
+    <string name="Save">Save</string>
+    <string name="clear_all">Clear All</string>
 
 </resources>

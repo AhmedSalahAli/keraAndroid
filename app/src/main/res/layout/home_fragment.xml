@@ -29,15 +29,18 @@
             layout="@layout/progress_dialog"
             android:visibility="gone" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp"
-            android:background="@drawable/rounded_bottom_left_right_corners"
-            android:elevation="4dp"
+            android:layout_height="@dimen/_80sdp"
+            style="@style/CustomCardCorners"
+            app:cardElevation="@dimen/_20sdp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+
 
             <ImageView
                 android:id="@+id/imageView26"
@@ -59,7 +62,7 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
@@ -78,14 +81,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <com.skydoves.androidveil.VeilLayout
+                    android:id="@+id/veilLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:veilLayout_veiled="true"
+                    app:veilLayout_shimmerEnable="true"
+                    app:veilLayout_baseColor="@color/gray_D2DCE8"
+                    app:veilLayout_highlightColor="@color/white"
+                    app:veilLayout_baseAlpha="0.6"
+                    app:veilLayout_highlightAlpha="1.0"
+                    app:veilLayout_dropOff="0.5"
+                    app:veilLayout_radius="6dp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/rounded_blue_effcff"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+
+                  >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout5"
@@ -94,7 +114,8 @@
                         android:background="@drawable/rounded_white_orange_stroke_10sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:padding="1dp">
 
                         <com.smarteist.autoimageslider.SliderView
                             android:id="@+id/recyclerView3"
@@ -223,6 +244,7 @@
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
                         android:layout_marginTop="12dp"
+
                         android:background="@drawable/oval_light_blue"
                         app:layout_constraintStart_toStartOf="@+id/constraintLayout_education"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout_education">
@@ -366,7 +388,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout_meals" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
+                </com.skydoves.androidveil.VeilLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_layout_news"
                     android:layout_width="match_parent"
@@ -377,7 +399,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraint_1">
+                    app:layout_constraintTop_toBottomOf="@+id/veilLayout">
 
                     <TextView
                         android:id="@+id/textView110"

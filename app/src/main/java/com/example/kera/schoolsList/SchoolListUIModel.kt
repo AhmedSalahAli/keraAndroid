@@ -55,7 +55,7 @@ class SchoolListUIModel(
                         it.longitude,
                         it.latitude,
                         getGeoHash(it.latitude, it.longitude),
-                        ObservableBoolean(false),
+                        ObservableBoolean(it.isFavourite),
                     )
                 }
             )

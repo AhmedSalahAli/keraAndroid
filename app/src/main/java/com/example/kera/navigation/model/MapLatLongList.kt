@@ -5,7 +5,9 @@ import com.example.kera.data.models.MapListResponseModel
 class MapLatLongList(
     var lat: Double,
     var long: Double,
-    var image: String?=""
+    var image: String?="",
+    var _id :String?="",
+    var name :String?="",
 ) {
     companion object {
         fun mapResponseToUI(responseModel: MapListResponseModel): ArrayList<MapLatLongList> {
@@ -13,7 +15,9 @@ class MapLatLongList(
                 MapLatLongList(
                     it.latitude,
                     it.longitude,
-                    it.logo
+                    it.logo,
+                    it.id,
+                    it.username
                 )
             } as ArrayList
         }

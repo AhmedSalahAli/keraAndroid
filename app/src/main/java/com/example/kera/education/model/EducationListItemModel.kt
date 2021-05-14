@@ -9,7 +9,8 @@ class EducationListItemModel(
     var description: String? = "",
     var image1: String? = "",
     var image2: String? = "",
-    var image3: String? = ""
+    var image3: String? = "",
+    var images:ArrayList<String>
 ) {
     companion object {
         fun convertResponseModelToUIModel(response: EducationResponseModel.DataBean?): ArrayList<EducationListItemModel> {
@@ -21,6 +22,9 @@ class EducationListItemModel(
                     it.images?.get(0),
                     it.images?.get(1),
                     it.images?.get(2),
+                    it.images!!.map {
+                        it
+                    } as ArrayList,
                 )
             } as ArrayList
         }

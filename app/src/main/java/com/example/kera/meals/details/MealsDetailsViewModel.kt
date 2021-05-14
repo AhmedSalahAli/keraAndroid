@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kera.data.network.AppRepo
 import com.example.kera.meals.model.MealsDetailsUIModel
+import com.example.kera.profile.ProfileUIModel
+import com.example.kera.profile.StudentsData
 import kotlinx.coroutines.launch
 
 class MealsDetailsViewModel(val appRepo: AppRepo) : ViewModel() {
@@ -13,7 +15,8 @@ class MealsDetailsViewModel(val appRepo: AppRepo) : ViewModel() {
     var mealDetails = MutableLiveData<MealsDetailsUIModel>()
     var postCommentObserver = MutableLiveData<Boolean>()
     var message = MutableLiveData<String>()
-
+    var selectedUser = MutableLiveData<StudentsData>()
+    var profileUIModel = MutableLiveData<ProfileUIModel>()
     fun getMealDetails(classID: String) {
         viewModelScope.launch {
             val response = appRepo.getClassMealDetails(classID)
@@ -34,6 +37,28 @@ class MealsDetailsViewModel(val appRepo: AppRepo) : ViewModel() {
                 message.value = e.toString()
             }
 
+        }
+    }
+
+    fun getSelectedChildDataFromSharedPref(): StudentsData? {
+        var response = appRepo.getSelectedChildData()
+        selectedUser.value = response!!
+        return appRepo.getSelectedChildData()
+    }
+    fun getAppRepoInstance() :AppRepo{
+        return appRepo
+    }
+    fun saveChildToSharedPref(studentData: StudentsData) {
+        appRepo.saveSelectedChildData(studentData)
+    }
+    fun getProfileData() {
+        viewModelScope.launch {
+            try {
+                val response = appRepo.getProfileData("en", 1, "user")
+                profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
+            } catch (e: Exception) {
+                message.value = e.toString()
+            }
         }
     }
 }

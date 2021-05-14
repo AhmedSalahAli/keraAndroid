@@ -22,11 +22,11 @@ class DailyReportViewModel(var appRepo: AppRepo) : ViewModel() {
         getSelectedChildDataFromSharedPref()
     }
 
-    fun getDailyReportData(studentID: String, fromDate: String, toDate: String) {
+    fun getDailyReportData(studentID: String, fromDate: String, toDate: String,page:Int) {
         viewModelScope.launch {
             try {
 //                Log.e("getting report data", studentID)
-                val data = appRepo.getDailyReportData(studentID, fromDate, toDate)
+                val data = appRepo.getDailyReportData(studentID, fromDate, toDate,page)
                 response.value = data
             } catch (e: Exception) {
                 message.value = e.toString()
@@ -48,7 +48,9 @@ class DailyReportViewModel(var appRepo: AppRepo) : ViewModel() {
     fun saveChildToSharedPref(studentData: StudentsData) {
         appRepo.saveSelectedChildData(studentData)
     }
-
+    fun getAppRepoInstance() :AppRepo{
+        return appRepo
+    }
 
     fun getSelectedChildDataFromSharedPref(): StudentsData? {
         var response = appRepo.getSelectedChildData()

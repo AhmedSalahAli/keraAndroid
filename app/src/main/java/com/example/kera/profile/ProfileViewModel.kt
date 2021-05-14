@@ -40,7 +40,9 @@ class ProfileViewModel(val appRepo: AppRepo) : ViewModel() {
         selectedUser.value!!.className = "Class:" + response.className
         return response
     }
-
+    fun getAppRepoInstance() :AppRepo{
+        return appRepo
+    }
     fun getNurseryLogo(): String {
         return appRepo.getNurseryLogoFromSharedPreference()
     }

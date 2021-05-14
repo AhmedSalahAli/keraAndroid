@@ -1,11 +1,15 @@
 package com.example.kera.login.ui
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -14,7 +18,9 @@ import com.example.kera.R
 import com.example.kera.databinding.ActivityLoginBinding
 import com.example.kera.pincode.PinCodeActivity
 import com.example.kera.utils.CommonUtils
+import com.example.kera.visitor.VisitorMain
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,9 +44,11 @@ class LoginActivity : AppCompatActivity() {
             mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
             viewModel.login()
         }
-
+        setupUI(viewDataBinding.loginLay)
         viewDataBinding.textViewSkip.setOnClickListener {
-
+            viewModel.saveTokenToSharedPref("kera-app")
+            val myIntent = Intent(this, VisitorMain::class.java)
+            startActivity(myIntent)
         }
 
         viewModel.loginFailed.observe(this, {
@@ -75,7 +83,28 @@ class LoginActivity : AppCompatActivity() {
             Toast.LENGTH_LONG
         ).show();
     }
+    fun hideSoftKeyboard(activity: Activity) {
+        val inputMethodManager: InputMethodManager = activity.getSystemService(
+            INPUT_METHOD_SERVICE
+        ) as InputMethodManager
+        if (inputMethodManager.isAcceptingText()) {
+            inputMethodManager.hideSoftInputFromWindow(
+                activity.currentFocus!!.windowToken,
+                0
+            )
+        }
+    }
+    fun setupUI(view: View) {
 
+        if (view !is EditText) {
+            view.setOnTouchListener { v, event ->
+                hideSoftKeyboard(this)
+                false
+            }
+        }
+
+
+    }
     fun hideLoading() {
         if (mProgressDialog != null && mProgressDialog!!.isShowing) {
             mProgressDialog!!.cancel()

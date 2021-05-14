@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.kera.R
 import com.example.kera.databinding.ActivityWriteReportBinding
@@ -48,7 +49,7 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
         viewModel.getDailyReportData(reportID)
         backButtonClickListener()
 
-        viewDataBinding.adapter = OuterAdapter(ArrayList(), this, this, this)
+        viewDataBinding.adapter = OuterAdapter(ArrayList(), this, this, this,0)
         viewDataBinding.studentsAdapter = WriteReportStudentsAdapter(ArrayList())
 
         viewDataBinding.textViewDate.text = CommonUtils.getCurrentDate_EEE_MM_YYY()
@@ -56,6 +57,7 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
         viewModel.response.observe(this, {
             CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.adapter!!.dailyReportList = it.data!!.answers!!
+            viewDataBinding.adapter!!.status = it.data!!.status
             viewDataBinding.adapter!!.notifyDataSetChanged()
 
             viewDataBinding.studentsAdapter!!.studentsList = it.data!!.students!!
@@ -68,18 +70,36 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
                 viewDataBinding.textViewNumberOfStudents.text =
                     "${it.data!!.students?.size} student is selected"
             }
+//            if (it.status == 1){
+//                viewDataBinding.imageViewPublishReport.visibility = View.VISIBLE
+//                viewDataBinding.imageViewPublishReport.isClickable = true
+//            }else{
+//                viewDataBinding.imageViewPublishReport.visibility = View.GONE
+//                viewDataBinding.imageViewPublishReport.isClickable = false
+//            }
         })
 
         viewModel.updateDailyReportQuestionBoolean.observe(this, {
             CommonUtils.hideLoading(mProgressDialog!!)
 
         })
+        viewModel.response.observe(this, {
+
+            if (it.status == 1){
+
+            }else{
+
+            }
+
+        })
+
 
         viewDataBinding.imageViewPublishReport.setOnClickListener {
             mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
             val requestModel = PublishReportRequestModel()
             requestModel.reportId = reportID
             viewModel.publishReport(requestModel)
+            finish()
         }
 
         viewModel.publishReportResultBoolean.observe(this, {

@@ -7,16 +7,26 @@
             name="model"
             type="com.example.kera.education.model.EducationListItemModel" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="@dimen/_5sdp"
         android:layout_margin="10dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/rounded_transparent_light_grey_stroke_dae2eb"
-        android:elevation="2dp">
+
+     >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/education_item_background"
+
+
+       >
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline32"
@@ -86,6 +96,8 @@
             android:text="@{model.description}"
             android:textColor="#5881A4"
             android:textSize="@dimen/_10ssp"
+            android:maxLines="2"
+
             app:layout_constraintEnd_toStartOf="@+id/guideline33"
             app:layout_constraintStart_toStartOf="@+id/guideline32"
             app:layout_constraintTop_toBottomOf="@+id/textView91"
@@ -106,10 +118,11 @@
             app:layout_constraintTop_toBottomOf="@+id/textView95">
 
             <ImageView
-                android:layout_width="@dimen/_55sdp"
-                android:layout_height="@dimen/_55sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:src="@drawable/kera"
+                android:scaleType="centerCrop"
+
                 app:image="@{model.image1}" />
         </com.example.kera.utils.RoundCornerLayout>
 
@@ -126,10 +139,11 @@
             app:layout_constraintTop_toTopOf="@+id/roundCornerLayout6">
 
             <ImageView
-                android:layout_width="@dimen/_55sdp"
-                android:layout_height="@dimen/_55sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
                 android:layout_gravity="center"
-                android:src="@drawable/kera"
+
                 app:image="@{model.image2}" />
         </com.example.kera.utils.RoundCornerLayout>
 
@@ -146,13 +160,15 @@
             app:layout_constraintTop_toTopOf="@+id/roundCornerLayout7">
 
             <ImageView
-                android:layout_width="@dimen/_55sdp"
-                android:layout_height="@dimen/_55sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
                 android:layout_gravity="center"
-                android:src="@drawable/kera"
+
                 app:image="@{model.image3}" />
         </com.example.kera.utils.RoundCornerLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

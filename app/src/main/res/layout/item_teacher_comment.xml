@@ -17,15 +17,30 @@
 
         <TextView
             android:id="@+id/textView_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/sf_ui_display_semibold"
             android:text="@string/teacher_comment"
             android:textColor="#5881A4"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintStart_toStartOf="@+id/guideline52"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintStart_toStartOf="@+id/textView_comment"
+            app:layout_constraintEnd_toStartOf="@+id/save_comment"
             app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/save_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/textView_comment"
+            android:text="@string/Save"
+            android:textColor="#5881A4"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/sf_ui_display_semibold"
+            android:background="@color/transparent"
+            app:layout_constraintEnd_toEndOf="@+id/textView_comment"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline52"
@@ -49,8 +64,8 @@
             android:background="@drawable/rounded_white_fcfcfc_stroke_eeeff0"
             android:fontFamily="@font/sf_ui_display_regular"
             android:gravity="top"
-            android:imeOptions="actionDone"
-            android:singleLine="true"
+
+
             android:hint="@string/please_write_your_comment_here"
             android:padding="10dp"
             android:textColor="#1A2F50"

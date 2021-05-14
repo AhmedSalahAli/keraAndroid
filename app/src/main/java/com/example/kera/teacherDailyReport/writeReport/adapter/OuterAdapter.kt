@@ -1,11 +1,13 @@
 package com.example.kera.teacherDailyReport.writeReport.adapter
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView.OnEditorActionListener
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kera.R
 import com.example.kera.data.models.teacherDailyReport.DailyReportResponseModel
 import com.example.kera.databinding.ItemMoodRecyclerBinding
 import com.example.kera.databinding.ItemTeacherCommentBinding
@@ -16,7 +18,7 @@ class OuterAdapter(
     var dailyReportList: ArrayList<DailyReportResponseModel.DataBean.AnswersBean>,
     var moodCallBack: MoodListAdapter.MoodCallBack,
     var editTextAction: OuterInterface,
-    var context: Context
+    var context: Context,var status :Int
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private val mood_view_type = 1
@@ -73,7 +75,8 @@ class OuterAdapter(
                 dailyReportList[position],
                 moodCallBack,
                 position,
-                context
+                context,
+                status
             )
             binding.textViewTitle.text = dailyReportList[position].question!!.value
         }
@@ -83,16 +86,59 @@ class OuterAdapter(
         BaseViewHolder(binding.root) {
         override fun onBind(position: Int) {
 
-            binding.textViewComment.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//            binding.textViewComment.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+//                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//
+//                    editTextAction.onEditTextDoneClicked(
+//                        binding.textViewComment.text.toString(),
+//                        dailyReportList[position].question?.id!!
+//                    )
+//                    return@OnEditorActionListener true
+//                }
+//                false
+//            })
 
-                    editTextAction.onEditTextDoneClicked(
-                        binding.textViewComment.text.toString(),
-                        dailyReportList[position].question?.id!!
-                    )
-                    return@OnEditorActionListener true
+            if (status == 1){
+                binding.textViewComment.isEnabled = true
+                binding.saveComment.isEnabled = true
+                binding.saveComment.isClickable = true
+            }else{
+                binding.textViewComment.isEnabled = false
+                binding.saveComment.isEnabled = false
+                binding.saveComment.isClickable = false
+            }
+
+            binding.textViewComment.addTextChangedListener(object : TextWatcher {
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+                    // TODO Auto-generated method stub
                 }
-                false
+
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+
+                    // TODO Auto-generated method stub
+                }
+
+                override fun afterTextChanged(s: Editable) {
+
+                    if (!binding.textViewComment.text.toString().equals(dailyReportList[position].answer.toString())){
+                        binding.saveComment.setText("*"+ context.getString(R.string.Save))
+                    }
+
+                }
+            })
+            binding.saveComment.setOnClickListener(View.OnClickListener {
+                editTextAction.onEditTextDoneClicked(
+                    binding.textViewComment.text.toString(),
+                    dailyReportList[position].question?.id!!
+
+                )
+                binding.saveComment.setText(context.getString(R.string.Save))
             })
 
             binding.textViewTitle.text = dailyReportList[position].question!!.value

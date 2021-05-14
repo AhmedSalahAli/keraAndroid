@@ -12,14 +12,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_mood"
-        android:layout_width="@dimen/_65sdp"
+        android:layout_width="@dimen/_74sdp"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/rounded_white_fcfcfc_stroke_fed93b"
         app:layout_constraintEnd_toEndOf="@+id/imageView9"
         app:layout_constraintStart_toEndOf="@+id/imageView9">
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/mood_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
         <ImageView
             android:id="@+id/imageView9"
             android:layout_width="@dimen/_30sdp"
@@ -37,7 +44,7 @@
             android:fontFamily="@font/sf_ui_display_regular"
             android:text="@{model.value}"
             android:textColor="#0093DE"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
@@ -50,8 +57,10 @@
             android:layout_marginBottom="8dp"
             android:button="@drawable/checkbox_drawable"
             android:checked="@{model.selected}"
+            android:buttonTint="#50C4FF"
             android:gravity="center"
             android:minWidth="0dp"
+            android:clickable="false"
             android:minHeight="0dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"

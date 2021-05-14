@@ -46,13 +46,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageView89"
-                android:layout_width="@dimen/_37sdp"
-                android:layout_height="@dimen/_37sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:image="@{model.image}"
+                android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_about_kera" />

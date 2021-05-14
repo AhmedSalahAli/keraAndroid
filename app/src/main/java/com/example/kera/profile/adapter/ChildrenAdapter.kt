@@ -1,15 +1,17 @@
 package com.example.kera.profile.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kera.data.network.AppRepo
 import com.example.kera.databinding.ItemStudentBinding
 import com.example.kera.profile.StudentsData
 import com.example.kera.utils.BaseViewHolder
 
 class ChildrenAdapter(
     var children: ArrayList<StudentsData>,
-    var callBack: CallBack
+    var callBack: CallBack,var appRepo: AppRepo
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -35,6 +37,13 @@ class ChildrenAdapter(
         BaseViewHolder(item.root) {
         override fun onBind(position: Int) {
             item.model = children[position]
+            if (children[position].studentId.equals(appRepo.getSelectedChildData()?.studentId)){
+                item.circleImageView.borderWidth  = 4
+
+            }else{
+                item.circleImageView.borderWidth  = 0
+            }
+
         }
     }
 

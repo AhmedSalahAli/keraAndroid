@@ -9,12 +9,15 @@
             type="com.example.kera.teacherMedicalReport.model.TeacherReportClassesUIModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/constraint_class"
-        android:layout_width="@dimen/_35sdp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/_20sdp"
+        app:cardCornerRadius="21dp"
+        app:cardElevation="5dp"
+
         android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_light_yellow_f4eee7">
+        app:cardBackgroundColor="#F4EEE7">
 
         <TextView
             android:id="@+id/textView119"
@@ -24,11 +27,15 @@
             android:gravity="center"
             android:text="@{model.name}"
             android:textColor="#152D4A"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/_14sdp"
             tools:text="KG1"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 </layout>

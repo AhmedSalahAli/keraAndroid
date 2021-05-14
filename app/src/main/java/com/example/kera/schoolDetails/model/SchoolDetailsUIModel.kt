@@ -9,8 +9,11 @@ class SchoolDetailsUIModel(
     var details: String?,
     var tags: ArrayList<String>,
     var location: String?,
+    var lat : Double,
+    var long : Double,
     var phoneNumbers: ArrayList<String>?,
     var numberOfLikes: String?,
+    var isFavourite : Boolean,
     var title: String?,
     var slogan: String?,
     var logo: String?,
@@ -35,10 +38,13 @@ class SchoolDetailsUIModel(
                     it.name!!
                 } as ArrayList,
                 response.address,
+                response.latitude,
+                response.longitude,
                 response.phones!!.map {
                     it
                 } as ArrayList,
                 response.favorites.toString(),
+                response.isFavourite,
                 response.type?.title,
                 response.slogan,
                 response.logo,

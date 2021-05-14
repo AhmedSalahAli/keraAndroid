@@ -19,6 +19,10 @@ import com.example.kera.preference.SharedPrefKeys.Companion.TOKEN
 import com.example.kera.preference.SharedPrefKeys.Companion.USERTYPE
 import com.example.kera.profile.ProfileUIModel
 import com.example.kera.profile.StudentsData
+import com.example.kera.registrationForm.screen1.model.PublishAppStep1Model
+import com.example.kera.registrationForm.screen1.model.PublishAppStep2Model
+import com.example.kera.registrationForm.screen3.model.PublishAppStep3
+import com.example.kera.registrationForm.screen4.model.SumbitFinalForm
 import com.example.kera.teacherDailyReport.model.CreateReportRequestModel
 import com.example.kera.teacherDailyReport.model.PublishReportRequestModel
 import com.example.kera.teacherDailyReport.model.UpdateQuestionRequestModel
@@ -157,10 +161,18 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
 
     suspend fun publishReport(requestModel: PublishReportRequestModel) =
         service.publishReport("en", 1, requestModel)
-
-    suspend fun getDailyReportData(studentID: String, fromDate: String, toDate: String) =
-        service.getDailyReport("en", 1, studentID, fromDate, toDate)
-
+    suspend fun publishApp1(requestModel: PublishAppStep1Model) =
+        service.publishApp1("en", 1, requestModel)
+    suspend fun publishApp2(requestModel: PublishAppStep2Model) =
+        service.publishApp2("en", 1, requestModel)
+    suspend fun publishApp3(requestModel: PublishAppStep3) =
+        service.publishApp3("en", 1, requestModel)
+    suspend fun publishApp4(requestModel: SumbitFinalForm) =
+        service.publishApp4("en", 1, requestModel)
+    suspend fun getDailyReportData(studentID: String, fromDate: String, toDate: String,page:Int) =
+        service.getDailyReport("en", 1, studentID,page, fromDate, toDate)
+    suspend fun getAssociationTerms(associationId:String) =
+        service.getAssociationTerms("en", 1,associationId)
     suspend fun getHomeNurseryData() =
         service.getHomeNurseryData("en", 1)
 

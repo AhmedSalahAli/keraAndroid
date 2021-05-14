@@ -9,6 +9,11 @@ import com.example.kera.data.models.schoolList.SchoolDetailsResponseModel
 import com.example.kera.data.models.schoolList.SchoolsListResponseModel
 import com.example.kera.data.models.teacherDailyReport.*
 import com.example.kera.meals.details.MealCommentPostModel
+import com.example.kera.registrationForm.screen1.model.PublishAppStep1Model
+import com.example.kera.registrationForm.screen1.model.PublishAppStep2Model
+import com.example.kera.registrationForm.screen3.model.PublishAppStep3
+import com.example.kera.registrationForm.screen4.model.AccocialtionTermsModel
+import com.example.kera.registrationForm.screen4.model.SumbitFinalForm
 import com.example.kera.teacherDailyReport.model.CreateReportRequestModel
 import com.example.kera.teacherDailyReport.model.PublishReportRequestModel
 import com.example.kera.teacherDailyReport.model.UpdateQuestionRequestModel
@@ -168,16 +173,46 @@ interface ApiService {
         @Body requestModel: PublishReportRequestModel,
     ): GeneralResponse
 
-
-    @GET("user/dailyreports/{studentID}/1")
+    @POST("general/application/step-1")
+    suspend fun publishApp1(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body AppStep1RequestModel: PublishAppStep1Model
+    ): GeneralResponse
+    @PUT("general/application/step-2")
+    suspend fun publishApp2(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body AppStep1RequestModel: PublishAppStep2Model
+    ): GeneralResponse
+    @PUT("general/application/step-3")
+    suspend fun publishApp3(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body AppStep1RequestModel: PublishAppStep3
+    ): GeneralResponse
+    @PUT("general/application/step-4")
+    suspend fun publishApp4(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body AppStep1RequestModel: SumbitFinalForm
+    ): GeneralResponse
+    @GET("user/dailyreports/{studentID}/{page}}")
     suspend fun getDailyReport(
         @Header("lang") language: String,
         @Header("v") version: Int,
         @Path("studentID") reportID: String,
+        @Path("page") page: Int,
         @Query("fromDate") fromDate: String,
         @Query("toDate") toDate: String,
-    ): DisplayDailyReportResponseModel
 
+    ): DisplayDailyReportResponseModel
+    @GET("general/setting/{associationId}/terms")
+    suspend fun getAssociationTerms(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Path("associationId") associationId: String,
+    ): AccocialtionTermsModel
 
     @GET("user/portal")
     suspend fun getHomeNurseryData(

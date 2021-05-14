@@ -64,5 +64,39 @@
         android:id="@+id/teacherProfileFragment"
         android:name="com.example.kera.teacherProfile.TeacherProfileFragment"
         android:label="TeacherProfileFragment" />
+    <fragment
+        android:id="@+id/appScreen12"
+        android:name="com.example.kera.registrationForm.screen1.AppScreen1"
+        android:label="app_screen1_fragment"
+        tools:layout="@layout/app_screen1_fragment" >
+        <action
+            android:id="@+id/action_appScreen12_to_appScreen22"
+            app:destination="@id/appScreen22"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/appScreen22"
+        android:name="com.example.kera.registrationForm.screen2.AppScreen2"
+        android:label="app_screen2_fragment"
+        tools:layout="@layout/app_screen2_fragment" >
+        <action
+            android:id="@+id/action_appScreen22_to_appScreen32"
+            app:destination="@id/appScreen32" />
+    </fragment>
+    <fragment
+        android:id="@+id/appScreen32"
+        android:name="com.example.kera.registrationForm.screen3.AppScreen3"
+        android:label="app_screen3_fragment"
+        tools:layout="@layout/app_screen3_fragment" >
+        <action
+            android:id="@+id/action_appScreen32_to_appScreen42"
+            app:destination="@id/appScreen42" />
+    </fragment>
+    <fragment
+        android:id="@+id/appScreen42"
+        android:name="com.example.kera.registrationForm.screen4.AppScreen4"
+        android:label="app_screen4_fragment"
+        tools:layout="@layout/app_screen4_fragment" />
 
 </navigation>

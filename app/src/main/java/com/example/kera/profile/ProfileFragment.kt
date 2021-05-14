@@ -3,8 +3,10 @@ package com.example.kera.profile
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.*
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.kera.R
@@ -17,7 +19,7 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
 
     lateinit var viewDataBinding: ProfileFragmentBinding
     val viewModel: ProfileViewModel by viewModel()
-    private var mProgressDialog: ProgressDialog? = null
+   // private var mProgressDialog: ProgressDialog? = null
 
     companion object {
         fun newInstance() = ProfileFragment()
@@ -44,19 +46,25 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
         window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
-        mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
+       // mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
         viewModel.getProfileData()
         messageObserver()
 
+        viewDataBinding.veilLayout.veil()
         viewModel.profileUIModel.observe(viewLifecycleOwner, {
-            CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.adapter = ChildrenAdapter(it.students!!, this)
+           // CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.veilLayout.unVeil()
+            viewDataBinding.adapter = ChildrenAdapter(it.students!!, this,viewModel.getAppRepoInstance())
             viewDataBinding.adapter!!.notifyDataSetChanged()
         })
 
         viewDataBinding.imageViewExchange.setOnClickListener {
-            // should open the students recycler
-            viewDataBinding.recyclerStudents.visibility = View.VISIBLE
+
+            if (viewDataBinding.recyclerStudents.isVisible){
+                stateOfChildrenFrame(false)
+            }else{
+                stateOfChildrenFrame(true)
+            }
         }
 
         viewDataBinding.imageView54.setOnClickListener {
@@ -70,7 +78,8 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
 
     private fun messageObserver() {
         viewModel.message.observe(viewLifecycleOwner, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+           // CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.veilLayout.unVeil()
             showMessage(it)
         })
     }
@@ -81,22 +90,42 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
             Toast.LENGTH_LONG
         ).show();
     }
+    fun stateOfChildrenFrame(state:Boolean){
+        if (state){
 
+            viewDataBinding.recyclerStudents.setAnimation(
+                AnimationUtils.loadAnimation(
+                    requireContext(),
+                    R.anim.fade_in
+                )
+            )
+            viewDataBinding.recyclerStudents.visibility = View.VISIBLE
+
+        }else{
+            viewDataBinding.recyclerStudents.setAnimation(
+                AnimationUtils.loadAnimation(
+                    requireContext(),
+                    R.anim.fade_out
+                )
+            )
+            viewDataBinding.recyclerStudents.visibility = View.GONE
+        }
+    }
     override fun onItemClicked(student: StudentsData) {
-        viewDataBinding.recyclerStudents.visibility = View.GONE
+        stateOfChildrenFrame(false)
         viewModel.saveChildDataToSharedPref(student)
         viewModel.selectedUser.value = student
         viewModel.selectedUser.value!!.studentCode = "Code:" + student.studentCode
         viewModel.selectedUser.value!!.className = "Class:" + student.className
-//        viewModel.profileUIModel.value!!.selectedStudentCode = "Code:" + student.studentCode
-//        viewModel.profileUIModel.value!!.className.value = "Class:" + student.className
-//        viewModel.profileUIModel.value!!.name.value = student.username
-//        viewModel.profileUIModel.value!!.image.value = student.profileImage
+        //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+
+
+        viewDataBinding.adapter!!.notifyDataSetChanged()
     }
 
-    fun hideLoading() {
-        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
-            mProgressDialog!!.cancel()
-        }
-    }
+//    fun hideLoading() {
+//        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
+//            mProgressDialog!!.cancel()
+//        }
+//    }
 }

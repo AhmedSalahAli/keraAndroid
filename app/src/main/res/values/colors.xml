@@ -20,5 +20,12 @@
     <color name="dark_blue_152D4A">#152D4A</color>
     <color name="light_grey_8c99a7">#8C99A7</color>
     <color name="blue_152d4a">#152D4A</color>
+    <color name="blue_effcff">#EFFCFF</color>
+    <color name="blue_fcfdfd">#FCFDFD</color>
+    <color name="bottom_bar_shadow">#EAEBEC</color>
+    <color name="transparent">#00EAEBEC</color>
+    <color name="orange_FFBB3B">#FFBB3B</color>
+    <color name="lite_orange_FFBB3B">#F4EEE7</color>
+    <color name="gray_D2DCE8">#D2DCE8</color>
 
 </resources>

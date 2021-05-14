@@ -1,5 +1,7 @@
 package com.example.kera.app
 
+
+import appScreensModule
 import com.example.kera.contactUs.di.contactUsModule
 import com.example.kera.dailyReport.di.dailyReportModule
 import com.example.kera.data.network.apiRepoModule
@@ -21,6 +23,7 @@ import com.example.kera.splash.di.splashModule
 import com.example.kera.teacherDailyReport.di.teacherDailyReportModule
 import com.example.kera.teacherMedicalReport.di.teacherMedicalReportModule
 import com.example.kera.teacherProfile.di.teacherProfileModule
+import com.example.kera.visitor.di.visitorModule
 
 var allFeatures = listOf(
     splashModule,
@@ -31,6 +34,7 @@ var allFeatures = listOf(
     pinCodeModule,
     homeModule,
     registrationModule,
+    visitorModule,
     eventsModule,
     notificationModule,
     educationModule,
@@ -39,6 +43,7 @@ var allFeatures = listOf(
     teacherMedicalReportModule,
     contactUsModule,
     teacherProfileModule,
+    appScreensModule,
     medicalModule,
     apiRepoModule,
     teacherDailyReportModule,

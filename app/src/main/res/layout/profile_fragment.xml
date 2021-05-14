@@ -17,16 +17,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
+        android:background="@drawable/background_profile"
         tools:context=".profile.ProfileFragment">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp"
-            android:background="@drawable/rounded_bottom_left_right_corners"
-            android:elevation="7dp"
+            android:layout_height="@dimen/_80sdp"
+            style="@style/CustomCardCorners"
+            app:cardElevation="@dimen/_20sdp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -40,360 +41,443 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView54"
-            android:layout_width="@dimen/_75sdp"
-            android:layout_height="@dimen/_75sdp"
-            android:elevation="1dp"
-            app:image="@{viewModel.selectedUser.profileImage}"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout18"
+
+
+        <com.skydoves.androidveil.VeilLayout
+            android:id="@+id/veilLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:veilLayout_veiled="true"
+            app:veilLayout_shimmerEnable="true"
+            app:veilLayout_baseColor="@color/gray_D2DCE8"
+            app:veilLayout_highlightColor="@color/white"
+            app:veilLayout_baseAlpha="0.6"
+            app:veilLayout_highlightAlpha="1.0"
+            app:veilLayout_dropOff="0.5"
+            app:veilLayout_radius="6dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout18" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout18"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginEnd="14dp"
-            android:background="@drawable/rounded_white_fcfdfd"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view">
+            app:layout_constraintStart_toStartOf="parent">
 
 
-            <TextView
-                android:id="@+id/textView85"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/constraintLayout18"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:fontFamily="@font/sf_ui_display_regular"
-                android:text="@{viewModel.selectedUser.username}"
-                android:textColor="#152D4A"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Logy" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="56dp"
-                android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout34">
-
-                <ImageView
-                    android:id="@+id/imageView56"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_tower" />
-
-                <TextView
-                    android:id="@+id/textView122"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@{viewModel.profileUIModel.address}"
-                    android:textColor="#8C99A7"
-                    android:textSize="@dimen/_9ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView56"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView75"
-                    app:layout_constraintStart_toEndOf="@+id/imageView56"
-                    app:layout_constraintTop_toTopOf="@+id/imageView56"
-                    tools:text="19 G gardenia street, pyra..." />
-
-                <ImageView
-                    android:id="@+id/imageView75"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_pen" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="56dp"
-                android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_mail" />
-
-                <TextView
-                    android:id="@+id/textViewEmail"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@{viewModel.profileUIModel.email}"
-                    android:textColor="#8C99A7"
-                    android:textSize="@dimen/_9ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView7"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
-                    app:layout_constraintTop_toTopOf="@+id/imageView5"
-                    tools:text="Omarabdelfattah@aucegypt.edu" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_pen" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout9"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="70dp"
-                android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_phone" />
-
-                <TextView
-                    android:id="@+id/textViewEmailphone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@{viewModel.profileUIModel.phone}"
-                    android:textColor="#8C99A7"
-                    android:textSize="@dimen/_9ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView1"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                    app:layout_constraintStart_toEndOf="@+id/imageView1"
-                    app:layout_constraintTop_toTopOf="@+id/imageView1"
-                    tools:text="(+20) 1012345678" />
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_pen" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout10"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="70dp"
-                android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_phone" />
-
-                <TextView
-                    android:id="@+id/textViewEmailphonee"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:textColor="#8C99A7"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView33"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
-                    tools:text="(+20) 1012345678" />
-
-                <ImageView
-                    android:id="@+id/imageView33"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_pen" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint_message_the_principle"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="38dp"
-                android:layout_marginEnd="56dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/rounded_blue_effcff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingBottom="100dp"
+                app:cardCornerRadius="@dimen/_20sdp"
+                app:cardBackgroundColor="@color/blue_fcfdfd"
+                app:cardElevation="@dimen/_10sdp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
 
-                <ImageView
-                    android:id="@+id/imageView76"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="13dp"
+
+
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_message" />
-
-                <TextView
-                    android:id="@+id/textView124"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="Message the Principals"
-                    android:textColor="#1A2F50"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView76"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView76"
-                    app:layout_constraintTop_toTopOf="@+id/imageView76" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout34"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+                    <TextView
+                        android:id="@+id/textView85"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="@{viewModel.selectedUser.username}"
+                        android:textColor="#152D4A"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.498"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Logy" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="56dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="56dp"
+                        android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout34">
+
+                        <ImageView
+                            android:id="@+id/imageView56"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_tower" />
+
+                        <TextView
+                            android:id="@+id/textView122"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/sf_ui_display_regular"
+                            android:text="@{viewModel.profileUIModel.address}"
+                            android:textColor="#8C99A7"
+                            android:textSize="@dimen/_9ssp"
+                            android:textAlignment="center"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView56"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView75"
+                            app:layout_constraintStart_toEndOf="@+id/imageView56"
+                            app:layout_constraintTop_toTopOf="@+id/imageView56"
+                            tools:text="19 G gardenia street, pyra..." />
+
+                        <ImageView
+                            android:id="@+id/imageView75"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_pen" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout8"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="56dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginEnd="56dp"
+                        android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_mail" />
+
+                        <TextView
+                            android:id="@+id/textViewEmail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/sf_ui_display_regular"
+                            android:text="@{viewModel.profileUIModel.email}"
+                            android:textColor="#8C99A7"
+                            android:textSize="@dimen/_9ssp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                            app:layout_constraintStart_toEndOf="@+id/imageView5"
+                            app:layout_constraintTop_toTopOf="@+id/imageView5"
+                            tools:text="Omarabdelfattah@aucegypt.edu" />
+
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_pen" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout9"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="70dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginEnd="70dp"
+                        android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
+
+                        <ImageView
+                            android:id="@+id/imageView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_phone" />
+
+                        <TextView
+                            android:id="@+id/textViewEmailphone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/sf_ui_display_regular"
+                            android:text="@{viewModel.profileUIModel.phone}"
+                            android:textColor="#8C99A7"
+                            android:textSize="@dimen/_9ssp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView1"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                            app:layout_constraintStart_toEndOf="@+id/imageView1"
+                            app:layout_constraintTop_toTopOf="@+id/imageView1"
+                            tools:text="(+20) 1012345678" />
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_pen" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout10"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="70dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginEnd="70dp"
+                        android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_phone" />
+
+                        <TextView
+                            android:id="@+id/textViewEmailphonee"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/sf_ui_display_regular"
+                            android:textColor="#8C99A7"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView33"
+                            app:layout_constraintStart_toEndOf="@+id/imageView"
+                            app:layout_constraintTop_toTopOf="@+id/imageView"
+                            tools:text="(+20) 1012345678" />
+
+                        <ImageView
+                            android:id="@+id/imageView33"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_pen" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_45sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout10"
+
+                        android:layout_marginTop="38dp"
+                        android:backgroundTint="@color/blue_effcff"
+                        app:cardCornerRadius="@dimen/_20sdp"
+                        android:elevation="5dp"
+
+                        android:layout_marginBottom="32dp">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraint_message_the_principle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+
+                            >
+
+                            <ImageView
+                                android:id="@+id/imageView76"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="13dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_message" />
+
+                            <TextView
+                                android:id="@+id/textView124"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="9dp"
+                                android:fontFamily="@font/sf_ui_display_regular"
+                                android:text="Message the "
+                                android:textColor="#1A2F50"
+                                android:textSize="18sp"
+                                android:textAlignment="center"
+
+                                app:layout_constraintStart_toEndOf="@+id/imageView76"
+                                app:layout_constraintTop_toTopOf="@+id/imageView76" />
+                            <TextView
+                                android:id="@+id/textView125"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/sf_ui_display_regular"
+                                android:text="Principals"
+                                android:textColor="#1A2F50"
+                                android:textSize="18sp"
+
+                                app:layout_constraintBottom_toBottomOf="@+id/textView124"
+
+                                app:layout_constraintStart_toEndOf="@+id/textView124"
+                                app:layout_constraintTop_toTopOf="@+id/textView124" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout34"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView85">
+
+                        <TextView
+                            android:id="@+id/textView87"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_blue_e9eff7"
+                            android:fontFamily="@font/sf_ui_display_regular"
+                            android:gravity="center"
+                            android:text="@{viewModel.selectedUser.className}"
+                            android:textColor="#8C99A7"
+                            android:textSize="@dimen/_8ssp"
+                            android:paddingStart="3dp"
+                            android:paddingRight="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Class Abcd" />
+
+                        <TextView
+                            android:id="@+id/textView86"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/rounded_blue_e9eff7"
+                            android:fontFamily="@font/sf_ui_display_regular"
+                            android:gravity="center"
+                            android:paddingStart="3dp"
+                            android:paddingRight="3dp"
+                            android:text="@{viewModel.selectedUser.studentCode}"
+                            android:textColor="#8C99A7"
+                            android:textSize="@dimen/_8ssp"
+                            app:layout_constraintEnd_toStartOf="@+id/textView87"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Code: 390-00000" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView54"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_75sdp"
+                android:elevation="@dimen/_11sdp"
+                app:image="@{viewModel.selectedUser.profileImage}"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView85">
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout18" />
 
-                <TextView
-                    android:id="@+id/textView87"
+            <ImageView
+                android:id="@+id/imageView_exchange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintBottom_toBottomOf="@+id/imageView54"
+                app:layout_constraintEnd_toEndOf="@+id/imageView54"
+                app:layout_constraintStart_toStartOf="@+id/imageView54"
+                app:layout_constraintTop_toBottomOf="@+id/imageView54"
+                android:elevation="@dimen/_11sdp"
+                app:srcCompat="@drawable/ic_exchange" />
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_blue_e9eff7"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:gravity="center"
-                    android:text="@{viewModel.selectedUser.className}"
-                    android:textColor="#8C99A7"
-                    android:textSize="@dimen/_8ssp"
-                    android:paddingStart="3dp"
-                    android:paddingRight="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Class Abcd" />
+                    android:background="@drawable/rounded_chiled_list"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView54"
+                    app:layout_constraintStart_toStartOf="@+id/imageView54"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_exchange"
+                    android:elevation="@dimen/_11sdp"
+                    >
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_students"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        app:adapter="@{adapter}"
+                        android:elevation="@dimen/_11sdp"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
 
-                <TextView
-                    android:id="@+id/textView86"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/rounded_blue_e9eff7"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:gravity="center"
-                    android:paddingStart="3dp"
-                    android:paddingRight="3dp"
-                    android:text="@{viewModel.selectedUser.studentCode}"
-                    android:textColor="#8C99A7"
-                    android:textSize="@dimen/_8ssp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView87"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Code: 390-00000" />
+                        app:spanCount="1"
+                        tools:listitem="@layout/item_student" />
+                </FrameLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:id="@+id/imageView_exchange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView54"
-            app:layout_constraintEnd_toEndOf="@+id/imageView54"
-            app:layout_constraintStart_toStartOf="@+id/imageView54"
-            app:layout_constraintTop_toBottomOf="@+id/imageView54"
-            app:srcCompat="@drawable/ic_exchange" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_students"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#FCFDFD"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            app:adapter="@{adapter}"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:layout_constraintEnd_toEndOf="@+id/imageView54"
-            app:layout_constraintStart_toStartOf="@+id/imageView54"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_exchange"
-            app:spanCount="1"
-            tools:listitem="@layout/item_student" />
+        </com.skydoves.androidveil.VeilLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

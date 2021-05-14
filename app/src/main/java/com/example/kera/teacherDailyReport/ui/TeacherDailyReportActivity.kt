@@ -12,12 +12,14 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.AbsListView
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.kera.R
 import com.example.kera.databinding.TeacherDailyReportFragmentBinding
 import com.example.kera.teacherDailyReport.adapter.ClassesListAdapter
@@ -73,7 +75,31 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         viewDataBinding.textViewMarkAsAbsent.text = content
 
-        mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+        //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+
+
+        viewDataBinding.recyclerView9.setAdapter(viewDataBinding.studentsAdapter) // sets your own adapter
+        viewDataBinding.recyclerView9.setLayoutManager(StaggeredGridLayoutManager(3,
+            StaggeredGridLayoutManager.HORIZONTAL)) // sets LayoutManager
+        viewDataBinding.recyclerView9.addVeiledItems(15)
+        viewDataBinding.recyclerView9.veil()
+
+        viewDataBinding.recyclerView7.setAdapter(viewDataBinding.classesAdapter) // sets your own adapter
+        viewDataBinding.recyclerView7.setLayoutManager(StaggeredGridLayoutManager(1,
+            StaggeredGridLayoutManager.HORIZONTAL)) // sets LayoutManager
+        viewDataBinding.recyclerView7.addVeiledItems(15)
+        viewDataBinding.recyclerView7.veil()
+
+        viewDataBinding.recyclerLatestReports.setAdapter(viewDataBinding.latestReportsAdapter) // sets your own adapter
+        viewDataBinding.recyclerLatestReports.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)) // sets LayoutManager
+        viewDataBinding.recyclerLatestReports.addVeiledItems(15)
+        viewDataBinding.recyclerLatestReports.veil()
+        viewDataBinding.recyclerLatestReports.setNestedScrollingEnabled(true);
+        viewDataBinding.recyclerLatestReports.getRecyclerView().setPadding(0,0,0,200)
+        viewDataBinding.recyclerLatestReports .getRecyclerView().clipToPadding = false
+        viewDataBinding.recyclerLatestReports.getVeiledRecyclerView().setPadding(0,0,0,200)
+        viewDataBinding.recyclerLatestReports .getVeiledRecyclerView().clipToPadding = false
+
         viewModel.getClasses()
         viewModel.getLatestReports(page)
         checkNumberOfSelectedStudents()
@@ -88,8 +114,8 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         createReportObservation()
 
         manager = LinearLayoutManager(this)
-        viewDataBinding.recyclerLatestReports.layoutManager = manager
-        viewDataBinding.recyclerLatestReports.addOnScrollListener(object :
+        viewDataBinding.recyclerLatestReports.setLayoutManager(manager)
+        viewDataBinding.recyclerLatestReports.getRecyclerView().addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -107,11 +133,12 @@ class TeacherDailyReportActivity : AppCompatActivity(),
                     isScrolling = false
                     if (page < totalNumberOfPages) {
                         page += 1
-                        mProgressDialog =
-                            CommonUtils.showLoadingDialog(
-                                this@TeacherDailyReportActivity,
-                                R.layout.progress_dialog
-                            )
+//                        mProgressDialog =
+//                            CommonUtils.showLoadingDialog(
+//                                this@TeacherDailyReportActivity,
+//                                R.layout.progress_dialog
+//                            )
+                       // viewDataBinding.recyclerLatestReports.veil()
                         Log.e("number of pages", totalNumberOfPages.toString())
                         Log.e("page = ", page.toString())
                         viewModel.getLatestReports(page)
@@ -129,11 +156,14 @@ class TeacherDailyReportActivity : AppCompatActivity(),
                     student.isSelected.set(true)
                     selectedStudents.add(student.id)
                 }
+                viewDataBinding.checkBoxSelectAll.setText(getString(R.string.clear_all))
             } else {
                 selectedStudents.clear()
                 for (student in viewDataBinding.studentsAdapter!!.studentsList) {
                     student.isSelected.set(false)
                 }
+                viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
+
                 Log.e("selectedStudents", selectedStudents.size.toString())
             }
             checkNumberOfSelectedStudents()
@@ -146,11 +176,15 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         viewModel.getLatestReports(page)
         selectedStudents.clear()
         checkNumberOfSelectedStudents()
+        viewDataBinding.checkBoxSelectAll.isChecked = false
+        viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
+
     }
 
     private fun getLatestReportsObservation() {
         viewModel.latestReportsList.observe(this, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+            //CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.recyclerLatestReports.unVeil()
             totalNumberOfPages = it.pages
             latestReports.addAll(it.reports)
             viewDataBinding.latestReportsAdapter!!.reportsList = latestReports
@@ -172,10 +206,15 @@ class TeacherDailyReportActivity : AppCompatActivity(),
 
     private fun createReportClickListener() {
         viewDataBinding.imageViewWriteReport.setOnClickListener {
-            mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-            var createReportRequestModel = CreateReportRequestModel()
-            createReportRequestModel.students = selectedStudents
-            viewModel.createDailyReport(createReportRequestModel)
+            if (selectedStudents.size >0){
+                mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+                var createReportRequestModel = CreateReportRequestModel()
+                createReportRequestModel.students = selectedStudents
+                viewModel.createDailyReport(createReportRequestModel)
+            }else{
+                showMessage(getString(R.string.please_select_at_least_one_student))
+            }
+
         }
     }
 
@@ -187,7 +226,8 @@ class TeacherDailyReportActivity : AppCompatActivity(),
 
     private fun classesListObservation() {
         viewModel.classesList.observe(this, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+            //CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.recyclerView7.unVeil()
             viewDataBinding.textViewNumberOfClasses.text = "${it.size} classes today"
             viewDataBinding.classesAdapter!!.classesList = it
             viewDataBinding.classesAdapter!!.notifyDataSetChanged()
@@ -196,7 +236,8 @@ class TeacherDailyReportActivity : AppCompatActivity(),
 
     private fun studentsListObservation() {
         viewModel.studentsList.observe(this, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+            //CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.recyclerView9.unVeil()
             viewDataBinding.studentsAdapter = StudentsListAdapter(it, this, this)
             viewDataBinding.studentsAdapter!!.notifyDataSetChanged()
         })
@@ -218,7 +259,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
 
     private fun messageObserver() {
         viewModel.message.observe(this@TeacherDailyReportActivity, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+            //CommonUtils.hideLoading(mProgressDialog!!)
             showMessage(it)
         })
     }
@@ -231,8 +272,12 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     }
 
     override fun onItemClicked(classID: String?) {
-        mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+        //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+        viewDataBinding.recyclerView9.veil()
         viewModel.getStudentsByClass(classID!!)
+        viewDataBinding.checkBoxSelectAll.isChecked = false
+        viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
+
     }
 
     override fun onStudentClicked(studentID: String?) {

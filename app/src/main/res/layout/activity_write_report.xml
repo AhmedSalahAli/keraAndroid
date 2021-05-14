@@ -21,143 +21,181 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background">
+       android:background="#FBFAF9">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout24"
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:background="@drawable/rounded_white_fbfaf9"
+            android:layout_height="match_parent"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/constraintLayout25"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_90sdp"
-                android:background="@drawable/rounded_white_fbfaf9"
-                android:elevation="5dp"
+                android:layout_height="wrap_content"
+
+                style="@style/CustomCardCorners"
+                app:cardElevation="@dimen/_5sdp"
+                app:cardBackgroundColor="#FBFAF9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
 
-                <ImageView
-                    android:id="@+id/imageView_back"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="23dp"
-                    android:layout_marginTop="32dp"
-                    android:src="@drawable/ic_rounded_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView126"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@string/daily_report"
-                    android:textColor="#152D4A"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView_publish_report"
-                    app:layout_constraintStart_toEndOf="@+id/imageView_back"
-                    app:layout_constraintTop_toTopOf="@+id/imageView_back" />
-
-                <ImageView
-                    android:id="@+id/imageView_publish_report"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="23dp"
-                    android:src="@drawable/ic_send_report"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView_back" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textView_number_of_students"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_ui_display_light"
-                    android:gravity="center"
-                    android:textColor="#5881A4"
-                    android:textSize="@dimen/_12ssp"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView_publish_report"
-                    app:layout_constraintStart_toEndOf="@+id/imageView_back"
-                    app:layout_constraintTop_toBottomOf="@+id/textView126"
-                    tools:text="11 students are selected" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/imageView_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="32dp"
+                        android:src="@drawable/ic_rounded_back"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal"
-                app:adapter="@{studentsAdapter}"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout25"
-                app:spanCount="1"
-                tools:listitem="@layout/item_student_name_image_small" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/textView126"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="@string/daily_report"
+                        android:textColor="#152D4A"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView_publish_report"
+                        app:layout_constraintStart_toEndOf="@+id/imageView_back"
+                        app:layout_constraintTop_toTopOf="@+id/imageView_back" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_top_white_fcfcfc"
-            android:elevation="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout24">
+                    <ImageView
+                        android:id="@+id/imageView_publish_report"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="23dp"
+                        android:src="@drawable/ic_send_report"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/imageView_back" />
 
-            <TextView
-                android:id="@+id/textView_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/sf_ui_display_semibold"
-                android:text="Monday, 11 May, 2021"
-                android:textColor="#152D4A"
-                android:textSize="@dimen/_9ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/textView_number_of_students"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_light"
+                        android:gravity="center"
+                        android:textColor="#5881A4"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView_publish_report"
+                        app:layout_constraintStart_toEndOf="@+id/imageView_back"
+                        app:layout_constraintTop_toBottomOf="@+id/textView126"
+                        tools:text="11 students are selected" />
+                    <View
+                        android:id="@+id/line_stroke"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:background="@drawable/rounded_white_fcfcfc_dashed_stroke_e9eff7"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_number_of_students"
+                        />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        app:adapter="@{studentsAdapter}"
+                        android:paddingStart="10dp"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line_stroke"
+                        app:spanCount="1"
+                        tools:listitem="@layout/item_student_name_image_small" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:fontFamily="@font/sf_ui_display_regular"
-                android:text="Class A5"
-                android:textColor="#8C99A7"
-                android:textSize="10sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_date" />
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView8"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="14dp"
-                android:orientation="vertical"
-                app:adapter="@{adapter}"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:paddingTop="190dp"
+                android:clipToPadding="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView24"
-                app:spanCount="1"
-                tools:listitem="@layout/item_teacher_comment" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout25">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:background="@drawable/rounded_top_white_fcfcfc"
+                    android:elevation="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/textView_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:fontFamily="@font/sf_ui_display_semibold"
+                        android:text="Monday, 11 May, 2021"
+                        android:textColor="#152D4A"
+                        android:textSize="@dimen/_9ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="Class A5"
+                        android:textColor="#8C99A7"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_date" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="14dp"
+                        android:orientation="vertical"
+                        app:adapter="@{adapter}"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView24"
+                        app:spanCount="1"
+                        android:paddingBottom="100dp"
+                        android:clipToPadding="false"
+                        tools:listitem="@layout/item_teacher_comment" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

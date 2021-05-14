@@ -33,7 +33,7 @@ object BindingUtils {
     @BindingAdapter("app:image")
     @JvmStatic
     fun bindImage(view: ImageView, url: String?) {
-        if (url != null) {
+        if (url != null ) {
             Glide.with(view.context).load(url).into(view)
         }
     }
@@ -45,7 +45,16 @@ object BindingUtils {
             view.adapter = adapter as RecyclerView.Adapter<*>?
         }
     }
+    @BindingAdapter("app:editable")
+    @JvmStatic
+    fun bindEnabled(view: EditText, status: Int) {
+        if (status ==1){
+            view.isEnabled = true
+        }else{
+            view.isEnabled = false
+        }
 
+    }
     @BindingAdapter("app:imageResources")
     @JvmStatic
     fun bindImageResources(view: ImageView, img: Int) {

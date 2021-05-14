@@ -73,7 +73,9 @@ class HomeFragment : Fragment() {
             viewModel.getProfileData("user")
         }
 
-        mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
+        //mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
+        viewDataBinding.veilLayout.veil()
+
         newsList = ArrayList()
 
 
@@ -122,7 +124,9 @@ class HomeFragment : Fragment() {
         })
 
         viewModel.homeNurseryData.observe(viewLifecycleOwner, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+          //  CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.veilLayout.unVeil()
+
             val adapter = ImagesListAdapter(it.images)
             viewDataBinding.recyclerView3.setSliderAdapter(adapter)
             viewDataBinding.recyclerView3.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
@@ -132,7 +136,9 @@ class HomeFragment : Fragment() {
 
         messageObserver()
         viewModel.newsList.observe(viewLifecycleOwner, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+            //CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.veilLayout.unVeil()
+
             newsList.clear()
             newsList.addAll(it.newsList)
             totalNumberOfPages = it.pages
@@ -175,7 +181,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun showMessage(it: String) {
-        CommonUtils.hideLoading(mProgressDialog!!)
+       // CommonUtils.hideLoading(mProgressDialog!!)
+        viewDataBinding.veilLayout.unVeil()
+
         Toast.makeText(
             requireContext(), it,
             Toast.LENGTH_LONG
@@ -190,7 +198,9 @@ class HomeFragment : Fragment() {
 
     private fun userProfileDataObservation() {
         viewModel.profileUIModel.observe(viewLifecycleOwner, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+            //CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.veilLayout.unVeil()
+
             viewModel.saveProfileResponseToSharedPref(it)
             if (viewModel.getSelectedChildDataFromSharedPref() == null) {
                 viewModel.saveChildDataToSharedPref(it.students!![0])
@@ -202,7 +212,9 @@ class HomeFragment : Fragment() {
 
     private fun teacherProfileDataObservation() {
         viewModel.teacherProfileUIModel.observe(viewLifecycleOwner, {
-            CommonUtils.hideLoading(mProgressDialog!!)
+           // CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.veilLayout.unVeil()
+
 //            viewModel.saveProfileResponseToSharedPref(it)
             viewModel.getNewsList("5fc2270ce4441941bbf5bcfd", page)
         })

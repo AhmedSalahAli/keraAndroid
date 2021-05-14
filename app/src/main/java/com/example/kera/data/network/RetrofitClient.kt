@@ -12,9 +12,10 @@ import java.util.concurrent.TimeUnit
 class RetrofitClient(val token: String?) {
     var logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     var client =
-        OkHttpClient.Builder().connectTimeout(100, TimeUnit.SECONDS).addInterceptor { chain ->
+        OkHttpClient.Builder().readTimeout(1000, TimeUnit.SECONDS).callTimeout(1000, TimeUnit.SECONDS).connectTimeout(1000, TimeUnit.SECONDS).addInterceptor { chain ->
             val newRequest: Request = chain.request().newBuilder()
                 .addHeader("Authorization", "Bearer $token")
+
                 .build()
             chain.proceed(newRequest)
         }.addInterceptor(logging).build()

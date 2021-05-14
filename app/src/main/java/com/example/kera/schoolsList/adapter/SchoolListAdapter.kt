@@ -1,15 +1,21 @@
 package com.example.kera.schoolsList.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kera.R
 import com.example.kera.databinding.ItemSchoolsListBinding
 import com.example.kera.schoolsList.SchoolListUIModel
 import com.example.kera.utils.BaseViewHolder
 
 class SchoolListAdapter(
     var schoolsList: List<SchoolListUIModel.SchoolData>,
-    var callBack: CallBack
+    var callBack: CallBack,
+    private var context: Context? = null
+
+
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -34,9 +40,41 @@ class SchoolListAdapter(
     internal inner class ViewHolder(var item: ItemSchoolsListBinding) :
         BaseViewHolder(item.root) {
         override fun onBind(position: Int) {
+
+//            if (context!=null){
+//                item.mainContent.setAnimation(
+//                    AnimationUtils.loadAnimation(
+//                        context,
+//                        R.anim.fade_scale
+//                    )
+//                )
+//            }
+
             item.model = schoolsList[position]
+
+            if (schoolsList[position].isLiked.get()){
+                item.imageViewFav.setImageResource(R.drawable.ic_baseline_favorite_24)
+            }else{
+                item.imageViewFav.setImageResource(R.drawable.ic_heart)
+            }
             item.imageViewFav.setOnClickListener {
-                callBack.onFavClicked(schoolsList[position].id!!, schoolsList[position].likes)
+                var LikesCounter : Int
+
+                if (schoolsList[position].isLiked.get()){
+                    item.imageViewFav.setImageResource(R.drawable.ic_heart)
+                    schoolsList[position].isLiked.set(false)
+                     LikesCounter = Integer.parseInt(item.textView9.text.toString()) -1
+                    item.textView9.text = LikesCounter.toString()
+                    callBack.onFavClicked(schoolsList[position].id!!, LikesCounter.toString() )
+
+                }else{
+                    item.imageViewFav.setImageResource(R.drawable.ic_baseline_favorite_24)
+                    schoolsList[position].isLiked.set(true)
+                   var LikesCounter : Int = Integer.parseInt(item.textView9.text.toString()) +1
+                    item.textView9.text = LikesCounter.toString()
+                    callBack.onFavClicked(schoolsList[position].id!!, LikesCounter.toString() )
+                }
+
             }
             item.tagsRecycler.adapter = TagsAdapter(schoolsList[position].tags)
         }

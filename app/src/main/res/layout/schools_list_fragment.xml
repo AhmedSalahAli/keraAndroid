@@ -18,24 +18,32 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:paddingBottom="50dp"
-        android:paddingTop="50dp">
+     >
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.skydoves.androidveil.VeilRecyclerFrameView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_height="match_parent"
+
             android:orientation="vertical"
             app:adapter="@{adapter}"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:spanCount="1"
-            tools:listitem="@layout/item_schools_list" />
+            app:veilFrame_layout="@layout/item_schools_list"
+            app:veilFrame_veiled="true"
+            app:veilFrame_shimmerEnable="true"
+            app:veilLayout_baseColor="@color/gray_D2DCE8"
+            app:veilLayout_highlightColor="@color/white"
+            app:veilFrame_baseAlpha="0.6"
+            app:veilFrame_highlightAlpha="1.0"
+            app:veilFrame_radius="8dp"
+            android:clipToPadding="false"
+             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
