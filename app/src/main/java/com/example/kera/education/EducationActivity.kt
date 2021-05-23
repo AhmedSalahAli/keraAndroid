@@ -53,7 +53,7 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
 
 
         accessType = viewModel.getUserType()
-        viewModel.getProfileData()
+
         viewDataBinding.imageViewExchange.setOnClickListener {
 
             if (viewDataBinding.childrenFrame.isVisible){
@@ -79,8 +79,13 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
         viewDataBinding.recyclerEducation.veil()
         if (accessType == "teacher") {
             viewModel.getDates("5fc2270ce4441941bbf5bcfd")
+            viewDataBinding.imageViewExchange.visibility = View.GONE
+            viewDataBinding.imageViewProfile.visibility = View.GONE
         } else {
             viewModel.getDates(viewModel.getSelectedChildDataFromSharedPref()?.classId!!)
+            viewModel.getProfileData()
+            viewDataBinding.imageViewExchange.visibility = View.VISIBLE
+            viewDataBinding.imageViewProfile.visibility = View.VISIBLE
         }
 //        viewModel.getDates(viewModel.getSelectedChildDataFromSharedPref()?.classId!!)
         viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this)

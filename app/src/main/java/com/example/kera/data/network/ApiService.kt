@@ -8,7 +8,9 @@ import com.example.kera.data.models.schoolList.FavouriteSchoolRequestModel
 import com.example.kera.data.models.schoolList.SchoolDetailsResponseModel
 import com.example.kera.data.models.schoolList.SchoolsListResponseModel
 import com.example.kera.data.models.teacherDailyReport.*
+import com.example.kera.data.models.teacherMedicalReport.MedicalReportResponseModel
 import com.example.kera.meals.details.MealCommentPostModel
+import com.example.kera.medical.model.DisplayMedicalReportResponseModel
 import com.example.kera.registrationForm.screen1.model.PublishAppStep1Model
 import com.example.kera.registrationForm.screen1.model.PublishAppStep2Model
 import com.example.kera.registrationForm.screen3.model.PublishAppStep3
@@ -134,7 +136,12 @@ interface ApiService {
         @Header("v") version: Int,
         @Path("reportID") reportID: String,
     ): DailyReportResponseModel
-
+    @GET("teacher/get/mediacl-report/{reportID}")
+    suspend fun getTeacherMedicalReportData(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Path("reportID") reportID: String,
+    ): MedicalReportResponseModel
 
     @PUT("teacher/update/question/report")
     suspend fun updateDailyReportQuestion(
@@ -142,7 +149,12 @@ interface ApiService {
         @Header("v") version: Int,
         @Body requestModel: UpdateQuestionRequestModel
     ): GeneralResponse
-
+    @PUT("teacher/update/question/report")
+    suspend fun updateMedicalReportQuestion(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body requestModel: UpdateQuestionRequestModel
+    ): GeneralResponse
 
     @POST("teacher/create/report")
     suspend fun createDailyReport(
@@ -150,7 +162,12 @@ interface ApiService {
         @Header("v") version: Int,
         @Body requestModel: CreateReportRequestModel
     ): CreateReportResponseModel
-
+    @POST("teacher/create/mediacl-report")
+    suspend fun createMedicalReport(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body requestModel: CreateReportRequestModel
+    ): CreateReportResponseModel
 
     @GET("teacher/latest/reports/{page}")
     suspend fun getLatestReports(
@@ -207,6 +224,16 @@ interface ApiService {
         @Query("toDate") toDate: String,
 
     ): DisplayDailyReportResponseModel
+    @GET("user/medicalreports/{studentID}/{page}}")
+    suspend fun getMedicalReport(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Path("studentID") reportID: String,
+        @Path("page") page: Int,
+        @Query("fromDate") fromDate: String,
+        @Query("toDate") toDate: String,
+
+        ): DisplayMedicalReportResponseModel
     @GET("general/setting/{associationId}/terms")
     suspend fun getAssociationTerms(
         @Header("lang") language: String,

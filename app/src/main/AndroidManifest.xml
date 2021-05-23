@@ -35,7 +35,8 @@
 
         <activity
             android:name=".teacherDailyReport.writeReport.WriteReportActivity"
-            android:label="@string/title_activity_write_report" />
+            android:label="@string/title_activity_write_report"
+            android:windowSoftInputMode="adjustResize"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -68,7 +69,8 @@
         <activity android:name=".medical.MedicalReportActivity" />
         <activity android:name=".education.EducationActivity" />
         <activity android:name=".schoolDetails.ui.SchoolDetailsActivity" />
-        <activity android:name=".meals.details.MealsDetailsActivity" />
+        <activity android:name=".meals.details.MealsDetailsActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".splash.ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

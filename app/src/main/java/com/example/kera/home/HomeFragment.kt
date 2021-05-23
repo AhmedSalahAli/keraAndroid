@@ -205,7 +205,7 @@ class HomeFragment : Fragment() {
             if (viewModel.getSelectedChildDataFromSharedPref() == null) {
                 viewModel.saveChildDataToSharedPref(it.students!![0])
             }
-            viewModel.getNewsList(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, page)
+            viewModel.getNewsList(it.associationId!!, page)
         })
     }
 
@@ -216,7 +216,7 @@ class HomeFragment : Fragment() {
             viewDataBinding.veilLayout.unVeil()
 
 //            viewModel.saveProfileResponseToSharedPref(it)
-            viewModel.getNewsList("5fc2270ce4441941bbf5bcfd", page)
+            viewModel.getNewsList(it.associationId!!, page)
         })
     }
 }

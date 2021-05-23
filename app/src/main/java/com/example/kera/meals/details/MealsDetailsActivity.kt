@@ -26,6 +26,7 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
     val viewModel: MealsDetailsViewModel by viewModel()
     private lateinit var viewDataBinding: ActivityMealsDetailsBinding
     private var mProgressDialog: ProgressDialog? = null
+    lateinit var accessType: String
 
     companion object {
         fun newInstance() = MealsDetailsActivity()
@@ -46,20 +47,32 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
 
+        accessType = viewModel.getUserType()
 
         viewModel.getMealDetails(mealID)
-        viewModel.getProfileData()
+        if (accessType == "teacher") {
 
-        Glide.with(this).load(viewModel.getSelectedChildDataFromSharedPref()!!.profileImage).into(viewDataBinding.imageViewProfile)
-        viewDataBinding.childrenAdapter = ChildrenAdapter(ArrayList(), this,viewModel.getAppRepoInstance())
-        viewDataBinding.imageViewExchange.setOnClickListener {
+            viewDataBinding.imageViewExchange.visibility = View.GONE
+            viewDataBinding.imageViewProfile.visibility = View.GONE
 
-            if (viewDataBinding.childrenFrame.isVisible){
-                stateOfChildrenFrame(false)
-            }else{
-                stateOfChildrenFrame(true)
+        } else {
+
+            viewModel.getProfileData()
+            viewDataBinding.imageViewExchange.visibility = View.VISIBLE
+            viewDataBinding.imageViewProfile.visibility = View.VISIBLE
+            Glide.with(this).load(viewModel.getSelectedChildDataFromSharedPref()!!.profileImage).into(viewDataBinding.imageViewProfile)
+            viewDataBinding.childrenAdapter = ChildrenAdapter(ArrayList(), this,viewModel.getAppRepoInstance())
+            viewDataBinding.imageViewExchange.setOnClickListener {
+
+                if (viewDataBinding.childrenFrame.isVisible){
+                    stateOfChildrenFrame(false)
+                }else{
+                    stateOfChildrenFrame(true)
+                }
             }
         }
+
+
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
 
 

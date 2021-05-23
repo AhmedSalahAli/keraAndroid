@@ -10,7 +10,9 @@ class TeacherProfileUIModel(
     var email: String? = "",
     var phone: String? = "",
     var image: String? = "",
-    var classID: String? = ""
+    var classID: String? = "",
+    var associationId: String? = ""
+
 ) {
     companion object {
         fun mapResponseModelToUIModel(response: TeacherProfileResponseModel.DataBean): TeacherProfileUIModel {
@@ -22,7 +24,8 @@ class TeacherProfileUIModel(
                 response.email,
                 response.phoneNumber,
                 response.profileImage,
-                response.classes?.get(0)?.id
+                response.classes?.get(0)?.id,
+                response.associationId
             )
         }
     }

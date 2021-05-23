@@ -231,13 +231,14 @@
             app:spanCount="1"
             android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
             app:veilFrame_layout="@layout/item_meals"
-        app:veilFrame_veiled="true"
-        app:veilFrame_shimmerEnable="true"
-            app:veilLayout_baseColor="@color/gray_D2DCE8"
-            app:veilLayout_highlightColor="@color/white"
-        app:veilFrame_baseAlpha="0.6"
-        app:veilFrame_highlightAlpha="1.0"
-        app:veilFrame_radius="8dp"
+            app:veilFrame_veiled="true"
+            app:veilFrame_shimmerEnable="true"
+
+            app:veilLayout_baseColor="@color/light_grey_8c99a7"
+            app:veilFrame_highlightColor="@color/blue_effcff"
+            app:veilFrame_baseAlpha="0.6"
+            app:veilFrame_highlightAlpha="1.0"
+            app:veilFrame_radius="8dp"
              />
 
         <FrameLayout

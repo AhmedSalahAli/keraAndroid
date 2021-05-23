@@ -70,28 +70,20 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
                 viewDataBinding.textViewNumberOfStudents.text =
                     "${it.data!!.students?.size} student is selected"
             }
-//            if (it.status == 1){
-//                viewDataBinding.imageViewPublishReport.visibility = View.VISIBLE
-//                viewDataBinding.imageViewPublishReport.isClickable = true
-//            }else{
-//                viewDataBinding.imageViewPublishReport.visibility = View.GONE
-//                viewDataBinding.imageViewPublishReport.isClickable = false
-//            }
+            if (it.data!!.status == 1){
+                viewDataBinding.imageViewPublishReport.visibility = View.VISIBLE
+               // viewDataBinding.imageViewPublishReport.isClickable = true
+            }else{
+                viewDataBinding.imageViewPublishReport.visibility = View.INVISIBLE
+                //viewDataBinding.imageViewPublishReport.isClickable = false
+            }
         })
 
         viewModel.updateDailyReportQuestionBoolean.observe(this, {
             CommonUtils.hideLoading(mProgressDialog!!)
 
         })
-        viewModel.response.observe(this, {
 
-            if (it.status == 1){
-
-            }else{
-
-            }
-
-        })
 
 
         viewDataBinding.imageViewPublishReport.setOnClickListener {

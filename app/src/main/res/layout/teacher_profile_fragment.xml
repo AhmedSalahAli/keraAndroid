@@ -21,12 +21,13 @@
         tools:context=".profile.ProfileFragment">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp"
-            android:background="@drawable/rounded_bottom_left_right_corners"
-            android:elevation="7dp"
+            android:layout_height="@dimen/_80sdp"
+            style="@style/CustomCardCorners"
+            app:cardElevation="@dimen/_20sdp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -40,7 +41,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView54"

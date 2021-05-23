@@ -88,8 +88,8 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScroll1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="0dp"
+
             android:background="@drawable/rounded_top_left_right_corners"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:src="@drawable/ic_left_arrow_grey"
-                        android:visibility="gone"
+
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
                         app:layout_constraintTop_toTopOf="@+id/guideline42" />
 
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:src="@drawable/ic_right_arrow_grey"
-                        android:visibility="gone"
+
                         app:layout_constraintEnd_toStartOf="@+id/guideline44"
                         app:layout_constraintTop_toTopOf="@+id/guideline42" />
 
@@ -191,8 +191,8 @@
                         app:veilFrame_layout="@layout/item_teacher_report_classes"
                         app:veilFrame_veiled="true"
                         app:veilFrame_shimmerEnable="true"
-                        app:veilLayout_baseColor="@color/gray_D2DCE8"
-                        app:veilLayout_highlightColor="@color/white"
+                        app:veilLayout_baseColor="@color/light_grey_8c99a7"
+                        app:veilFrame_highlightColor="@color/blue_effcff"
                         app:veilFrame_baseAlpha="0.6"
                         app:veilFrame_highlightAlpha="1.0"
                         app:veilFrame_radius="8dp"
@@ -207,7 +207,7 @@
                         android:text="@string/students"
                         android:textColor="#5881A4"
                         android:textSize="14dp"
-                        android:textStyle="bold"
+
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
                         app:layout_constraintTop_toBottomOf="@+id/recyclerView7" />
 
@@ -261,8 +261,8 @@
                         app:veilFrame_layout="@layout/item_student_name_image"
                         app:veilFrame_veiled="true"
                         app:veilFrame_shimmerEnable="true"
-                        app:veilLayout_baseColor="@color/gray_D2DCE8"
-                        app:veilLayout_highlightColor="@color/white"
+                        app:veilLayout_baseColor="@color/light_grey_8c99a7"
+                        app:veilFrame_highlightColor="@color/blue_effcff"
                         app:veilFrame_baseAlpha="0.6"
                         app:veilFrame_highlightAlpha="1.0"
                         app:veilFrame_radius="8dp"
@@ -307,8 +307,8 @@
 
                     <com.skydoves.androidveil.VeilRecyclerFrameView
                         android:id="@+id/recycler_latest_reports"
-                        android:layout_width="match_parent"
-                        android:layout_height="500dp"
+                        android:layout_width="0dp"
+                        android:layout_height="300dp"
                         android:layout_marginTop="8dp"
                         android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
 
@@ -322,8 +322,8 @@
                         app:veilFrame_layout="@layout/item_teacher_medical_report_report"
                         app:veilFrame_veiled="true"
                         app:veilFrame_shimmerEnable="true"
-                        app:veilLayout_baseColor="@color/gray_D2DCE8"
-                        app:veilLayout_highlightColor="@color/white"
+                        app:veilLayout_baseColor="@color/light_grey_8c99a7"
+                        app:veilFrame_highlightColor="@color/blue_effcff"
                         app:veilFrame_baseAlpha="0.6"
                         app:veilFrame_highlightAlpha="1.0"
                         app:veilFrame_radius="8dp"

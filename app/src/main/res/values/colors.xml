@@ -27,5 +27,8 @@
     <color name="orange_FFBB3B">#FFBB3B</color>
     <color name="lite_orange_FFBB3B">#F4EEE7</color>
     <color name="gray_D2DCE8">#D2DCE8</color>
+    <color name="blue_yes">#2DB7BE</color>
+    <color name="red_no">#F2818A</color>
+    <color name="gray_nothing">#CFD6DE</color>
 
 </resources>

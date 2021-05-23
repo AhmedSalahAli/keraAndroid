@@ -7,6 +7,7 @@ class ProfileUIModel(
     var address: String? = "",
     var email: String? = "",
     var phone: String? = "",
+    var associationId: String? = "",
     var name: MutableLiveData<String>,
 //    var mobile: String? = "",
     var students: ArrayList<StudentsData>? = null,
@@ -21,6 +22,7 @@ class ProfileUIModel(
                 data?.location?.address,
                 data?.email,
                 data?.phoneNumber,
+                data?.associationId,
                 MutableLiveData(data?.students!![0].username),
                 data.students?.map {
                     StudentsData(

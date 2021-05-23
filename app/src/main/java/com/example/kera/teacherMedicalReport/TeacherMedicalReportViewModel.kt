@@ -43,10 +43,10 @@ class TeacherMedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
     }
 
 
-    fun createDailyReport(requestModel: CreateReportRequestModel) {
+    fun createMedicalReport(requestModel: CreateReportRequestModel) {
         viewModelScope.launch {
             try {
-                val response = appRepo.createDailyReport(requestModel)
+                val response = appRepo.createMedicalReport(requestModel)
                 createdReportResponseID.value = response.data?.id
             } catch (e: Exception) {
                 message.value = e.toString()

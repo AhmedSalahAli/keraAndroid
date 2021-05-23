@@ -147,14 +147,17 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
 
     suspend fun getTeacherDailyReportData(reportID: String) =
         service.getTeacherDailyReportData("en", 1, reportID)
-
+    suspend fun getTeacherMedicalReportData(reportID: String) =
+        service.getTeacherMedicalReportData("en", 1, reportID)
     suspend fun updateDailyReportQuestion(updateQuestionRequestModel: UpdateQuestionRequestModel) =
         service.updateDailyReportQuestion("en", 1, updateQuestionRequestModel)
-
+    suspend fun updateMedicalReportQuestion(updateQuestionRequestModel: UpdateQuestionRequestModel) =
+        service.updateMedicalReportQuestion("en", 1, updateQuestionRequestModel)
 
     suspend fun createDailyReport(requestModel: CreateReportRequestModel) =
         service.createDailyReport("en", 1, requestModel)
-
+    suspend fun createMedicalReport(requestModel: CreateReportRequestModel) =
+        service.createMedicalReport("en", 1, requestModel)
     suspend fun getLatestReports(page: Int) = service.getLatestReports("en", 1, page)
 
     suspend fun getLatestMedicalReports(page: Int) = service.getLatestMedicalReports("en", 1, page)
@@ -171,6 +174,8 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         service.publishApp4("en", 1, requestModel)
     suspend fun getDailyReportData(studentID: String, fromDate: String, toDate: String,page:Int) =
         service.getDailyReport("en", 1, studentID,page, fromDate, toDate)
+    suspend fun getMedicalReportData(studentID: String, fromDate: String, toDate: String,page:Int) =
+        service.getMedicalReport("en", 1, studentID,page, fromDate, toDate)
     suspend fun getAssociationTerms(associationId:String) =
         service.getAssociationTerms("en", 1,associationId)
     suspend fun getHomeNurseryData() =

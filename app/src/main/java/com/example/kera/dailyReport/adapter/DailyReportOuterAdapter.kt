@@ -59,7 +59,7 @@ class DailyReportOuterAdapter(
                     binding.beforeExpand.visibility = View.GONE
                     binding.afterExpand.visibility = View.VISIBLE
 
-                    CommonUtilsJava.expand(binding.outerReportItem, binding.afterExpand, binding.beforeExpand)
+                   // CommonUtilsJava.expand(binding.outerReportItem, binding.afterExpand, binding.beforeExpand)
 
 
                 } else {

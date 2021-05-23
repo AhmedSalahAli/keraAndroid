@@ -73,15 +73,16 @@ class DailyReportActivity : AppCompatActivity(), ChildrenAdapter.CallBack,
         )
 
 
-
+        val scale =   CommonUtils.pxToDp(viewDataBinding.cardTopView.layoutParams.height,this)
+        val padding_in_px = (scale + 50.5f).toInt()
         manager = LinearLayoutManager(this)
         viewDataBinding.recyclerView10.setLayoutManager(manager)
         viewDataBinding.recyclerView10.setAdapter(viewDataBinding.adapter) // sets your own adapter
         viewDataBinding.recyclerView10.addVeiledItems(15)
         viewDataBinding.recyclerView10.veil()
-        viewDataBinding.recyclerView10.getRecyclerView().setPadding(0,500,0,0)
+        viewDataBinding.recyclerView10.getRecyclerView().setPadding(0,padding_in_px,0,0)
         viewDataBinding.recyclerView10 .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView10.getVeiledRecyclerView().setPadding(0,500,0,0)
+        viewDataBinding.recyclerView10.getVeiledRecyclerView().setPadding(0,padding_in_px,0,0)
         viewDataBinding.recyclerView10 .getVeiledRecyclerView().clipToPadding = false
         viewDataBinding.recyclerView10.getRecyclerView().addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

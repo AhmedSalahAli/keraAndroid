@@ -3,7 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".medical.MedicalReportActivity">
+    <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.kera.medical.MedicalReportViewModel" />
+        <variable
+            name="adapter"
+            type="com.example.kera.medical.adapter.MedicalReportsAdapter" />
+
+        <variable
+            name="childrenAdapter"
+            type="com.example.kera.profile.adapter.ChildrenAdapter" />
+
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,101 +34,211 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout7"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_top_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_bottom_left_right_corners"
-            android:elevation="10dp"
+            style="@style/CustomCardCorners"
+            app:cardElevation="@dimen/_20sdp"
+            app:cardBackgroundColor="@color/blue_fcfdfd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageView_back"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout7"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="33dp"
-                android:layout_marginTop="33dp"
-                android:src="@drawable/ic_rounded_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView103"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:fontFamily="@font/sf_ui_display_regular"
-                android:text="@string/medical_reports"
-                android:textColor="#152D4A"
-                android:textSize="@dimen/_13ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView_back" />
+                >
 
-            <View
-                android:id="@+id/view5"
-                android:layout_width="0dp"
-                android:layout_height="0.5dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="30dp"
-                android:background="#D0D6DB"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView_back" />
+                <ImageView
+                    android:id="@+id/imageView_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginTop="33dp"
+                    android:src="@drawable/ic_rounded_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView65"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="13dp"
-                android:src="@drawable/ic_calendar_icon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/view5"
-                app:layout_constraintTop_toBottomOf="@+id/view5" />
+                <TextView
+                    android:id="@+id/textView103"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:fontFamily="@font/sf_ui_display_regular"
+                    android:text="@string/meadical_report"
+                    android:textColor="#152D4A"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView_back" />
 
-            <TextView
-                android:id="@+id/textView111"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sf_ui_display_regular"
-                android:text="Wednesday, April 15"
-                android:textColor="#152D4A"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView65"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView65" />
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="#D0D6DB"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_back" />
 
-            <ImageView
-                android:id="@+id/imageView66"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/ic_filter_blue"
-                app:layout_constraintBottom_toBottomOf="@+id/textView111"
-                app:layout_constraintEnd_toEndOf="@+id/view5"
-                app:layout_constraintTop_toTopOf="@+id/textView111" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/imageView65"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="13dp"
+                    android:src="@drawable/ic_calendar_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/view5"
+                    app:layout_constraintTop_toBottomOf="@+id/view5" />
 
-        <androidx.recyclerview.widget.RecyclerView
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/textView111"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView65"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView65">
+
+                    <TextView
+                        android:id="@+id/textView_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="@string/from"
+                        android:textColor="#5881A4"
+                        android:textSize="@dimen/_14ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_from_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="@{viewModel.fromDate}"
+                        android:textColor="#152D4A"
+                        android:textSize="@dimen/_14ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_from"
+                        app:layout_constraintStart_toEndOf="@+id/textView_from"
+                        app:layout_constraintTop_toTopOf="@+id/textView_from"
+                        tools:text="1/1" />
+
+                    <TextView
+                        android:id="@+id/textView_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="@string/to"
+                        android:textColor="#5881A4"
+                        android:textSize="@dimen/_14ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_from_date"
+                        app:layout_constraintStart_toEndOf="@+id/textView_from_date"
+                        app:layout_constraintTop_toTopOf="@+id/textView_from_date" />
+
+                    <TextView
+                        android:id="@+id/textView_to_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:textColor="#152D4A"
+                        android:textSize="@dimen/_14ssp"
+                        android:text="@{viewModel.toDate}"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_to"
+                        app:layout_constraintStart_toEndOf="@+id/textView_to"
+                        app:layout_constraintTop_toTopOf="@+id/textView_to"
+                        tools:text="2/2" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageView_profile"
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    app:civ_border_color="#FFBB3B"
+                    app:civ_border_width="1dp"
+                    app:image="@{viewModel.selectedUser.profileImage}"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView111"
+                    app:layout_constraintEnd_toEndOf="@+id/view5"
+                    app:layout_constraintTop_toTopOf="@+id/textView111" />
+
+                <ImageView
+                    android:id="@+id/imageView_exchange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView_profile"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView_profile"
+                    app:layout_constraintStart_toStartOf="@+id/imageView_profile"
+                    app:layout_constraintTop_toTopOf="@+id/imageView_profile"
+                    app:srcCompat="@drawable/ic_exchange" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.skydoves.androidveil.VeilRecyclerFrameView
+            android:id="@+id/recyclerView10"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="13dp"
+            android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+
+            app:layout_constraintTop_toBottomOf="@+id/card_top_view"
+
             android:orientation="vertical"
+            app:adapter="@{adapter}"
+            tools:listitem="@layout/item_medical_report"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
             app:spanCount="1"
-            tools:listitem="@layout/item_medical_report" />
+            app:veilFrame_layout="@layout/item_medical_report"
+            app:veilFrame_veiled="true"
+            app:veilFrame_shimmerEnable="true"
+            app:veilLayout_baseColor="@color/light_grey_8c99a7"
+            app:veilFrame_highlightColor="@color/blue_effcff"
+            app:veilFrame_baseAlpha="0.6"
+            app:veilFrame_highlightAlpha="1.0"
+            app:veilFrame_radius="8dp"
+            />
+
+        <FrameLayout
+            android:id="@+id/children_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_chiled_list"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerView10"
+            app:layout_constraintTop_toBottomOf="@+id/card_top_view"
+            android:layout_marginEnd="23dp"
+            android:visibility="gone"
+            android:elevation="@dimen/_15sdp"
+            android:layout_marginTop="10dp"
+            >
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_students"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                app:adapter="@{childrenAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+
+                app:spanCount="1"
+                tools:listitem="@layout/item_student" />
+
+        </FrameLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

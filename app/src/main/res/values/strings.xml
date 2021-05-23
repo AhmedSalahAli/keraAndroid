@@ -113,5 +113,7 @@
     <string name="please_select_at_least_one_student">Please select at least one studnet</string>
     <string name="Save">Save</string>
     <string name="clear_all">Clear All</string>
+    <string name="meadical_report">Medical Reports</string>
+    <string name="doctor_comment">Doctor Comment</string>
 
 </resources>

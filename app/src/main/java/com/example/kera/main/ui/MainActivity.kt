@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
         accessType = mainViewModel.getUserType()
         val navController = findNavController(R.id.fragment)
         viewDataBinding.bottomNavigationView.uncheckAllItems()
-
         viewDataBinding.bottomNavigationView.setupWithNavController(navController)
 
 

@@ -11,6 +11,7 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.format.DateFormat
+import android.util.DisplayMetrics
 import android.util.Log
 import android.util.Patterns
 import androidx.annotation.LayoutRes
@@ -19,6 +20,7 @@ import java.io.File
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 object CommonUtils {
     val DATE_PICKER_DAY_FORMAT = SimpleDateFormat("EEE d", Locale.ENGLISH)
@@ -67,7 +69,10 @@ object CommonUtils {
             storageDir.mkdirs()
         return storageDir
     }
-
+    fun pxToDp(px: Int, context: Context): Int {
+        val displayMetrics: DisplayMetrics = context.getResources().getDisplayMetrics()
+        return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+    }
     fun shareImage(uri: Uri, context: Context, text: String?) {
         val sharingIntent = Intent(Intent.ACTION_SEND)
         sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)

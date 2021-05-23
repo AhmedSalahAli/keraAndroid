@@ -70,6 +70,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
 
+
         viewDataBinding.textViewDate.text = CommonUtils.getCurrentDate_EEE_MM_YYY()
         val content = SpannableString(resources.getString(R.string.mark_as_abscent))
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
@@ -87,7 +88,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         viewDataBinding.recyclerView7.setAdapter(viewDataBinding.classesAdapter) // sets your own adapter
         viewDataBinding.recyclerView7.setLayoutManager(StaggeredGridLayoutManager(1,
             StaggeredGridLayoutManager.HORIZONTAL)) // sets LayoutManager
-        viewDataBinding.recyclerView7.addVeiledItems(15)
+        viewDataBinding.recyclerView7.addVeiledItems(10)
         viewDataBinding.recyclerView7.veil()
 
         viewDataBinding.recyclerLatestReports.setAdapter(viewDataBinding.latestReportsAdapter) // sets your own adapter

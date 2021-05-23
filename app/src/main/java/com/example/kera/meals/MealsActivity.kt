@@ -55,18 +55,26 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
         viewDataBinding.veilLayout.veil()
         viewDataBinding.recyclerMeals.setAdapter(viewDataBinding.mealsAdapter) // sets your own adapter
+
         viewDataBinding.recyclerMeals.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)) // sets LayoutManager
         viewDataBinding.recyclerMeals.addVeiledItems(15)
         viewDataBinding.recyclerMeals.veil()
 
         if (accessType == "teacher") {
             viewModel.getDates("5fc2270ce4441941bbf5bcfd")
+            viewDataBinding.imageViewExchange.visibility = View.GONE
+            viewDataBinding.imageViewProfile.visibility = View.GONE
+
         } else {
             viewModel.getDates(viewModel.getSelectedChildDataFromSharedPref()?.classId!!)
+            viewModel.getProfileData()
+            viewDataBinding.imageViewExchange.visibility = View.VISIBLE
+            viewDataBinding.imageViewProfile.visibility = View.VISIBLE
+
         }
 
         messageObserver()
-        viewModel.getProfileData()
+
         viewDataBinding.imageViewExchange.setOnClickListener {
 
             if (viewDataBinding.childrenFrame.isVisible){

@@ -33,6 +33,12 @@ class SplashActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val config: ImagePipelineConfig = ImagePipelineConfig.newBuilder(this)
+            .setProgressiveJpegConfig(SimpleProgressiveJpegConfig())
+            .setResizeAndRotateEnabledForNetwork(true)
+            .setDownsampleEnabled(true)
+            .build()
+        Fresco.initialize(this, config)
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
 
         val window: Window =this.window
@@ -45,12 +51,7 @@ class SplashActivity : AppCompatActivity() {
         viewDataBinding.viewModel = splashViewModel
         splashViewModel.getIsUserLoggedIn()
         requestLocationPermission()
-        val config: ImagePipelineConfig = ImagePipelineConfig.newBuilder(this)
-            .setProgressiveJpegConfig(SimpleProgressiveJpegConfig())
-            .setResizeAndRotateEnabledForNetwork(true)
-            .setDownsampleEnabled(true)
-            .build()
-        Fresco.initialize(this, config)
+
 
     }
 

@@ -39,7 +39,9 @@ class MealsDetailsViewModel(val appRepo: AppRepo) : ViewModel() {
 
         }
     }
-
+    fun getUserType() : String{
+        return appRepo.getUserTypeFromSharedPref()
+    }
     fun getSelectedChildDataFromSharedPref(): StudentsData? {
         var response = appRepo.getSelectedChildData()
         selectedUser.value = response!!

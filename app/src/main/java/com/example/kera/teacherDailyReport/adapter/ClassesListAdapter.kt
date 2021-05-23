@@ -44,11 +44,11 @@ class ClassesListAdapter(
         BaseViewHolder(item.root) {
         override fun onBind(position: Int) {
             if (selectedItem == position){
-                item.constraintClass.setCardBackgroundColor(context.resources.getColor(R.color.orange_FFBB3B) )
+                item.constraintClass.setBackgroundResource(R.drawable.rounded_30_shadow_classes_yello)
                 item.textView119.setTextColor(context.resources.getColor(R.color.dark_blue_152D4A))
             }
             else{
-                item.constraintClass.setCardBackgroundColor(context.resources.getColor(R.color.lite_orange_FFBB3B))
+                item.constraintClass.setBackgroundResource(R.drawable.rounded_light_yellow_f4eee7)
                 item.textView119.setTextColor(context.resources.getColor(R.color.light_blue))
             }
             item.model = classesList[position]

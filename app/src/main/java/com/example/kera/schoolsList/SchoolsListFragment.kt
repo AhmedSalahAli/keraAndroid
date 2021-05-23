@@ -28,7 +28,6 @@ import com.example.kera.data.models.schoolList.FavouriteSchoolRequestModel
 import com.example.kera.databinding.SchoolsListFragmentBinding
 import com.example.kera.schoolDetails.ui.SchoolDetailsActivity
 import com.example.kera.schoolsList.adapter.SchoolListAdapter
-import com.example.kera.utils.CommonUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -69,18 +68,26 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
 
         //mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
         viewModel.getSchoolsList(page)
-        viewDataBinding.adapter = SchoolListAdapter(ArrayList(), this,requireContext())
+        viewDataBinding.adapter = SchoolListAdapter(ArrayList(), this, requireContext())
 
         manager = LinearLayoutManager(requireActivity())
         viewDataBinding.recyclerView.setLayoutManager(manager)
         viewDataBinding.recyclerView.setAdapter(viewDataBinding.adapter) // sets your own adapter
         viewDataBinding.recyclerView.addVeiledItems(15)
         viewDataBinding.recyclerView.veil()
-        viewDataBinding.recyclerView.getRecyclerView().setPadding(0,180,0,150)
+
+
+        val scale = resources.getDimension(R.dimen._120sdp)
+        val padding_in_px = (scale + 0.5f).toInt()
+        viewDataBinding.recyclerView.getRecyclerView().setPadding(
+            0,
+            padding_in_px, 0, 150
+        )
         viewDataBinding.recyclerView .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView.getVeiledRecyclerView().setPadding(0,180,0,150)
+        viewDataBinding.recyclerView.getVeiledRecyclerView().setPadding(0, padding_in_px, 0, 150)
         viewDataBinding.recyclerView .getVeiledRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView.getRecyclerView().addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        viewDataBinding.recyclerView.getRecyclerView().addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
@@ -101,7 +108,7 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
 //                            requireActivity(),
 //                            R.layout.progress_dialog
 //                        )
-                      //  viewDataBinding.recyclerView.veil()
+                        //  viewDataBinding.recyclerView.veil()
 
                         viewModel.getSchoolsList(page)
                     }
@@ -118,7 +125,7 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
         messageObserver()
 
         viewModel.schoolsList.observe(viewLifecycleOwner, {
-           // CommonUtils.hideLoading(mProgressDialog!!)
+            // CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.recyclerView.unVeil()
 
             isScrolling = false
