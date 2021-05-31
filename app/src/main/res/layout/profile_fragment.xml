@@ -17,14 +17,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_profile"
+        android:background="@drawable/background_alll"
         tools:context=".profile.ProfileFragment">
 
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp"
+            android:layout_height="80dp"
             style="@style/CustomCardCorners"
             app:cardElevation="@dimen/_20sdp"
 

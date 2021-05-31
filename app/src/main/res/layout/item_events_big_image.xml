@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="model"
+            type="com.example.kera.events.model.UpcomingItemUIModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,12 +16,13 @@
 
         <com.example.kera.utils.RoundCornerLayout
             android:id="@+id/roundCornerLayout4"
-            android:layout_width="220dp"
+            android:layout_width="223dp"
             android:layout_height="140dp"
             app:bottomLeftEnabled="true"
             app:bottomRightEnabled="true"
-            app:cornerRadius="@dimen/_10sdp"
-            android:background="@drawable/rounded_white_orange_stroke"
+            app:cornerRadius="30dp"
+            android:background="@drawable/rounded_white_orange_stroke30dp"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:topLeftEnabled="true"
@@ -29,7 +32,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/background" />
+                app:image="@{model.mainCover}"
+
+                android:src="@drawable/upload_pic" />
 
 
         </com.example.kera.utils.RoundCornerLayout>
@@ -49,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/sf_ui_display_regular"
-                android:text="JUN"
+
+
                 android:textColor="#FFBB3B"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="@font/sf_ui_display_regular"
-                android:text="23"
+
                 android:textColor="#152D4A"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -71,38 +77,48 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView60" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textView55"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:fontFamily="@font/sf_ui_display_regular"
-            android:text="Voyez ce jeu exquis wallon"
-            android:textColor="#0093DE"
-            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout16"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout16" />
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout16"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout16">
 
-        <ImageView
-            android:id="@+id/imageView41"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            app:layout_constraintStart_toStartOf="@+id/textView55"
-            app:layout_constraintTop_toBottomOf="@+id/textView55"
-            app:srcCompat="@drawable/ic_calendar_small_grey" />
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:fontFamily="@font/sf_ui_display_regular"
+                android:text="@{model.shortDescription}"
+                android:textColor="#0093DE"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:maxEms="30"
+                android:maxLength="30"
+                android:ellipsize="end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
-        <TextView
-            android:id="@+id/textView59"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sf_ui_display_regular"
-            android:text="“Voyez ce jeu exquis wallon, de…"
-            android:textColor="#8C99A7"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView41"
-            app:layout_constraintStart_toEndOf="@+id/imageView41"
-            app:layout_constraintTop_toTopOf="@+id/imageView41" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView59"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_ui_display_regular"
+                android:text="@{model.address}"
+                android:textColor="#8C99A7"
+                android:textSize="10sp"
+                android:maxEms="30"
+                android:maxLength="30"
+                android:ellipsize="end"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/ic_calendar_small_grey"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/textView55" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>

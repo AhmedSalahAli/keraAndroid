@@ -14,8 +14,8 @@ class LoginViewModel(val appRepo: AppRepo) : ViewModel() {
     val loginFailed = MutableLiveData<Boolean>()
     var message = MutableLiveData<String>()
 
-    fun login() {
-        loginRequestModel.fcmToken = "test"
+    fun login(fcmToken :String) {
+        loginRequestModel.fcmToken = fcmToken
         when {
             loginRequestModel.phone.isEmpty() -> {
                 message.value = "please enter your phone number"

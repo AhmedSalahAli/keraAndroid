@@ -20,6 +20,15 @@
     <style name="CustomCardCorners" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_corners</item>
     </style>
+    <style name="CustomCardCornersOp" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_cornersOp</item>
+    </style>
+    <style name="CustomCardCornersOpOp" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_cornersOpOp</item>
+    </style>
+    <style name="CardCustomCardCorners" parent="@style/CardView">
+        <item name="shapeAppearance">@style/ShapeAppearance_custom_corners</item>
+    </style>
     <style name="TopCustomCardCorners" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/Top_ShapeAppearance_custom_corners</item>
     </style>
@@ -32,6 +41,20 @@
         <item name="cornerSizeTopRight">0dp</item>
         <item name="cornerSizeBottomLeft">20dp</item>
         <item name="cornerSizeBottomRight">20dp</item>
+    </style>
+    <style name="ShapeAppearance_custom_cornersOp" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
+    </style>
+    <style name="ShapeAppearance_custom_cornersOpOp" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
     </style>
     <style name="Top_ShapeAppearance_custom_corners" parent="">
         <item name="cornerFamily">rounded</item>

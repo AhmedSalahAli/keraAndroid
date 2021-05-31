@@ -21,6 +21,7 @@ import com.example.kera.home.adapter.ImagesListAdapter
 import com.example.kera.home.model.HomeNewsUIModel
 import com.example.kera.meals.MealsActivity
 import com.example.kera.medical.MedicalReportActivity
+import com.example.kera.qrCode.QRActivity
 import com.example.kera.teacherDailyReport.ui.TeacherDailyReportActivity
 import com.example.kera.teacherMedicalReport.TeacherMedicalReportActivity
 import com.example.kera.utils.CommonUtils
@@ -172,6 +173,9 @@ class HomeFragment : Fragment() {
         viewDataBinding.constraintLayoutEducation.setOnClickListener {
             startActivity(Intent(context, EducationActivity::class.java))
         }
+        viewDataBinding.imageViewQrCode.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(context, QRActivity::class.java))
+        })
     }
 
     private fun messageObserver() {

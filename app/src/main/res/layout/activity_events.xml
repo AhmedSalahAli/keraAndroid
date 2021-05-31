@@ -9,72 +9,89 @@
         <variable
             name="viewModel"
             type="com.example.kera.events.ui.EventsViewModel" />
+        <variable
+            name="adapter"
+            type="com.example.kera.events.adapter.UpcomingListAdapter" />
+        <variable
+            name="previousAdapter"
+            type="com.example.kera.events.adapter.PreviousListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".events.ui.EventsActivity">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        tools:context=".events.ui.EventsActivity"
+        android:background="@drawable/background_alll">
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@drawable/rounded_bottom_left_right_corners"
-            android:elevation="4dp"
+            android:layout_height="@dimen/_80sdp"
+            style="@style/CustomCardCorners"
+            app:cardElevation="@dimen/_5sdp"
+            app:cardBackgroundColor="#FCFCFC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-            <ImageView
-                android:id="@+id/imageView26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/bubbles"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout_back"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="31dp"
-                android:layout_marginTop="11dp"
-                android:background="@drawable/rounded_grey"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView26"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView26">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView19"
+                    android:id="@+id/imageView26"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:image="@{viewModel.logo}"
+                    app:layout_constraintBottom_toBottomOf="@+id/view1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_back" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout_back"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="11dp"
+                    android:background="@drawable/rounded_grey"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView26"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView26">
+
+                    <ImageView
+                        android:id="@+id/imageView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_back" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="20dp" />
+            app:layout_constraintGuide_begin="@dimen/_20sdp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="20dp" />
+            app:layout_constraintGuide_end="@dimen/_33sdp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline24"
@@ -87,42 +104,55 @@
             android:id="@+id/textView62"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/sf_ui_display_regular"
+
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/sf_ui_display_semibold"
             android:text="@string/upcoming_events"
             android:textColor="#152D4A"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/guideline22"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.skydoves.androidveil.VeilRecyclerFrameView
             android:id="@+id/recyclerView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="193.2dp"
             android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+           
+            app:adapter="@{adapter}"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintEnd_toStartOf="@+id/guideline23"
             app:layout_constraintStart_toStartOf="@+id/textView62"
             app:layout_constraintTop_toBottomOf="@+id/textView62"
             app:spanCount="1"
-            tools:listitem="@layout/item_events_big_image" />
+            app:layout_constraintVertical_bias="1.0"
+            android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+            app:veilFrame_layout="@layout/item_events_big_image"
+            app:veilFrame_veiled="true"
+            app:veilFrame_shimmerEnable="true"
+            app:veilLayout_baseColor="@color/light_grey_8c99a7"
+            app:veilFrame_highlightColor="@color/blue_effcff"
+            app:veilFrame_baseAlpha="0.6"
+            app:veilFrame_highlightAlpha="1.0"
+            app:veilFrame_radius="30dp"/>
 
         <TextView
             android:id="@+id/textView67"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:fontFamily="@font/sf_ui_display_regular"
+            android:fontFamily="@font/sf_ui_display_semibold"
             android:text="@string/previous_events"
             android:textColor="#152D4A"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/recyclerView4"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView4" />
-
-        <androidx.recyclerview.widget.RecyclerView
+            app:layout_constraintStart_toStartOf="@+id/guideline22"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView4"
+/>
+        <com.skydoves.androidveil.VeilRecyclerFrameView
+            android:id="@+id/recyclerView3"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -132,8 +162,19 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline23"
             app:layout_constraintStart_toStartOf="@+id/textView67"
             app:layout_constraintTop_toBottomOf="@+id/textView67"
+            app:adapter="@{previousAdapter}"
             app:spanCount="1"
-            tools:listitem="@layout/item_events_small_image" />
+
+            app:layout_constraintVertical_bias="1.0"
+            android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+            app:veilFrame_layout="@layout/item_events_small_image"
+            app:veilFrame_veiled="true"
+            app:veilFrame_shimmerEnable="true"
+            app:veilLayout_baseColor="@color/light_grey_8c99a7"
+            app:veilFrame_highlightColor="@color/blue_effcff"
+            app:veilFrame_baseAlpha="0.6"
+            app:veilFrame_highlightAlpha="1.0"
+            app:veilFrame_radius="15dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

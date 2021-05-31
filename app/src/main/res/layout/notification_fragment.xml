@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+   >
 
     <data>
 
@@ -17,15 +18,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
+        android:background="@drawable/background_alll"
         tools:context=".notification.NotificationFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@drawable/rounded_bottom_left_right_corners"
-            android:elevation="7dp"
+            android:layout_height="80dp"
+            style="@style/CustomCardCorners"
+            app:cardElevation="@dimen/_20sdp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -39,14 +41,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.recyclerview.widget.RecyclerView
+
+        <com.skydoves.androidveil.VeilRecyclerFrameView
+            android:id="@+id/recycler_notifications"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="12dp"
+
             android:orientation="vertical"
             app:adapter="@{adapter}"
             android:background="#FCFDFD"
@@ -56,7 +58,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
             app:spanCount="1"
-            tools:listitem="@layout/item_notification" />
+
+            android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+
+            app:veilFrame_layout="@layout/item_notification"
+            app:veilFrame_veiled="true"
+            app:veilFrame_shimmerEnable="true"
+            app:veilLayout_baseColor="@color/light_grey_8c99a7"
+            app:veilFrame_highlightColor="@color/blue_effcff"
+            app:veilFrame_baseAlpha="0.6"
+            app:veilFrame_highlightAlpha="1.0"
+            app:veilFrame_radius="8dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

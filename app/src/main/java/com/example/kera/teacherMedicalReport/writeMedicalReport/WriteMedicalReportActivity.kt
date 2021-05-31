@@ -10,7 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.kera.R
+import com.example.kera.data.models.teacherMedicalReport.UpdateMedicalRequestModel
 import com.example.kera.databinding.WriteMedicalReportFragmentBinding
+import com.example.kera.teacherDailyReport.model.PublishReportRequestModel
+import com.example.kera.teacherDailyReport.model.UpdateQuestionRequestModel
 import com.example.kera.teacherMedicalReport.TeacherMedicalReportViewModel
 import com.example.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter
 import com.example.kera.utils.CommonUtils
@@ -24,6 +27,8 @@ class WriteMedicalReportActivity : AppCompatActivity() {
     var isNoCheckBoxChecked: Boolean = false
     lateinit var reportID: String
     private var mProgressDialog: ProgressDialog? = null
+    private var ReportStatus:Int = 0
+
     companion object {
         fun newInstance() = WriteMedicalReportActivity()
     }
@@ -76,12 +81,15 @@ class WriteMedicalReportActivity : AppCompatActivity() {
                 viewDataBinding.textView131.text =
                     "${it.data!!.students?.size} student is selected"
             }
+            ReportStatus = it.data!!.status!!
             if (it.data!!.status == 1){
                 viewDataBinding.imageView80.visibility = View.VISIBLE
                 viewDataBinding.constraintlayoutNo.isClickable = true
                 viewDataBinding.constraintLayoutYes.isClickable = true
 
                 viewDataBinding.textView138.isEnabled = true
+
+
                 if (it.data!!.images!![0].isEmpty()){
                     Glide.with(this).load(resources.getDrawable(R.drawable.upload_picc)).error(R.drawable.upload_picc).into(viewDataBinding.imageView2)
 
@@ -104,15 +112,56 @@ class WriteMedicalReportActivity : AppCompatActivity() {
             Glide.with(this).load(it.data!!.images!![1]).error(R.drawable.upload_picc).into(viewDataBinding.imageView1)
             Glide.with(this).load(it.data!!.images!![2]).error(R.drawable.upload_picc).into(viewDataBinding.imageView83)
         })
+        viewDataBinding.imageView80.setOnClickListener {
+
+            mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+            val requestModel = PublishReportRequestModel()
+            requestModel.reportId = reportID
+            viewModel.publishReport(requestModel)
+            finish()
+        }
         checkBoxNoClickListener()
         checkBoxYesClickListener()
         recommendTourFields()
+        viewModel.updateDailyReportQuestionBoolean.observe(this, {
+            CommonUtils.hideLoading(mProgressDialog!!)
+            finish()
+        })
 
+    }
+
+    override fun onBackPressed() {
+
+        if (ReportStatus == 1){
+            UpdateReport()
+        }else{
+            super.onBackPressed()
+        }
     }
     private fun backButtonClickListener() {
         viewDataBinding.imageView55.setOnClickListener {
-            finish()
+            if (ReportStatus == 1){
+                UpdateReport()
+            }else{
+                finish()
+            }
+
+
         }
+    }
+    private fun UpdateReport(){
+        mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+
+        var updateQuestionRequestModel = UpdateMedicalRequestModel()
+        if (isYesCheckBoxChecked){
+            updateQuestionRequestModel.question1 = "isYes"
+
+        }else if (isNoCheckBoxChecked){
+            updateQuestionRequestModel.question1 = "isNo"
+        }
+        updateQuestionRequestModel.question2 = viewDataBinding.textView138.text.toString()
+        updateQuestionRequestModel.reportId = reportID
+        viewModel.updateMedicalReportQuestion(updateQuestionRequestModel, reportID)
     }
     private fun checkBoxNoClickListener() {
         viewDataBinding.constraintlayoutNo.setOnClickListener {
@@ -136,6 +185,11 @@ class WriteMedicalReportActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onStop() {
+        super.onStop()
+
+    }
     private fun checkBoxYesClickListener() {
         viewDataBinding.constraintLayoutYes.setOnClickListener {
 

@@ -1,12 +1,15 @@
 package com.example.kera.teacherProfile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.kera.R
+import com.example.kera.attendanceHistory.AttendanceHistory
 import com.example.kera.databinding.TeacherProfileFragmentBinding
+import com.example.kera.qrCode.QRActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TeacherProfileFragment : Fragment() {
@@ -38,10 +41,18 @@ class TeacherProfileFragment : Fragment() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-
+        viewDataBinding.veilLayout.veil()
         viewModel.getProfileData()
 
         viewModel.profileUIModel.observe(viewLifecycleOwner, {
+            viewDataBinding.veilLayout.unVeil()
+        })
+        viewDataBinding.constraintLayout10.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(context, QRActivity::class.java))
+
+        })
+        viewDataBinding.constraintAttendanceHistory.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(context, AttendanceHistory::class.java))
 
         })
     }

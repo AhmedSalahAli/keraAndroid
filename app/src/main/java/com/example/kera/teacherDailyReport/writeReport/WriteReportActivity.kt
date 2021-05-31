@@ -100,6 +100,7 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
 
     }
 
+
     private fun messageObserver() {
         viewModel.message.observe(this@WriteReportActivity, {
             CommonUtils.hideLoading(mProgressDialog!!)

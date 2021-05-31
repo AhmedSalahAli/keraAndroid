@@ -18,6 +18,7 @@ import androidx.annotation.LayoutRes
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -213,7 +214,47 @@ object CommonUtils {
         val date = DateFormat.format("d E", calendar).toString()
         return date
     }
+    fun convertTimeStampToEe(iso: String): String {
+        val calendar = Calendar.getInstance(Locale.ENGLISH)
 
+
+
+
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        try {
+             val date = format.parse(iso)
+            calendar.time = date
+
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return     DateFormat.format("E", calendar).toString()
+
+    }
+    fun convertIsoToDate(iso: String): String {
+        val calendar = Calendar.getInstance(Locale.ENGLISH)
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        try {
+            val date = format.parse(iso)
+            calendar.time = date
+
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return     DateFormat.format("MMMM dd, yyyy", calendar).toString()
+    }
+    fun convertTimeStampToDd(iso: String): String {
+        val calendar = Calendar.getInstance(Locale.ENGLISH)
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        try {
+            val date = format.parse(iso)
+            calendar.time = date
+
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return     DateFormat.format("d", calendar).toString()
+    }
     fun convertTimeStampToDate_mm_dd_yyyy(timestamp: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = timestamp.toLong()
@@ -233,6 +274,20 @@ object CommonUtils {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = timestamp.toLong()
         val date = DateFormat.format("EEE,MMM MM,yyyy ", calendar).toString()
+        return date
+    }
+    fun convertTimeStampToTime_Am_Pm(timestamp: String): String {
+        val calendar = Calendar.getInstance(Locale.ENGLISH)
+        calendar.timeInMillis = timestamp.toLong()
+        val date1 = DateFormat.format("hh:mm", calendar).toString()
+        val date: String = date1.format(Date()).toString()
+        return date
+    }
+    fun convertTimeStampTo_Am_Pm(timestamp: String): String {
+        val calendar = Calendar.getInstance(Locale.ENGLISH)
+        calendar.timeInMillis = timestamp.toLong()
+        val date1 = DateFormat.format("aa", calendar).toString()
+        val date: String = date1.format(Date()).toString()
         return date
     }
     fun getTimeDateFromTimeStamp(timestamp: Long): String? {

@@ -1,5 +1,6 @@
 package com.example.kera.data.network
 
+import com.example.kera.attendanceHistory.model.AttendanceResponseModel
 import com.example.kera.data.models.*
 import com.example.kera.data.models.meals.ClassMealsResponseModel
 import com.example.kera.data.models.meals.DatesResponseModel
@@ -9,8 +10,13 @@ import com.example.kera.data.models.schoolList.SchoolDetailsResponseModel
 import com.example.kera.data.models.schoolList.SchoolsListResponseModel
 import com.example.kera.data.models.teacherDailyReport.*
 import com.example.kera.data.models.teacherMedicalReport.MedicalReportResponseModel
+import com.example.kera.data.models.teacherMedicalReport.UpdateMedicalRequestModel
+import com.example.kera.events.model.ClassUpcomingResponseModel
+import com.example.kera.events.model.EventDetailsResponseModel
 import com.example.kera.meals.details.MealCommentPostModel
 import com.example.kera.medical.model.DisplayMedicalReportResponseModel
+import com.example.kera.notification.model.NotificationsResponseModel
+import com.example.kera.qrCode.QrCodeModel
 import com.example.kera.registrationForm.screen1.model.PublishAppStep1Model
 import com.example.kera.registrationForm.screen1.model.PublishAppStep2Model
 import com.example.kera.registrationForm.screen3.model.PublishAppStep3
@@ -28,6 +34,16 @@ interface ApiService {
         @Path("page") page: Int, @Header("lang") language: String,
         @Header("v") version: Int
     ): SchoolsListResponseModel
+    @GET("portal/events/upcoming/{page}")
+    suspend fun getUpcomingEventList(
+        @Path("page") page: Int, @Header("lang") language: String,
+        @Header("v") version: Int
+    ): ClassUpcomingResponseModel
+    @GET("portal/events/previous/{page}")
+    suspend fun getPreviousEventList(
+        @Path("page") page: Int, @Header("lang") language: String,
+        @Header("v") version: Int
+    ): ClassUpcomingResponseModel
 
     @GET("portal/single/{id}")
     suspend fun getSchoolDetails(
@@ -52,10 +68,20 @@ interface ApiService {
         @Header("lang") language: String,
         @Header("v") version: Int
     ): MealDetailsResponseModel
-
+    @GET("portal/events/{eventID}")
+    suspend fun getEventDetails(
+        @Path("eventID") id: String,
+        @Header("lang") language: String,
+        @Header("v") version: Int
+    ): EventDetailsResponseModel
 
     @GET("class/dates/{classID}")
     suspend fun getClassEducationDates(@Path("classID") id: String): DatesResponseModel
+
+    @GET("general/attendance-dates")
+    suspend fun getClassAttendanceDates(
+        @Header("lang") language: String,
+        @Header("v") version: Int): DatesResponseModel
 
     @GET("portal/education/{classID}")
     suspend fun getClassEducationList(
@@ -71,7 +97,13 @@ interface ApiService {
         @Path("classID") id: String, @Path("page") page: Int, @Header("lang") language: String,
         @Header("v") version: Int
     ): NewsResponseModel
-
+    @GET("general/attendance/{page}")
+    suspend fun getAttendanceList(
+         @Path("page") page: Int,
+         @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Query("fromDate", encoded = true) fromDate: String
+    ): AttendanceResponseModel
     @PUT("portal/meals/comment")
     suspend fun postMealComment(@Body mealCommentModel: MealCommentPostModel): GeneralResponse
 
@@ -149,11 +181,11 @@ interface ApiService {
         @Header("v") version: Int,
         @Body requestModel: UpdateQuestionRequestModel
     ): GeneralResponse
-    @PUT("teacher/update/question/report")
+    @PUT("teacher/update/mediacl-report")
     suspend fun updateMedicalReportQuestion(
         @Header("lang") language: String,
         @Header("v") version: Int,
-        @Body requestModel: UpdateQuestionRequestModel
+        @Body requestModel: UpdateMedicalRequestModel
     ): GeneralResponse
 
     @POST("teacher/create/report")
@@ -183,18 +215,36 @@ interface ApiService {
         @Path("page") page: Int
     ): LatestReportsResponseModel
 
+    @GET("user/notifications/{page}")
+    suspend fun getNotifications(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Path("page") page: Int
+    ): NotificationsResponseModel
+
     @PUT("teacher/publish/report")
     suspend fun publishReport(
         @Header("lang") language: String,
         @Header("v") version: Int,
         @Body requestModel: PublishReportRequestModel,
     ): GeneralResponse
-
+    @PUT("teacher/publish/medical-report")
+    suspend fun publishMedicalReport(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body requestModel: PublishReportRequestModel,
+    ): GeneralResponse
     @POST("general/application/step-1")
     suspend fun publishApp1(
         @Header("lang") language: String,
         @Header("v") version: Int,
         @Body AppStep1RequestModel: PublishAppStep1Model
+    ): GeneralResponse
+    @POST("general/qrcode")
+    suspend fun publishAttendanceQrCode(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body qrCodeModel: QrCodeModel
     ): GeneralResponse
     @PUT("general/application/step-2")
     suspend fun publishApp2(

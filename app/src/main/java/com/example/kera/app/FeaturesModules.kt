@@ -2,6 +2,7 @@ package com.example.kera.app
 
 
 import appScreensModule
+import com.example.kera.attendanceHistory.di.AttendanceModule
 import com.example.kera.contactUs.di.contactUsModule
 import com.example.kera.dailyReport.di.dailyReportModule
 import com.example.kera.data.network.apiRepoModule
@@ -15,6 +16,7 @@ import com.example.kera.navigation.di.navigationModule
 import com.example.kera.notification.di.notificationModule
 import com.example.kera.pincode.pinCodeModule
 import com.example.kera.profile.di.profileModule
+import com.example.kera.qrCode.di.QRModule
 import com.example.kera.registration.di.registrationModule
 import com.example.kera.schoolDetails.di.schoolDetailsModule
 import com.example.kera.schoolsList.di.schoolsListModule
@@ -34,10 +36,12 @@ var allFeatures = listOf(
     pinCodeModule,
     homeModule,
     registrationModule,
+    QRModule,
     visitorModule,
     eventsModule,
     notificationModule,
     educationModule,
+    AttendanceModule,
     mealsModule,
     profileModule,
     teacherMedicalReportModule,

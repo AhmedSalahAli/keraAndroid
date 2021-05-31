@@ -4,53 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.kera.events.ui.eventsdetails.EventsDetailsViewModel" />
     </data>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_100sdp"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+
+    <FrameLayout
+        android:id="@+id/veilLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:veilLayout_veiled="true"
+        app:veilLayout_shimmerEnable="true"
+        app:veilLayout_baseColor="@color/gray_D2DCE8"
+        app:veilLayout_highlightColor="@color/white"
+        app:veilLayout_baseAlpha="0.6"
+        app:veilLayout_highlightAlpha="1.0"
+        app:veilLayout_dropOff="0.5"
+        app:veilLayout_radius="6dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/view"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background"
         tools:context=".events.ui.eventsdetails.EventsDetailsActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="35dp"
-            app:layout_constraintStart_toStartOf="@+id/guideline26"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView47"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_rounded_back" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.example.kera.utils.RoundCornerLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/roundCornerLayout5"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:bottomLeftEnabled="true"
-            app:bottomRightEnabled="true"
-            app:cornerRadius="@dimen/_10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="210dp"
+            style="@style/CustomCardCorners"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="20dp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:topLeftEnabled="false"
-            app:topRightEnabled="false">
+            >
 
-            <ImageView
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/background" />
+                android:elevation="@dimen/_11sdp"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="right"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="13dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#0093DE"
+                app:sliderIndicatorUnselectedColor="#D2DCE8"
+                app:sliderStartAutoCycle="true" />
 
-        </com.example.kera.utils.RoundCornerLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="35dp"
+                android:alpha="0.5"
+                android:layout_marginStart="@dimen/_23sdp"
+                app:layout_constraintStart_toStartOf="@+id/guideline26"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView47"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_rounded_back" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/textView68"
@@ -58,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:fontFamily="@font/sf_ui_display_regular"
-            android:text="Luxor Aswan Trip"
+            android:text="@{viewModel.eventDetails.title}"
             android:textColor="#0093DE"
             android:textSize="17sp"
             android:textStyle="bold"
@@ -85,7 +129,7 @@
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="13dp"
-            android:background="@drawable/rounded_orange"
+            android:background="@drawable/rounded_pink_fdebf7"
             app:layout_constraintStart_toStartOf="@+id/guideline26"
             app:layout_constraintTop_toBottomOf="@+id/textView68">
 
@@ -95,8 +139,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/sf_ui_display_regular"
-                android:text="JUN"
-                android:textColor="#FFBB3B"
+                android:text="@{viewModel.eventDetails.eventDateE}"
+                android:textColor="#5881A4"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,10 +152,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/sf_ui_display_regular"
-                android:text="23"
-                android:textColor="#152D4A"
+                android:fontFamily="@font/sf_ui_display_semibold"
+                android:text="@{viewModel.eventDetails.eventDateD}"
+                android:textColor="#5881A4"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textView69"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
@@ -134,7 +179,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
             android:fontFamily="@font/sf_ui_display_regular"
-            android:text="June 23, 2021"
+            android:text="@{viewModel.eventDetails.fromTime}"
             android:textColor="#152D4A"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView48"
@@ -156,7 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
             android:fontFamily="@font/sf_ui_display_regular"
-            android:text="June 28, 2021"
+            android:text="@{viewModel.eventDetails.toTime}"
             android:textColor="#8C99A7"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView49"
@@ -170,20 +215,9 @@
             android:layout_marginEnd="13dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline25"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout17"
-            app:srcCompat="@drawable/ic_bookmark" />
+            app:srcCompat="@drawable/ic_calender_up" />
 
-        <TextView
-            android:id="@+id/textView73"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:fontFamily="@font/sf_ui_display_regular"
-            android:text="09:00 AM"
-            android:textColor="#FFBB3B"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView71"
-            app:layout_constraintEnd_toStartOf="@+id/imageView50"
-            app:layout_constraintTop_toTopOf="@+id/textView71" />
+
 
         <TextView
             android:id="@+id/textView74"
@@ -198,17 +232,7 @@
             app:layout_constraintStart_toStartOf="@+id/imageView50"
             app:layout_constraintTop_toBottomOf="@+id/imageView50" />
 
-        <TextView
-            android:id="@+id/textView75"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="15dp"
-            android:text="09:00 PM"
-            android:textColor="#FFBB3B"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView50"
-            app:layout_constraintTop_toBottomOf="@+id/textView73" />
+
 
         <TextView
             android:id="@+id/textView76"
@@ -216,6 +240,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/sf_ui_display_regular"
+            android:textColor="#152D4A"
             android:text="@string/details"
             android:textSize="17sp"
             android:textStyle="bold"
@@ -227,6 +252,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:textColor="#5881A4"
+            android:fontFamily="@font/sf_ui_display_regular"
             android:text="The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! "
             app:layout_constraintEnd_toStartOf="@+id/guideline25"
             app:layout_constraintStart_toStartOf="@+id/guideline26"
@@ -247,7 +274,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/sf_ui_display_regular"
-            android:text="Luxor, Egypt."
+            android:text="@{viewModel.eventDetails.address}"
             android:textColor="#8C99A7"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView51"
@@ -273,10 +300,56 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="70$"
-            android:textColor="#FFBB3B"
+            android:textColor="#2DB7BE"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="@+id/guideline26"
             app:layout_constraintTop_toBottomOf="@+id/textView79" />
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_74sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textView80"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:minWidth="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+
+            >
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/CustomCardCornersOpOp"
+                app:cardElevation="@dimen/_4sdp"
+                app:cardBackgroundColor="#FCFCFC"
+              android:layout_marginStart="@dimen/_35sdp"
+                >
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_35sdp"
+                app:cardBackgroundColor="#50C4FF"
+                app:cardCornerRadius="@dimen/_15sdp"
+                app:cardElevation="@dimen/_5sdp"
+                android:layout_gravity="start|center"
+                android:text="Accept">
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Accept"
+                    android:fontFamily="@font/sf_ui_display_semibold"
+                    android:textColor="#152D4A"
+                    android:layout_gravity="center"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline26"
+                    app:layout_constraintTop_toBottomOf="@+id/textView79" />
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.kera.attendanceHistory.AttendanceViewModel" />
+        <variable
+            name="datesAdapter"
+            type="com.example.kera.education.adapter.DateAdapter" />
+        <variable
+            name="listAdapter"
+            type="com.example.kera.attendanceHistory.adapter.AttendanceListAdapter" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".attendanceHistory.AttendanceHistory">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout19"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:background="@drawable/rounded_bottom_left_right_corners"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="11dp"
+            android:src="@drawable/ic_rounded_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView88"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_ui_display_regular"
+            android:text="@string/attendance_history"
+            android:textColor="#152D4A"
+            android:textSize="@dimen/_17ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView_back" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.skydoves.androidveil.VeilLayout
+        android:id="@+id/veilLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:veilLayout_veiled="true"
+        app:veilLayout_shimmerEnable="true"
+        app:veilLayout_baseColor="@color/gray_D2DCE8"
+        app:veilLayout_highlightColor="@color/white"
+        app:veilLayout_baseAlpha="0.6"
+        app:veilLayout_highlightAlpha="1.0"
+        app:veilLayout_dropOff="0.5"
+        app:veilLayout_radius="6dp"
+
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline31"
+        app:layout_constraintStart_toStartOf="@+id/guideline30"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout19"
+        android:layout_marginTop="16dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dates_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+
+            android:elevation="5dp"
+            android:background="@drawable/rounded_grey_d2dce8_grey_stroke"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dates_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                android:overScrollMode="ifContentScrolls"
+                android:visibility="visible"
+                app:adapter="@{datesAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout21"
+                app:spanCount="1"
+                tools:listitem="@layout/calendar_date_item" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView89"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_ui_display_regular"
+                    android:text="@string/this_week"
+                    android:textColor="#1A2F50"
+                    android:textSize="@dimen/_9ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView92"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_ui_display_regular"
+                    android:text="Days"
+                    android:textColor="#1A2F50"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView89"
+                    app:layout_constraintStart_toEndOf="@+id/textView89"
+                    app:layout_constraintTop_toTopOf="@+id/textView89" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_ui_display_regular"
+                    android:text="Next"
+                    android:textColor="#1A2F50"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView93"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_ui_display_regular"
+                    android:text="@string/the_week"
+                    android:textColor="#1A2F50"
+                    android:textSize="@dimen/_9ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView90"
+                    app:layout_constraintEnd_toStartOf="@+id/textView90"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.skydoves.androidveil.VeilLayout>
+    <com.skydoves.androidveil.VeilRecyclerFrameView
+        android:id="@+id/recycler_attendance"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:adapter="@{listAdapter}"
+        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline31"
+        app:layout_constraintStart_toStartOf="@+id/guideline30"
+        app:layout_constraintTop_toBottomOf="@+id/veilLayout"
+        app:spanCount="1"
+        app:veilFrame_layout="@layout/attendance_item"
+        app:veilFrame_veiled="true"
+        app:veilFrame_shimmerEnable="true"
+        app:veilLayout_baseColor="@color/light_grey_8c99a7"
+        app:veilFrame_highlightColor="@color/blue_effcff"
+        app:veilFrame_baseAlpha="0.6"
+        app:veilFrame_highlightAlpha="1.0"
+        app:veilFrame_radius="8dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

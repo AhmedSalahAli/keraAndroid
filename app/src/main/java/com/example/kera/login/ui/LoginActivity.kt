@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -19,6 +20,8 @@ import com.example.kera.databinding.ActivityLoginBinding
 import com.example.kera.pincode.PinCodeActivity
 import com.example.kera.utils.CommonUtils
 import com.example.kera.visitor.VisitorMain
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -42,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewDataBinding.textViewGo.setOnClickListener {
             mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-            viewModel.login()
+           doSendNotification()
         }
         setupUI(viewDataBinding.loginLay)
         viewDataBinding.textViewSkip.setOnClickListener {
@@ -110,4 +113,20 @@ class LoginActivity : AppCompatActivity() {
             mProgressDialog!!.cancel()
         }
     }
+    private fun doSendNotification(){
+
+        //get user notification token provided by firebase
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("token_failed", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val notificationToken = task.result
+            viewModel.login(notificationToken)
+        })
+
+    }
+
 }

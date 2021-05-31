@@ -1,5 +1,6 @@
 package com.example.kera.data.network
 
+import com.example.kera.attendanceHistory.model.AttendanceResponseModel
 import com.example.kera.data.models.*
 import com.example.kera.data.models.meals.ClassMealsResponseModel
 import com.example.kera.data.models.meals.DatesResponseModel
@@ -7,6 +8,9 @@ import com.example.kera.data.models.meals.MealDetailsResponseModel
 import com.example.kera.data.models.schoolList.FavouriteSchoolRequestModel
 import com.example.kera.data.models.schoolList.SchoolDetailsResponseModel
 import com.example.kera.data.models.schoolList.SchoolsListResponseModel
+import com.example.kera.data.models.teacherMedicalReport.UpdateMedicalRequestModel
+import com.example.kera.events.model.ClassUpcomingResponseModel
+import com.example.kera.events.model.EventDetailsResponseModel
 import com.example.kera.meals.details.MealCommentPostModel
 import com.example.kera.preference.AppSharedPreference
 import com.example.kera.preference.SharedPrefKeys
@@ -19,6 +23,7 @@ import com.example.kera.preference.SharedPrefKeys.Companion.TOKEN
 import com.example.kera.preference.SharedPrefKeys.Companion.USERTYPE
 import com.example.kera.profile.ProfileUIModel
 import com.example.kera.profile.StudentsData
+import com.example.kera.qrCode.QrCodeModel
 import com.example.kera.registrationForm.screen1.model.PublishAppStep1Model
 import com.example.kera.registrationForm.screen1.model.PublishAppStep2Model
 import com.example.kera.registrationForm.screen3.model.PublishAppStep3
@@ -36,7 +41,10 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
 
     suspend fun getSchoolsList(page: Int): SchoolsListResponseModel =
         service.getSchoolsList(page, "en", 1)
-
+    suspend fun getUpcomingEventList(page: Int): ClassUpcomingResponseModel =
+        service.getUpcomingEventList(page, "en", 1)
+    suspend fun getPreviousEventList(page: Int): ClassUpcomingResponseModel =
+        service.getPreviousEventList(page, "en", 1)
     suspend fun getSchoolDetails(id: String): SchoolDetailsResponseModel =
         service.getSchoolDetails(id, "en", 1)
 
@@ -48,11 +56,14 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
 
     suspend fun getClassMealDetails(classID: String): MealDetailsResponseModel =
         service.getClassMealDetails(classID, "en", 1)
-
+    suspend fun getEventDetails(classID: String): EventDetailsResponseModel =
+        service.getEventDetails(classID, "en", 1)
 
     suspend fun getEducationDates(classID: String): DatesResponseModel =
         service.getClassEducationDates(classID)
 
+    suspend fun getAttendanceDates(): DatesResponseModel =
+        service.getClassAttendanceDates( "en", 1)
 
     suspend fun getEducationList(
         classID: String,
@@ -61,7 +72,12 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         version: Int
     ): EducationResponseModel =
         service.getClassEducationList(classID, fromDate, language, version)
+    suspend fun getAttendanceList(
+        page: Int,
+        fromDate: String,
 
+    ): AttendanceResponseModel =
+        service.getAttendanceList(page, "en", 1, fromDate)
     suspend fun getHomeNews(classID: String, pageNumber: Int): NewsResponseModel =
         service.getHomeNews(classID, pageNumber, "en", 1)
 
@@ -151,7 +167,7 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         service.getTeacherMedicalReportData("en", 1, reportID)
     suspend fun updateDailyReportQuestion(updateQuestionRequestModel: UpdateQuestionRequestModel) =
         service.updateDailyReportQuestion("en", 1, updateQuestionRequestModel)
-    suspend fun updateMedicalReportQuestion(updateQuestionRequestModel: UpdateQuestionRequestModel) =
+    suspend fun updateMedicalReportQuestion(updateQuestionRequestModel: UpdateMedicalRequestModel) =
         service.updateMedicalReportQuestion("en", 1, updateQuestionRequestModel)
 
     suspend fun createDailyReport(requestModel: CreateReportRequestModel) =
@@ -161,9 +177,12 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
     suspend fun getLatestReports(page: Int) = service.getLatestReports("en", 1, page)
 
     suspend fun getLatestMedicalReports(page: Int) = service.getLatestMedicalReports("en", 1, page)
+    suspend fun getNotifications(page: Int) = service.getNotifications("en", 1, page)
 
     suspend fun publishReport(requestModel: PublishReportRequestModel) =
         service.publishReport("en", 1, requestModel)
+    suspend fun publishMedicalReport(requestModel: PublishReportRequestModel) =
+        service.publishMedicalReport("en", 1, requestModel)
     suspend fun publishApp1(requestModel: PublishAppStep1Model) =
         service.publishApp1("en", 1, requestModel)
     suspend fun publishApp2(requestModel: PublishAppStep2Model) =
@@ -180,7 +199,8 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         service.getAssociationTerms("en", 1,associationId)
     suspend fun getHomeNurseryData() =
         service.getHomeNurseryData("en", 1)
-
+    suspend fun publishAttendanceQrCode(requestModel: QrCodeModel) =
+        service.publishAttendanceQrCode("en", 1, requestModel)
     suspend fun getMapData() = service.getMapData("en", 1)
 
 

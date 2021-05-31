@@ -59,7 +59,7 @@
     <string name="see_more"><u>See more</u></string>
     <string name="comment_about_this_meal">Comment about this meal…</string>
     <string name="medical">Medical</string>
-    <string name="events">Events</string>
+    <string name="events">مناسبات</string>
     <string name="daily_reports">Daily Reports</string>
     <string name="meals">Meals</string>
     <string name="nursery">Nursery</string>
@@ -97,7 +97,7 @@
     <string name="to">To:</string>
     <string name="this_week">This week</string>
     <string name="the_week">The week</string>
-    <string name="latest_news">Latest News</string>
+    <string name="latest_news">اخر الاخبار</string>
     <string name="teacher_comment">Teacher Comment</string>
     <string name="please_write_your_comment_here">Please write your comment here</string>
     <string name="medical_reports">Medical reports</string>

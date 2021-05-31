@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="model"
+            type="com.example.kera.events.model.UpcomingItemUIModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,17 +13,32 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp">
 
-
-        <ImageView
+        <com.example.kera.utils.RoundCornerLayout
             android:id="@+id/imageView44"
-            android:layout_width="70dp"
-            android:layout_height="97dp"
-            android:background="@drawable/rounded_white_orange_stroke"
-            android:scaleType="centerCrop"
+            android:layout_width="71dp"
+            android:layout_height="91dp"
+            app:bottomLeftEnabled="true"
+            app:bottomRightEnabled="true"
+            app:cornerRadius="15dp"
+            android:background="@drawable/rounded_white_orange_stroke30dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/background" />
+            app:topLeftEnabled="true"
+            app:topRightEnabled="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:image="@{model.mainCover}"
+
+                android:src="@drawable/upload_pic" />
+
+
+        </com.example.kera.utils.RoundCornerLayout>
+
 
         <TextView
             android:id="@+id/textView63"
@@ -29,8 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:layout_marginTop="14dp"
-            android:fontFamily="@font/sf_ui_display_regular"
-            android:text="Luxor Aswan Trip"
+            android:fontFamily="@font/sf_ui_display_black"
+            android:text="@{model.title}"
             android:textColor="#0093DE"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,20 +59,26 @@
             android:id="@+id/imageView43"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="9dp"
             app:layout_constraintStart_toStartOf="@+id/textView63"
             app:layout_constraintTop_toBottomOf="@+id/textView63"
-            app:srcCompat="@drawable/ic_calendar_small_grey" />
+           />
 
         <TextView
             android:id="@+id/textView64"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+
             android:fontFamily="@font/sf_ui_display_regular"
-            android:text="“The quick, brown fox jumps…"
+            android:text="@{model.shortDescription}"
             android:textColor="#8C99A7"
+            android:maxLines="1"
+            android:maxEms="30"
+            android:maxLength="30"
+            android:ellipsize="end"
             android:textSize="10sp"
+            android:drawableStart="@drawable/ic_calendar_small_grey"
+            android:drawablePadding="6dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView43"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -67,45 +90,47 @@
             android:id="@+id/imageView45"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="19dp"
             app:layout_constraintStart_toStartOf="@+id/imageView43"
             app:layout_constraintTop_toBottomOf="@+id/imageView43"
-            app:srcCompat="@drawable/ic_calendar_orange" />
+           />
 
         <TextView
             android:id="@+id/textView65"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sf_ui_display_regular"
+            android:fontFamily="@font/sf_ui_display_medium"
             android:text="January 15, 2021"
-            android:textColor="#FFBB3B"
+            android:textColor="#5881A4"
             android:textSize="12sp"
+            android:drawableStart="@drawable/ic_calendar_orange"
+            android:drawablePadding="9dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView45"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView45"
+            android:layout_marginTop="9dp"
             app:layout_constraintStart_toStartOf="@+id/textView64"
-            app:layout_constraintTop_toTopOf="@+id/imageView45"
+            app:layout_constraintTop_toBottomOf="@+id/textView64"
             app:layout_constraintVertical_bias="0.7" />
 
-        <ImageView
-            android:id="@+id/imageView46"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView45"
-            app:layout_constraintTop_toBottomOf="@+id/imageView45"
-            app:srcCompat="@drawable/ic_location_black" />
+
 
         <TextView
             android:id="@+id/textView66"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sf_ui_display_regular"
-            android:text="Luxor, Egypt."
+            android:text="@{model.address}"
             android:textColor="#152D4A"
+            android:maxLines="1"
+            android:maxEms="30"
+            android:maxLength="30"
+            android:ellipsize="end"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView46"
+            android:drawableStart="@drawable/ic_location_black"
+            android:drawablePadding="9dp"
+            android:layout_marginTop="6dp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView45"

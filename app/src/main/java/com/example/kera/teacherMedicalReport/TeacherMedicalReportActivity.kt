@@ -180,7 +180,8 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
         viewDataBinding.checkBoxSelectAll.isChecked = false
         viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
 
-    }    private fun createReportObservation() {
+    }
+    private fun createReportObservation() {
         viewModel.createdReportResponseID.observe(this, {
             CommonUtils.hideLoading(mProgressDialog!!)
             val intent = Intent(
