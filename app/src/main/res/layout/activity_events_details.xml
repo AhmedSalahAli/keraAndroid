@@ -310,7 +310,7 @@
             android:layout_height="@dimen/_74sdp"
             app:layout_constraintTop_toBottomOf="@+id/textView80"
             app:layout_constraintEnd_toEndOf="parent"
-            android:minWidth="@dimen/_15sdp"
+            android:minWidth="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_20sdp"
 
             >
@@ -320,6 +320,8 @@
                 android:layout_height="match_parent"
                 style="@style/CustomCardCornersOpOp"
                 app:cardElevation="@dimen/_4sdp"
+                android:minWidth="@dimen/_50sdp"
+
                 app:cardBackgroundColor="#FCFCFC"
               android:layout_marginStart="@dimen/_35sdp"
                 >
