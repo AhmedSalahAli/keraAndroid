@@ -11,11 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kera.R
+import com.example.kera.dailyReport.ui.DailyReportActivity
 import com.example.kera.databinding.NotificationFragmentBinding
+import com.example.kera.medical.MedicalReportActivity
 import com.example.kera.notification.adapter.NotificationsListAdapter
 import com.example.kera.notification.model.NotificationItemUIModel
 import com.example.kera.teacherMedicalReport.adapter.LatestReportsListAdapter
 import com.example.kera.teacherMedicalReport.model.LatestReportItemUIModel
+import com.example.kera.visitor.VisitorMain
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment(), NotificationsListAdapter.CallBack {
@@ -116,11 +119,13 @@ class NotificationFragment : Fragment(), NotificationsListAdapter.CallBack {
     override fun onItemClicked(notificationType: String?) {
 
         if (notificationType!!.equals("1")){
-            startActivity(Intent(),)
+
+            startActivity(Intent(requireContext(), MedicalReportActivity::class.java))
 
 
         }else if (notificationType!!.equals("2")){
 
+            startActivity(Intent(requireContext(), DailyReportActivity::class.java))
         }
     }
 }

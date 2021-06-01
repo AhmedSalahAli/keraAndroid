@@ -220,7 +220,7 @@ object CommonUtils {
 
 
 
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
         try {
              val date = format.parse(iso)
             calendar.time = date
@@ -228,12 +228,12 @@ object CommonUtils {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-        return     DateFormat.format("E", calendar).toString()
+        return     DateFormat.format("MMM", calendar).toString()
 
     }
     fun convertIsoToDate(iso: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val format =SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
         try {
             val date = format.parse(iso)
             calendar.time = date
@@ -245,7 +245,7 @@ object CommonUtils {
     }
     fun convertTimeStampToDd(iso: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
         try {
             val date = format.parse(iso)
             calendar.time = date
@@ -253,7 +253,7 @@ object CommonUtils {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-        return     DateFormat.format("d", calendar).toString()
+        return     DateFormat.format("dd", calendar).toString()
     }
     fun convertTimeStampToDate_mm_dd_yyyy(timestamp: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
@@ -266,7 +266,7 @@ object CommonUtils {
     fun convertTimeStampToDate_EEEE_MMM_MM(timestamp: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("EEEE,MMM MM ", calendar).toString()
+        val date = DateFormat.format("EEEE,MMM dd ", calendar).toString()
         return date
     }
 

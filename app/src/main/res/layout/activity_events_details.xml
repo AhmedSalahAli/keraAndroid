@@ -42,14 +42,15 @@
 
 
 
-        <androidx.cardview.widget.CardView
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/roundCornerLayout5"
             android:layout_width="wrap_content"
             android:layout_height="210dp"
-            style="@style/CustomCardCorners"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="20dp"
 
+
+            app:cardElevation="20dp"
+            app:cardCornerRadius="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +60,7 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:elevation="@dimen/_11sdp"
+
                 app:sliderAnimationDuration="600"
                 app:sliderAutoCycleDirection="right"
                 app:sliderAutoCycleEnabled="true"
@@ -73,13 +74,21 @@
                 app:sliderIndicatorUnselectedColor="#D2DCE8"
                 app:sliderStartAutoCycle="true" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline226"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="33dp" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="35dp"
-                android:alpha="0.5"
-                android:layout_marginStart="@dimen/_23sdp"
-                app:layout_constraintStart_toStartOf="@+id/guideline26"
+                android:alpha="0.8"
+                android:elevation="@dimen/_11sdp"
+
+                app:layout_constraintStart_toStartOf="@+id/guideline226"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -93,7 +102,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_rounded_back" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <TextView
@@ -125,10 +134,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout17"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="13dp"
+            android:minWidth="55dp"
+            android:minHeight="30dp"
             android:background="@drawable/rounded_pink_fdebf7"
             app:layout_constraintStart_toStartOf="@+id/guideline26"
             app:layout_constraintTop_toBottomOf="@+id/textView68">
@@ -270,7 +281,7 @@
 
         <TextView
             android:id="@+id/textView78"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/sf_ui_display_regular"
@@ -279,6 +290,7 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView51"
             app:layout_constraintStart_toEndOf="@+id/imageView51"
+            app:layout_constraintEnd_toStartOf="@id/guideline25"
             app:layout_constraintTop_toTopOf="@+id/imageView51" />
 
         <TextView
@@ -299,7 +311,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:text="70$"
+
             android:textColor="#2DB7BE"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="@+id/guideline26"

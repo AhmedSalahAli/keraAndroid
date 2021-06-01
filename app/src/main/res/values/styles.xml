@@ -16,10 +16,12 @@
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/bg_spinner</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:text">"sda"</item>
     </style>
     <style name="CustomCardCorners" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_corners</item>
     </style>
+
     <style name="CustomCardCornersOp" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_cornersOp</item>
     </style>
@@ -36,7 +38,7 @@
         <item name="shapeAppearanceOverlay">@style/Bottom_ShapeAppearance_custom_corners</item>
     </style>
     <style name="ShapeAppearance_custom_corners" parent="">
-        <item name="cornerFamily">rounded</item>
+        <item name="cornerFamily">cut</item>
         <item name="cornerSizeTopLeft">0dp</item>
         <item name="cornerSizeTopRight">0dp</item>
         <item name="cornerSizeBottomLeft">20dp</item>

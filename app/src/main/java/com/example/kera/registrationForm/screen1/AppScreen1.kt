@@ -70,6 +70,7 @@ class AppScreen1 : Fragment() {
 
         Glide.with(this).load(requireActivity().intent.getStringExtra("SchoolLogo")!!).centerCrop().into(viewDataBinding.imageView18)
 
+        viewDataBinding.textView30.textView_selectedCountry.text = ""
         nextButtonClickListener();
         backButtonClickListener()
         imageClickListener()

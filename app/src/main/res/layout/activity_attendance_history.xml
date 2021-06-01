@@ -201,7 +201,7 @@
         app:veilFrame_highlightColor="@color/blue_effcff"
         app:veilFrame_baseAlpha="0.6"
         app:veilFrame_highlightAlpha="1.0"
-        app:veilFrame_radius="8dp"
+        app:veilFrame_radius="25dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

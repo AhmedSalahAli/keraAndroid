@@ -11,7 +11,7 @@ class EventDetailsUIModel
     var longitude: MutableLiveData<Double>?,
 
     var address: MutableLiveData<String>?,
-    var eventPrice: MutableLiveData<Float>?,
+    var eventPrice: Float? = null,
     var eventDateE: MutableLiveData<String>?,
     var eventDateD: MutableLiveData<String>?,
     var fromTime: MutableLiveData<String>?,
@@ -30,7 +30,7 @@ class EventDetailsUIModel
                     MutableLiveData(response.latitude),
                     MutableLiveData(response.longitude),
                     MutableLiveData(response.address),
-                    MutableLiveData(response.eventPrice ),
+                    response.eventPrice ,
                     MutableLiveData(CommonUtils.convertTimeStampToEe(response.eventDate!!)),
                     MutableLiveData(CommonUtils.convertTimeStampToDd(response.eventDate!!)),
                     MutableLiveData("From " + response.fromTime),

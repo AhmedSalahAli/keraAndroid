@@ -238,11 +238,12 @@
            android:layout_marginEnd="24dp"
            android:gravity="start|center"
            android:paddingLeft="10dp"
-
+           android:minWidth="@dimen/_100sdp"
            android:spinnerMode="dropdown"
            app:ccp_showArrow="false"
            app:ccp_showFlag="false"
            app:ccp_showFullName="true"
+
            app:ccp_showNameCode="false"
            app:ccp_showPhoneCode="false"
            app:layout_constraintEnd_toStartOf="@+id/guideline20"
@@ -297,7 +298,7 @@
                android:background="@android:color/transparent"
                android:textColor="@color/blue_152d4a"
                android:textStyle="bold"
-               android:hint="17/7/2020"
+
                android:textSize="17sp"
                app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintEnd_toStartOf="@+id/imageView85"

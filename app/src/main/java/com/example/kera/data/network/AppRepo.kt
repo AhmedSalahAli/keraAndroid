@@ -24,6 +24,7 @@ import com.example.kera.preference.SharedPrefKeys.Companion.USERTYPE
 import com.example.kera.profile.ProfileUIModel
 import com.example.kera.profile.StudentsData
 import com.example.kera.qrCode.QrCodeModel
+import com.example.kera.registration.screen1.AppStepModel
 import com.example.kera.registrationForm.screen1.model.PublishAppStep1Model
 import com.example.kera.registrationForm.screen1.model.PublishAppStep2Model
 import com.example.kera.registrationForm.screen3.model.PublishAppStep3
@@ -86,6 +87,8 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
 
     suspend fun getProfileData(language: String, version: Int, type: String) =
         service.getProfileData(language, version, type)
+    suspend fun getAppStep(language: String, version: Int, req: AppStepModel) =
+        service.getAppStep(language, version,req)
 
     suspend fun getTeacherProfileData(language: String, version: Int) =
         service.getTeacherProfileData(language, version)

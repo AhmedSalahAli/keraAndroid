@@ -17,6 +17,8 @@ import com.example.kera.meals.details.MealCommentPostModel
 import com.example.kera.medical.model.DisplayMedicalReportResponseModel
 import com.example.kera.notification.model.NotificationsResponseModel
 import com.example.kera.qrCode.QrCodeModel
+import com.example.kera.registration.screen1.AppStepModel
+import com.example.kera.registration.screen1.CheckAppStep
 import com.example.kera.registrationForm.screen1.model.PublishAppStep1Model
 import com.example.kera.registrationForm.screen1.model.PublishAppStep2Model
 import com.example.kera.registrationForm.screen3.model.PublishAppStep3
@@ -107,13 +109,19 @@ interface ApiService {
     @PUT("portal/meals/comment")
     suspend fun postMealComment(@Body mealCommentModel: MealCommentPostModel): GeneralResponse
 
+    @GET("general/check-application-step")
+    suspend fun getAppStep(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body AppStepModel: AppStepModel
+    ): CheckAppStep
     @GET("{type}/profile")
     suspend fun getProfileData(
         @Header("lang") language: String,
         @Header("v") version: Int,
-        @Path("type") type: String
-    ): ProfileResponseModel
+        @Path("type") type: String,
 
+    ): ProfileResponseModel
     @GET("teacher/profile")
     suspend fun getTeacherProfileData(
         @Header("lang") language: String,
