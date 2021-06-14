@@ -44,6 +44,7 @@ class AppScreen4 : Fragment() {
     var base64 = ""
     var idBase64 = ""
     var birthBase64 = ""
+    var ImageUrl = ""
     private var mProgressDialog: ProgressDialog? = null
     companion object {
         fun newInstance() = AppScreen4()
@@ -69,10 +70,15 @@ class AppScreen4 : Fragment() {
         val bundle = this.arguments
         applicationId = bundle!!.getString("applicationId", "")
         base64 = bundle!!.getString("profileImage", "")
-
+        ImageUrl= bundle!!.getString("profileUrl", "")
         Glide.with(this).load(CommonUtilsJava.convert(base64)).error(R.drawable.ic_person).into(
             viewDataBinding.imageView18
         )
+        if (!ImageUrl.isNullOrEmpty()){
+            Glide.with(this).load(ImageUrl).error(R.drawable.ic_person).into(
+                viewDataBinding.imageView18
+            )
+        }
         viewModel.getAssociationTerms(requireActivity().intent.getStringExtra("SchoolID")!!)
         viewModel.response.observe(requireActivity(), {
 
@@ -176,25 +182,44 @@ class AppScreen4 : Fragment() {
     private fun nextButtonClickListener() {
         viewDataBinding.textView58.setOnClickListener {
             // startActivity(Intent(this, Registration2Activity::class.java))
-            mProgressDialog = CommonUtils.showLoadingDialog(
-                requireActivity(),
-                R.layout.progress_dialog
-            )
-            val requestModel = SumbitFinalForm()
-            requestModel.applicationId = applicationId
 
-            if (!idBase64.isEmpty()){
-                requestModel.idImage = "data:image/jpeg;base64,"+idBase64
+            if (!birthBase64.isNullOrEmpty() && !idBase64.isNullOrEmpty()){
+                if (viewDataBinding.checkBox.isChecked){
+                    mProgressDialog = CommonUtils.showLoadingDialog(
+                        requireActivity(),
+                        R.layout.progress_dialog
+                    )
+                    val requestModel = SumbitFinalForm()
+                    requestModel.applicationId = applicationId
+
+                    if (!idBase64.isEmpty()){
+                        requestModel.idImage = "data:image/jpeg;base64,"+idBase64
+                    }
+                    if (!birthBase64.isEmpty()){
+                        requestModel.birthImage = "data:image/jpeg;base64,"+birthBase64
+                    }
+
+
+
+                    viewModel.publishScreen4(requestModel)
+
+                    messageObserver();
+                }else{
+
+                    Toast.makeText(
+                        requireContext(), resources.getString(R.string.please_accept_policy_term),
+                        Toast.LENGTH_LONG
+                    ).show();
+                }
+            }else{
+
+                Toast.makeText(
+                    requireContext(), resources.getString(R.string.please_prvide_the_required_images),
+                    Toast.LENGTH_LONG
+                ).show();
             }
-            if (!birthBase64.isEmpty()){
-                requestModel.birthImage = "data:image/jpeg;base64,"+birthBase64
-            }
 
 
-
-            viewModel.publishScreen4(requestModel)
-
-            messageObserver();
         }
         viewModel.publishApp1Boolean.observe(viewLifecycleOwner, {
             CommonUtils.hideLoading(mProgressDialog!!)

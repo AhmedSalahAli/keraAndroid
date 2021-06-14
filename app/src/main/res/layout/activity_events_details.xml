@@ -7,12 +7,13 @@
         <variable
             name="viewModel"
             type="com.example.kera.events.ui.eventsdetails.EventsDetailsViewModel" />
+        <variable
+            name="adapter"
+            type="com.example.kera.events.adapter.ChildrenAdapter" />
     </data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/_100sdp"
-        android:clipToPadding="false"
         android:fillViewport="true">
 
 
@@ -319,37 +320,54 @@
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_74sdp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/textView80"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:minWidth="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_20sdp"
-
+             android:layout_marginBottom="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_24sdp"
             >
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 style="@style/CustomCardCornersOpOp"
-                app:cardElevation="@dimen/_4sdp"
+                app:cardElevation="@dimen/_1sdp"
                 android:minWidth="@dimen/_50sdp"
 
                 app:cardBackgroundColor="#FCFCFC"
               android:layout_marginStart="@dimen/_35sdp"
                 >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    app:adapter="@{adapter}"
+                    android:layout_marginStart="@dimen/_35sdp"
+                    android:layout_gravity="start|center"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline44"
+                    app:layout_constraintStart_toStartOf="@+id/guideline43"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_number_of_classes"
+                    android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
 
+                    />
             </com.google.android.material.card.MaterialCardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_35sdp"
                 app:cardBackgroundColor="#50C4FF"
                 app:cardCornerRadius="@dimen/_15sdp"
-                app:cardElevation="@dimen/_5sdp"
+                app:cardElevation="@dimen/_2sdp"
                 android:layout_gravity="start|center"
                 android:text="Accept">
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -363,7 +381,9 @@
             </androidx.cardview.widget.CardView>
         </FrameLayout>
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
+
     </androidx.core.widget.NestedScrollView>
 </layout>

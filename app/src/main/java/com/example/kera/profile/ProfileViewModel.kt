@@ -13,7 +13,7 @@ class ProfileViewModel(val appRepo: AppRepo) : ViewModel() {
     var selectedUser = MutableLiveData<StudentsData>()
 
     init {
-        getSelectedChildDataFromSharedPref()
+
         logo.value = getNurseryLogo()
 
     }

@@ -30,6 +30,7 @@ class AppScreen3 : Fragment() {
     lateinit var viewDataBinding: AppScreen3FragmentBinding
     var applicationId = ""
     var base64 = ""
+    var ImageUrl = ""
     var MAP_RESULT = 100;
     var lat :Float = 0.0F
     var long :Float = 0.0F
@@ -60,10 +61,16 @@ class AppScreen3 : Fragment() {
         val bundle = this.arguments
         applicationId = bundle!!.getString("applicationId", "")
         base64 = bundle!!.getString("profileImage", "")
+        ImageUrl= bundle!!.getString("profileUrl", "")
 
         Glide.with(this).load(CommonUtilsJava.convert(base64)).error(R.drawable.ic_person).into(
             viewDataBinding.imageView18
         )
+        if (!ImageUrl.isNullOrEmpty()){
+            Glide.with(this).load(ImageUrl).error(R.drawable.ic_person).into(
+                viewDataBinding.imageView18
+            )
+        }
 
         nextButtonClickListener()
         addLocationListner()
@@ -105,6 +112,7 @@ class AppScreen3 : Fragment() {
             val bundle = Bundle()
             bundle.putString("applicationId", applicationId)
             bundle.putString("profileImage",base64)
+            bundle.putString("profileUrl", ImageUrl)
             fragment.arguments = bundle
             (activity as Registration1Activity?)?.switchFragment(fragment)
         })

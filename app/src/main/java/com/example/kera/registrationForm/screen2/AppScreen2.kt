@@ -42,6 +42,7 @@ class AppScreen2 : Fragment() {
     var relativeBase64 = ""
     var applicationId = ""
     var base64 = ""
+    var ImageUrl = ""
     private var mProgressDialog: ProgressDialog? = null
     companion object {
         fun newInstance() = AppScreen2()
@@ -69,10 +70,16 @@ class AppScreen2 : Fragment() {
         val bundle = this.arguments
          applicationId = bundle!!.getString("applicationId", "")
          base64 = bundle!!.getString("profileImage", "")
-
+        ImageUrl= bundle!!.getString("profileUrl", "")
         Glide.with(this).load(CommonUtilsJava.convert(base64)).error(R.drawable.ic_person).into(
             viewDataBinding.imageView18
         )
+        if (!ImageUrl.isNullOrEmpty()){
+            Glide.with(this).load(ImageUrl).error(R.drawable.ic_person).into(
+                viewDataBinding.imageView18
+            )
+        }
+
         imageClickListener()
         backButtonClickListener()
         nextButtonClickListener()
@@ -270,6 +277,7 @@ class AppScreen2 : Fragment() {
             val bundle = Bundle()
             bundle.putString("applicationId", applicationId)
             bundle.putString("profileImage", base64)
+            bundle.putString("profileUrl", ImageUrl)
             fragment.arguments = bundle
             (activity as Registration1Activity?)?.switchFragment(fragment)
         })

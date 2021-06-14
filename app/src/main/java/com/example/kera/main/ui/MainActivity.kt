@@ -5,6 +5,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.viewModel = mainViewModel
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
         val navController = findNavController(R.id.fragment)
         viewDataBinding.bottomNavigationView.uncheckAllItems()
         viewDataBinding.bottomNavigationView.setupWithNavController(navController)
+
 
 
 
@@ -62,11 +65,20 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
         viewDataBinding.floatingActionButton2.setOnClickListener(View.OnClickListener {
-            navController.navigate(R.id.homeFragment)
-            viewDataBinding.bottomNavigationView.uncheckAllItems()
+            if (accessType == "visitor"){
+                navController.navigate(R.id.needToLogin)
+            }else{
+                navController.navigate(R.id.homeFragment)
+                viewDataBinding.bottomNavigationView.uncheckAllItems()
+            }
+
         })
 
+        if (accessType == "visitor"){
+            navController.navigate(R.id.needToLogin)
+        }
         viewDataBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
+
             when (it.itemId) {
                 R.id.navigationFragment -> {
                     navController.navigate(R.id.navigationFragment)
@@ -83,6 +95,8 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
                     if (accessType == "user") {
                         navController.navigate(R.id.profileFragment)
 
+                    } else if(accessType=="visitor") {
+                        navController.navigate(R.id.needToLogin)
                     } else {
                         navController.navigate(R.id.teacherProfileFragment)
 

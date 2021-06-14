@@ -3,23 +3,24 @@ package com.example.kera.login.ui
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.kera.R
 import com.example.kera.databinding.ActivityLoginBinding
+import com.example.kera.main.ui.MainActivity
 import com.example.kera.pincode.PinCodeActivity
 import com.example.kera.utils.CommonUtils
-import com.example.kera.visitor.VisitorMain
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.viewModel = viewModel
@@ -50,7 +52,9 @@ class LoginActivity : AppCompatActivity() {
         setupUI(viewDataBinding.loginLay)
         viewDataBinding.textViewSkip.setOnClickListener {
             viewModel.saveTokenToSharedPref("kera-app")
-            val myIntent = Intent(this, VisitorMain::class.java)
+            viewModel.saveUserType("visitor")
+            viewModel.saveNurseryLogoToSharedPreference("visitor")
+            val myIntent = Intent(this, MainActivity::class.java)
             startActivity(myIntent)
         }
 

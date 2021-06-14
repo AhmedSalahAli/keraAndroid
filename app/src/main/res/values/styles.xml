@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="Theme.Fab_Bottom_app_bar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#ffffff</item>
         <item name="colorPrimaryVariant">#ffffff</item>
         <item name="colorOnPrimary">#000</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
     <style name="ThemeOverlay.App.FloatingActionButton" parent="">

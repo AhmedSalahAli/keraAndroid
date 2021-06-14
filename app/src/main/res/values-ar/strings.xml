@@ -116,5 +116,15 @@
     <string name="clear_all">Clear All</string>
     <string name="meadical_report">Medical Reports</string>
     <string name="doctor_comment">Doctor Comment</string>
+    <string name="please_accept_policy_term">"Please accept policy terms "</string>
+    <string name="please_prvide_the_required_images">Please provide the required images</string>
+    <string name="contact_us_with_kera">Contact us with kera</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="Login_need">Log-in!</string>
+    <string name="you_need_to">You need to</string>
+    <string name="login_n">Login!</string>
+    <string name="no_new">No New</string>
+    <string name="notification_n">Notifications!</string>
+    <string name="log_in">Login</string>
 
 </resources>

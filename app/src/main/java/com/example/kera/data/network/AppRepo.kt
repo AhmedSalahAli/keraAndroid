@@ -87,8 +87,8 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
 
     suspend fun getProfileData(language: String, version: Int, type: String) =
         service.getProfileData(language, version, type)
-    suspend fun getAppStep(language: String, version: Int, req: AppStepModel) =
-        service.getAppStep(language, version,req)
+    suspend fun getAppStep(language: String, version: Int, udid: String) =
+        service.getAppStep(language, version,udid)
 
     suspend fun getTeacherProfileData(language: String, version: Int) =
         service.getTeacherProfileData(language, version)

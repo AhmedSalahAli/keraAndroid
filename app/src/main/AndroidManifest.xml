@@ -32,7 +32,7 @@
         </service>
 
         <activity android:name=".keraLuncher.KeraConfigrationsLuncher" />
-        <activity android:name=".visitor.VisitorMain" />
+        <activity android:name=".visitor.SideViewMain" />
         <activity
             android:name=".addLocation.AddLocation"
             android:theme="@style/Theme.Fab_Bottom_app_bar.fullscreen" />

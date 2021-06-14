@@ -8,17 +8,16 @@ import android.widget.AbsListView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.kera.R
 import com.example.kera.dailyReport.ui.DailyReportActivity
 import com.example.kera.databinding.NotificationFragmentBinding
 import com.example.kera.medical.MedicalReportActivity
 import com.example.kera.notification.adapter.NotificationsListAdapter
 import com.example.kera.notification.model.NotificationItemUIModel
-import com.example.kera.teacherMedicalReport.adapter.LatestReportsListAdapter
-import com.example.kera.teacherMedicalReport.model.LatestReportItemUIModel
-import com.example.kera.visitor.VisitorMain
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment(), NotificationsListAdapter.CallBack {
@@ -69,13 +68,14 @@ class NotificationFragment : Fragment(), NotificationsListAdapter.CallBack {
                 LinearLayoutManager.VERTICAL,false)
         ) // sets LayoutManager
         viewDataBinding.recyclerNotifications.addVeiledItems(15)
-        viewDataBinding.recyclerNotifications.getRecyclerView().setPadding(0,100,0,200)
+        viewDataBinding.recyclerNotifications.getRecyclerView().setPadding(0,100,0,1000)
         viewDataBinding.recyclerNotifications .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerNotifications.getVeiledRecyclerView().setPadding(0,100,0,200)
+        viewDataBinding.recyclerNotifications.getVeiledRecyclerView().setPadding(0,100,0,1000)
         viewDataBinding.recyclerNotifications .getVeiledRecyclerView().clipToPadding = false
         viewDataBinding.recyclerNotifications.veil()
         manager = LinearLayoutManager(requireContext())
         viewDataBinding.recyclerNotifications.setLayoutManager(manager)
+
         viewDataBinding.recyclerNotifications.getRecyclerView().addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -113,7 +113,22 @@ class NotificationFragment : Fragment(), NotificationsListAdapter.CallBack {
             notificationList.addAll(it.notifications)
             viewDataBinding.adapter!!.notifications = notificationList
             viewDataBinding.adapter!!.notifyDataSetChanged()
+            if (notificationList.size == 0){
+                showNoData()
+            }else{
+                hideNoData()
+            }
         })
+        messageObserver()
+        viewModel.logo.observe(viewLifecycleOwner, Observer {
+            if (it == "visitor"){
+                viewDataBinding.imageView26.setImageResource(R.drawable.kera_box)
+            }else{
+                Glide.with(this).load(it).into(viewDataBinding.imageView26)
+
+            }
+        })
+
     }
 
     override fun onItemClicked(notificationType: String?) {
@@ -127,5 +142,20 @@ class NotificationFragment : Fragment(), NotificationsListAdapter.CallBack {
 
             startActivity(Intent(requireContext(), DailyReportActivity::class.java))
         }
+    }
+    private fun messageObserver() {
+        viewModel.message.observe(viewLifecycleOwner, {
+            viewDataBinding.recyclerNotifications.unVeil()
+            showNoData()
+        })
+    }
+    private fun showNoData() {
+        viewDataBinding.recyclerNotifications.visibility = View.GONE
+        viewDataBinding.relNoNotifications.visibility = View.VISIBLE
+
+    }
+    private fun hideNoData() {
+        viewDataBinding.recyclerNotifications.visibility = View.VISIBLE
+        viewDataBinding.relNoNotifications.visibility = View.GONE
     }
 }

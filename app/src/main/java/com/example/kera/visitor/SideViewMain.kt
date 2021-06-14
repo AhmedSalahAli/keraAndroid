@@ -17,7 +17,7 @@ import com.example.kera.navigation.NavigationFragment
 import com.example.kera.registration.screen1.Registration1ViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class VisitorMain : AppCompatActivity() {
+class SideViewMain : AppCompatActivity() {
 
     val viewModel: VisitorMainViewModel by viewModel()
     lateinit var viewDataBinding: ActivityVisitorMainBinding
@@ -31,15 +31,9 @@ class VisitorMain : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_fcfdfd);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-        switchFragment(NavigationFragment())
+        var url = this.intent.getStringExtra("SideUrl")
+        viewDataBinding.webview.loadUrl(url!!)
+
     }
-    fun switchFragment(fragment: Fragment) {
 
-
-        val fm: FragmentManager = supportFragmentManager
-        val transaction: FragmentTransaction = fm.beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
-
-        transaction.replace(viewDataBinding.contentFragment.id,fragment)
-        transaction.commit()
-    }
 }

@@ -39,4 +39,10 @@ class LoginViewModel(val appRepo: AppRepo) : ViewModel() {
     fun saveTokenToSharedPref(token: String) {
         appRepo.saveTokenInSharedPref(token)
     }
+    fun saveUserType(type: String) {
+        appRepo.saveUserTypeInSharedPref(type)
+    }
+    fun saveNurseryLogoToSharedPreference(logo: String?) {
+        appRepo.saveNurseryLogoToSharedPreference(logo)
+    }
 }

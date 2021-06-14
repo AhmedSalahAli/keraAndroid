@@ -1,5 +1,6 @@
 package com.example.kera.registration.screen1
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,14 +12,18 @@ import kotlinx.coroutines.launch
 
 class Registration1ViewModel(val appRepo: AppRepo) : ViewModel() {
     var step = MutableLiveData<CheckAppStep.ApplicationBean>()
+    var res = MutableLiveData<Boolean>()
     var message = MutableLiveData<String>()
-    fun getAppStep(appStepModel: AppStepModel) {
+    fun getAppStep(udid: String) {
         viewModelScope.launch {
             try {
-                val response = appRepo.getAppStep("en", 1, appStepModel)
+                val response = appRepo.getAppStep("en", 1, udid)
                 step.value = response.application
+
             } catch (e: Exception) {
                 message.value = e.toString()
+                res.value = true
+
             }
         }
     }

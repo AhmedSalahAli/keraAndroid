@@ -113,7 +113,7 @@ interface ApiService {
     suspend fun getAppStep(
         @Header("lang") language: String,
         @Header("v") version: Int,
-        @Body AppStepModel: AppStepModel
+        @Header("udid") udid: String,
     ): CheckAppStep
     @GET("{type}/profile")
     suspend fun getProfileData(

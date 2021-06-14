@@ -10,6 +10,10 @@ import com.example.kera.R
 import com.example.kera.contactUs.ContactUsActivity
 import com.example.kera.databinding.SideMenuFragmentBinding
 import com.example.kera.login.ui.LoginActivity
+import com.example.kera.utils.Constants.Companion.aboutLinkApp
+import com.example.kera.utils.Constants.Companion.privacyPolicyLinkApp
+import com.example.kera.utils.Constants.Companion.termsLinkApp
+import com.example.kera.visitor.SideViewMain
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SideMenuFragment : Fragment() {
@@ -51,6 +55,32 @@ class SideMenuFragment : Fragment() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         })
+        viewDataBinding.constraintAboutKera.setOnClickListener(View.OnClickListener {
+            var intent = Intent(context, SideViewMain::class.java)
+            intent.putExtra("SideUrl", aboutLinkApp)
+            startActivity(intent)
+        })
+        viewDataBinding.constraintContactUs.setOnClickListener(View.OnClickListener {
+            var intent = Intent(context, ContactUsActivity::class.java)
+            startActivity(intent)
+        })
+        viewDataBinding.constraintContactUs2.setOnClickListener(View.OnClickListener {
+            var intent = Intent(context, SideViewMain::class.java)
+            intent.putExtra("SideUrl", privacyPolicyLinkApp)
+            startActivity(intent)
+        })
+        viewDataBinding.constraintTerms.setOnClickListener(View.OnClickListener {
+            var intent = Intent(context, SideViewMain::class.java)
+            intent.putExtra("SideUrl", termsLinkApp)
+            startActivity(intent)
+        })
+        if (viewModel.getUserType() == "visitor"){
+            viewDataBinding.textView11.text = resources.getString(R.string.log_in)
+            viewDataBinding.imageView11.setImageResource(R.drawable.ic_round_login_24)
+        }else{
+            viewDataBinding.textView11.text = resources.getString(R.string.log_out)
+            viewDataBinding.imageView11.setImageResource(R.drawable.ic_logout)
+        }
     }
 
     companion object {

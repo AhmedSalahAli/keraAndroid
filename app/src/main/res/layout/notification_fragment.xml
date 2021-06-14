@@ -36,11 +36,9 @@
                 android:id="@+id/imageView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:image="@{viewModel.logo}"
+                android:src="@drawable/kera_box"
                 app:layout_constraintBottom_toBottomOf="@+id/view"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_gravity="center"/>
         </com.google.android.material.card.MaterialCardView>
 
 
@@ -70,6 +68,51 @@
             app:veilFrame_highlightAlpha="1.0"
             app:veilFrame_radius="8dp"/>
 
+        <RelativeLayout
+            android:id="@+id/rel_no_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_marginBottom="60dp">
+            <FrameLayout
+                android:id="@+id/img_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_no_notification"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/img_frame">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/no_new"
+                    android:textSize="16dp"
+                    android:textColor="#5881A4"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/sf_ui_display_regular"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/notification_n"
+                    android:layout_marginStart="5dp"
+                    android:textSize="16dp"
+                    android:textColor="#5881A4"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/sf_ui_display_black"/>
+            </LinearLayout>
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

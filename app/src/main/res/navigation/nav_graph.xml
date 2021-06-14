@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_homeFragment_to_eventsActivity"
             app:destination="@id/eventsActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_needToLogin"
+            app:destination="@id/needToLogin" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
@@ -98,5 +101,10 @@
         android:name="com.example.kera.registrationForm.screen4.AppScreen4"
         android:label="app_screen4_fragment"
         tools:layout="@layout/app_screen4_fragment" />
+    <fragment
+        android:id="@+id/needToLogin"
+        android:name="com.example.kera.visitor.NeedToLogin"
+        android:label="need_to_login_fragment"
+        tools:layout="@layout/need_to_login_fragment" />
 
 </navigation>

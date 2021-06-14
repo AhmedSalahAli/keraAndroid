@@ -19,6 +19,7 @@ class NotificationViewModel(val appRepo: AppRepo) : ViewModel() {
     }
 
     fun getNurseryLogo(): String {
+
         return appRepo.getNurseryLogoFromSharedPreference()
     }
     fun getNotifications(page : Int) {

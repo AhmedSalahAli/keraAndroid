@@ -12,4 +12,7 @@ class SideMenuViewModel(val appRepo: AppRepo) : ViewModel() {
         appRepo.logOut()
         loggedOut.value = true
     }
+    fun getUserType() : String{
+        return appRepo.getUserTypeFromSharedPref()
+    }
 }

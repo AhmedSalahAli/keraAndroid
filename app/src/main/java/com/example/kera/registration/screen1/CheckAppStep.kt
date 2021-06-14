@@ -14,9 +14,26 @@ class CheckAppStep {
     var application: ApplicationBean ?= null
 
     class ApplicationBean {
+        @SerializedName("_id")
+        var _id: String? = null
         @SerializedName("associationId")
         var associationId: String? = null
         @SerializedName("step")
         var step: Int? = 0
+        @SerializedName("student")
+        var student: Student ?= null
+        class Student{
+            @SerializedName("name")
+            var name: String? = null
+            @SerializedName("profileImage")
+            var profileImage: String? = null
+            @SerializedName("nationality")
+            var nationality: String? = null
+            @SerializedName("gender")
+            var gender: Int? = null
+            @SerializedName("birthDate")
+            var birthDate: String? = null
+
+        }
     }
 }

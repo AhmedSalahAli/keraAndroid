@@ -2,11 +2,13 @@ package com.example.kera.registration.screen1
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,6 +23,7 @@ import com.example.kera.registrationForm.screen2.AppScreen2
 import com.example.kera.registrationForm.screen3.AppScreen3
 import com.example.kera.registrationForm.screen4.AppScreen4
 import com.example.kera.utils.CommonUtils
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -42,29 +45,60 @@ class Registration1Activity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_fcfdfd);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
-//        mProgressDialog = CommonUtils.showLoadingDialog(
-//            this,
-//            R.layout.progress_dialog
-//        )
+        mProgressDialog = CommonUtils.showLoadingDialog(
+            this,
+            R.layout.progress_dialog
+        )
         val stepModel = AppStepModel()
         stepModel.associationId = this.intent.getStringExtra("SchoolID")
         stepModel.message = "test"
-//        viewModel.getAppStep(stepModel)
+        viewModel.getAppStep(
+            Settings.Secure.getString(
+            this.getContentResolver(),
+            Settings.Secure.ANDROID_ID
+        ))
        // nextButtonClickListener()
-        switchFragment(AppScreen1())
-//        viewModel.step.observe(this, Observer {
-//            CommonUtils.hideLoading(mProgressDialog!!)
-//
-//            when (it.step) {
-//                0 ->switchFragment(AppScreen1())
-//                1 ->switchFragment(AppScreen2())
-//                2 ->switchFragment(AppScreen3())
-//                3 ->switchFragment(AppScreen4())
-//                else -> { // Note the block
-//                    finish()
-//                }
-//            }
-//        })
+        viewModel.res.observe(this, Observer {
+            switchFragment(AppScreen1())
+        })
+        viewModel.step.observe(this, Observer {
+            CommonUtils.hideLoading(mProgressDialog!!)
+
+            var fragment = Fragment()
+            val bundle = Bundle()
+            bundle.putString("applicationId", it?._id)
+            bundle.putString("profileImage", "")
+            bundle.putString("profileUrl", it.student?.profileImage)
+                when (it.step) {
+                    0 ->{
+                        fragment = AppScreen1()
+                        fragment.arguments = bundle
+                        switchFragment(fragment)
+                    }
+                    1 ->{
+                        fragment = AppScreen2()
+                        fragment.arguments = bundle
+                        switchFragment(fragment)
+                    }
+                    2 ->{
+                        fragment = AppScreen3()
+                        fragment.arguments = bundle
+                        switchFragment(fragment)
+                    }
+                    3 ->{
+                        fragment = AppScreen4()
+                        fragment.arguments = bundle
+                        switchFragment(fragment)
+                    }
+
+                    else -> { // Note the block
+                        finish()
+                    }
+                }
+
+
+
+        })
 
     }
 

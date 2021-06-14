@@ -1,6 +1,7 @@
 package com.example.kera.profile
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
@@ -10,7 +11,9 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.kera.R
+import com.example.kera.contactUs.ContactUsActivity
 import com.example.kera.databinding.ProfileFragmentBinding
+import com.example.kera.main.ui.MainActivity
 import com.example.kera.profile.adapter.ChildrenAdapter
 import com.example.kera.utils.CommonUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -72,7 +75,8 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
         }
 
         viewDataBinding.constraintMessageThePrinciple.setOnClickListener {
-            // should navigate to contact teacher page
+            startActivity(Intent(requireContext(), ContactUsActivity::class.java).apply {})
+
         }
     }
 
