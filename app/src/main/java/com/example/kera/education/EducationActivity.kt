@@ -6,6 +6,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -30,13 +31,14 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
     private var isSelectedDateIsTodayFlag = true
     private var mProgressDialog: ProgressDialog? = null
     lateinit var accessType: String
-
+    var actualeDate:String = ""
     companion object {
         fun newInstance() = EducationActivity()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         messageObserver()
         viewDataBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_education)
@@ -66,6 +68,12 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.childrenAdapter!!.children = it.students!!
             viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
+            if (it.students!!.size ==1){
+                viewDataBinding.imageViewExchange.visibility =  View.GONE
+            }else{
+                viewDataBinding.imageViewExchange.visibility =  View.VISIBLE
+
+            }
         })
 
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
@@ -78,7 +86,7 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
         viewDataBinding.recyclerEducation.addVeiledItems(15)
         viewDataBinding.recyclerEducation.veil()
         if (accessType == "teacher") {
-            viewModel.getDates("5fc2270ce4441941bbf5bcfd")
+            viewModel.getDates(viewModel.getTeacheerProfile().classNumber!!)
             viewDataBinding.imageViewExchange.visibility = View.GONE
             viewDataBinding.imageViewProfile.visibility = View.GONE
         } else {
@@ -88,7 +96,7 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
             viewDataBinding.imageViewProfile.visibility = View.VISIBLE
         }
 //        viewModel.getDates(viewModel.getSelectedChildDataFromSharedPref()?.classId!!)
-        viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this)
+        viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this,this)
 
         viewModel.educationList.observe(this, {
             //CommonUtils.hideLoading(mProgressDialog!!)
@@ -96,6 +104,11 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
 
             viewDataBinding.listAdapter = EducationListAdapter(it,this)
             viewDataBinding.listAdapter!!.notifyDataSetChanged()
+            if (it.size == 0){
+                showNoData()
+            }else{
+                hideNoData()
+            }
         })
 
         viewModel.datesListLiveData.observe(this, {
@@ -104,13 +117,14 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
 
             viewDataBinding.datesAdapter!!.datesList = it
             if (accessType == "teacher") {
-                viewModel.getEducationList("5fc2270ce4441941bbf5bcfd", it[0].actualDate)
+                viewModel.getEducationList(viewModel.getTeacheerProfile().classNumber!!, it[0].actualDate)
             } else {
                 viewModel.getEducationList(
                     viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
                     it[0].actualDate
                 )
             }
+            actualeDate=it[0].actualDate
 //            viewModel.getEducationList(
 //                viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
 //                it[0].actualDate
@@ -118,11 +132,18 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
 
         })
+        viewDataBinding.imageViewProfile.setOnClickListener {
 
+            if (viewDataBinding.childrenFrame.isVisible){
+                stateOfChildrenFrame(false)
+            }else{
+                stateOfChildrenFrame(true)
+            }
+        }
         viewDataBinding.imageViewBack.setOnClickListener {
             finish()
         }
-
+        setupUI(viewDataBinding.educationLay)
     }
 
     private fun messageObserver() {
@@ -137,17 +158,26 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
             Toast.LENGTH_LONG
         ).show();
     }
+    fun setupUI(view: View) {
 
+        if (view !is EditText) {
+            view.setOnTouchListener { v, event ->
+                viewDataBinding.childrenFrame.visibility = View.GONE
+                false
+            }
+        }
+    }
     override fun onDateClick(date: String) {
-        viewModel.getEducationList(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, date)
+
         if (accessType == "teacher") {
-            viewModel.getEducationList("5fc2270ce4441941bbf5bcfd", date)
+            viewModel.getEducationList(viewModel.getTeacheerProfile().classNumber!!, date)
         } else {
             viewModel.getEducationList(
                 viewModel.getSelectedChildDataFromSharedPref()?.classId!!,
                 date
             )
         }
+        actualeDate = date
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
@@ -186,9 +216,20 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
         viewModel.selectedUser.value!!.studentCode = "Code:" + student.studentCode
         viewModel.selectedUser.value!!.className = "Class:" + student.className
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-
-
         viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
+        if (accessType == "teacher") {
+            viewModel.getEducationList(viewModel.getTeacheerProfile().classNumber!!, actualeDate)
+        } else {
+            viewModel.getEducationList(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, actualeDate)
+        }
     }
+    private fun showNoData() {
+        viewDataBinding.recyclerEducation.visibility = View.GONE
+        viewDataBinding.relNoPlanned.visibility = View.VISIBLE
 
+    }
+    private fun hideNoData() {
+        viewDataBinding.recyclerEducation.visibility = View.VISIBLE
+        viewDataBinding.relNoPlanned.visibility = View.GONE
+    }
 }

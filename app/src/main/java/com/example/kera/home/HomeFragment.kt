@@ -210,6 +210,7 @@ class HomeFragment : Fragment() {
                 viewModel.saveChildDataToSharedPref(it.students!![0])
             }
             viewModel.getNewsList(it.associationId!!, page)
+
         })
     }
 
@@ -218,7 +219,7 @@ class HomeFragment : Fragment() {
         viewModel.teacherProfileUIModel.observe(viewLifecycleOwner, {
            // CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
-
+            viewModel.saveTeacherResponseToSharedPref(it)
 //            viewModel.saveProfileResponseToSharedPref(it)
             viewModel.getNewsList(it.associationId!!, page)
         })

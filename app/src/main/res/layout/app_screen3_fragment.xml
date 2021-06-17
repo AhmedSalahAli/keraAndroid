@@ -243,9 +243,9 @@ tools:context=".registrationForm.screen3.AppScreen3">
                 android:id="@+id/imageView39"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/ic_medical"
+                android:src="@drawable/ic_medical_app_form"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

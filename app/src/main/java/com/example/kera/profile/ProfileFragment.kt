@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.kera.R
 import com.example.kera.contactUs.ContactUsActivity
 import com.example.kera.databinding.ProfileFragmentBinding
@@ -53,17 +55,24 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
         viewModel.getProfileData()
         messageObserver()
 
+       // Glide.with(this).load(viewModel.selectedUser.value?.profileImage).error(requireContext().resources.getDrawable(R.drawable.ic_person)).into(viewDataBinding.imageView54)
         viewDataBinding.veilLayout.veil()
         viewModel.profileUIModel.observe(viewLifecycleOwner, {
            // CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
             viewDataBinding.adapter = ChildrenAdapter(it.students!!, this,viewModel.getAppRepoInstance())
             viewDataBinding.adapter!!.notifyDataSetChanged()
+            if (it.students!!.size ==1){
+                viewDataBinding.imageViewExchange.visibility =  View.GONE
+            }else{
+                viewDataBinding.imageViewExchange.visibility =  View.VISIBLE
+
+            }
         })
 
         viewDataBinding.imageViewExchange.setOnClickListener {
 
-            if (viewDataBinding.recyclerStudents.isVisible){
+            if (viewDataBinding.childrenFrame.isVisible){
                 stateOfChildrenFrame(false)
             }else{
                 stateOfChildrenFrame(true)
@@ -78,8 +87,17 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
             startActivity(Intent(requireContext(), ContactUsActivity::class.java).apply {})
 
         }
+        setupUI(viewDataBinding.nestedScrollView)
     }
+    fun setupUI(view: View) {
 
+        if (view !is EditText) {
+            view.setOnTouchListener { v, event ->
+                viewDataBinding.childrenFrame.visibility = View.GONE
+                false
+            }
+        }
+    }
     private fun messageObserver() {
         viewModel.message.observe(viewLifecycleOwner, {
            // CommonUtils.hideLoading(mProgressDialog!!)
@@ -97,22 +115,22 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
     fun stateOfChildrenFrame(state:Boolean){
         if (state){
 
-            viewDataBinding.recyclerStudents.setAnimation(
+            viewDataBinding.childrenFrame.setAnimation(
                 AnimationUtils.loadAnimation(
                     requireContext(),
                     R.anim.fade_in
                 )
             )
-            viewDataBinding.recyclerStudents.visibility = View.VISIBLE
+            viewDataBinding.childrenFrame.visibility = View.VISIBLE
 
         }else{
-            viewDataBinding.recyclerStudents.setAnimation(
+            viewDataBinding.childrenFrame.setAnimation(
                 AnimationUtils.loadAnimation(
                     requireContext(),
                     R.anim.fade_out
                 )
             )
-            viewDataBinding.recyclerStudents.visibility = View.GONE
+            viewDataBinding.childrenFrame.visibility = View.GONE
         }
     }
     override fun onItemClicked(student: StudentsData) {

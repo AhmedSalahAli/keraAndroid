@@ -126,5 +126,8 @@
     <string name="no_new">No New</string>
     <string name="notification_n">Notifications!</string>
     <string name="log_in">Login</string>
+    <string name="no_data">No data yet</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
 
 </resources>

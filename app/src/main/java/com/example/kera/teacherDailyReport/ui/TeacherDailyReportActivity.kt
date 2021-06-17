@@ -174,6 +174,8 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     override fun onResume() {
         super.onResume()
         viewModel.getClasses()
+        latestReports.clear()
+        page = 1
         viewModel.getLatestReports(page)
         selectedStudents.clear()
         checkNumberOfSelectedStudents()
@@ -275,9 +277,14 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     override fun onItemClicked(classID: String?) {
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
         viewDataBinding.recyclerView9.veil()
-        viewModel.getStudentsByClass(classID!!)
+
+        selectedStudents.clear()
+        for (student in viewDataBinding.studentsAdapter!!.studentsList) {
+            student.isSelected.set(false)
+        }
         viewDataBinding.checkBoxSelectAll.isChecked = false
         viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
+        viewModel.getStudentsByClass(classID!!)
 
     }
 

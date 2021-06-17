@@ -137,6 +137,7 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
+
         ImageViewer.Builder<String>(this, imagesList)
             .setStartPosition(position)
             .allowZooming(true)

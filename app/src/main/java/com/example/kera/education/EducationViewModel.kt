@@ -8,6 +8,7 @@ import com.example.kera.education.model.EducationListItemModel
 import com.example.kera.meals.model.ClassMealsDates
 import com.example.kera.profile.ProfileUIModel
 import com.example.kera.profile.StudentsData
+import com.example.kera.teacherProfile.TeacherProfileUIModel
 import kotlinx.coroutines.launch
 
 class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
@@ -48,7 +49,9 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
         selectedUser.value = response!!
         return appRepo.getSelectedChildData()
     }
-
+    fun getTeacheerProfile(): TeacherProfileUIModel {
+        return appRepo.getTeacherData()
+    }
     fun getAppRepoInstance() :AppRepo{
         return appRepo
     }

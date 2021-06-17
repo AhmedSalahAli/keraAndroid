@@ -15,7 +15,7 @@ class ProfileViewModel(val appRepo: AppRepo) : ViewModel() {
     init {
 
         logo.value = getNurseryLogo()
-
+        getSelectedChildDataFromSharedPref()
     }
 
     fun getProfileData() {

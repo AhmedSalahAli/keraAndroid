@@ -88,13 +88,13 @@
             app:layout_constraintBottom_toTopOf="@+id/constraint_logout"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@id/guideline12"
             />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="27dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView93"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
@@ -106,7 +106,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="32dp"
+
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -116,8 +117,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+
                     android:src="@drawable/ic_about_kera"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -143,6 +143,8 @@
                 android:id="@+id/constraint_contact_us"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/constraint_about_kera"
                 app:layout_constraintTop_toBottomOf="@+id/constraint_about_kera">
@@ -152,8 +154,7 @@
                     android:id="@+id/imageView3"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+
                     android:src="@drawable/ic_phone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -179,6 +180,8 @@
                 android:id="@+id/constraint_contact_us2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/constraint_contact_us"
                 app:layout_constraintTop_toBottomOf="@+id/constraint_contact_us">
@@ -188,8 +191,7 @@
                     android:id="@+id/imageView1"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+
                     android:src="@drawable/ic_about_kera"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -215,6 +217,7 @@
                 android:id="@+id/constraint_terms"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/constraint_contact_us2"
                 app:layout_constraintTop_toBottomOf="@+id/constraint_contact_us2">
@@ -224,8 +227,7 @@
                     android:id="@+id/imageView6"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+
                     android:src="@drawable/ic_terms"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

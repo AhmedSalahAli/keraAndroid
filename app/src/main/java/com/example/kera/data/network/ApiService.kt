@@ -1,6 +1,7 @@
 package com.example.kera.data.network
 
 import com.example.kera.attendanceHistory.model.AttendanceResponseModel
+import com.example.kera.dailyReport.model.PublishReplay
 import com.example.kera.data.models.*
 import com.example.kera.data.models.meals.ClassMealsResponseModel
 import com.example.kera.data.models.meals.DatesResponseModel
@@ -241,6 +242,12 @@ interface ApiService {
         @Header("lang") language: String,
         @Header("v") version: Int,
         @Body requestModel: PublishReportRequestModel,
+    ): GeneralResponse
+    @PUT("user/report-reply")
+    suspend fun publishReplay(
+        @Header("lang") language: String,
+        @Header("v") version: Int,
+        @Body publishReplay: PublishReplay
     ): GeneralResponse
     @POST("general/application/step-1")
     suspend fun publishApp1(

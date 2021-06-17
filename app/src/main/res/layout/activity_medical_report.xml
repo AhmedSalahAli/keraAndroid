@@ -125,13 +125,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/sf_ui_display_regular"
-                        android:text="@{viewModel.fromDate}"
+
                         android:textColor="#152D4A"
                         android:textSize="@dimen/_14ssp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView_from"
                         app:layout_constraintStart_toEndOf="@+id/textView_from"
                         app:layout_constraintTop_toTopOf="@+id/textView_from"
-                        tools:text="1/1" />
+                        tools:text="@string/start" />
 
                     <TextView
                         android:id="@+id/textView_to"
@@ -153,11 +153,11 @@
                         android:fontFamily="@font/sf_ui_display_regular"
                         android:textColor="#152D4A"
                         android:textSize="@dimen/_14ssp"
-                        android:text="@{viewModel.toDate}"
+
                         app:layout_constraintBottom_toBottomOf="@+id/textView_to"
                         app:layout_constraintStart_toEndOf="@+id/textView_to"
                         app:layout_constraintTop_toTopOf="@+id/textView_to"
-                        tools:text="2/2" />
+                        tools:text="@string/end" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -211,13 +211,72 @@
             app:veilFrame_highlightAlpha="1.0"
             app:veilFrame_radius="8dp"
             />
+        <RelativeLayout
+            android:id="@+id/no_data"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_top_view">
 
+            <FrameLayout
+                android:id="@+id/img_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_need_login" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/sf_ui_display_black"
+                    android:text="@string/no_data"
+                    android:textColor="#5881A4"
+                    android:textSize="22dp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_frame"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/sf_ui_display_regular"
+
+                    android:textColor="#5881A4"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/visitorLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/sf_ui_display_black"
+
+                    android:textColor="#5881A4"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </RelativeLayout>
         <FrameLayout
             android:id="@+id/children_frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_chiled_list"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView10"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_top_view"
             android:layout_marginEnd="23dp"
             android:visibility="gone"

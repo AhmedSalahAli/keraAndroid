@@ -1,5 +1,7 @@
 package com.example.kera.events.ui.eventsdetails
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -23,7 +25,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , ChildrenAdapter.CallBack {
     lateinit var viewDataBinding: ActivityEventsDetailsBinding
     val eventsDetailsViewModel: EventsDetailsViewModel by viewModel()
-
+    var lat : Double = 0.0
+    var long :Double = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val EventID = intent.getStringExtra("EventID")!!
@@ -38,7 +41,7 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
         viewDataBinding.adapter = ChildrenAdapter(ArrayList(), this, this)
-
+        viewDataBinding.veilLayout.veil()
         eventsDetailsViewModel.getEventDetails(EventID)
         eventsDetailsViewModel.eventDetails.observe(this, {
             val adapter = ImagesAdapter(it.images!!,this,this)
@@ -60,6 +63,9 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
             )
             viewDataBinding.adapter!!.children = it.students!!
             viewDataBinding.adapter!!.notifyDataSetChanged()
+            lat = it.latitude?.value!!
+            long = it.longitude?.value!!
+            viewDataBinding.veilLayout.unVeil()
         }
 
         )
@@ -86,7 +92,19 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
             }
 
         }
+        viewDataBinding.textView78.setOnClickListener(View.OnClickListener {
+            if (lat != 0.0 && long != 0.0) {
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://maps.google.com/maps?&daddr=" + lat + "," + long + "")
+                )
+                startActivity(intent)
+            }
 
+        })
+        viewDataBinding.imageView47.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {

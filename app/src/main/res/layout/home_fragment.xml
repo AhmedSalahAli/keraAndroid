@@ -397,6 +397,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="32dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:elevation="1dp"
                     android:background="@drawable/rounded_light_grey"
 
                     app:layout_constraintTop_toBottomOf="@+id/constraint_1">
@@ -407,11 +410,11 @@
                         android:layout_height="wrap_content"
 
                         android:layout_marginTop="8dp"
-                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:fontFamily="@font/sf_ui_display_black"
                         android:text="@string/latest_news"
                         android:textColor="#5881A4"
-                        android:textSize="@dimen/_11ssp"
-                        android:textStyle="bold"
+                        android:textSize="14dp"
+
                         android:layout_marginStart="16dp"
 
                         android:layout_marginEnd="16dp"

@@ -71,9 +71,9 @@
             android:textColor="@color/blue_152d4a"/>
     </FrameLayout>
     <View
-        android:layout_width="7dp"
-        android:layout_height="7dp"
-        android:background="@color/white"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@drawable/rounded_blue_1a2f50"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />

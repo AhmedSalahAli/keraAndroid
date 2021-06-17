@@ -45,6 +45,7 @@ public class AddLocation extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap mMap;;
     private Double lat,lon;
     private LatLng latLng;
+    private LatLng selectedLatLng;
     private PendingResult<LocationSettingsResult> result;
 
     private GoogleApiClient googleApiClient;
@@ -77,8 +78,8 @@ public class AddLocation extends AppCompatActivity implements OnMapReadyCallback
             public void onClick(View v) {
 
                     Intent returnIntent = new Intent();
-                    returnIntent.putExtra("lat",Float.parseFloat(String.valueOf(latLng.latitude)) );
-                    returnIntent.putExtra("long",Float.parseFloat(String.valueOf(latLng.longitude)) );
+                    returnIntent.putExtra("lat",Float.parseFloat(String.valueOf(selectedLatLng.latitude)) );
+                    returnIntent.putExtra("long",Float.parseFloat(String.valueOf(selectedLatLng.longitude)) );
 
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
@@ -104,7 +105,12 @@ public class AddLocation extends AppCompatActivity implements OnMapReadyCallback
         }
         // Add a marker in Sydney and move the camera
 
-
+        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+            @Override
+            public void onCameraIdle() {
+                selectedLatLng = mMap.getCameraPosition().target;
+            }
+        });
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setCompassEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(false);

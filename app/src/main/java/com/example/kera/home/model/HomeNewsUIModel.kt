@@ -28,7 +28,7 @@ class HomeNewsUIModel(
                 response.docs?.map {
                     NewsList(
                         it.content,
-                        CommonUtils.getTimeDateFromTimeStamp(it.date!!.toLong()!!),
+                        CommonUtils.convertTimeStampToDate_EEEE_MMM_MM_yyyy(it.date!!),
                         "# ${it.id}",
                         it.associationId?.image
                     )

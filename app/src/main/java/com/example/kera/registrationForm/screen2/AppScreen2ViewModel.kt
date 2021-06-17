@@ -17,7 +17,7 @@ class AppScreen2ViewModel(val appRepo: AppRepo) : ViewModel() {
             try {
                 val data = appRepo.publishApp2(model)
                 if (data.status == 200) {
-                    message.value = "Form published successfully"
+                    //message.value = "Form published successfully"
                     publishApp1Boolean.value = true
                     applicationId.value = data.applicationId
                 }

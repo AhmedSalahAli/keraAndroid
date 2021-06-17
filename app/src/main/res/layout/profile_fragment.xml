@@ -15,6 +15,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_alll"
@@ -116,7 +117,7 @@
                         android:fontFamily="@font/sf_ui_display_regular"
                         android:text="@{viewModel.selectedUser.username}"
                         android:textColor="#152D4A"
-                        android:textSize="@dimen/_13ssp"
+
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.498"
@@ -128,9 +129,9 @@
                         android:id="@+id/constraintLayout6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="56dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="32dp"
-                        android:layout_marginEnd="56dp"
+                        android:layout_marginEnd="20dp"
                         android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -181,9 +182,9 @@
                         android:id="@+id/constraintLayout8"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="56dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="19dp"
-                        android:layout_marginEnd="56dp"
+                        android:layout_marginEnd="20dp"
                         android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -234,9 +235,9 @@
                         android:id="@+id/constraintLayout9"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
-                        android:layout_marginStart="70dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="19dp"
-                        android:layout_marginEnd="70dp"
+                        android:layout_marginEnd="20dp"
                         android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -348,7 +349,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:layout_margin="10dp"
+                            android:layout_margin="14dp"
 
                             >
 
@@ -460,9 +461,10 @@
                 app:layout_constraintEnd_toEndOf="@+id/imageView54"
                 app:layout_constraintStart_toStartOf="@+id/imageView54"
                 app:layout_constraintTop_toBottomOf="@+id/imageView54"
-                android:elevation="@dimen/_11sdp"
+                android:elevation="@dimen/_13sdp"
                 app:srcCompat="@drawable/ic_exchange" />
                 <FrameLayout
+                    android:id="@+id/children_frame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_chiled_list"
@@ -470,13 +472,14 @@
                     app:layout_constraintStart_toStartOf="@+id/imageView54"
                     app:layout_constraintTop_toBottomOf="@+id/imageView_exchange"
                     android:elevation="@dimen/_11sdp"
+                    android:visibility="gone"
                     >
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_students"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:visibility="gone"
+
                         app:adapter="@{adapter}"
                         android:elevation="@dimen/_11sdp"
                         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"

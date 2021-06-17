@@ -249,7 +249,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_70sdp"
                     android:layout_marginTop="32dp"
-                    android:background="@drawable/rounded_blue_dashed_stroke_97b4d8"
+                    android:background="@drawable/rounded_stroke_gray_5"
                     android:fontFamily="@font/sf_ui_display_regular"
                     android:gravity="top"
                     android:hint="@string/comment_about_this_meal"

@@ -3,10 +3,12 @@ package com.example.kera.dailyReport.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kera.dailyReport.model.PublishReplay
 import com.example.kera.data.models.DisplayDailyReportResponseModel
 import com.example.kera.data.network.AppRepo
 import com.example.kera.profile.ProfileUIModel
 import com.example.kera.profile.StudentsData
+import com.example.kera.registrationForm.screen1.model.PublishAppStep1Model
 import kotlinx.coroutines.launch
 
 class DailyReportViewModel(var appRepo: AppRepo) : ViewModel() {
@@ -17,6 +19,7 @@ class DailyReportViewModel(var appRepo: AppRepo) : ViewModel() {
     var fromDate = MutableLiveData<String>("")
     var toDate = MutableLiveData<String>("")
     var selectedUser = MutableLiveData<StudentsData>()
+    var publishReplayBoolean = MutableLiveData<Boolean>()
 
     init {
         getSelectedChildDataFromSharedPref()
@@ -44,7 +47,20 @@ class DailyReportViewModel(var appRepo: AppRepo) : ViewModel() {
             }
         }
     }
+    fun sendReplay(model: PublishReplay) {
+        viewModelScope.launch {
+            try {
+                val data = appRepo.publishReplay(model)
+                if (data.status == 200) {
+                    // message.value = "Form published successfully"
+                    publishReplayBoolean.value = true
 
+                }
+            } catch (e: Exception) {
+                message.value = e.toString()
+            }
+        }
+    }
     fun saveChildToSharedPref(studentData: StudentsData) {
         appRepo.saveSelectedChildData(studentData)
     }

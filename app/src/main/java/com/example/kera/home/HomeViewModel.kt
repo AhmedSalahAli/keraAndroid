@@ -83,9 +83,15 @@ class HomeViewModel(val appRepo: AppRepo) : ViewModel() {
     fun saveProfileResponseToSharedPref(responseModel: ProfileUIModel) {
         appRepo.saveProfileResponse(responseModel)
     }
+    fun saveTeacherResponseToSharedPref(responseModel: TeacherProfileUIModel) {
+        appRepo.saveTeacherResponse(responseModel)
+    }
 
     fun getUserType(): String {
         return appRepo.getUserTypeFromSharedPref()
+    }
+    fun getTeacheerProfile(): TeacherProfileUIModel {
+        return appRepo.getTeacherData()
     }
 
     fun getSelectedChildDataFromSharedPref(): StudentsData? {

@@ -44,7 +44,7 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.viewModel = viewModel
         viewDataBinding.veilLayout.veil()
-        viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this)
+        viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this,this)
 
         viewModel.getAttendanceList(page,"")
         viewDataBinding.listAdapter = AttendanceListAdapter(ArrayList(), this)

@@ -1,5 +1,6 @@
 package com.example.kera.medical
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -32,9 +33,12 @@ MedicalReportsAdapter.CallBack{
     val viewModel: MedicalReportViewModel by viewModel()
     lateinit var viewDataBinding: ActivityMedicalReportBinding
     val c = Calendar.getInstance()
-    val year = c.get(Calendar.YEAR)
-    val month = c.get(Calendar.MONTH)
-    val day = c.get(Calendar.DAY_OF_MONTH)
+    var rb_year = c.get(Calendar.YEAR)
+    var rb_month = c.get(Calendar.MONTH)
+    var rb_day = c.get(Calendar.DAY_OF_MONTH)
+    var ra_year = c.get(Calendar.YEAR)
+    var ra_month = c.get(Calendar.MONTH)
+    var ra_day = c.get(Calendar.DAY_OF_MONTH)
     lateinit var studentID: String
     var isScrolling: Boolean = false
     var currentItems: Int = 0
@@ -44,7 +48,12 @@ MedicalReportsAdapter.CallBack{
     var totalNumberOfPages: Int = 1
     lateinit var manager: LinearLayoutManager
     var medicalReportList: ArrayList<DisplayMedicalReportResponseModel.DataBean.DocsBean> = ArrayList()
-
+    private  var Bmonth:String = ""
+    private  var Byear:String = ""
+    private  var Bday:String = ""
+    private  var Amonth:String = ""
+    private  var Ayear:String = ""
+    private  var Aday:String = ""
     companion object {
         fun newInstance() = MedicalReportActivity()
     }
@@ -130,10 +139,15 @@ MedicalReportsAdapter.CallBack{
             totalNumberOfPages = it.data!!.pages
            viewDataBinding.adapter!!.medicalReportList = medicalReportList
            viewDataBinding.adapter!!.notifyDataSetChanged()
+            if (medicalReportList.size == 0) {
+                showNoData()
+            } else {
+                hideNoData()
+            }
         })
 
 
-        viewDataBinding.imageViewExchange.setOnClickListener {
+        viewDataBinding.imageViewProfile.setOnClickListener {
 
             if (viewDataBinding.childrenFrame.isVisible){
                 stateOfChildrenFrame(false)
@@ -145,46 +159,165 @@ MedicalReportsAdapter.CallBack{
         viewDataBinding.imageViewBack.setOnClickListener {
             finish()
         }
+        viewDataBinding.imageViewBack.setOnClickListener {
+            finish()
+        }
+
+        viewDataBinding.textViewFromDate.setOnClickListener {
 
 
+            showDatePickerDialog(0)
+
+        }
+        viewDataBinding.textViewToDate.setOnClickListener {
+
+
+            showDatePickerDialog(1)
+
+        }
         viewDataBinding.textViewTo.setOnClickListener {
-            val pickerPopWin = DatePickerPopWin.Builder(
-                this@MedicalReportActivity
-            ) { year, month, day, dateDesc ->
-                viewDataBinding.textViewToDate.text = "$day/$month"
-                viewModel.toDate.value = "$day/$month"
-            }.textConfirm("Done") //text of confirm button
-                .btnTextSize(8) // button text size
-                .viewTextSize(8) // pick view text size
-                .minYear(1990) //min year in loop
-                .maxYear(year + 1) // max year in loop
-                .build()
-            pickerPopWin.showPopWin(this@MedicalReportActivity)
+//            val pickerPopWin = DatePickerPopWin.Builder(
+//                this@DailyReportActivity
+//            ) { year, month, day, dateDesc ->
+//                viewDataBinding.textViewToDate.text = "$day/$month"
+//                viewModel.toDate.value = "$day/$month"
+//            }.textConfirm("Done") //text of confirm button
+//                .btnTextSize(8) // button text size
+//                .viewTextSize(8) // pick view text size
+//                .minYear(1990) //min year in loop
+//                .maxYear(year + 1) // max year in loop
+//                .build()
+//            pickerPopWin.showPopWin(this@DailyReportActivity)
+
+            showDatePickerDialog(1)
+
         }
 
 
         viewDataBinding.textViewFrom.setOnClickListener {
-            val pickerPopWin = DatePickerPopWin.Builder(
-                this@MedicalReportActivity
-            ) { year, month, day, dateDesc ->
-                viewModel.fromDate.value = "$day/$month"
-                viewDataBinding.textViewFromDate.text = "$day/$month"
-            }.textConfirm("Done") //text of confirm button
-                .btnTextSize(8) // button text size
-                .viewTextSize(8) // pick view text size
-                .minYear(1990) //min year in loop
-                .maxYear(year + 1) // max year in loop
-                .dateChose("$(year+1)-($month+1)-$day") // date chose when init popwindow
-                .build()
-            pickerPopWin.showPopWin(this@MedicalReportActivity)
+//            val pickerPopWin = DatePickerPopWin.Builder(
+//                this@DailyReportActivity
+//            ) { year, month, day, dateDesc ->
+//                viewModel.fromDate.value = "$day/$month"
+//                viewDataBinding.textViewFromDate.text = "$day/$month"
+//            }.textConfirm("Done") //text of confirm button
+//                .btnTextSize(8) // button text size
+//                .viewTextSize(8) // pick view text size
+//                .minYear(1990) //min year in loop
+//                .maxYear(year + 1) // max year in loop
+//                .dateChose("$(year+1)-($month+1)-$day") // date chose when init popwindow
+//                .build()
+//            pickerPopWin.showPopWin(this@DailyReportActivity)
+            showDatePickerDialog(0)
         }
+
+
         viewModel.profileUIModel.observe(this, {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.childrenAdapter!!.children = it.students!!
             viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
         })
-    }
+        setDateValues()
+        viewDataBinding.imageView65.setOnClickListener(View.OnClickListener {
+            viewModel.fromDate.value = ""
+            viewModel.toDate.value = ""
+            rb_year = c.get(Calendar.YEAR)
+            rb_month = c.get(Calendar.MONTH)
+            rb_day = c.get(Calendar.DAY_OF_MONTH)
+            ra_year = c.get(Calendar.YEAR)
+            ra_month = c.get(Calendar.MONTH)
+            ra_day = c.get(Calendar.DAY_OF_MONTH)
+            setDateValues()
+            medicalReportList.clear()
+            page = 1
+            viewModel.getMedicalReportData(
+                viewModel.getSelectedChildDataFromSharedPref()?.studentId.toString(),
+                "",
+                "",
+                page
+            )
 
+        })
+    }
+    fun getDailyData(){
+        medicalReportList.clear()
+        page = 1
+        viewModel.getMedicalReportData(
+            viewModel.getSelectedChildDataFromSharedPref()?.studentId.toString(),
+            "$Bmonth/$Bday/$Byear",
+            "$Amonth/$Aday/$Ayear",
+            page
+        )
+
+    }
+    fun showDatePickerDialog(i: Int) {
+
+        var datePickerDialog: DatePickerDialog
+        if (i==0){
+            datePickerDialog = DatePickerDialog(
+                this, R.style.MyTimePickerDialogTheme,
+                { view, year, monthOfYear, dayOfMonth ->
+                    //DO SOMETHING
+                }, rb_year,
+                rb_month,
+                rb_day
+            )
+
+            datePickerDialog.show()
+
+        }else{
+            datePickerDialog = DatePickerDialog(
+                this, R.style.MyTimePickerDialogTheme,
+                { view, year, monthOfYear, dayOfMonth ->
+                    //DO SOMETHING
+                }, rb_year,
+                rb_month,
+                rb_day
+            )
+            datePickerDialog.show()
+        }
+
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            datePickerDialog.setOnDateSetListener(DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                if (i == 0) {
+                    Bmonth = "" + (month + 1)
+                    Bday = "" + dayOfMonth
+                    Byear = "" + year
+                    rb_day = dayOfMonth
+                    rb_month = month
+                    rb_year = year
+                    viewDataBinding.textViewFromDate.text = "$Bday/$Bmonth"
+                } else {
+                    Amonth = "" + (month + 1)
+                    Aday = "" + dayOfMonth
+                    Ayear = "" + year
+                    ra_day = dayOfMonth
+                    ra_month = month
+                    ra_year = year
+                    viewDataBinding.textViewToDate.text = "$Aday/$Amonth"
+                }
+                getDailyData()
+
+            })
+        }
+    }
+    fun setDateValues(){
+        if (viewModel.fromDate.value.isNullOrEmpty()){
+            viewDataBinding.textViewFromDate.text = resources.getString(R.string.start)
+        }else{
+            viewDataBinding.textViewFromDate.text = viewModel.fromDate.value
+        }
+
+
+
+        if (viewModel.toDate.value.isNullOrEmpty()){
+            viewDataBinding.textViewToDate.text = resources.getString(R.string.end)
+        }else{
+            viewDataBinding.textViewToDate.text = viewModel.toDate.value
+        }
+
+    }
     override fun onItemClicked(student: StudentsData) {
         stateOfChildrenFrame(false)
         viewModel.saveChildToSharedPref(student)
@@ -196,6 +329,9 @@ MedicalReportsAdapter.CallBack{
         medicalReportList.clear()
         page = 1
         isScrolling = false
+        viewModel.fromDate.value = ""
+        viewModel.toDate.value = ""
+        setDateValues()
         viewModel.getMedicalReportData(
             viewModel.getSelectedChildDataFromSharedPref()?.studentId!!,
             viewModel.fromDate.value!!,
@@ -237,5 +373,14 @@ MedicalReportsAdapter.CallBack{
             .allowZooming(true)
             .allowSwipeToDismiss(true)
             .show()
+    }
+    private fun showNoData() {
+        viewDataBinding.recyclerView10.visibility = View.GONE
+        viewDataBinding.noData.visibility = View.VISIBLE
+
+    }
+    private fun hideNoData() {
+        viewDataBinding.recyclerView10.visibility = View.VISIBLE
+        viewDataBinding.noData.visibility = View.GONE
     }
 }

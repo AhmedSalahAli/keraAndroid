@@ -1,5 +1,7 @@
 package com.example.kera.dailyReport.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +11,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.example.kera.R
 import com.example.kera.databinding.CustomDialogReplyBinding
+import jp.wasabeef.blurry.Blurry
 
-class CustomDialogClass(var callback: CallBack) : DialogFragment() {
+class CustomDialogClass(var callback: CallBack,var id:String) : DialogFragment() {
     lateinit var viewDataBinding: CustomDialogReplyBinding
 
     companion object {
@@ -18,10 +21,11 @@ class CustomDialogClass(var callback: CallBack) : DialogFragment() {
         private const val KEY_TITLE = "KEY_TITLE"
         private const val KEY_SUBTITLE = "KEY_SUBTITLE"
 
-        fun newInstance(callback: CallBack): CustomDialogClass {
-            val fragment = CustomDialogClass(callback)
+        fun newInstance(callback: CallBack,id: String): CustomDialogClass {
+            val fragment = CustomDialogClass(callback,id)
             return fragment
         }
+
     }
 
     override fun onCreateView(
@@ -39,6 +43,8 @@ class CustomDialogClass(var callback: CallBack) : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupView(view)
         setupClickListeners(view)
+        getDialog()?.getWindow()?.setBackgroundDrawable( ColorDrawable(Color.TRANSPARENT));
+
     }
 
     override fun onStart() {
@@ -47,6 +53,12 @@ class CustomDialogClass(var callback: CallBack) : DialogFragment() {
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
+
+    }
+
+    override fun onStop() {
+
+        super.onStop()
     }
 
     private fun setupView(view: View) {
@@ -55,12 +67,12 @@ class CustomDialogClass(var callback: CallBack) : DialogFragment() {
 
     private fun setupClickListeners(view: View) {
         viewDataBinding.sendButton.setOnClickListener {
-            callback.onSendReplyClicked(viewDataBinding.editText.text.toString())
+            callback.onSendReplyClicked(viewDataBinding.editText.text.toString(),id)
         }
     }
 
     interface CallBack {
-        fun onSendReplyClicked(comment: String)
+        fun onSendReplyClicked(comment: String,id: String)
     }
 
 //    private fun onClickInscription() {

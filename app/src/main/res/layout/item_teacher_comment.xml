@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_margin="2dp"
+        android:paddingBottom="@dimen/_30sdp"
+        android:paddingTop="@dimen/_30sdp"
         android:background="@drawable/rounded_white_fcfcfc_dashed_stroke_e9eff7">
 
 
@@ -24,23 +26,36 @@
             android:text="@string/teacher_comment"
             android:textColor="#5881A4"
             android:textSize="@dimen/_12ssp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintStart_toStartOf="@+id/textView_comment"
-            app:layout_constraintEnd_toStartOf="@+id/save_comment"
-            app:layout_constraintTop_toTopOf="parent" />
-        <TextView
-            android:id="@+id/save_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/textView_comment"
-            android:text="@string/Save"
-            android:textColor="#5881A4"
-            android:textSize="@dimen/_12ssp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/sf_ui_display_semibold"
-            android:background="@color/transparent"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toEndOf="@+id/save_commentCard"
             app:layout_constraintEnd_toEndOf="@+id/textView_comment"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/save_commentCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/textView_comment"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="4dp"
+            app:cardCornerRadius="5dp"
+            android:elevation="1dp"
+            android:layout_marginEnd="10dp"
+            app:cardBackgroundColor="@color/white">
+            <TextView
+                android:id="@+id/save_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/textView_comment"
+                android:text="@string/Save"
+                android:textColor="#5881A4"
+                android:textSize="@dimen/_12ssp"
+                android:layout_margin="3dp"
+                android:fontFamily="@font/sf_ui_display_semibold"
+                android:background="@color/transparent"
+                app:layout_constraintEnd_toEndOf="@+id/textView_comment"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.cardview.widget.CardView>
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline52"
@@ -60,12 +75,12 @@
             android:id="@+id/textView_comment"
             android:layout_width="0dp"
             android:layout_height="@dimen/_120sdp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_white_fcfcfc_stroke_eeeff0"
             android:fontFamily="@font/sf_ui_display_regular"
             android:gravity="top"
 
-
+            android:elevation="@dimen/_5sdp"
             android:hint="@string/please_write_your_comment_here"
             android:padding="10dp"
             android:textColor="#1A2F50"

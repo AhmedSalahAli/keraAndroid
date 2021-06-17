@@ -5,9 +5,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutContainer"
-        android:layout_width="@dimen/_280sdp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_350sdp"
-        android:background="@drawable/rounded_white_transparent_10"
+        android:background="@drawable/blur_replay_d"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
         android:orientation="vertical">
 
 
@@ -21,8 +23,8 @@
             android:background="@drawable/rounded_light_blue_15"
             android:gravity="top"
             android:inputType="textMultiLine"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
             tools:text="mamamamama amamama amamama mama"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

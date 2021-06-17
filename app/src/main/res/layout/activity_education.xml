@@ -22,6 +22,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/education_lay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background">
@@ -243,6 +244,58 @@
             app:veilFrame_highlightAlpha="1.0"
             app:veilFrame_radius="8dp"
              />
+        <RelativeLayout
+            android:id="@+id/rel_no_planned"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/guideline31"
+            app:layout_constraintStart_toStartOf="@+id/guideline30"
+            app:layout_constraintTop_toBottomOf="@+id/veilLayout"
+            android:layout_marginBottom="60dp">
+            <FrameLayout
+                android:id="@+id/img_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/booklets"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/no_data"
+                    android:textSize="22dp"
+                    android:textColor="#1A2F50"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/lato_light"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_marginStart="5dp"
+                    android:textSize="12dp"
+                    android:textColor="#1A2F50"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/lato_light"/>
+            </LinearLayout>
+        </RelativeLayout>
         <FrameLayout
             android:id="@+id/children_frame"
             android:layout_width="wrap_content"
@@ -250,7 +303,7 @@
             android:background="@drawable/rounded_chiled_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout19"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="4dp"
             android:visibility="gone"
             android:elevation="@dimen/_15sdp"
             android:layout_marginTop="10dp"

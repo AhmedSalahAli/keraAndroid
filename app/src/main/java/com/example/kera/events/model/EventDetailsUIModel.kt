@@ -7,6 +7,7 @@ class EventDetailsUIModel
     (
     var images: ArrayList<String>?,
     var title: MutableLiveData<String>?,
+    var description: MutableLiveData<String>?,
     var latitude: MutableLiveData<Double>?,
     var longitude: MutableLiveData<Double>?,
 
@@ -27,14 +28,15 @@ class EventDetailsUIModel
                         it
                     } as ArrayList,
                     MutableLiveData(response.title),
+                    MutableLiveData(response.description),
                     MutableLiveData(response.latitude),
                     MutableLiveData(response.longitude),
                     MutableLiveData(response.address),
                     response.eventPrice ,
                     MutableLiveData(CommonUtils.convertTimeStampToEe(response.eventDate!!)),
                     MutableLiveData(CommonUtils.convertTimeStampToDd(response.eventDate!!)),
-                    MutableLiveData("From " + response.fromTime),
-                    MutableLiveData("To " + response.toTime),
+                    MutableLiveData(response.fromTime),
+                    MutableLiveData(response.toTime),
                     MutableLiveData(response._id),
                     response?.students?.map {
                         it

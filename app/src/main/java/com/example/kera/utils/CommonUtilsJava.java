@@ -6,6 +6,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -29,6 +31,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+import java.util.Locale;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
@@ -107,4 +111,21 @@ public class CommonUtilsJava {
         v.startAnimation(a);
     }
 
+    public static String getAddress(Context context, float lat , float lon) {
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(context, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(lat, lon, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+            String address = addresses.get(0).getAddressLine(0);
+            return address;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+
+
+    }
 }

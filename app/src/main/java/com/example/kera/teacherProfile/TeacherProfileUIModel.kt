@@ -6,6 +6,7 @@ class TeacherProfileUIModel(
     var name: String? = "",
     var specialization: String? = "",
     var classNumber: String? = "",
+    var className: String? = "",
     var address: String? = "",
     var email: String? = "",
     var phone: String? = "",
@@ -19,7 +20,8 @@ class TeacherProfileUIModel(
             return TeacherProfileUIModel(
                 response.username,
                 response.specialization,
-                response.specialization,
+                response.classes!!.get(0).id,
+                response.classes!!.get(0).name,
                 response.location?.address,
                 response.email,
                 response.phoneNumber,

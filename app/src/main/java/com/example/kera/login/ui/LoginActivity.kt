@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
     val viewModel: LoginViewModel by viewModel()
     private var mProgressDialog: ProgressDialog? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -60,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.loginFailed.observe(this, {
             CommonUtils.hideLoading(mProgressDialog!!)
+
         })
         viewModel.loginResponse.observe(this, {
             CommonUtils.hideLoading(mProgressDialog!!)

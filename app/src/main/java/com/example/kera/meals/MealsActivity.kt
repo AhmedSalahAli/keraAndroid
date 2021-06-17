@@ -7,6 +7,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -30,6 +31,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
     val viewModel: MealsViewModel by viewModel()
     private var mProgressDialog: ProgressDialog? = null
     lateinit var accessType: String
+    var actualeDate:String = ""
 
     companion object {
         fun newInstance() = MealsActivity()
@@ -47,7 +49,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         window.statusBarColor = ContextCompat.getColor(this, R.color.white);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
-        viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this)
+        viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this,this)
         viewDataBinding.mealsAdapter = MealsListAdapter(ArrayList(), this)
         viewDataBinding.childrenAdapter = ChildrenAdapter(ArrayList(), this,viewModel.getAppRepoInstance())
 
@@ -72,10 +74,18 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
             viewDataBinding.imageViewProfile.visibility = View.VISIBLE
 
         }
-
+        setupUI(viewDataBinding.mealsLay)
         messageObserver()
 
         viewDataBinding.imageViewExchange.setOnClickListener {
+
+            if (viewDataBinding.childrenFrame.isVisible){
+                stateOfChildrenFrame(false)
+            }else{
+                stateOfChildrenFrame(true)
+            }
+        }
+        viewDataBinding.imageViewProfile.setOnClickListener {
 
             if (viewDataBinding.childrenFrame.isVisible){
                 stateOfChildrenFrame(false)
@@ -87,7 +97,14 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.childrenAdapter!!.children = it.students!!
             viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
+            if (it.students!!.size ==1){
+                viewDataBinding.imageViewExchange.visibility =  View.GONE
+            }else{
+                viewDataBinding.imageViewExchange.visibility =  View.VISIBLE
+
+            }
         })
+
         viewModel.datesListLiveData.observe(this, {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
@@ -104,6 +121,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
                     it[0].actualDate
                 )
             }
+            actualeDate=it[0].actualDate
 //            viewModel.getMeals(
 //                viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
 //                it[0].actualDate
@@ -117,13 +135,26 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
             viewDataBinding.mealsAdapter!!.mealsList = it
 
             viewDataBinding.mealsAdapter!!.notifyDataSetChanged()
+            if (it.size == 0){
+                showNoData()
+            }else{
+                hideNoData()
+            }
         })
 
         viewDataBinding.imageViewBack.setOnClickListener {
             finish()
         }
     }
+    fun setupUI(view: View) {
 
+        if (view !is EditText) {
+            view.setOnTouchListener { v, event ->
+                viewDataBinding.childrenFrame.visibility = View.GONE
+                false
+            }
+        }
+    }
     override fun onItemClicked(mealID: String?) {
         val myIntent = Intent(this@MealsActivity, MealsDetailsActivity::class.java)
         myIntent.putExtra("MealID", mealID) //Optional parameters
@@ -153,6 +184,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         } else {
             viewModel.getMeals(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, date)
         }
+        actualeDate = date
     }
     fun stateOfChildrenFrame(state:Boolean){
         if (state){
@@ -183,8 +215,22 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         viewModel.selectedUser.value!!.studentCode = "Code:" + student.studentCode
         viewModel.selectedUser.value!!.className = "Class:" + student.className
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-
-
         viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
+        if (accessType == "teacher") {
+            viewModel.getMeals("5fc2270ce4441941bbf5bcfd", actualeDate)
+        } else {
+            viewModel.getMeals(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, actualeDate)
+        }
+
+
+    }
+    private fun showNoData() {
+        viewDataBinding.recyclerMeals.visibility = View.GONE
+        viewDataBinding.relNoPlanned.visibility = View.VISIBLE
+
+    }
+    private fun hideNoData() {
+        viewDataBinding.recyclerMeals.visibility = View.VISIBLE
+        viewDataBinding.relNoPlanned.visibility = View.GONE
     }
 }

@@ -1,5 +1,6 @@
 package com.example.kera.education.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,8 @@ import com.example.kera.meals.model.ClassMealsDates
 import com.example.kera.utils.BaseViewHolder
 
 class DateAdapter(
-    var datesList: ArrayList<ClassMealsDates>, var itemClickNavigator: ItemClickNavigator
+    var datesList: ArrayList<ClassMealsDates>, var itemClickNavigator: ItemClickNavigator,
+    var context: Context
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
     var selectedItem = 0
@@ -41,10 +43,16 @@ class DateAdapter(
         override fun onBind(position: Int) {
             if (selectedItem == position) {
                 binding.viewDateIndicator.setBackgroundResource(R.drawable.rounded_white_10)
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    binding.tvDatePickerDayWeek.typeface = context.resources.getFont(R.font.sf_ui_display_black)
+                }
             } else {
                 binding.viewDateIndicator.setBackgroundResource(R.drawable.rounded_blue_d2dce8_stroke_97b4d8)
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    binding.tvDatePickerDayWeek.typeface = context.resources.getFont(R.font.sf_ui_display_regular)
+                }
             }
-            binding.date = datesList[position].displayDate
+            binding.viewModel = datesList[position]
 
         }
     }

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="date"
-            type="String" />
+            name="viewModel"
+            type="com.example.kera.meals.model.ClassMealsDates" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
             android:layout_marginTop="@dimen/_3sdp"
             android:fontFamily="@font/sf_ui_display_regular"
             android:gravity="center"
-            android:text="@{date.split(` `)[0]}"
+            android:text="@{viewModel.displayDateDay}"
             android:textColor="#1A2F50"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
@@ -43,7 +43,7 @@
             android:layout_marginBottom="@dimen/_3sdp"
             android:fontFamily="@font/sf_ui_display_regular"
             android:gravity="center"
-            android:text="@{date.split(` `)[1]}"
+            android:text="@{viewModel.displayDateMonth.split(` `)[0]}"
             android:textColor="#1A2F50"
             android:textSize="@dimen/_9ssp"
             android:textStyle="normal"

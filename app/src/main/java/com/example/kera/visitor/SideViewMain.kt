@@ -15,6 +15,7 @@ import com.example.kera.databinding.ActivityRegistration1Binding
 import com.example.kera.databinding.ActivityVisitorMainBinding
 import com.example.kera.navigation.NavigationFragment
 import com.example.kera.registration.screen1.Registration1ViewModel
+import com.example.kera.utils.Constants
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SideViewMain : AppCompatActivity() {
@@ -31,9 +32,18 @@ class SideViewMain : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, R.color.blue_fcfdfd);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+
         var url = this.intent.getStringExtra("SideUrl")
         viewDataBinding.webview.loadUrl(url!!)
+        when(url){
+            Constants.termsLinkApp -> viewDataBinding.textView88.text = resources.getString(R.string.terms_amp_conditions)
+            Constants.aboutLinkApp -> viewDataBinding.textView88.text = resources.getString(R.string.about_kera)
+            Constants.privacyPolicyLinkApp -> viewDataBinding.textView88.text = resources.getString(R.string.privacy_policy)
 
+        }
+        viewDataBinding.constraintLayoutBack.setOnClickListener {
+            finish()
+        }
     }
 
 }

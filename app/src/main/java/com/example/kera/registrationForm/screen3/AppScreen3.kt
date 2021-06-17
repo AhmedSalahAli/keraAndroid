@@ -127,7 +127,7 @@ class AppScreen3 : Fragment() {
                     long = data!!.getFloatExtra("long",0.0f)!!
 
                 viewDataBinding.textView52.text = "("+lat+","+long+")"
-
+                viewDataBinding.textView50.setText(""+CommonUtilsJava.getAddress(requireContext(),lat,long))
                 }
 
             }

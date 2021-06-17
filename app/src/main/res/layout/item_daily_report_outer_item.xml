@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="30dp"
-        app:cardElevation="@dimen/_20sdp"
+        app:cardElevation="@dimen/_12sdp"
         app:cardBackgroundColor="@color/blue_fcfdfd"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
@@ -33,7 +33,7 @@
                 android:id="@+id/txt_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Techer Command"
+                android:text="@{model.teacher.username}"
                 android:layout_marginTop="6dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
@@ -77,14 +77,14 @@
                     android:id="@+id/before_textView_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginStart="8dp"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@{model.dateConverted}"
                     android:drawableStart="@drawable/ic_clock"
                     android:drawablePadding="10dp"
+                    android:fontFamily="@font/sf_ui_display_regular"
+
                     android:textColor="#50C4FF"
-                    android:textSize="@dimen/_8ssp"
-                    android:layout_gravity="center"/>
+                    android:textSize="@dimen/_8ssp" />
 
             </LinearLayout>
 
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/sf_ui_display_regular"
-                android:text="@{model.dateConverted}"
+
                 android:textColor="#1A2F50"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"

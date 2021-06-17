@@ -1,6 +1,7 @@
 package com.example.kera.data.network
 
 import com.example.kera.attendanceHistory.model.AttendanceResponseModel
+import com.example.kera.dailyReport.model.PublishReplay
 import com.example.kera.data.models.*
 import com.example.kera.data.models.meals.ClassMealsResponseModel
 import com.example.kera.data.models.meals.DatesResponseModel
@@ -19,6 +20,7 @@ import com.example.kera.preference.SharedPrefKeys.Companion.ISUSERLOGGEDIN
 import com.example.kera.preference.SharedPrefKeys.Companion.LOGIN_DATA
 import com.example.kera.preference.SharedPrefKeys.Companion.NURSERY_LOGO
 import com.example.kera.preference.SharedPrefKeys.Companion.STUDENTID
+import com.example.kera.preference.SharedPrefKeys.Companion.TEACHER_DATA
 import com.example.kera.preference.SharedPrefKeys.Companion.TOKEN
 import com.example.kera.preference.SharedPrefKeys.Companion.USERTYPE
 import com.example.kera.profile.ProfileUIModel
@@ -32,6 +34,7 @@ import com.example.kera.registrationForm.screen4.model.SumbitFinalForm
 import com.example.kera.teacherDailyReport.model.CreateReportRequestModel
 import com.example.kera.teacherDailyReport.model.PublishReportRequestModel
 import com.example.kera.teacherDailyReport.model.UpdateQuestionRequestModel
+import com.example.kera.teacherProfile.TeacherProfileUIModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -124,7 +127,12 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
     fun saveProfileResponse(profileResponse: ProfileUIModel) {
         sharedPreference.saveString(LOGIN_DATA, Gson().toJson(profileResponse))
     }
-
+    fun saveTeacherResponse(teacherProfileUIModel: TeacherProfileUIModel) {
+        sharedPreference.saveString(TEACHER_DATA, Gson().toJson(teacherProfileUIModel))
+    }
+    fun getTeacherData(): TeacherProfileUIModel {
+        return Gson().fromJson(sharedPreference.getString(TEACHER_DATA), TeacherProfileUIModel::class.java)
+    }
     fun getProfileData(): ProfileUIModel {
         return Gson().fromJson(sharedPreference.getString(LOGIN_DATA), ProfileUIModel::class.java)
     }
@@ -186,6 +194,8 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         service.publishReport("en", 1, requestModel)
     suspend fun publishMedicalReport(requestModel: PublishReportRequestModel) =
         service.publishMedicalReport("en", 1, requestModel)
+    suspend fun publishReplay(requestModel: PublishReplay) =
+        service.publishReplay("en", 1, requestModel)
     suspend fun publishApp1(requestModel: PublishAppStep1Model) =
         service.publishApp1("en", 1, requestModel)
     suspend fun publishApp2(requestModel: PublishAppStep2Model) =
