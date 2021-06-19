@@ -38,7 +38,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="4dp"
             app:cardCornerRadius="5dp"
-            android:elevation="1dp"
             android:layout_marginEnd="10dp"
             app:cardBackgroundColor="@color/white">
             <TextView
@@ -80,7 +79,7 @@
             android:fontFamily="@font/sf_ui_display_regular"
             android:gravity="top"
 
-            android:elevation="@dimen/_5sdp"
+
             android:hint="@string/please_write_your_comment_here"
             android:padding="10dp"
             android:textColor="#1A2F50"
