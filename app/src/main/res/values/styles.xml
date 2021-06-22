@@ -42,6 +42,9 @@
     <style name="BottomCustomCardCorners" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/Bottom_ShapeAppearance_custom_corners</item>
     </style>
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:colorAccent">#0000FF</item>
+    </style>
     <style name="ShapeAppearance_custom_corners" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">0dp</item>

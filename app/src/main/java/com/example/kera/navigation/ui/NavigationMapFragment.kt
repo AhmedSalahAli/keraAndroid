@@ -117,6 +117,7 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
             }
         }
 
+
     }
 
     private fun schoolListObserver() {
@@ -240,6 +241,11 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
         viewModel.getSchoolsLocationList()
         schoolListObserver()
         buildGoogleApiClient()
+        viewDataBinding.BmyLocationCard.setOnClickListener(View.OnClickListener {
+            if (latLng != null) {
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16F))
+            }
+        })
         map.setOnMarkerClickListener(OnMarkerClickListener { marker ->
 
 
@@ -250,6 +256,7 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
             }, 500)
             false
         })
+        setUpMap()
     }
     @Synchronized
     protected fun buildGoogleApiClient() {

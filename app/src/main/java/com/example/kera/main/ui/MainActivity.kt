@@ -1,6 +1,10 @@
 package com.example.kera.main.ui
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -8,14 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.kera.R
+import com.example.kera.app.ForceUpdateChecker
 import com.example.kera.databinding.ActivityMainBinding
-import com.example.kera.home.HomeFragment
 import com.example.kera.navigation.NavigationFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.shape.CornerFamily.ROUNDED
@@ -23,7 +24,7 @@ import com.google.android.material.shape.MaterialShapeDrawable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
+class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpdateChecker.OnUpdateNeededListener, ForceUpdateChecker.onUpatePreferedListner{
     var positionSelected = 2
 
     private val mainViewModel: MainViewModel by viewModel()
@@ -65,9 +66,9 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
         viewDataBinding.floatingActionButton2.setOnClickListener(View.OnClickListener {
-            if (accessType == "visitor"){
+            if (accessType == "visitor") {
                 navController.navigate(R.id.needToLogin)
-            }else{
+            } else {
                 navController.navigate(R.id.homeFragment)
                 viewDataBinding.bottomNavigationView.uncheckAllItems()
             }
@@ -95,7 +96,7 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
                     if (accessType == "user") {
                         navController.navigate(R.id.profileFragment)
 
-                    } else if(accessType=="visitor") {
+                    } else if (accessType == "visitor") {
                         navController.navigate(R.id.needToLogin)
                     } else {
                         navController.navigate(R.id.teacherProfileFragment)
@@ -108,7 +109,9 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
             }
             true
         }
-
+        Log.i("Access Type for remote", accessType)
+        ForceUpdateChecker.with(this).onUpdateNeeded(this).UserType(accessType).check()
+        ForceUpdateChecker.with(this).onUpdatePrefered(this).UserType(accessType).check()
 //        viewDataBinding.floatingActionButton2.setOnClickListener {
 //            viewDataBinding.bottomNavigationView.uncheckAllItems()
 //            navController.navigate(R.id.homeFragment)
@@ -225,5 +228,42 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack {
             menu.getItem(i).isChecked = false
         }
         menu.setGroupCheckable(0, true, true)
+    }
+    private fun redirectStore(updateUrl: String) {
+
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse(updateUrl)
+        startActivity(i)
+    }
+
+    override fun onUpdateNeeded(updateUrl: String?) {
+        val dialog = AlertDialog.Builder(this, 5)
+            .setCancelable(false)
+            .setIcon(R.drawable.kera_box)
+            .setTitle(resources.getString(R.string.Newversionavailable))
+            .setMessage(resources.getString(R.string.Pleaseupdateapptonewversiontocontinuereposting))
+            .setPositiveButton(
+                resources.getString(R.string.Update)
+            ) { dialog, which ->
+                redirectStore(updateUrl!!)
+                finish()
+            }
+        dialog.show()
+    }
+
+    override fun onUpdatePrefered(updateUrl: String?) {
+        val dialog = AlertDialog.Builder(this, 5)
+            .setIcon(R.drawable.kera_box)
+            .setTitle(resources.getString(R.string.Newversionavailable))
+            .setMessage(resources.getString(R.string.Pleaseupdateapptonewversiontocontinuereposting))
+            .setPositiveButton(
+                resources.getString(R.string.Update)
+            ) { dialog, which ->
+                redirectStore(updateUrl!!)
+                finish()
+            }.setNegativeButton(
+                resources.getString(R.string.skip)
+            ) { dialog, which -> dialog.dismiss() }.create()
+        dialog.show()
     }
 }

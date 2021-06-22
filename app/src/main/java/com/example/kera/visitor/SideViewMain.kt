@@ -39,7 +39,7 @@ class SideViewMain : AppCompatActivity() {
             Constants.termsLinkApp -> viewDataBinding.textView88.text = resources.getString(R.string.terms_amp_conditions)
             Constants.aboutLinkApp -> viewDataBinding.textView88.text = resources.getString(R.string.about_kera)
             Constants.privacyPolicyLinkApp -> viewDataBinding.textView88.text = resources.getString(R.string.privacy_policy)
-
+            Constants.moreImages -> viewDataBinding.textView88.text = resources.getString(R.string.event_images)
         }
         viewDataBinding.constraintLayoutBack.setOnClickListener {
             finish()

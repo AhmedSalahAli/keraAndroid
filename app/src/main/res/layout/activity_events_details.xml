@@ -55,6 +55,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+
             >
 
             <com.smarteist.autoimageslider.SliderView
@@ -74,7 +75,22 @@
                 app:sliderIndicatorSelectedColor="#0093DE"
                 app:sliderIndicatorUnselectedColor="#D2DCE8"
                 app:sliderStartAutoCycle="true" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_more_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
 
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#50C4FF"
+                android:clickable="true"
+                app:tint="@color/white"
+                app:elevation="@dimen/_1sdp"
+                app:srcCompat="@drawable/ic_baseline_image_24"
+                android:alpha="0.5"
+                />
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline226"
                 android:layout_width="wrap_content"
@@ -343,6 +359,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView79" />
 
         <FrameLayout
+            android:id="@+id/attend_frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/textView80"

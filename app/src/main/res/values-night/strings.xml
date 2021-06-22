@@ -3,4 +3,8 @@
     <string name="no_data">No data yet</string>
     <string name="start">Start</string>
     <string name="end">End</string>
+    <string name="Update">Update</string>
+    <string name="Newversionavailable">"There is new version available "</string>
+    <string name="Pleaseupdateapptonewversiontocontinuereposting">Please update to new version to get the latest features</string>
+    <string name="event_images">Event Images</string>
 </resources>

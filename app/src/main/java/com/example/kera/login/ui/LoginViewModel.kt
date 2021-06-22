@@ -16,6 +16,7 @@ class LoginViewModel(val appRepo: AppRepo) : ViewModel() {
 
     fun login(fcmToken :String) {
         loginRequestModel.fcmToken = fcmToken
+        loginRequestModel.deviceType = "Android"
         when {
             loginRequestModel.phone.isEmpty() -> {
                 message.value = "please enter your phone number"

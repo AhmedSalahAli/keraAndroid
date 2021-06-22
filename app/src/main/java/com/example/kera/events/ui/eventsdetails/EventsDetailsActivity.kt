@@ -18,6 +18,8 @@ import com.example.kera.events.adapter.ChildrenAdapter
 import com.example.kera.events.model.EventDetailsResponseModel
 import com.example.kera.schoolDetails.adapter.ImagesAdapter
 import com.example.kera.teacherDailyReport.adapter.ClassesListAdapter
+import com.example.kera.utils.Constants
+import com.example.kera.visitor.SideViewMain
 import com.smarteist.autoimageslider.SliderAnimations
 import com.stfalcon.frescoimageviewer.ImageViewer
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -65,6 +67,7 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
             viewDataBinding.adapter!!.notifyDataSetChanged()
             lat = it.latitude?.value!!
             long = it.longitude?.value!!
+            Constants.moreImages = it.imagesLink?.value!!
             viewDataBinding.veilLayout.unVeil()
         }
 
@@ -105,6 +108,11 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
         viewDataBinding.imageView47.setOnClickListener {
             finish()
         }
+        viewDataBinding.btnMorePhoto.setOnClickListener(View.OnClickListener {
+            var intent = Intent(this, SideViewMain::class.java)
+            intent.putExtra("SideUrl", Constants.moreImages)
+            startActivity(intent)
+        })
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {

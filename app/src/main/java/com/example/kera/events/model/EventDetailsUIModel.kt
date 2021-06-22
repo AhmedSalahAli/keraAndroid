@@ -18,6 +18,7 @@ class EventDetailsUIModel
     var fromTime: MutableLiveData<String>?,
     var toTime: MutableLiveData<String>?,
     var _id: MutableLiveData<String>?,
+    var imagesLink: MutableLiveData<String>?,
     var students: ArrayList<EventDetailsResponseModel.DataBean.StudentData>??,
 
     ) {
@@ -38,6 +39,7 @@ class EventDetailsUIModel
                     MutableLiveData(response.fromTime),
                     MutableLiveData(response.toTime),
                     MutableLiveData(response._id),
+                    MutableLiveData(response.imagesLink),
                     response?.students?.map {
                         it
                     } as ArrayList,

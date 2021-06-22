@@ -45,7 +45,8 @@ class EventDetailsResponseModel {
 
         @SerializedName("_id")
         var _id: String? = null
-
+        @SerializedName("imagesLink")
+        var imagesLink: String? = null
         @SerializedName("students")
         var students: List<StudentData>? = null
 

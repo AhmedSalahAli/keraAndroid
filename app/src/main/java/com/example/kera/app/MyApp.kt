@@ -1,13 +1,22 @@
 package com.example.kera.app
 
 import android.app.Application
+import android.util.Log
+import com.example.kera.R
+import com.google.firebase.FirebaseApp
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import io.alterac.blurkit.BlurKit
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class MyApp : Application() {
+    private val TAG: String = MyApp::class.java.simpleName
 
     companion object {
         lateinit var application: MyApp
@@ -25,6 +34,37 @@ class MyApp : Application() {
             modules(
                 modules
             )
+        }
+        initFirebaseRemoteConfig()
+
+    }
+    private fun initFirebaseRemoteConfig() {
+        FirebaseApp.initializeApp(this)
+        FirebaseRemoteConfig.getInstance().apply {
+            //set this during development
+            val configSettings = FirebaseRemoteConfigSettings.Builder()
+                .setMinimumFetchIntervalInSeconds(0)
+                .build()
+            setConfigSettingsAsync(configSettings)
+            //set this during development
+
+            // set in-app defaults
+            val remoteConfigDefaults: MutableMap<String?, Any?> = HashMap<String?, Any?>()
+            remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_REQUIRED] = false
+            remoteConfigDefaults[ForceUpdateChecker.KEY_NORMAL_UPDATE_REQUIRED] = false
+            remoteConfigDefaults[ForceUpdateChecker.KEY_CURRENT_VERSION] = "1.0.0"
+            remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_URL] =
+                "https://drive.google.com/file/d/1yhBp9RIbK8yh5ivtoJWGtLrDCfo2sXkR/view?usp=sharing"
+            setDefaultsAsync(remoteConfigDefaults)
+            fetchAndActivate().addOnCompleteListener { task ->
+                val updated = task.result
+                if (task.isSuccessful) {
+                    val updated = task.result
+                    Log.d(TAG, "Config params updated: $updated")
+                } else {
+                    Log.d(TAG, "Config params updated not success: $updated")
+                }
+            }
         }
 
     }
