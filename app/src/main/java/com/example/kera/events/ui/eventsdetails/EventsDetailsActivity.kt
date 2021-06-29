@@ -7,6 +7,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -109,9 +110,17 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
             finish()
         }
         viewDataBinding.btnMorePhoto.setOnClickListener(View.OnClickListener {
-            var intent = Intent(this, SideViewMain::class.java)
-            intent.putExtra("SideUrl", Constants.moreImages)
-            startActivity(intent)
+           if(!Constants.moreImages.isNullOrEmpty()&&Constants.moreImages !=""){
+               val i = Intent(Intent.ACTION_VIEW)
+               i.data = Uri.parse(Constants.moreImages)
+               startActivity(i)
+           }else{
+               Toast.makeText(
+                   this, resources.getString(R.string.no_more_images),
+                   Toast.LENGTH_LONG
+               ).show();
+           }
+
         })
     }
 

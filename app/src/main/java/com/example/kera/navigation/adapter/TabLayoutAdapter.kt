@@ -4,6 +4,8 @@ package com.example.kera.navigation.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.kera.navigation.ui.MapFragment
+import com.example.kera.navigation.ui.MapsFragment
 import com.example.kera.navigation.ui.NavigationMapFragment
 import com.example.kera.schoolsList.SchoolsListFragment
 
@@ -20,7 +22,7 @@ class TabLayoutAdapter(
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
-                return  NavigationMapFragment()
+                return  MapFragment()
             }
             1 -> {
                 return SchoolsListFragment()

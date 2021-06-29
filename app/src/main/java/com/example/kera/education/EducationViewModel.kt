@@ -17,15 +17,23 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
     var monthAndYearTitleLiveData = MutableLiveData<String>()
     private var calendarDate: String? = null
     var message = MutableLiveData<String>()
+    var apiError = MutableLiveData<Boolean>()
+    var apiErrorDates = MutableLiveData<Boolean>()
     var selectedUser = MutableLiveData<StudentsData>()
     var profileUIModel = MutableLiveData<ProfileUIModel>()
     val language = "en"
     val version = 1
     fun getEducationList(classID: String, date: String) {
         viewModelScope.launch {
-            val response = appRepo.getEducationList(classID, date, language, version)
-            educationList.value =
-                EducationListItemModel.convertResponseModelToUIModel(response.data)
+
+            try {
+                val response = appRepo.getEducationList(classID, date, language, version)
+                educationList.value =
+                    EducationListItemModel.convertResponseModelToUIModel(response.data)
+            } catch (e: Exception) {
+                message.value = e.toString()
+                apiError.value = true
+            }
         }
     }
 
@@ -34,8 +42,11 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
             try {
                 val response = appRepo.getEducationDates(classID)
                 datesListLiveData.value = ClassMealsDates.convertDate(response.data!!)
+
             } catch (e: Exception) {
                 message.value = e.toString()
+                apiError.value = true
+                apiErrorDates.value = true
             }
         }
     }
@@ -64,6 +75,7 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getProfileData("en", 1, "user")
                 profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
             } catch (e: Exception) {
+                apiError.value = true
                 message.value = e.toString()
             }
         }

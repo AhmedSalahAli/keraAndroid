@@ -115,5 +115,7 @@ dependencies {
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     implementation 'jp.wasabeef:blurry:4.0.0'
     implementation 'com.google.firebase:firebase-config:21.0.0'
-
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    // location
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 }

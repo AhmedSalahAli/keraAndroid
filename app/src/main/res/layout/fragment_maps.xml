@@ -2,27 +2,26 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".navigation.ui.MapsFragment">
+    tools:context=".navigation.ui.NavigationMapFragment">
 
     <data>
         <variable
             name="viewModel"
             type="com.example.kera.navigation.ui.NavigationMapViewModel" />
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <fragment
-            android:id="@+id/googleMap"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="100dp"
-            android:paddingTop="150dp"
-            android:clipToPadding="false"
-          />
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/map"
+    tools:context=".navigation.ui.MapsFragment"
+    android:paddingBottom="100dp"
+    android:paddingTop="150dp"
+    android:clipToPadding="false"
+    android:name="com.google.android.gms.maps.SupportMapFragment"/>
         <androidx.cardview.widget.CardView
             android:id="@+id/BmyLocationCard"
             android:layout_width="45dp"
@@ -31,14 +30,10 @@
             android:clickable="true"
             app:cardCornerRadius="15dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="240dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-
-
-
-
             >
             <ImageView
                 android:id="@+id/BmyLocation"
@@ -51,7 +46,5 @@
                 android:src="@drawable/ic_baseline_my_location_24"
                 />
         </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </layout>

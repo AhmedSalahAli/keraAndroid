@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -14,9 +15,12 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import com.example.kera.R
+import com.example.kera.app.ForceUpdateChecker
 import com.example.kera.databinding.ActivitySplashBinding
 import com.example.kera.login.ui.LoginActivity
 import com.example.kera.main.ui.MainActivity
+import com.example.kera.utils.Configurations
+import com.example.kera.utils.Configurations.Companion.API_PATH
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig
@@ -27,13 +31,15 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParamsListner {
 
     private val splashViewModel: SplashViewModel by viewModel()
     lateinit var viewDataBinding: ActivitySplashBinding
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ForceUpdateChecker.with(this).onCheckConfigParams(this).config()
+
         val config: ImagePipelineConfig = ImagePipelineConfig.newBuilder(this)
             .setProgressiveJpegConfig(SimpleProgressiveJpegConfig())
             .setResizeAndRotateEnabledForNetwork(true)
@@ -109,5 +115,13 @@ class SplashActivity : AppCompatActivity() {
     override fun onStop() {
         viewDataBinding.blurLayout.pauseBlur()
         super.onStop()
+    }
+
+    override fun onCheckConfigParams(BaseUrl: String?) {
+        if (BaseUrl != null) {
+            Configurations.BASE_URL = BaseUrl+API_PATH
+            Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
+        }
+        Log.i("BaseUrl","reach listner")
     }
 }

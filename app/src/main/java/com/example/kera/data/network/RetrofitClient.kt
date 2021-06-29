@@ -1,5 +1,6 @@
 package com.example.kera.data.network
 
+import com.example.kera.utils.Configurations.Companion.BASE_URL
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -21,7 +22,7 @@ class RetrofitClient(val token: String?) {
 
     fun getService(): ApiService {
         return Retrofit.Builder().client(client)
-            .baseUrl("https://kera-app.herokuapp.com/api/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build().create(ApiService::class.java)
     }

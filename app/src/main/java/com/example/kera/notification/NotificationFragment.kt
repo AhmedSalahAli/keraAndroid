@@ -4,35 +4,40 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.AbsListView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.kera.R
 import com.example.kera.dailyReport.ui.DailyReportActivity
 import com.example.kera.databinding.NotificationFragmentBinding
 import com.example.kera.medical.MedicalReportActivity
 import com.example.kera.notification.adapter.NotificationsListAdapter
+import com.example.kera.notification.adapter.PaginationListener
+import com.example.kera.notification.adapter.PaginationListener.PAGE_START
+import com.example.kera.notification.adapter.PostRecyclerAdapter
 import com.example.kera.notification.model.NotificationItemUIModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NotificationFragment : Fragment(), NotificationsListAdapter.CallBack {
+
+class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRefreshLayout.OnRefreshListener{
 
     lateinit var viewDataBinding: NotificationFragmentBinding
     val viewModel: NotificationViewModel by viewModel()
-    var isScrolling: Boolean = false
-    var currentItems: Int = 0
-    var totalItems: Int = 0
-    var scrollOutItems: Int = 0
+
     var page = 1
-    var totalNumberOfPages: Int = 1
+
     lateinit var manager: LinearLayoutManager
     var notificationList = ArrayList<NotificationItemUIModel.NotificationModel>()
-
+    private var adapter: PostRecyclerAdapter? = null
+    private var currentPage: Int = PAGE_START
+    private var isLastPage = false
+    private var totalPage = 10
+    private var isLoading = false
+    var itemCount = 0
     companion object {
         fun newInstance() = NotificationFragment()
     }
@@ -58,72 +63,149 @@ class NotificationFragment : Fragment(), NotificationsListAdapter.CallBack {
         window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
-        viewModel.getNotifications(page)
+        viewModel.getNotifications(currentPage)
+       viewDataBinding. swipeRefresh.setOnRefreshListener(this)
+        val layoutManager = LinearLayoutManager(requireContext())
 
-        viewDataBinding.adapter = NotificationsListAdapter(ArrayList(), this)
+        adapter = PostRecyclerAdapter(ArrayList(), requireContext(),this)
+        viewDataBinding.adapter =  PostRecyclerAdapter(ArrayList(), requireContext(),this)
 
-        viewDataBinding.recyclerNotifications.setAdapter(viewDataBinding.adapter) // sets your own adapter
+        viewDataBinding.recyclerNotifications.setAdapter(adapter) // sets your own adapter
         viewDataBinding.recyclerNotifications.setLayoutManager(
-            LinearLayoutManager(requireContext(),
-                LinearLayoutManager.VERTICAL,false)
-        ) // sets LayoutManager
+            LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL, false
+            )
+        )
+        viewDataBinding.recyclerNotifications.getRecyclerView().setHasFixedSize(true)
+
         viewDataBinding.recyclerNotifications.addVeiledItems(15)
-        viewDataBinding.recyclerNotifications.getRecyclerView().setPadding(0,100,0,1000)
+        viewDataBinding.recyclerNotifications.getRecyclerView().setPadding(0, 100, 0, 200)
         viewDataBinding.recyclerNotifications .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerNotifications.getVeiledRecyclerView().setPadding(0,100,0,1000)
+        viewDataBinding.recyclerNotifications.getVeiledRecyclerView().setPadding(0, 100, 0, 200)
         viewDataBinding.recyclerNotifications .getVeiledRecyclerView().clipToPadding = false
         viewDataBinding.recyclerNotifications.veil()
         manager = LinearLayoutManager(requireContext())
-        viewDataBinding.recyclerNotifications.setLayoutManager(manager)
+        viewDataBinding.recyclerNotifications.setLayoutManager(layoutManager)
+
 
         viewDataBinding.recyclerNotifications.getRecyclerView().addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    isScrolling = true
-                }
+            PaginationListener(
+                layoutManager
+            ) {
+            override fun loadMoreItems() {
+
+                this@NotificationFragment.isLoading = true;
+                currentPage++;
+                viewModel.getNotifications(currentPage)
             }
 
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                currentItems = manager.childCount
-                totalItems = manager.itemCount
-                scrollOutItems = manager.findFirstVisibleItemPosition()
-                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
-                    isScrolling = false
-                    if (page < totalNumberOfPages) {
-                        page += 1
-//                        mProgressDialog =
-//                            CommonUtils.showLoadingDialog(
-//                                this@TeacherMedicalReportActivity,
-//                                R.layout.progress_dialog
-//                            )
-                        Log.e("number of pages", totalNumberOfPages.toString())
-                        Log.e("page = ", page.toString())
-                        viewModel.getNotifications(page)
-                    }
-                }
+            override fun isLastPage(): Boolean {
+                return this@NotificationFragment.isLastPage;
             }
+
+            override fun isLoading(): Boolean {
+                return this@NotificationFragment.isLoading;
+            }
+
+
         })
+
+//        viewDataBinding.recyclerNotifications.getRecyclerView().addOnScrollListener(object :
+//            RecyclerView.OnScrollListener() {
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+//                    isScrolling = true
+//                }
+//            }
+//
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//                currentItems = manager.childCount
+//                totalItems = manager.itemCount
+//                scrollOutItems = manager.findFirstVisibleItemPosition()
+//                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
+//                    isScrolling = false
+//                    if (page < totalNumberOfPages) {
+//                        page += 1
+//
+//
+//
+//
+//                        viewModel.getNotifications(page)
+//
+//
+//                    }
+//                }
+//            }
+//        })
         viewModel.notificationsList.observe(viewLifecycleOwner, {
             viewDataBinding.recyclerNotifications.unVeil()
 
-            totalNumberOfPages = it.pages
-            notificationList.addAll(it.notifications)
-            viewDataBinding.adapter!!.notifications = notificationList
-            viewDataBinding.adapter!!.notifyDataSetChanged()
-            if (notificationList.size == 0){
+            var items: ArrayList<NotificationItemUIModel.NotificationModel> = ArrayList()
+            totalPage = it.pages
+
+            for (tt in it.notifications) {
+                itemCount++
+
+                items.add(tt)
+            }
+            /**
+             * manage progress view
+             */
+            /**
+             * manage progress view
+             */
+            /**
+             * manage progress view
+             */
+            /**
+             * manage progress view
+             */
+
+            if (currentPage !== PAGE_START) adapter!!.removeLoading()
+            adapter!!.addItems(items)
+
+            viewDataBinding.swipeRefresh.isRefreshing = false
+            // check weather is last page or not
+            if (currentPage < totalPage) {
+                adapter!!.addLoading()
+            } else {
+                isLastPage = true
+            }
+            isLoading = false
+            Log.e("items Count L ",""+ adapter!!.items.size)
+            if (adapter!!.items.size == 0) {
                 showNoData()
-            }else{
+            } else {
                 hideNoData()
             }
+
+
+//            viewDataBinding.adapter!!.notifyItemInserted(notificationList.size - 1);
+//            totalNumberOfPages = it.pages
+//
+//            for (notification in it.notifications) {
+//                notificationList.add(notification)
+//                if (it.notifications.size != notificationList.size) {
+//                    viewDataBinding.adapter!!.notifyDataSetChanged()
+//                }
+//
+//            }
+//
+//            // viewDataBinding.adapter!!.notifyDataSetChanged()
+//            if (notificationList.size == 0) {
+//                showNoData()
+//            } else {
+//                hideNoData()
+//            }
         })
         messageObserver()
         viewModel.logo.observe(viewLifecycleOwner, Observer {
-            if (it == "visitor"){
+            if (it == "visitor") {
                 viewDataBinding.imageView26.setImageResource(R.drawable.kera_box)
-            }else{
+            } else {
                 Glide.with(this).load(it).into(viewDataBinding.imageView26)
 
             }
@@ -157,5 +239,15 @@ class NotificationFragment : Fragment(), NotificationsListAdapter.CallBack {
     private fun hideNoData() {
         viewDataBinding.recyclerNotifications.visibility = View.VISIBLE
         viewDataBinding.relNoNotifications.visibility = View.GONE
+    }
+
+
+    override fun onRefresh() {
+        itemCount = 0;
+        currentPage = PAGE_START;
+        isLastPage = false;
+        adapter!!.clear();
+        viewDataBinding.recyclerNotifications.veil()
+        viewModel.getNotifications(currentPage)
     }
 }

@@ -117,7 +117,6 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
             }
         }
 
-
     }
 
     private fun schoolListObserver() {
@@ -241,11 +240,6 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
         viewModel.getSchoolsLocationList()
         schoolListObserver()
         buildGoogleApiClient()
-        viewDataBinding.BmyLocationCard.setOnClickListener(View.OnClickListener {
-            if (latLng != null) {
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16F))
-            }
-        })
         map.setOnMarkerClickListener(OnMarkerClickListener { marker ->
 
 
@@ -256,7 +250,6 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
             }, 500)
             false
         })
-        setUpMap()
     }
     @Synchronized
     protected fun buildGoogleApiClient() {
@@ -363,6 +356,7 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
             val status = result.status
             when (status.statusCode) {
                 LocationSettingsStatusCodes.SUCCESS -> {
+                    startLocationUpdates()
                 }
                 LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
                     // Location settings are not satisfied. But could be fixed by showing the user
@@ -531,7 +525,7 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onMarkerClick(p0: Marker?) = false
     override fun onConnected(p0: Bundle?) {
         createLocationRequest()
-       // Toast.makeText(requireContext(), "coneected", Toast.LENGTH_LONG).show()
+        // Toast.makeText(requireContext(), "coneected", Toast.LENGTH_LONG).show()
     }
 
     override fun onConnectionSuspended(p0: Int) {
@@ -540,11 +534,11 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onConnectionFailed(p0: ConnectionResult) {
 
-      //Toast.makeText(requireContext(), "faild", Toast.LENGTH_LONG).show()
+        //Toast.makeText(requireContext(), "faild", Toast.LENGTH_LONG).show()
     }
 
     override fun onLocationChanged(p0: Location) {
-       // Toast.makeText(requireContext(), "detected", Toast.LENGTH_LONG).show()
+        // Toast.makeText(requireContext(), "detected", Toast.LENGTH_LONG).show()
     }
 
 }

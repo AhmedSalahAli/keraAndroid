@@ -1,8 +1,10 @@
 package com.example.kera.splash.ui
 
+import android.content.Context
 import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.kera.app.ForceUpdateChecker
 import com.example.kera.data.network.AppRepo
 
 class SplashViewModel(val appRepo: AppRepo) : ViewModel() {
@@ -27,6 +29,9 @@ class SplashViewModel(val appRepo: AppRepo) : ViewModel() {
         timer.start()
     }
 
+    fun getAppConfig(context: Context){
+
+    }
      fun getIsUserLoggedIn() {
         appRepo.getIsUserLoggedIn().let {
             isAuthorized.value = it

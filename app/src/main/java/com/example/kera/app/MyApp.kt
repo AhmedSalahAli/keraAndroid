@@ -3,6 +3,8 @@ package com.example.kera.app
 import android.app.Application
 import android.util.Log
 import com.example.kera.R
+import com.example.kera.utils.Configurations
+import com.example.kera.utils.Configurations.Companion.API_PATH
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -15,7 +17,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class MyApp : Application() {
+class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
     private val TAG: String = MyApp::class.java.simpleName
 
     companion object {
@@ -25,6 +27,8 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         application = this
+        ForceUpdateChecker.with(this).onCheckConfigParams(this).config()
+
         BlurKit.init(this);
         startKoin {
             androidLogger(Level.DEBUG)
@@ -55,6 +59,8 @@ class MyApp : Application() {
             remoteConfigDefaults[ForceUpdateChecker.KEY_CURRENT_VERSION] = "1.0.0"
             remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_URL] =
                 "https://drive.google.com/file/d/1yhBp9RIbK8yh5ivtoJWGtLrDCfo2sXkR/view?usp=sharing"
+            remoteConfigDefaults[ForceUpdateChecker.prod_base_url] =
+                "https://kera-test-app.herokuapp.com/"
             setDefaultsAsync(remoteConfigDefaults)
             fetchAndActivate().addOnCompleteListener { task ->
                 val updated = task.result
@@ -67,5 +73,12 @@ class MyApp : Application() {
             }
         }
 
+    }
+    override fun onCheckConfigParams(BaseUrl: String?) {
+        if (BaseUrl != null) {
+            Configurations.BASE_URL = BaseUrl+API_PATH
+            Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
+        }
+        Log.i("BaseUrl","reach listner")
     }
 }

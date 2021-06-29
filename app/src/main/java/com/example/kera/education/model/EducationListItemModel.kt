@@ -7,9 +7,7 @@ class EducationListItemModel(
     var title: String? = "",
     var date: String? = "",
     var description: String? = "",
-    var image1: String? = "",
-    var image2: String? = "",
-    var image3: String? = "",
+
     var images:ArrayList<String>
 ) {
     companion object {
@@ -19,9 +17,7 @@ class EducationListItemModel(
                     it.title,
                     CommonUtils.convertTimeStampToDate_EEEE_MMM_MM(it.date!!),
                     it.shortDescription,
-                    it.images?.get(0),
-                    it.images?.get(1),
-                    it.images?.get(2),
+
                     it.images!!.map {
                         it
                     } as ArrayList,

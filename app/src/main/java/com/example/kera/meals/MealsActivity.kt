@@ -63,7 +63,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         viewDataBinding.recyclerMeals.veil()
 
         if (accessType == "teacher") {
-            viewModel.getDates("5fc2270ce4441941bbf5bcfd")
+            viewModel.getDates(viewModel.getTeacheerProfile().classNumber!!)
             viewDataBinding.imageViewExchange.visibility = View.GONE
             viewDataBinding.imageViewProfile.visibility = View.GONE
 
@@ -104,28 +104,46 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
 
             }
         })
+        viewModel.apiError.observe(this, {
+            viewDataBinding.recyclerMeals.unVeil()
+            showNoData()
+            viewDataBinding.datesAdapter!!.datesList.clear()
+            viewDataBinding.datesAdapter!!.notifyDataSetChanged()
+        })
+        viewModel.apiErrorDates.observe(this, {
+            viewDataBinding.veilLayout.unVeil()
+            viewDataBinding.datesAdapter!!.datesList.clear()
+            viewDataBinding.datesAdapter!!.notifyDataSetChanged()
+        })
 
         viewModel.datesListLiveData.observe(this, {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
-            viewDataBinding.datesAdapter!!.datesList = it
-            viewDataBinding.datesAdapter!!.notifyDataSetChanged()
+            if (it.size > 0 ){
+                viewDataBinding.datesAdapter!!.datesList = it
 
 
-            if (accessType == "teacher") {
-                viewModel.getDates("5fc2270ce4441941bbf5bcfd")
-                viewModel.getMeals("5fc2270ce4441941bbf5bcfd", it[0].actualDate)
-            } else {
-                viewModel.getMeals(
-                    viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
-                    it[0].actualDate
-                )
-            }
-            actualeDate=it[0].actualDate
+
+                if (accessType == "teacher") {
+
+                    viewModel.getMeals(viewModel.getTeacheerProfile().classNumber!!, it[0].actualDate)
+                } else {
+                    viewModel.getMeals(
+                        viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
+                        it[0].actualDate
+                    )
+                }
+                actualeDate=it[0].actualDate
 //            viewModel.getMeals(
 //                viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
 //                it[0].actualDate
 //            )
+            }else{
+                showNoData()
+                viewDataBinding.datesAdapter!!.datesList.clear()
+            }
+
+            viewDataBinding.datesAdapter!!.notifyDataSetChanged()
         })
 
         viewModel.mealsList.observe(this, {
@@ -180,7 +198,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
       //  mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
         viewDataBinding.recyclerMeals.veil()
         if (accessType == "teacher") {
-            viewModel.getMeals("5fc2270ce4441941bbf5bcfd", date)
+            viewModel.getMeals(viewModel.getTeacheerProfile().classNumber!!, date)
         } else {
             viewModel.getMeals(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, date)
         }
@@ -215,13 +233,22 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         viewModel.selectedUser.value!!.studentCode = "Code:" + student.studentCode
         viewModel.selectedUser.value!!.className = "Class:" + student.className
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-        viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
+//        viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
+//        if (accessType == "teacher") {
+//            viewModel.getMeals(viewModel.getTeacheerProfile().classNumber!!, actualeDate)
+//        } else {
+//            viewModel.getMeals(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, actualeDate)
+//        }
         if (accessType == "teacher") {
-            viewModel.getMeals("5fc2270ce4441941bbf5bcfd", actualeDate)
+            viewModel.getDates(viewModel.getTeacheerProfile().classNumber!!)
+            viewDataBinding.imageViewExchange.visibility = View.GONE
+            viewDataBinding.imageViewProfile.visibility = View.GONE
         } else {
-            viewModel.getMeals(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, actualeDate)
+            viewModel.getDates(viewModel.getSelectedChildDataFromSharedPref()?.classId!!)
+            viewModel.getProfileData()
+            viewDataBinding.imageViewExchange.visibility = View.VISIBLE
+            viewDataBinding.imageViewProfile.visibility = View.VISIBLE
         }
-
 
     }
     private fun showNoData() {

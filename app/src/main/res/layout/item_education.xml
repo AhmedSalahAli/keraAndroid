@@ -118,12 +118,13 @@
             app:layout_constraintTop_toBottomOf="@+id/textView95">
 
             <ImageView
+                android:id="@+id/img_edu_1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-
-                app:image="@{model.image1}" />
+                android:src="@drawable/upload_pic"
+             />
         </com.example.kera.utils.RoundCornerLayout>
 
         <com.example.kera.utils.RoundCornerLayout
@@ -139,12 +140,14 @@
             app:layout_constraintTop_toTopOf="@+id/roundCornerLayout6">
 
             <ImageView
+                android:id="@+id/img_edu_2"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center"
-
-                app:image="@{model.image2}" />
+                android:src="@drawable/upload_pic"
+                />
         </com.example.kera.utils.RoundCornerLayout>
 
         <com.example.kera.utils.RoundCornerLayout
@@ -160,12 +163,14 @@
             app:layout_constraintTop_toTopOf="@+id/roundCornerLayout7">
 
             <ImageView
+                android:id="@+id/img_edu_3"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center"
-
-                app:image="@{model.image3}" />
+                android:src="@drawable/upload_pic"
+              />
         </com.example.kera.utils.RoundCornerLayout>
 
 

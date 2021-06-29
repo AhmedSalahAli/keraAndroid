@@ -8,6 +8,7 @@ import com.example.kera.meals.model.ClassMealsDates
 import com.example.kera.meals.model.MealsItemUIModel
 import com.example.kera.profile.ProfileUIModel
 import com.example.kera.profile.StudentsData
+import com.example.kera.teacherProfile.TeacherProfileUIModel
 import kotlinx.coroutines.launch
 
 class MealsViewModel(val appRepo: AppRepo) : ViewModel() {
@@ -20,7 +21,8 @@ class MealsViewModel(val appRepo: AppRepo) : ViewModel() {
     var message = MutableLiveData<String>()
     var selectedUser = MutableLiveData<StudentsData>()
     var profileUIModel = MutableLiveData<ProfileUIModel>()
-
+    var apiError = MutableLiveData<Boolean>()
+    var apiErrorDates = MutableLiveData<Boolean>()
     fun getDates(classID: String) {
         viewModelScope.launch {
             try {
@@ -28,6 +30,8 @@ class MealsViewModel(val appRepo: AppRepo) : ViewModel() {
                 datesListLiveData.value = ClassMealsDates.convertDate(response.data!!)
             } catch (e: Exception) {
                 message.value = e.toString()
+                apiError.value = true
+                apiErrorDates.value = true
             }
         }
     }
@@ -38,6 +42,7 @@ class MealsViewModel(val appRepo: AppRepo) : ViewModel() {
                 profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
             } catch (e: Exception) {
                 message.value = e.toString()
+                apiError.value = true
             }
         }
     }
@@ -49,11 +54,14 @@ class MealsViewModel(val appRepo: AppRepo) : ViewModel() {
                     MealsItemUIModel.convertResponseModelToUIModel(response.data?.Meals)
             } catch (e: Exception) {
                 message.value = e.toString()
+                apiError.value = true
             }
         }
     }
 
-
+    fun getTeacheerProfile(): TeacherProfileUIModel {
+        return appRepo.getTeacherData()
+    }
     fun getSelectedChildDataFromSharedPref(): StudentsData? {
         var response = appRepo.getSelectedChildData()
         selectedUser.value = response!!

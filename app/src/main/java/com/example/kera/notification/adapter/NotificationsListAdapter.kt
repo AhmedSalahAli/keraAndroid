@@ -1,16 +1,20 @@
 package com.example.kera.notification.adapter
 
+import android.R
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kera.databinding.ItemNotificationBinding
-import com.example.kera.notification.NotificationUIModel
 import com.example.kera.notification.model.NotificationItemUIModel
-import com.example.kera.schoolsList.adapter.SchoolListAdapter
 import com.example.kera.utils.BaseViewHolder
 
+
 class NotificationsListAdapter(
-    var notifications: List<NotificationItemUIModel.NotificationModel>, var callBack: NotificationsListAdapter.CallBack
+    var notifications: List<NotificationItemUIModel.NotificationModel>,
+    var callBack: NotificationsListAdapter.CallBack,var context: Context
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
 
@@ -28,6 +32,18 @@ class NotificationsListAdapter(
         holder.onBind(position)
         holder.itemView.setOnClickListener { callBack.onItemClicked(notifications[position].notificationType) }
 
+//        val animation: Animation =
+//            AnimationUtils.loadAnimation(context, R.anim.slide_in_left)
+//        animation.startOffset = (position * 100).toLong()
+//        holder.itemView.startAnimation(animation)
+//                    if (context!=null){
+//                        holder.itemView.setAnimation(
+//                    AnimationUtils.loadAnimation(
+//                        context,
+//                        R.anim.slide_in_left
+//                    )
+//                )
+//            }
     }
 
     override fun getItemCount(): Int {
@@ -46,5 +62,7 @@ class NotificationsListAdapter(
         fun onItemClicked(
             notificationType: String?
         )
+
+
     }
 }

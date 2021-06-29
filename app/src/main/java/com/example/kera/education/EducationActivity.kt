@@ -2,6 +2,7 @@ package com.example.kera.education
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -22,6 +23,7 @@ import com.example.kera.profile.adapter.ChildrenAdapter
 import com.example.kera.utils.CommonUtils
 import com.stfalcon.frescoimageviewer.ImageViewer
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.log
 
 class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,EducationListAdapter.CallBack,ChildrenAdapter.CallBack{
 
@@ -102,33 +104,55 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.recyclerEducation.unVeil()
 
-            viewDataBinding.listAdapter = EducationListAdapter(it,this)
+            viewDataBinding.listAdapter = EducationListAdapter(it,this,this)
             viewDataBinding.listAdapter!!.notifyDataSetChanged()
             if (it.size == 0){
                 showNoData()
+
             }else{
                 hideNoData()
+                Log.i("ed123","More than 0 ")
             }
         })
+        viewModel.apiError.observe(this, {
+            viewDataBinding.recyclerEducation.unVeil()
+            showNoData()
+            viewDataBinding.datesAdapter!!.datesList.clear()
+            viewDataBinding.datesAdapter!!.notifyDataSetChanged()
+        })
+        viewModel.apiErrorDates.observe(this, {
+            viewDataBinding.veilLayout.unVeil()
+            viewDataBinding.datesAdapter!!.datesList.clear()
+            viewDataBinding.datesAdapter!!.notifyDataSetChanged()
+        })
+
 
         viewModel.datesListLiveData.observe(this, {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
+            if (it.size >0){
+                viewDataBinding.datesAdapter!!.datesList = it
 
-            viewDataBinding.datesAdapter!!.datesList = it
-            if (accessType == "teacher") {
-                viewModel.getEducationList(viewModel.getTeacheerProfile().classNumber!!, it[0].actualDate)
-            } else {
-                viewModel.getEducationList(
-                    viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
-                    it[0].actualDate
-                )
-            }
-            actualeDate=it[0].actualDate
+                Log.i("ed1234","DateObserve")
+                if (accessType == "teacher") {
+                    viewModel.getEducationList(viewModel.getTeacheerProfile().classNumber!!, it[0].actualDate)
+                } else {
+                    viewModel.getEducationList(
+                        viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
+                        it[0].actualDate
+                    )
+                }
+                actualeDate=it[0].actualDate
 //            viewModel.getEducationList(
 //                viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
 //                it[0].actualDate
 //            )
+            }else{
+                showNoData()
+                viewDataBinding.datesAdapter!!.datesList.clear()
+
+            }
+
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
 
         })
@@ -217,10 +241,30 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
         viewModel.selectedUser.value!!.className = "Class:" + student.className
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
         viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
+//        if (accessType == "teacher") {
+//
+//            viewModel.getDates(viewModel.getTeacheerProfile().classNumber!!)
+//            viewDataBinding.imageViewExchange.visibility = View.GONE
+//            viewDataBinding.imageViewProfile.visibility = View.GONE
+//           // viewModel.getEducationList(viewModel.selectedUser.value!!.studentCode!!, "")
+//        } else {
+//
+//            viewModel.getDates(viewModel.selectedUser.value!!.className!!)
+//
+//            viewDataBinding.imageViewExchange.visibility = View.VISIBLE
+//            viewDataBinding.imageViewProfile.visibility = View.VISIBLE
+//            //viewModel.getEducationList(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, "")
+//        }
+
         if (accessType == "teacher") {
-            viewModel.getEducationList(viewModel.getTeacheerProfile().classNumber!!, actualeDate)
+            viewModel.getDates(viewModel.getTeacheerProfile().classNumber!!)
+            viewDataBinding.imageViewExchange.visibility = View.GONE
+            viewDataBinding.imageViewProfile.visibility = View.GONE
         } else {
-            viewModel.getEducationList(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, actualeDate)
+            viewModel.getDates(viewModel.getSelectedChildDataFromSharedPref()?.classId!!)
+            viewModel.getProfileData()
+            viewDataBinding.imageViewExchange.visibility = View.VISIBLE
+            viewDataBinding.imageViewProfile.visibility = View.VISIBLE
         }
     }
     private fun showNoData() {

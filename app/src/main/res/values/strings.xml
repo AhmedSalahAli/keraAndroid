@@ -132,5 +132,7 @@
     <string name="Newversionavailable">"There is new version available "</string>
     <string name="Pleaseupdateapptonewversiontocontinuereposting">Please update to new version to get the latest features</string>
     <string name="event_images">Event Images</string>
+    <string name="location_updated">Location  Updates</string>
+    <string name="no_more_images">Sorry there is no more images</string>
 
 </resources>
