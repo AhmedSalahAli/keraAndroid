@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.registration.screen2.Registration2ViewModel" />
+            type="com.app.kera.registration.screen2.Registration2ViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView

@@ -39,6 +39,6 @@
             app:layout_constraintStart_toStartOf="@+id/textView_title"
             app:layout_constraintTop_toBottomOf="@+id/textView_title"
             app:spanCount="1"
-            tools:listitem="@layout/item_mood" />
+            tools:listitem="@layout/item_question_radio" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

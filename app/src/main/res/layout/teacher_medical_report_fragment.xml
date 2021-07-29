@@ -8,19 +8,19 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.teacherMedicalReport.TeacherMedicalReportViewModel" />
+            type="com.app.kera.teacherMedicalReport.TeacherMedicalReportViewModel" />
 
         <variable
             name="studentsAdapter"
-            type="com.example.kera.teacherMedicalReport.adapter.StudentsListAdapter" />
+            type="com.app.kera.teacherMedicalReport.adapter.StudentsListAdapter" />
 
         <variable
             name="latestReportsAdapter"
-            type="com.example.kera.teacherMedicalReport.adapter.LatestReportsListAdapter" />
+            type="com.app.kera.teacherMedicalReport.adapter.LatestReportsListAdapter" />
 
         <variable
             name="classesAdapter"
-            type="com.example.kera.teacherMedicalReport.adapter.MedicalReportClassesListAdapter" />
+            type="com.app.kera.teacherMedicalReport.adapter.MedicalReportClassesListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

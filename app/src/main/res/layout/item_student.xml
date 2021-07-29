@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.example.kera.profile.StudentsData" />
+            type="com.app.kera.profile.StudentsData" />
 
     </data>
 

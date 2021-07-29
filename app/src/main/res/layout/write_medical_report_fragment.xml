@@ -8,10 +8,10 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.teacherMedicalReport.writeMedicalReport.WriteMedicalReportViewModel" />
+            type="com.app.kera.teacherMedicalReport.writeMedicalReport.WriteMedicalReportViewModel" />
         <variable
             name="studentsAdapter"
-            type="com.example.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter" />
+            type="com.app.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -386,7 +386,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.example.kera.utils.RoundCornerLayout
+                    <com.app.kera.utils.RoundCornerLayout
                         android:id="@+id/constraintLayout30"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -398,8 +398,8 @@
                         app:layout_constraintTop_toTopOf="parent"
 
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="@+id/guideline32"
-                        app:layout_constraintTop_toBottomOf="@+id/textView95">
+
+                        >
 
 
 
@@ -414,8 +414,8 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:src="@tools:sample/avatars" />
-                    </com.example.kera.utils.RoundCornerLayout>
-                    <com.example.kera.utils.RoundCornerLayout
+                    </com.app.kera.utils.RoundCornerLayout>
+                    <com.app.kera.utils.RoundCornerLayout
                         android:id="@+id/constraintLayout32"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -426,9 +426,9 @@
                         app:layout_constraintTop_toTopOf="parent"
 
 
-                        app:layout_constraintEnd_toStartOf="@+id/roundCornerLayout7"
+
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintTop_toBottomOf="@+id/textView95">
+                       >
 
 
 
@@ -443,9 +443,9 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:src="@drawable/upload_picc" />
-                    </com.example.kera.utils.RoundCornerLayout>
+                    </com.app.kera.utils.RoundCornerLayout>
 
-                    <com.example.kera.utils.RoundCornerLayout
+                    <com.app.kera.utils.RoundCornerLayout
                         android:id="@+id/constraintLayout3"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -455,7 +455,7 @@
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/constraintLayout32"
 
-                        app:layout_constraintTop_toBottomOf="@+id/textView95"
+
                         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -469,7 +469,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:src="@tools:sample/avatars" />
-                    </com.example.kera.utils.RoundCornerLayout>
+                    </com.app.kera.utils.RoundCornerLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

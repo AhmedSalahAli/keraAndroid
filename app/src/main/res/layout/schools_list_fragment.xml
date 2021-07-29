@@ -8,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.schoolsList.SchoolsListViewModel" />
+            type="com.app.kera.schoolsList.SchoolsListViewModel" />
 
         <variable
             name="adapter"
-            type="com.example.kera.schoolsList.adapter.SchoolListAdapter" />
+            type="com.app.kera.schoolsList.adapter.SchoolListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

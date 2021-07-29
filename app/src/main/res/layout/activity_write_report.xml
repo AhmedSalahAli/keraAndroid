@@ -7,15 +7,15 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.teacherDailyReport.writeReport.WriteReportViewModel" />
+            type="com.app.kera.teacherDailyReport.writeReport.WriteReportViewModel" />
 
         <variable
             name="adapter"
-            type="com.example.kera.teacherDailyReport.writeReport.adapter.OuterAdapter" />
+            type="com.app.kera.teacherDailyReport.writeReport.adapter.OuterAdapter" />
 
         <variable
             name="studentsAdapter"
-            type="com.example.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter" />
+            type="com.app.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

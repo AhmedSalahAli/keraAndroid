@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.visitor.NeedToLoginViewModel" />
+            type="com.app.kera.visitor.NeedToLoginViewModel" />
 
 
     </data>

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.visitor.VisitorMainViewModel" />
+            type="com.app.kera.visitor.VisitorMainViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

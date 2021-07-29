@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.kera.meals.model.MealsItemUIModel" />
+            type="com.app.kera.meals.model.MealsItemUIModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,7 +70,7 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_begin="20dp" />
 
-                <com.example.kera.utils.RoundCornerLayout
+                <com.app.kera.utils.RoundCornerLayout
                     android:id="@+id/roundCornerLayout9"
                     android:layout_width="241dp"
                     android:layout_height="@dimen/_140sdp"
@@ -89,7 +89,7 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/food"
                         app:image="@{model.images}" />
-                </com.example.kera.utils.RoundCornerLayout>
+                </com.app.kera.utils.RoundCornerLayout>
 
                 <TextView
                     android:id="@+id/textView97"

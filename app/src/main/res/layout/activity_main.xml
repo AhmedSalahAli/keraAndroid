@@ -4,7 +4,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.main.ui.MainViewModel" />
+            type="com.app.kera.main.ui.MainViewModel" />
 
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"

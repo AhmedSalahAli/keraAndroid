@@ -8,7 +8,7 @@ tools:context=".registrationForm.screen2.AppScreen2">
 
     <variable
         name="viewModel"
-        type="com.example.kera.registrationForm.screen2.AppScreen2ViewModel" />
+        type="com.app.kera.registrationForm.screen2.AppScreen2ViewModel" />
 </data>
 
 <androidx.core.widget.NestedScrollView
@@ -251,7 +251,7 @@ tools:context=".registrationForm.screen2.AppScreen2">
                     android:background="@drawable/rounded_white_blue_stroke_image"
 
                     >
-                    <com.example.kera.utils.RoundCornerLayout
+                    <com.app.kera.utils.RoundCornerLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -275,7 +275,7 @@ tools:context=".registrationForm.screen2.AppScreen2">
 
 
                             />
-                    </com.example.kera.utils.RoundCornerLayout>
+                    </com.app.kera.utils.RoundCornerLayout>
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -451,7 +451,7 @@ tools:context=".registrationForm.screen2.AppScreen2">
                     android:background="@drawable/rounded_white_pink_stroke_image"
 
                     >
-                    <com.example.kera.utils.RoundCornerLayout
+                    <com.app.kera.utils.RoundCornerLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -475,7 +475,7 @@ tools:context=".registrationForm.screen2.AppScreen2">
 
 
                             />
-                    </com.example.kera.utils.RoundCornerLayout>
+                    </com.app.kera.utils.RoundCornerLayout>
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -637,7 +637,7 @@ tools:context=".registrationForm.screen2.AppScreen2">
                     android:background="@drawable/rounded_white_blue_stroke_image"
 
                     >
-                    <com.example.kera.utils.RoundCornerLayout
+                    <com.app.kera.utils.RoundCornerLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -660,7 +660,7 @@ tools:context=".registrationForm.screen2.AppScreen2">
 
 
                             />
-                    </com.example.kera.utils.RoundCornerLayout>
+                    </com.app.kera.utils.RoundCornerLayout>
 
                     <ImageView
                         android:layout_width="wrap_content"

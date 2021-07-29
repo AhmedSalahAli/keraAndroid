@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.registration.screen4.Registration4ViewModel" />
+            type="com.app.kera.registration.screen4.Registration4ViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView

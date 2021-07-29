@@ -8,13 +8,13 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.events.ui.EventsViewModel" />
+            type="com.app.kera.events.ui.EventsViewModel" />
         <variable
             name="adapter"
-            type="com.example.kera.events.adapter.UpcomingListAdapter" />
+            type="com.app.kera.events.adapter.UpcomingListAdapter" />
         <variable
             name="previousAdapter"
-            type="com.example.kera.events.adapter.PreviousListAdapter" />
+            type="com.app.kera.events.adapter.PreviousListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

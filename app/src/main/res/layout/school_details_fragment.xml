@@ -9,19 +9,19 @@
 
         <variable
             name="imagesAdapter"
-            type="com.example.kera.schoolDetails.adapter.ImagesAdapter" />
+            type="com.app.kera.schoolDetails.adapter.ImagesAdapter" />
 
         <variable
             name="tagsAdapter"
-            type="com.example.kera.schoolDetails.adapter.TagsAdapter" />
+            type="com.app.kera.schoolDetails.adapter.TagsAdapter" />
 
         <variable
             name="phonesAdapter"
-            type="com.example.kera.schoolDetails.adapter.PhonesAdapter" />
+            type="com.app.kera.schoolDetails.adapter.PhonesAdapter" />
 
         <variable
             name="viewModel"
-            type="com.example.kera.schoolDetails.ui.SchoolDetailsViewModel" />
+            type="com.app.kera.schoolDetails.ui.SchoolDetailsViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -273,7 +273,7 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_rounded_back" />
 
-            <com.example.kera.utils.RoundCornerLayout
+            <com.app.kera.utils.RoundCornerLayout
                 android:id="@+id/imageView57"
                 android:layout_width="@dimen/_130sdp"
                 android:layout_height="@dimen/_35sdp"
@@ -292,7 +292,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     app:image="@{viewModel.schoolDetails.logo}" />
-            </com.example.kera.utils.RoundCornerLayout>
+            </com.app.kera.utils.RoundCornerLayout>
 
             <ImageView
                 android:id="@+id/imageView84"

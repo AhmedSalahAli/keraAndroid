@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.example.kera.schoolsList.SchoolListUIModel.Tags" />
+            type="com.app.kera.schoolsList.SchoolListUIModel.Tags" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             android:id="@+id/imageView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
+
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_tag" />
 

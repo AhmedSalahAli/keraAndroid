@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.example.kera.teacherMedicalReport.model.LatestReportItemUIModel.ReportModel" />
+            type="com.app.kera.teacherMedicalReport.model.LatestReportItemUIModel.ReportModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

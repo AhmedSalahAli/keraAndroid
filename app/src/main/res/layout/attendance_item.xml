@@ -7,7 +7,7 @@
 
         <variable
         name="model"
-        type="com.example.kera.attendanceHistory.model.AttendanceListItemModel" />
+        type="com.app.kera.attendanceHistory.model.AttendanceListItemModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"

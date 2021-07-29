@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.meals.model.ClassMealsDates" />
+            type="com.app.kera.meals.model.ClassMealsDates" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

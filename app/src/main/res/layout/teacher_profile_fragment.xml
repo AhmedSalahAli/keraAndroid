@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.teacherProfile.TeacherProfileViewModel" />
+            type="com.app.kera.teacherProfile.TeacherProfileViewModel" />
 
         <variable
             name="adapter"
-            type="com.example.kera.profile.adapter.ChildrenAdapter" />
+            type="com.app.kera.profile.adapter.ChildrenAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

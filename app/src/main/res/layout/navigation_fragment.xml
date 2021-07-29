@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.navigation.NavigationViewModel" />
+            type="com.app.kera.navigation.NavigationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

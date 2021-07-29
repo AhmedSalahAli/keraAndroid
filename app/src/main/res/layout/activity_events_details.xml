@@ -6,10 +6,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.kera.events.ui.eventsdetails.EventsDetailsViewModel" />
+            type="com.app.kera.events.ui.eventsdetails.EventsDetailsViewModel" />
         <variable
             name="adapter"
-            type="com.example.kera.events.adapter.ChildrenAdapter" />
+            type="com.app.kera.events.adapter.ChildrenAdapter" />
     </data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.qrCode.QRViewModel" />
+            type="com.app.kera.qrCode.QRViewModel" />
 
     </data>
 <FrameLayout

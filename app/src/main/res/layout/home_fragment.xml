@@ -8,15 +8,15 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.home.HomeViewModel" />
+            type="com.app.kera.home.HomeViewModel" />
 
         <variable
             name="imagesAdapter"
-            type="com.example.kera.home.adapter.ImagesListAdapter" />
+            type="com.app.kera.home.adapter.ImagesListAdapter" />
 
         <variable
             name="newsAdapter"
-            type="com.example.kera.home.adapter.HomeNewsAdapter" />
+            type="com.app.kera.home.adapter.HomeNewsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,11 +44,14 @@
 
             <ImageView
                 android:id="@+id/imageView26"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 app:image="@{viewModel.homeNurseryData.logo}"
                 app:layout_constraintBottom_toBottomOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="center"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

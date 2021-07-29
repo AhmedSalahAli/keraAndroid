@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.kera.teacherMedicalReport.model.StudentItemUIModel" />
+            type="com.app.kera.teacherMedicalReport.model.StudentItemUIModel" />
 
         <import type="android.view.View" />
 

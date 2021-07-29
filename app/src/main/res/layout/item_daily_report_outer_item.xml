@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="com.example.kera.data.models.DisplayDailyReportResponseModel.DataBean.DocsBean" />
+            type="com.app.kera.data.models.DisplayDailyReportResponseModel.DataBean.DocsBean" />
     </data>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/outer_report_item"

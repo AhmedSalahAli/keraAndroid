@@ -5,7 +5,7 @@
     <data>
         <variable
             name="model"
-            type="com.example.kera.events.model.UpcomingItemUIModel" />
+            type="com.app.kera.events.model.UpcomingItemUIModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp">
 
-        <com.example.kera.utils.RoundCornerLayout
+        <com.app.kera.utils.RoundCornerLayout
             android:id="@+id/imageView44"
             android:layout_width="71dp"
             android:layout_height="91dp"
@@ -37,7 +37,7 @@
                 android:src="@drawable/upload_pic" />
 
 
-        </com.example.kera.utils.RoundCornerLayout>
+        </com.app.kera.utils.RoundCornerLayout>
 
 
         <TextView

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.splash.ui.SplashViewModel" />
+            type="com.app.kera.splash.ui.SplashViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

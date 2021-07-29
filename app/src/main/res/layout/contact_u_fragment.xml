@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.contactUs.ContactUsViewModel" />
+            type="com.app.kera.contactUs.ContactUsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

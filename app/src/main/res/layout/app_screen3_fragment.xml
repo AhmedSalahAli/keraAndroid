@@ -8,7 +8,7 @@ tools:context=".registrationForm.screen3.AppScreen3">
 
     <variable
         name="viewModel"
-        type="com.example.kera.registrationForm.screen3.AppScreen3ViewModel" />
+        type="com.app.kera.registrationForm.screen3.AppScreen3ViewModel" />
 </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

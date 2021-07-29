@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.login.ui.LoginViewModel" />
+            type="com.app.kera.login.ui.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

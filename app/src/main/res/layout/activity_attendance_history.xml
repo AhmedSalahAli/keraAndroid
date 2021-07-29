@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.attendanceHistory.AttendanceViewModel" />
+            type="com.app.kera.attendanceHistory.AttendanceViewModel" />
         <variable
             name="datesAdapter"
-            type="com.example.kera.education.adapter.DateAdapter" />
+            type="com.app.kera.education.adapter.DateAdapter" />
         <variable
             name="listAdapter"
-            type="com.example.kera.attendanceHistory.adapter.AttendanceListAdapter" />
+            type="com.app.kera.attendanceHistory.adapter.AttendanceListAdapter" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -73,8 +73,6 @@
 
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline31"
-        app:layout_constraintStart_toStartOf="@+id/guideline30"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout19"
         android:layout_marginTop="16dp">
 
@@ -190,8 +188,7 @@
 
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline31"
-        app:layout_constraintStart_toStartOf="@+id/guideline30"
+
         app:layout_constraintTop_toBottomOf="@+id/veilLayout"
         app:spanCount="1"
         app:veilFrame_layout="@layout/attendance_item"

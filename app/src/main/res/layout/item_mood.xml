@@ -7,14 +7,15 @@
 
         <variable
             name="model"
-            type="com.example.kera.data.models.teacherDailyReport.DailyReportResponseModel.DataBean.AnswersBean.OptionsBean" />
+            type="com.app.kera.data.models.teacherDailyReport.DailyReportResponseModel.DataBean.AnswersBean.OptionsBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_mood"
-        android:layout_width="@dimen/_74sdp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:minWidth="74dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/rounded_white_fcfcfc_stroke_fed93b"
         app:layout_constraintEnd_toEndOf="@+id/imageView9"
@@ -44,6 +45,8 @@
             android:fontFamily="@font/sf_ui_display_regular"
             android:text="@{model.value}"
             android:textColor="#0093DE"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

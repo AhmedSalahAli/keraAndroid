@@ -8,17 +8,17 @@
 
         <variable
             name="datesAdapter"
-            type="com.example.kera.education.adapter.DateAdapter" />
+            type="com.app.kera.education.adapter.DateAdapter" />
 
         <variable
             name="listAdapter"
-            type="com.example.kera.education.adapter.EducationListAdapter" />
+            type="com.app.kera.education.adapter.EducationListAdapter" />
         <variable
             name="viewModel"
-            type="com.example.kera.education.EducationViewModel" />
+            type="com.app.kera.education.EducationViewModel" />
         <variable
             name="childrenAdapter"
-            type="com.example.kera.profile.adapter.ChildrenAdapter" />
+            type="com.app.kera.profile.adapter.ChildrenAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

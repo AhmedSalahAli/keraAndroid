@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.example.kera.notification.model.NotificationItemUIModel.NotificationModel" />
+            type="com.app.kera.notification.model.NotificationItemUIModel.NotificationModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

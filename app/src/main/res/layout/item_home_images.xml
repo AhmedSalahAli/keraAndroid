@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_180sdp">
 
-        <com.example.kera.utils.RoundCornerLayout
+        <com.app.kera.utils.RoundCornerLayout
             android:id="@+id/roundCornerLayout3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -37,7 +37,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/picture" />
-        </com.example.kera.utils.RoundCornerLayout>
+        </com.app.kera.utils.RoundCornerLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

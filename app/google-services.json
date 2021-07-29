@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:787778066511:android:8e42914cadcc9c9ae5323a",
+        "mobilesdk_app_id": "1:787778066511:android:a262b36ac31dee7fe5323a",
         "android_client_info": {
-          "package_name": "com.example.kera"
+          "package_name": "com.app.kera"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "787778066511-a9qtbpc342vm3ltgkrmm3rmf8ad96f6s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.kera",
+            "certificate_hash": "9f89d23308a1a51197084071c22304030f71e791"
+          }
+        },
         {
           "client_id": "787778066511-ol8dgfp77dqejia6se62fktqffvorbd9.apps.googleusercontent.com",
           "client_type": 3
@@ -31,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "787778066511-rib004cig14uf5086361oju6tkjb3doe.apps.googleusercontent.com",
+              "client_id": "787778066511-7ucjvmmgr3ss71u3jl1hekq4028uoc9f.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.kera.kera"
+                "bundle_id": "com.kera.KeraApp"
               }
             }
           ]

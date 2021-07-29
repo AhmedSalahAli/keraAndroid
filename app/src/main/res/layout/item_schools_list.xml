@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.kera.schoolsList.SchoolListUIModel.SchoolData" />
+            type="com.app.kera.schoolsList.SchoolListUIModel.SchoolData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -116,7 +116,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView_school_logo"
                 tools:text="@string/the_quick_brown_fox_jumps_over_a_lazy_dog_djs_flock_by_when_mtv_ax_quiz_prog_junk_mtv_quiz_graced_by_fox_whelps_bawds_jog_flick_quartz_vex_nymphs_waltz_bad_nymph_for_quick_jigs_vex" />
 
-            <com.example.kera.utils.RoundCornerLayout
+            <com.app.kera.utils.RoundCornerLayout
                 android:id="@+id/roundCornerLayout"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_90sdp"
@@ -137,7 +137,7 @@
                     android:scaleType="centerCrop"
 
                     app:image="@{model.image}" />
-            </com.example.kera.utils.RoundCornerLayout>
+            </com.app.kera.utils.RoundCornerLayout>
 
             <ImageView
                 android:id="@+id/imageView_fav"

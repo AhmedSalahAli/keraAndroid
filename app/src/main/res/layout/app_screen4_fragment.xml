@@ -8,7 +8,7 @@ tools:context=".registrationForm.screen4.AppScreen4">
 
     <variable
         name="viewModel"
-        type="com.example.kera.registrationForm.screen4.AppScreen4ViewModel" />
+        type="com.app.kera.registrationForm.screen4.AppScreen4ViewModel" />
 </data>
 
 <androidx.core.widget.NestedScrollView

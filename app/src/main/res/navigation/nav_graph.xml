@@ -8,36 +8,36 @@
 
     <fragment
         android:id="@+id/schoolDetailsFragment"
-        android:name="com.example.kera.schoolDetails.ui.SchoolDetailsActivity"
+        android:name="com.app.kera.schoolDetails.ui.SchoolDetailsActivity"
         android:label="school_details_fragment"
         tools:layout="@layout/school_details_fragment" />
     <fragment
         android:id="@+id/schoolsListFragment"
-        android:name="com.example.kera.schoolsList.SchoolsListFragment"
+        android:name="com.app.kera.schoolsList.SchoolsListFragment"
         android:label="schools_list_fragment"
         tools:layout="@layout/schools_list_fragment" />
     <fragment
         android:id="@+id/sideMenuFragment"
-        android:name="com.example.kera.sideMenu.SideMenuFragment"
+        android:name="com.app.kera.sideMenu.SideMenuFragment"
         android:label="side_menu_fragment"
         tools:layout="@layout/side_menu_fragment" />
     <fragment
         android:id="@+id/homeMapFragment"
-        android:name="com.example.kera.navigation.ui.NavigationMapFragment"
+        android:name="com.app.kera.navigation.ui.NavigationMapFragment"
         android:label="home_map_fragment"
         tools:layout="@layout/navigation_map_fragment" />
     <fragment
         android:id="@+id/educationFragment"
-        android:name="com.example.kera.education.EducationActivity"
+        android:name="com.app.kera.education.EducationActivity"
         android:label="education_fragment"
         tools:layout="@layout/activity_education" />
     <activity
         android:id="@+id/eventsActivity"
-        android:name="com.example.kera.events.ui.EventsActivity"
+        android:name="com.app.kera.events.ui.EventsActivity"
         android:label="EventsActivity" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.kera.home.HomeFragment"
+        android:name="com.app.kera.home.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" >
         <action
@@ -52,24 +52,24 @@
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.example.kera.notification.NotificationFragment"
+        android:name="com.app.kera.notification.NotificationFragment"
         android:label="NotificationFragment" />
     <fragment
         android:id="@+id/navigationFragment"
-        android:name="com.example.kera.navigation.NavigationFragment"
+        android:name="com.app.kera.navigation.NavigationFragment"
         android:label="navigation_fragment"
         tools:layout="@layout/navigation_fragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.kera.profile.ProfileFragment"
+        android:name="com.app.kera.profile.ProfileFragment"
         android:label="ProfileFragment" />
     <fragment
         android:id="@+id/teacherProfileFragment"
-        android:name="com.example.kera.teacherProfile.TeacherProfileFragment"
+        android:name="com.app.kera.teacherProfile.TeacherProfileFragment"
         android:label="TeacherProfileFragment" />
     <fragment
         android:id="@+id/appScreen12"
-        android:name="com.example.kera.registrationForm.screen1.AppScreen1"
+        android:name="com.app.kera.registrationForm.screen1.AppScreen1"
         android:label="app_screen1_fragment"
         tools:layout="@layout/app_screen1_fragment" >
         <action
@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/appScreen22"
-        android:name="com.example.kera.registrationForm.screen2.AppScreen2"
+        android:name="com.app.kera.registrationForm.screen2.AppScreen2"
         android:label="app_screen2_fragment"
         tools:layout="@layout/app_screen2_fragment" >
         <action
@@ -89,7 +89,7 @@
     </fragment>
     <fragment
         android:id="@+id/appScreen32"
-        android:name="com.example.kera.registrationForm.screen3.AppScreen3"
+        android:name="com.app.kera.registrationForm.screen3.AppScreen3"
         android:label="app_screen3_fragment"
         tools:layout="@layout/app_screen3_fragment" >
         <action
@@ -98,12 +98,12 @@
     </fragment>
     <fragment
         android:id="@+id/appScreen42"
-        android:name="com.example.kera.registrationForm.screen4.AppScreen4"
+        android:name="com.app.kera.registrationForm.screen4.AppScreen4"
         android:label="app_screen4_fragment"
         tools:layout="@layout/app_screen4_fragment" />
     <fragment
         android:id="@+id/needToLogin"
-        android:name="com.example.kera.visitor.NeedToLogin"
+        android:name="com.app.kera.visitor.NeedToLogin"
         android:label="need_to_login_fragment"
         tools:layout="@layout/need_to_login_fragment" />
 

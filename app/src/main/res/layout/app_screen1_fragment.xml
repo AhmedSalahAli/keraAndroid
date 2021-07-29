@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.registrationForm.screen1.AppScreen1ViewModel" />
+            type="com.app.kera.registrationForm.screen1.AppScreen1ViewModel" />
 
 
     </data>
@@ -52,11 +52,15 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline50"
             app:layout_constraintStart_toStartOf="@+id/guideline51"
             app:layout_constraintTop_toBottomOf="@+id/back_button" />
+
         <ImageView
             android:id="@+id/imageView18"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+
+
+            app:layout_constraintBottom_toTopOf="@+id/textView26"
             app:layout_constraintEnd_toStartOf="@+id/guideline50"
             app:layout_constraintStart_toStartOf="@+id/guideline51"
             app:layout_constraintTop_toTopOf="@+id/guideline21"

@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.medical.MedicalReportViewModel" />
+            type="com.app.kera.medical.MedicalReportViewModel" />
         <variable
             name="adapter"
-            type="com.example.kera.medical.adapter.MedicalReportsAdapter" />
+            type="com.app.kera.medical.adapter.MedicalReportsAdapter" />
 
         <variable
             name="childrenAdapter"
-            type="com.example.kera.profile.adapter.ChildrenAdapter" />
+            type="com.app.kera.profile.adapter.ChildrenAdapter" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

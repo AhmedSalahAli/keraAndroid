@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.kera.home.model.HomeNewsUIModel.NewsList" />
+            type="com.app.kera.home.model.HomeNewsUIModel.NewsList" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="235dp">
 
-        <com.example.kera.utils.RoundCornerLayout
+        <com.app.kera.utils.RoundCornerLayout
             android:id="@+id/roundCornerLayout3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -34,7 +34,7 @@
                 android:scaleType="centerCrop"
                 app:image="@{model}"
                 />
-        </com.example.kera.utils.RoundCornerLayout>
+        </com.app.kera.utils.RoundCornerLayout>
 
 
 

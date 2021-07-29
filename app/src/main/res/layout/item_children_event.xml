@@ -5,7 +5,7 @@
     <data>
         <variable
             name="model"
-            type="com.example.kera.events.model.EventDetailsResponseModel.DataBean.StudentData" />
+            type="com.app.kera.events.model.EventDetailsResponseModel.DataBean.StudentData" />
     </data>
 <FrameLayout
     android:layout_width="wrap_content"

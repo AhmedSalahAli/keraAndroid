@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.example.kera.medical.model.DisplayMedicalReportResponseModel.DataBean.DocsBean" />
+            type="com.app.kera.medical.model.DisplayMedicalReportResponseModel.DataBean.DocsBean" />
     </data>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/outer_report_item"
@@ -235,7 +235,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView113" />
 
 
-            <com.example.kera.utils.RoundCornerLayout
+            <com.app.kera.utils.RoundCornerLayout
                 android:id="@+id/roundCornerLayout6"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -256,9 +256,9 @@
                     app:image="@{model.images[0]}"
 
                     />
-            </com.example.kera.utils.RoundCornerLayout>
+            </com.app.kera.utils.RoundCornerLayout>
 
-            <com.example.kera.utils.RoundCornerLayout
+            <com.app.kera.utils.RoundCornerLayout
                 android:id="@+id/roundCornerLayout7"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -277,9 +277,9 @@
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     app:image="@{model.images[1]}" />
-            </com.example.kera.utils.RoundCornerLayout>
+            </com.app.kera.utils.RoundCornerLayout>
 
-            <com.example.kera.utils.RoundCornerLayout
+            <com.app.kera.utils.RoundCornerLayout
                 android:id="@+id/roundCornerLayout8"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -299,7 +299,7 @@
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     app:image="@{model.images[2]}"/>
-            </com.example.kera.utils.RoundCornerLayout>
+            </com.app.kera.utils.RoundCornerLayout>
 
             <ImageView
                 android:id="@+id/imageView69"

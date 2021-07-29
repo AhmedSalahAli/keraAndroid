@@ -8,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.kera.notification.NotificationViewModel" />
+            type="com.app.kera.notification.NotificationViewModel" />
 
         <variable
             name="adapter"
-            type="com.example.kera.notification.adapter.PostRecyclerAdapter" />
+            type="com.app.kera.notification.adapter.PostRecyclerAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,8 +34,9 @@
 
             <ImageView
                 android:id="@+id/imageView26"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:src="@drawable/kera_box"
                 app:layout_constraintBottom_toBottomOf="@+id/view"
                 android:layout_gravity="center"/>

@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.kera.data.models.teacherDailyReport.DailyReportResponseModel.DataBean.StudentsBean" />
+            type="com.app.kera.data.models.teacherDailyReport.DailyReportResponseModel.DataBean.StudentsBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

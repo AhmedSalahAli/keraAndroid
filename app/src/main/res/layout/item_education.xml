@@ -5,7 +5,7 @@
 
         <variable
             name="model"
-            type="com.example.kera.education.model.EducationListItemModel" />
+            type="com.app.kera.education.model.EducationListItemModel" />
     </data>
     <com.google.android.material.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -104,7 +104,7 @@
             tools:text="The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz." />
 
 
-        <com.example.kera.utils.RoundCornerLayout
+        <com.app.kera.utils.RoundCornerLayout
             android:id="@+id/roundCornerLayout6"
             android:layout_width="@dimen/_67sdp"
             android:layout_height="@dimen/_67sdp"
@@ -125,9 +125,9 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/upload_pic"
              />
-        </com.example.kera.utils.RoundCornerLayout>
+        </com.app.kera.utils.RoundCornerLayout>
 
-        <com.example.kera.utils.RoundCornerLayout
+        <com.app.kera.utils.RoundCornerLayout
             android:id="@+id/roundCornerLayout7"
             android:layout_width="@dimen/_67sdp"
             android:layout_height="@dimen/_67sdp"
@@ -148,9 +148,9 @@
                 android:layout_gravity="center"
                 android:src="@drawable/upload_pic"
                 />
-        </com.example.kera.utils.RoundCornerLayout>
+        </com.app.kera.utils.RoundCornerLayout>
 
-        <com.example.kera.utils.RoundCornerLayout
+        <com.app.kera.utils.RoundCornerLayout
             android:id="@+id/roundCornerLayout8"
             android:layout_width="@dimen/_67sdp"
             android:layout_height="@dimen/_67sdp"
@@ -171,7 +171,7 @@
                 android:layout_gravity="center"
                 android:src="@drawable/upload_pic"
               />
-        </com.example.kera.utils.RoundCornerLayout>
+        </com.app.kera.utils.RoundCornerLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
