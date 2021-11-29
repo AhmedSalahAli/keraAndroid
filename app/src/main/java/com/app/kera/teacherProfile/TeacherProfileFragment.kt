@@ -10,6 +10,7 @@ import com.app.kera.R
 import com.app.kera.attendanceHistory.AttendanceHistory
 import com.app.kera.databinding.TeacherProfileFragmentBinding
 import com.app.kera.qrCode.QRActivity
+import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TeacherProfileFragment : Fragment() {
@@ -45,6 +46,11 @@ class TeacherProfileFragment : Fragment() {
         viewModel.getProfileData()
 
         viewModel.profileUIModel.observe(viewLifecycleOwner, {
+            if (!it.image.isNullOrEmpty()){
+                Glide.with(view.context).load(it.image).error(R.drawable.ic_person).into(viewDataBinding.imageView54)
+            }else{
+                Glide.with(view.context).load(R.drawable.ic_person).error(R.drawable.ic_person).into(viewDataBinding.imageView54)
+            }
             viewDataBinding.veilLayout.unVeil()
         })
         viewDataBinding.constraintLayout10.setOnClickListener(View.OnClickListener {

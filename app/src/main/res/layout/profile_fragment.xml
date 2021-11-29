@@ -449,6 +449,7 @@
                 android:layout_height="@dimen/_75sdp"
                 android:elevation="@dimen/_12sdp"
                 app:image="@{viewModel.selectedUser.profileImage}"
+                app:civ_circle_background_color="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

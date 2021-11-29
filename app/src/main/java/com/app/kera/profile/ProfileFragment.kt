@@ -14,6 +14,7 @@ import com.app.kera.R
 import com.app.kera.contactUs.ContactUsActivity
 import com.app.kera.databinding.ProfileFragmentBinding
 import com.app.kera.profile.adapter.ChildrenAdapter
+import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
@@ -55,6 +56,7 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
         viewDataBinding.veilLayout.veil()
         viewModel.profileUIModel.observe(viewLifecycleOwner, {
            // CommonUtils.hideLoading(mProgressDialog!!)
+
             viewDataBinding.veilLayout.unVeil()
             viewDataBinding.adapter = ChildrenAdapter(it.students!!, this,viewModel.getAppRepoInstance())
             viewDataBinding.adapter!!.notifyDataSetChanged()
