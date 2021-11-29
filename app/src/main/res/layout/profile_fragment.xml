@@ -25,7 +25,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="@dimen/_80sdp"
             style="@style/CustomCardCorners"
             app:cardElevation="@dimen/_20sdp"
 
