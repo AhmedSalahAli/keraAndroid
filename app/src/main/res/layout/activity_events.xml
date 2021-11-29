@@ -43,7 +43,7 @@
 
                 <ImageView
                     android:id="@+id/imageView26"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     app:image="@{viewModel.logo}"
                     app:layout_constraintBottom_toBottomOf="@+id/view1"

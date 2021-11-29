@@ -119,7 +119,7 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
     override fun onCheckConfigParams(BaseUrl: String?) {
         if (BaseUrl != null) {
             Configurations.BASE_URL = BaseUrl+API_PATH
-            //Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
+          //  Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
             Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
         }
         Log.i("BaseUrl","reach listner")

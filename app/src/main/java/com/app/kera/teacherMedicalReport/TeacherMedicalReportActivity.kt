@@ -77,22 +77,36 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
         getLatestReportsObservation()
         createReportClickListener()
         createReportObservation()
+
+        viewDataBinding.textView117.text = CommonUtils.getCurrentDate_EEE_MM_YYY()
+
         viewDataBinding.recyclerView9.setLayoutManager(
             GridLayoutManager(this,
                 3, GridLayoutManager.HORIZONTAL,false)
         )
         viewDataBinding.recyclerView9.getRecyclerView().adapter = viewDataBinding.studentsAdapter // sets your own adapter
- 
-        viewDataBinding.recyclerView9.addVeiledItems(15)
+        viewDataBinding.recyclerView9.addVeiledItems(20)
         viewDataBinding.recyclerView9.veil()
+        viewDataBinding.recyclerView9.getRecyclerView().setPadding(80,60,60,60)
+        viewDataBinding.recyclerView9 .getRecyclerView().clipToPadding = false
+        viewDataBinding.recyclerView9.getVeiledRecyclerView().setPadding(80,60,60,60)
+        viewDataBinding.recyclerView9 .getVeiledRecyclerView().clipToPadding = false
 
-        viewDataBinding.recyclerView7.setAdapter(viewDataBinding.classesAdapter) // sets your own adapter
+
         viewDataBinding.recyclerView7.setLayoutManager(
             StaggeredGridLayoutManager(1,
             StaggeredGridLayoutManager.HORIZONTAL)
         ) // sets LayoutManager
+        viewDataBinding.recyclerView7.setAdapter(viewDataBinding.classesAdapter) // sets your own adapter
         viewDataBinding.recyclerView7.addVeiledItems(15)
         viewDataBinding.recyclerView7.veil()
+        viewDataBinding.recyclerView7.getRecyclerView().setPadding(80,60,60,60)
+        viewDataBinding.recyclerView7 .getRecyclerView().clipToPadding = false
+        viewDataBinding.recyclerView7.getVeiledRecyclerView().setPadding(80,60,60,60)
+        viewDataBinding.recyclerView7 .getVeiledRecyclerView().clipToPadding = false
+
+
+
 
         viewDataBinding.recyclerLatestReports.setAdapter(viewDataBinding.latestReportsAdapter) // sets your own adapter
         viewDataBinding.recyclerLatestReports.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)) // sets LayoutManager

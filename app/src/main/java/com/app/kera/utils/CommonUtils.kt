@@ -26,7 +26,7 @@ import java.util.*
 object CommonUtils {
     val DATE_PICKER_DAY_FORMAT = SimpleDateFormat("EEE d", Locale.ENGLISH)
     val DATE_PICKER_YYYY_MM_DD_FORMAT = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-    val DATE_PICKER_EEE_MM_YYY_FORMAT = SimpleDateFormat("EEEE,MMM MM,yyy", Locale.ENGLISH)
+    val DATE_PICKER_EEE_MM_YYY_FORMAT = SimpleDateFormat("EEEE,MMM dd,yyy", Locale.ENGLISH)
     val DATE_PICKER_MMMM_YYYY_FORMAT = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
     val DATE_PICKER_24H_FORMAT =
         SimpleDateFormat("HH:mm", Locale.ENGLISH)

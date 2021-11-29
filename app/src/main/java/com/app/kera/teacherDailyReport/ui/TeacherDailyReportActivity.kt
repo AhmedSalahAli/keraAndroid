@@ -71,6 +71,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
 
 
 
+
         viewDataBinding.textViewDate.text = CommonUtils.getCurrentDate_EEE_MM_YYY()
         val content = SpannableString(resources.getString(R.string.mark_as_abscent))
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
@@ -83,15 +84,22 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         )
 
         viewDataBinding.recyclerView9.setAdapter(viewDataBinding.studentsAdapter) // sets your own adapter
-
+        viewDataBinding.recyclerView9.getRecyclerView().setPadding(80,60,60,60)
+        viewDataBinding.recyclerView9 .getRecyclerView().clipToPadding = false
+        viewDataBinding.recyclerView9.getVeiledRecyclerView().setPadding(80,60,60,60)
+        viewDataBinding.recyclerView9 .getVeiledRecyclerView().clipToPadding = false
 
         viewDataBinding.recyclerView9.addVeiledItems(15)
         viewDataBinding.recyclerView9.veil()
 
-
-        viewDataBinding.recyclerView7.setAdapter(viewDataBinding.classesAdapter) // sets your own adapter
         viewDataBinding.recyclerView7.setLayoutManager(StaggeredGridLayoutManager(1,
             StaggeredGridLayoutManager.HORIZONTAL)) // sets LayoutManager
+        viewDataBinding.recyclerView7.setAdapter(viewDataBinding.classesAdapter) // sets your own adapter
+
+        viewDataBinding.recyclerView7.getRecyclerView().setPadding(80,60,60,60)
+        viewDataBinding.recyclerView7 .getRecyclerView().clipToPadding = false
+        viewDataBinding.recyclerView7.getVeiledRecyclerView().setPadding(80,60,60,60)
+        viewDataBinding.recyclerView7 .getVeiledRecyclerView().clipToPadding = false
         viewDataBinding.recyclerView7.addVeiledItems(10)
         viewDataBinding.recyclerView7.veil()
 

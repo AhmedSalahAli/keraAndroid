@@ -97,7 +97,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_daily_report_data"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -179,8 +179,8 @@
 
                     <com.skydoves.androidveil.VeilRecyclerFrameView
                         android:id="@+id/recyclerView7"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:orientation="horizontal"
                         app:adapter="@{classesAdapter}"
@@ -248,25 +248,25 @@
 
                     <com.skydoves.androidveil.VeilRecyclerFrameView
                         android:id="@+id/recyclerView9"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/_250sdp"
                         android:layout_marginTop="32dp"
+                        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
                         android:orientation="horizontal"
                         app:adapter="@{studentsAdapter}"
-                        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
 
 
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
                         app:layout_constraintTop_toBottomOf="@+id/search_constraint"
-                        app:veilFrame_layout="@layout/item_student_name_image"
-                        app:veilFrame_veiled="true"
-                        app:veilFrame_shimmerEnable="true"
-                        app:veilLayout_baseColor="@color/light_grey_8c99a7"
-                        app:veilFrame_highlightColor="@color/blue_effcff"
                         app:veilFrame_baseAlpha="0.6"
                         app:veilFrame_highlightAlpha="1.0"
+                        app:veilFrame_highlightColor="@color/blue_effcff"
+                        app:veilFrame_layout="@layout/item_student_name_image"
                         app:veilFrame_radius="8dp"
-                        />
+                        app:veilFrame_shimmerEnable="true"
+                        app:veilFrame_veiled="true"
+                        app:veilLayout_baseColor="@color/light_grey_8c99a7" />
 
                     <TextView
                         android:id="@+id/textView_students_selected"
@@ -367,7 +367,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
         </androidx.core.widget.NestedScrollView>
 
