@@ -105,6 +105,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="19dp"
+                                    android:layout_marginTop="@dimen/_10sdp"
                                     android:fontFamily="@font/sf_ui_display_regular"
                                     android:text="@string/subject"
                                     android:textColor="#5881A4"
@@ -128,9 +129,9 @@
 
                                 <ImageView
                                     android:id="@+id/imageView78"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_70sdp"
-
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/_30sdp"
                                     android:minHeight="@dimen/_35sdp"
                                     app:image="@{viewModel.logo}"
                                     app:layout_constraintEnd_toEndOf="parent"
