@@ -222,9 +222,10 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/search_constraint"
-                        android:layout_width="250dp"
+                        android:layout_width="0dp"
                         android:layout_height="32dp"
                         android:background="@drawable/rounded_white_light_grey_eeeff0_stroke"
+                        app:layout_constraintEnd_toStartOf="@+id/select_all"
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
                         app:layout_constraintTop_toBottomOf="@+id/textView120">
 
@@ -250,20 +251,18 @@
                             app:layout_constraintStart_toEndOf="@+id/imageView74"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
                     <com.skydoves.androidveil.VeilRecyclerFrameView
                         android:id="@+id/recyclerView9"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_190sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_250sdp"
+                        android:layout_marginTop="15dp"
                         android:orientation="horizontal"
                         app:adapter="@{studentsAdapter}"
-                        android:layout_marginTop="8dp"
-                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+                        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+
+
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
                         app:layout_constraintTop_toBottomOf="@+id/search_constraint"
-                        app:spanCount="3"
-
                         app:veilFrame_layout="@layout/item_student_name_image"
                         app:veilFrame_veiled="true"
                         app:veilFrame_shimmerEnable="true"
@@ -271,7 +270,9 @@
                         app:veilFrame_highlightColor="@color/blue_effcff"
                         app:veilFrame_baseAlpha="0.6"
                         app:veilFrame_highlightAlpha="1.0"
-                        app:veilFrame_radius="8dp"/>
+                        app:veilFrame_radius="8dp"
+                        />
+
 
                     <TextView
                         android:id="@+id/textView_students_selected"

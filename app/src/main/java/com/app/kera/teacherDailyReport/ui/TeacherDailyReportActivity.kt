@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -76,13 +77,17 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         viewDataBinding.textViewMarkAsAbsent.text = content
 
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-
+        viewDataBinding.recyclerView9.setLayoutManager(
+            GridLayoutManager(this,
+                3,GridLayoutManager.HORIZONTAL,false)
+        )
 
         viewDataBinding.recyclerView9.setAdapter(viewDataBinding.studentsAdapter) // sets your own adapter
-        viewDataBinding.recyclerView9.setLayoutManager(StaggeredGridLayoutManager(3,
-            StaggeredGridLayoutManager.HORIZONTAL)) // sets LayoutManager
+
+
         viewDataBinding.recyclerView9.addVeiledItems(15)
         viewDataBinding.recyclerView9.veil()
+
 
         viewDataBinding.recyclerView7.setAdapter(viewDataBinding.classesAdapter) // sets your own adapter
         viewDataBinding.recyclerView7.setLayoutManager(StaggeredGridLayoutManager(1,

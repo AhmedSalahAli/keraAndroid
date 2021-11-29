@@ -294,7 +294,7 @@ object CommonUtils {
     fun convertTimeStampToDate_EEE_MMM_MM_yyyyTT(timestamp: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("hh:mm a  EEEE, MMM MM,yyyy ", calendar).toString()
+        val date = DateFormat.format("hh:mm a  EEEE, MMM ddyyyy ", calendar).toString()
         return date
     }
     fun convertTimeStampToDate_EEE_MMM_yyyy(timestamp: String): String {
@@ -306,13 +306,13 @@ object CommonUtils {
     fun convertTimeStampToDate_EEE_MMM_MM_yyyy(timestamp: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("EEEE, MMM MM,yyyy ", calendar).toString()
+        val date = DateFormat.format("EEEE, MMM dd,yyyy ", calendar).toString()
         return date
     }
     fun convertTimeStampToDate_EEEE_MMM_MM_yyyy(timestamp: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("EEE, MMM MM,yyyy ", calendar).toString()
+        val date = DateFormat.format("EEE, MMM dd,yyyy ", calendar).toString()
         return date
     }
     fun convertTimeStampToDate_TT(timestamp: String): String {

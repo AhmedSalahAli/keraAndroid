@@ -63,8 +63,10 @@ class DailyReportAdapter(
     inner class ActivityViewHolder(var binding: ItemDailyReportActivitiesBinding) :
         BaseViewHolder(binding.root) {
         override fun onBind(position: Int) {
+
+            val dailyFiltered = dailyReportList?.get(position)?.options?.filter { it.selected }
             binding.recyclerViewActivities.adapter = ActivityAdapter(
-                dailyReportList?.get(position)!!,
+                dailyFiltered,
             )
             binding.textViewTitle.text = dailyReportList!![position].question!!.value
         }

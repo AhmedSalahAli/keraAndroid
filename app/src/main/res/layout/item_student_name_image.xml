@@ -32,11 +32,14 @@
             android:text="@{model.name}"
             android:textColor="@color/light_grey_8c99a7"
             android:textSize="@dimen/_8ssp"
+
+            android:maxEms="10"
+            android:maxLength="12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout38"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout38"
-            tools:text="Laura" />
+            tools:text="dfsfsdfsfsfsfsdfsdfsdfsdfdsf" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout38"

@@ -88,8 +88,9 @@
                 android:clickable="true"
                 app:tint="@color/white"
                 app:elevation="@dimen/_1sdp"
+                android:elevation="5dp"
                 app:srcCompat="@drawable/ic_baseline_image_24"
-                android:alpha="0.5"
+                android:alpha="0.9"
                 />
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline226"

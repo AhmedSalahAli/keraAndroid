@@ -1,12 +1,16 @@
 package com.app.kera.sideMenu
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.app.kera.R
+import com.app.kera.app.ForceUpdateChecker
 import com.app.kera.contactUs.ContactUsActivity
 import com.app.kera.databinding.SideMenuFragmentBinding
 import com.app.kera.login.ui.LoginActivity
@@ -81,8 +85,19 @@ class SideMenuFragment : Fragment() {
             viewDataBinding.textView11.text = resources.getString(R.string.log_out)
             viewDataBinding.imageView11.setImageResource(R.drawable.ic_logout)
         }
+        viewDataBinding.txtVersionCode.text = getAppVersion(requireContext())
     }
+    private fun getAppVersion(context: Context): String? {
+        var result = ""
+        try {
+            result = context.packageManager
+                .getPackageInfo(context.packageName, 0).versionName
+            result = result.replace("[a-zA-Z]|-".toRegex(), "")
+        } catch (e: PackageManager.NameNotFoundException) {
 
+        }
+        return "Kera v$result"
+    }
     companion object {
         fun newInstance() = SideMenuFragment()
     }

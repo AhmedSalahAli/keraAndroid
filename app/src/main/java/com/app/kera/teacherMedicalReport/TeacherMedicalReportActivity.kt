@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -76,11 +77,12 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
         getLatestReportsObservation()
         createReportClickListener()
         createReportObservation()
-        viewDataBinding.recyclerView9.setAdapter(viewDataBinding.studentsAdapter) // sets your own adapter
         viewDataBinding.recyclerView9.setLayoutManager(
-            StaggeredGridLayoutManager(3,
-            StaggeredGridLayoutManager.HORIZONTAL)
-        ) // sets LayoutManager
+            GridLayoutManager(this,
+                3, GridLayoutManager.HORIZONTAL,false)
+        )
+        viewDataBinding.recyclerView9.getRecyclerView().adapter = viewDataBinding.studentsAdapter // sets your own adapter
+ 
         viewDataBinding.recyclerView9.addVeiledItems(15)
         viewDataBinding.recyclerView9.veil()
 

@@ -60,7 +60,7 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
             remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_URL] =
                 "https://drive.google.com/file/d/1yhBp9RIbK8yh5ivtoJWGtLrDCfo2sXkR/view?usp=sharing"
             remoteConfigDefaults[ForceUpdateChecker.prod_base_url] =
-                "https://kera-test-app.herokuapp.com/"
+                "https://kera-app.herokuapp.com/"
             setDefaultsAsync(remoteConfigDefaults)
             fetchAndActivate().addOnCompleteListener { task ->
                 val updated = task.result
@@ -75,8 +75,8 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
     }
     override fun onCheckConfigParams(BaseUrl: String?) {
         if (BaseUrl != null) {
-            Configurations.BASE_URL = BaseUrl+API_PATH
-            //Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
+           Configurations.BASE_URL = BaseUrl+API_PATH
+          // Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
             Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
         }
         Log.i("BaseUrl","reach listner")
