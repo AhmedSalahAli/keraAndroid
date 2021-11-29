@@ -29,7 +29,10 @@ class ImagesListAdapter(var images: ArrayList<String?>) :
     inner class SliderAdapterVH(var sliderItemBinding: ItemHomeImagesBinding) :
         SliderViewAdapter.ViewHolder(sliderItemBinding.root) {
         fun onBind(position: Int) {
-            sliderItemBinding.path = images[position]
+            if (!images[position].isNullOrEmpty()){
+                sliderItemBinding.path = images[position]
+            }
+
         }
     }
 }

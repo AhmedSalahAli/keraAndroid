@@ -1,6 +1,9 @@
 package com.app.kera.meals.model
 
+import android.net.Uri
+import com.app.kera.R
 import com.app.kera.data.models.meals.ClassMealsResponseModel
+import com.app.kera.utils.CommonUtils
 
 class MealsItemUIModel(
     var id: String? = "",
@@ -17,11 +20,30 @@ class MealsItemUIModel(
                     it.id,
                     it.date,
                     it.title,
-                    it.images?.get(0),
+                    imageChecker(it.images),
                     it.mealName,
                     it.shortDescription
                 )
             } as ArrayList
         }
+
+        private fun imageChecker(images: List<String>?): String? {
+            return if (images != null) {
+                if (images.isNotEmpty()){
+
+                    images[0]
+
+                }else{
+                    val uri: Uri = Uri.parse("R.drawable.ic_meals_m")
+                    uri.toString()
+                }
+
+            }else{
+                val uri: Uri = Uri.parse("R.drawable.ic_meals_m")
+                uri.toString()
+            }
+        }
+
+
     }
 }
