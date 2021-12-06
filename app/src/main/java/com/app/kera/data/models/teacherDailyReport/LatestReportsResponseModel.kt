@@ -43,6 +43,9 @@ class LatestReportsResponseModel {
 
             @SerializedName("text")
             var text: String? = null
+
+            @SerializedName("isPublished")
+            var isPublished: Boolean? = false
         }
     }
 }

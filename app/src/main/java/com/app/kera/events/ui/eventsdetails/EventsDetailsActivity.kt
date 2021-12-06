@@ -108,6 +108,7 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
         viewDataBinding.imageView47.setOnClickListener {
             finish()
         }
+
         viewDataBinding.btnMorePhoto.setOnClickListener(View.OnClickListener {
             if (!Constants.moreImages.isNullOrEmpty() && Constants.moreImages != "") {
                 val i = Intent(Intent.ACTION_VIEW)
@@ -121,6 +122,11 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
             }
 
         })
+        if (!Constants.moreImages.isNullOrEmpty() && Constants.moreImages != "") {
+            viewDataBinding.btnMorePhoto.visibility =View.VISIBLE
+        } else {
+            viewDataBinding.btnMorePhoto.visibility =View.GONE
+        }
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {

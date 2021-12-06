@@ -106,6 +106,13 @@ class EventsActivity : AppCompatActivity() ,UpcomingListAdapter.CallBack,Previou
         eventsViewModel.upcomingEventList.observe(this, {
 
             viewDataBinding.recyclerView4.unVeil()
+            if (it.size > 0 ){
+                viewDataBinding.recyclerView4.visibility = View.VISIBLE
+                viewDataBinding.textView62.visibility = View.VISIBLE
+            }else{
+                viewDataBinding.recyclerView4.visibility = View.GONE
+                viewDataBinding.textView62.visibility = View.GONE
+            }
             viewDataBinding.adapter!!.UpcomingEventList = it
 
             viewDataBinding.adapter!!.notifyDataSetChanged()

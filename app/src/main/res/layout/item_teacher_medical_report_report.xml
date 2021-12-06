@@ -15,7 +15,9 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_20ssp"
         android:layout_marginBottom="15dp"
-        app:cardElevation="@dimen/_9sdp">
+        app:cardElevation="@dimen/_5sdp"
+        android:outlineAmbientShadowColor="#75F5F5F5"
+        android:outlineSpotShadowColor="#75F5F5F5">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,14 +62,22 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/sf_ui_display_regular"
-                android:text="@{model.details}"
                 android:textColor="#8C99A7"
                 android:textSize="@dimen/_8ssp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txt_published"
                 app:layout_constraintStart_toEndOf="@+id/imageView82"
                 app:layout_constraintTop_toBottomOf="@+id/textView140"
                 tools:text="Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky. Jovencillo emponzoñado de whisky, ¡qué figurota exhibes." />
 
+            <ImageView
+                android:id="@+id/txt_published"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_check_circle_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             <ImageView
                 android:id="@+id/imageView82"
                 android:layout_width="0.5dp"
@@ -92,6 +102,7 @@
                     android:id="@+id/imageView60"
                     android:layout_width="wrap_content"
                     android:layout_height="14dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -106,6 +117,7 @@
                     android:text="@{model.sent}"
                     android:textColor="#50C4FF"
                     android:textSize="@dimen/_9ssp"
+
                     app:layout_constraintBottom_toBottomOf="@+id/imageView60"
                     app:layout_constraintStart_toEndOf="@+id/imageView60"
                     app:layout_constraintTop_toTopOf="@+id/imageView60"

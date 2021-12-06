@@ -15,7 +15,8 @@ class LatestReportItemUIModel(
         var date: String? = "",
         var details: String? = "",
         var image: String? = "",
-        var sent: String? = ""
+        var sent: String? = "",
+        var isPublished :Boolean? =false
     )
 
     companion object {
@@ -30,7 +31,8 @@ class LatestReportItemUIModel(
                         CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyyTT(it.date!!),
                         it.text,
                         it.profileImage,
-                        "Sent to ${it.sent}"
+                        "Sent to ${it.sent}",
+                        it.isPublished
                     )
                 } as ArrayList
             )

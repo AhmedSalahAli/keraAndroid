@@ -31,4 +31,5 @@
     <color name="red_no">#F2818A</color>
     <color name="gray_nothing">#CFD6DE</color>
     <color name="pink_label">#F379C6</color>
+    <color name="success_label">#138115</color>
 </resources>
