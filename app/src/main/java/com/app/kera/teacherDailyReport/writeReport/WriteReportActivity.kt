@@ -1,8 +1,10 @@
 package com.app.kera.teacherDailyReport.writeReport
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -23,6 +25,7 @@ import com.app.kera.teacherDailyReport.writeReport.adapter.RadioListAdapter
 import com.app.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter
 import com.app.kera.utils.CommonUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.Serializable
 
 class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
     OuterAdapter.OuterInterface,RadioListAdapter.RadioCallBack {
@@ -87,15 +90,40 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
 
 
         viewDataBinding.imageViewPublishReport.setOnClickListener {
-            mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-            val requestModel = PublishReportRequestModel()
-            requestModel.reportId = reportID
-            viewModel.publishReport(requestModel)
-            finish()
+
+            val dialog = AlertDialog.Builder(this, 5)
+                .setCancelable(false)
+                .setIcon(R.drawable.kera_box)
+                .setTitle(resources.getString(R.string.publish))
+                .setMessage(resources.getString(R.string.publish_report_message))
+                .setNegativeButton(resources.getString(R.string.no)){
+                        dialog, which ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(
+                    resources.getString(R.string.yes)
+                ) { dialog, which ->
+                    mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+                    val requestModel = PublishReportRequestModel()
+                    requestModel.reportId = reportID
+                    viewModel.publishReport(requestModel)
+                    val returnIntent = Intent()
+                    setResult(RESULT_OK, returnIntent)
+                    finish()
+                }
+            dialog.show()
+
+
         }
 
         viewModel.publishReportResultBoolean.observe(this, {
             CommonUtils.hideLoading(mProgressDialog!!)
+            if (it){
+                showMessage(resources.getString(R.string.report_published_successfully))
+            }else{
+                showMessage(resources.getString(R.string.error_pulishinng))
+            }
+
         })
 
     }

@@ -108,9 +108,9 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         viewDataBinding.recyclerLatestReports.addVeiledItems(15)
         viewDataBinding.recyclerLatestReports.veil()
         viewDataBinding.recyclerLatestReports.setNestedScrollingEnabled(true);
-        viewDataBinding.recyclerLatestReports.getRecyclerView().setPadding(0,0,0,200)
+        viewDataBinding.recyclerLatestReports.getRecyclerView().setPadding(40,40,40,30)
         viewDataBinding.recyclerLatestReports .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerLatestReports.getVeiledRecyclerView().setPadding(0,0,0,200)
+        viewDataBinding.recyclerLatestReports.getVeiledRecyclerView().setPadding(40,40,40,30)
         viewDataBinding.recyclerLatestReports .getVeiledRecyclerView().clipToPadding = false
 
         viewModel.getClasses()
@@ -128,6 +128,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
 
         manager = LinearLayoutManager(this)
         viewDataBinding.recyclerLatestReports.setLayoutManager(manager)
+
         viewDataBinding.recyclerLatestReports.getRecyclerView().addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

@@ -9,4 +9,8 @@
     <string name="event_images">Event Images</string>
     <string name="location_updated">Location  Updates</string>
     <string name="no_more_images">Sorry there is no more images</string>
+    <string name="publish">Publish Daily Report</string>
+    <string name="publish_report_message">By pressing Yes this report will be published to all related parents...</string>
+    <string name="report_published_successfully">Report Published Successfully</string>
+    <string name="error_pulishinng">Error Publishing Report</string>
 </resources>
