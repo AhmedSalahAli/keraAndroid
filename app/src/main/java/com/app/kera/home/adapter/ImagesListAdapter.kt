@@ -3,7 +3,9 @@ package com.app.kera.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.app.kera.databinding.ItemHomeImagesBinding
+import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderViewAdapter
+import kotlin.coroutines.coroutineContext
 
 class ImagesListAdapter(var images: ArrayList<String?>) :
     SliderViewAdapter<ImagesListAdapter.SliderAdapterVH>() {

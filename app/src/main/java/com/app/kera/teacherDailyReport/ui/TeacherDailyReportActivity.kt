@@ -211,12 +211,15 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     private fun createReportObservation() {
         viewModel.createdReportResponseID.observe(this, {
             CommonUtils.hideLoading(mProgressDialog!!)
-            val intent = Intent(
-                this@TeacherDailyReportActivity,
-                WriteReportActivity()::class.java
-            )
-            intent.putExtra("reportID", it)
-            startActivity(intent)
+            if (!it.isNullOrEmpty()){
+                val intent = Intent(
+                    this@TeacherDailyReportActivity,
+                    WriteReportActivity()::class.java
+                )
+                intent.putExtra("reportID", it)
+                startActivity(intent)
+            }
+
         })
     }
 

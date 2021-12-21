@@ -1,6 +1,7 @@
 package com.app.kera.events.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.kera.databinding.ItemEventsSmallImageBinding
@@ -36,6 +37,11 @@ class PreviousListAdapter(
         BaseViewHolder(requestListItemBinding.root) {
         override fun onBind(position: Int) {
             requestListItemBinding.model = UpcomingEventList[position]
+            if (UpcomingEventList[position].address.isNullOrEmpty()){
+                requestListItemBinding.textView66.visibility = View.GONE
+            }else{
+                requestListItemBinding.textView66.visibility = View.VISIBLE
+            }
             requestListItemBinding.textView65.text = UpcomingEventList[position].eventDate?.let {
                 CommonUtils.convertIsoToDate(
                     it

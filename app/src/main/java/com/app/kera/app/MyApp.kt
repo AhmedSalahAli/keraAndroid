@@ -2,6 +2,7 @@ package com.app.kera.app
 
 import android.app.Application
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 
 import com.app.kera.utils.Configurations
 import com.app.kera.utils.Configurations.Companion.API_PATH
@@ -26,6 +27,7 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
 
     override fun onCreate() {
         super.onCreate()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         application = this
         ForceUpdateChecker.with(this).onCheckConfigParams(this).config()
 
@@ -75,8 +77,8 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
     }
     override fun onCheckConfigParams(BaseUrl: String?) {
         if (BaseUrl != null) {
-          // Configurations.BASE_URL = BaseUrl+API_PATH
-          Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
+           //Configurations.BASE_URL = BaseUrl+API_PATH
+         Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
             Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
         }
         Log.i("BaseUrl","reach listner")

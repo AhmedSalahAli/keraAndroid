@@ -2,10 +2,13 @@ package com.app.kera.home
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils.isEmpty
 import android.view.*
 import android.widget.AbsListView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -22,6 +25,7 @@ import com.app.kera.home.model.HomeNewsUIModel
 import com.app.kera.meals.MealsActivity
 import com.app.kera.medical.MedicalReportActivity
 import com.app.kera.qrCode.QRActivity
+import com.app.kera.schoolDetails.adapter.ImagesAdapter
 import com.app.kera.teacherDailyReport.ui.TeacherDailyReportActivity
 import com.app.kera.teacherMedicalReport.TeacherMedicalReportActivity
 import com.app.kera.utils.CommonUtils
@@ -29,7 +33,7 @@ import com.smarteist.autoimageslider.SliderAnimations
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment() ,ImagesAdapter.CallBack {
 
     var isScrolling: Boolean = false
     var currentItems: Int = 0
@@ -60,6 +64,7 @@ class HomeFragment : Fragment() {
         return viewDataBinding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -127,8 +132,8 @@ class HomeFragment : Fragment() {
         viewModel.homeNurseryData.observe(viewLifecycleOwner, {
           //  CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
-
-            val adapter = ImagesListAdapter(it.images)
+            it.images.removeIf(String::isEmpty);
+            val adapter = ImagesAdapter(it.images,requireContext(),this)
             viewDataBinding.recyclerView3.setSliderAdapter(adapter)
             viewDataBinding.recyclerView3.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
             viewDataBinding.recyclerView3.scrollTimeInSec = 4 //set scroll delay in seconds :
@@ -223,5 +228,9 @@ class HomeFragment : Fragment() {
 //            viewModel.saveProfileResponseToSharedPref(it)
             viewModel.getNewsList(it.associationId!!, page)
         })
+    }
+
+    override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
+
     }
 }

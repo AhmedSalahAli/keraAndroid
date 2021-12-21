@@ -121,6 +121,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/sf_ui_display_regular"
             android:text="@{model.address}"
+
             android:textColor="#152D4A"
             android:maxLines="1"
             android:maxEms="30"

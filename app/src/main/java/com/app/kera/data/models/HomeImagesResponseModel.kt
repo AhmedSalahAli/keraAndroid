@@ -44,7 +44,8 @@ class HomeImagesResponseModel {
             var link: String? = null
 
             @SerializedName("image")
-            var image: String? = null
+            var image: String = ""
+
         }
 
         class StudentsBean {

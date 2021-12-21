@@ -35,7 +35,7 @@ class SchoolDetailsActivity : AppCompatActivity(), PhonesAdapter.CallBack , Imag
     var likers :String = ""
     var lat : Double = 0.0
     var long :Double = 0.0
-     var AllImages : ArrayList<String> = ArrayList()
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,10 +67,10 @@ class SchoolDetailsActivity : AppCompatActivity(), PhonesAdapter.CallBack , Imag
             viewDataBinding.tagsAdapter!!.tags = it.tags
             viewDataBinding.tagsAdapter!!.notifyDataSetChanged()
 
-            it.images.removeIf(String::isEmpty);
+            it.images.removeIf(String::isEmpty)
             val adapter = ImagesAdapter(it.images, this,this)
             viewDataBinding.recyclerView.setSliderAdapter(adapter)
-            AllImages = it.images
+
 
 
             viewDataBinding.phonesAdapter!!.phones = it.phoneNumbers

@@ -12,7 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.app.kera.R
@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.viewModel = viewModel

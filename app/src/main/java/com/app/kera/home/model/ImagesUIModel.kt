@@ -8,7 +8,7 @@ class ImagesUIModel(
     var slogan: String? = "",
     var type: String? = "",
     var logo: String? = "",
-    var images: ArrayList<String?>
+    var images: ArrayList<String>
 ) {
     companion object {
         fun convertResponseModelToUIModel(responseModel: HomeImagesResponseModel.DataBean): ImagesUIModel {
