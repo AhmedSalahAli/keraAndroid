@@ -4,7 +4,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils.isEmpty
 import android.view.*
 import android.widget.AbsListView
 import android.widget.Toast
@@ -25,7 +24,7 @@ import com.app.kera.home.model.HomeNewsUIModel
 import com.app.kera.meals.MealsActivity
 import com.app.kera.medical.MedicalReportActivity
 import com.app.kera.qrCode.QRActivity
-import com.app.kera.schoolDetails.adapter.ImagesAdapter
+
 import com.app.kera.teacherDailyReport.ui.TeacherDailyReportActivity
 import com.app.kera.teacherMedicalReport.TeacherMedicalReportActivity
 import com.app.kera.utils.CommonUtils
@@ -33,7 +32,7 @@ import com.smarteist.autoimageslider.SliderAnimations
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment() ,ImagesAdapter.CallBack {
+class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
 
     var isScrolling: Boolean = false
     var currentItems: Int = 0
@@ -133,7 +132,7 @@ class HomeFragment : Fragment() ,ImagesAdapter.CallBack {
           //  CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
             it.images.removeIf(String::isEmpty);
-            val adapter = ImagesAdapter(it.images,requireContext(),this)
+            val adapter = ImagesListAdapter(it.images,requireContext(),this)
             viewDataBinding.recyclerView3.setSliderAdapter(adapter)
             viewDataBinding.recyclerView3.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
             viewDataBinding.recyclerView3.scrollTimeInSec = 4 //set scroll delay in seconds :

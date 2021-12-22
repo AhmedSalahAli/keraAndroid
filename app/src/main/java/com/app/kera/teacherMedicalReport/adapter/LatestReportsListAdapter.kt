@@ -39,12 +39,18 @@ class LatestReportsListAdapter(
         override fun onBind(position: Int) {
             item.model = reportsList[position]
             if (reportsList[position].isPublished!!){
-               item.txtPublished.visibility = View.VISIBLE
+               item.txtPublished.setImageResource(R.drawable.ic_baseline_check_circle_24_success)
                 item.textView141.setText(R.string.published)
-                item.textView141.setTextColor(item.root.resources.getColor(R.color.success_label))
+                item.txtIsPublished.setText(R.string.published)
+                item.txtIsPublished.setTextColor(item.root.resources.getColor(R.color.teal_700))
+                item.textView141.setTextColor(item.root.resources.getColor(R.color.teal_700))
             }else{
-                item.txtPublished.visibility = View.GONE
+                item.txtPublished.setImageResource(R.drawable.ic_baseline_check_circle_24)
+
+                item.txtIsPublished.setText(R.string.draft)
+                item.txtIsPublished.setTextColor(item.root.resources.getColor(R.color.red_no))
                 item.textView141.text = reportsList[position].details
+
                 item.textView141.setTextColor(item.root.resources.getColor(R.color.light_grey_8c99a7))
             }
         }

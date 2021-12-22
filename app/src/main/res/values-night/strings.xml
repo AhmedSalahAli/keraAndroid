@@ -14,4 +14,5 @@
     <string name="report_published_successfully">Report Published Successfully</string>
     <string name="error_pulishinng">Error Publishing Report</string>
     <string name="published">Published</string>
+    <string name="draft">Draft</string>
 </resources>
