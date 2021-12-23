@@ -1,5 +1,6 @@
 package com.app.kera.education
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -55,9 +56,10 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
     fun getUserType() : String{
         return appRepo.getUserTypeFromSharedPref()
     }
+    @SuppressLint("NullSafeMutableLiveData")
     fun getSelectedChildDataFromSharedPref(): StudentsData? {
         var response = appRepo.getSelectedChildData()
-        selectedUser.value = response!!
+        selectedUser.value = response
         return appRepo.getSelectedChildData()
     }
     fun getTeacheerProfile(): TeacherProfileUIModel {
