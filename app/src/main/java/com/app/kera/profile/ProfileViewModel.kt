@@ -1,5 +1,6 @@
 package com.app.kera.profile
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -33,11 +34,16 @@ class ProfileViewModel(val appRepo: AppRepo) : ViewModel() {
         appRepo.saveSelectedChildData(studentData)
     }
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun getSelectedChildDataFromSharedPref(): StudentsData? {
         val response = appRepo.getSelectedChildData()
-        selectedUser.value = response!!
-        selectedUser.value!!.studentCode = "Code:" + response.studentCode
-        selectedUser.value!!.className = "Class:" + response.className
+        selectedUser.value = response
+        if (response != null) {
+            selectedUser.value!!.studentCode = "Code:" + response.studentCode
+        }
+        if (response != null) {
+            selectedUser.value!!.className = "Class:" + response.className
+        }
         return response
     }
     fun getAppRepoInstance() :AppRepo{

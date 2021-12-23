@@ -1,5 +1,6 @@
 package com.app.kera.medical
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -46,9 +47,10 @@ class MedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
     fun getAppRepoInstance() :AppRepo{
         return appRepo
     }
+    @SuppressLint("NullSafeMutableLiveData")
     fun getSelectedChildDataFromSharedPref(): StudentsData? {
         var response = appRepo.getSelectedChildData()
-        selectedUser.value = response!!
+        selectedUser.value = response
         return appRepo.getSelectedChildData()
     }
 }

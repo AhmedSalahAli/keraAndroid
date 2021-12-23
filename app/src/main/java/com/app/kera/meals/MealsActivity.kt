@@ -67,7 +67,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
             viewDataBinding.imageViewProfile.visibility = View.GONE
 
         } else {
-            viewModel.getDates(viewModel.getSelectedChildDataFromSharedPref()?.classId!!)
+            viewModel.getSelectedChildDataFromSharedPref()?.classId?.let { viewModel.getDates(it) }
             viewModel.getProfileData()
             viewDataBinding.imageViewExchange.visibility = View.VISIBLE
             viewDataBinding.imageViewProfile.visibility = View.VISIBLE

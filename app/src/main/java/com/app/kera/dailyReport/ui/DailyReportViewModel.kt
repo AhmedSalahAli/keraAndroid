@@ -1,5 +1,6 @@
 package com.app.kera.dailyReport.ui
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -67,9 +68,10 @@ class DailyReportViewModel(var appRepo: AppRepo) : ViewModel() {
         return appRepo
     }
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun getSelectedChildDataFromSharedPref(): StudentsData? {
         var response = appRepo.getSelectedChildData()
-        selectedUser.value = response!!
+        selectedUser.value = response
         return appRepo.getSelectedChildData()
     }
 }
