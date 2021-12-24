@@ -114,7 +114,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         viewDataBinding.recyclerLatestReports .getVeiledRecyclerView().clipToPadding = false
 
         viewModel.getClasses()
-        viewModel.getLatestReports(page)
+
         checkNumberOfSelectedStudents()
         searchClickListener()
         messageObserver()
