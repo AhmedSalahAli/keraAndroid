@@ -1,5 +1,6 @@
 package com.app.kera.sideMenu
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,6 +15,8 @@ import com.app.kera.app.ForceUpdateChecker
 import com.app.kera.contactUs.ContactUsActivity
 import com.app.kera.databinding.SideMenuFragmentBinding
 import com.app.kera.login.ui.LoginActivity
+import com.app.kera.teacherDailyReport.model.CreateReportRequestModel
+import com.app.kera.utils.CommonUtils
 import com.app.kera.utils.Constants.Companion.aboutLinkApp
 import com.app.kera.utils.Constants.Companion.privacyPolicyLinkApp
 import com.app.kera.utils.Constants.Companion.termsLinkApp
@@ -52,7 +55,23 @@ class SideMenuFragment : Fragment() {
         }
 
         viewDataBinding.constraintLogout.setOnClickListener {
-            viewModel.logout()
+
+            val dialog = AlertDialog.Builder(requireContext(), 5)
+                .setCancelable(false)
+                .setIcon(R.drawable.kera_box)
+                .setTitle(resources.getString(R.string.log_out))
+                .setMessage(resources.getString(R.string.log_out_q))
+                .setNegativeButton(resources.getString(R.string.cancel)){
+                        dialog, which ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(
+                    resources.getString(R.string.log_out)
+                ) { dialog, which ->
+                    viewModel.logout()
+                }
+            dialog.show()
+
         }
         viewModel.loggedOut.observe(viewLifecycleOwner, {
             var intent = Intent(context, LoginActivity::class.java)

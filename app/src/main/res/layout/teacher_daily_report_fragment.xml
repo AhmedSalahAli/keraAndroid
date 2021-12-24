@@ -309,10 +309,10 @@
                     <com.skydoves.androidveil.VeilRecyclerFrameView
                         android:id="@+id/recycler_latest_reports"
                         android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_height="@dimen/_300sdp"
                         android:layout_marginTop="8dp"
                         android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
-                        app:layout_constraintBottom_toBottomOf="parent"
+
                         android:orientation="vertical"
                         app:adapter="@{latestReportsAdapter}"
 

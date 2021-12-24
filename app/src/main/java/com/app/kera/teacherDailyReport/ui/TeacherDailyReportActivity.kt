@@ -1,5 +1,6 @@
 package com.app.kera.teacherDailyReport.ui
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -24,6 +25,7 @@ import com.app.kera.R
 import com.app.kera.databinding.TeacherDailyReportFragmentBinding
 import com.app.kera.teacherDailyReport.adapter.ClassesListAdapter
 import com.app.kera.teacherDailyReport.model.CreateReportRequestModel
+import com.app.kera.teacherDailyReport.model.PublishReportRequestModel
 import com.app.kera.teacherDailyReport.writeReport.WriteReportActivity
 import com.app.kera.teacherMedicalReport.adapter.LatestReportsListAdapter
 import com.app.kera.teacherMedicalReport.adapter.StudentsListAdapter
@@ -226,10 +228,30 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     private fun createReportClickListener() {
         viewDataBinding.imageViewWriteReport.setOnClickListener {
             if (selectedStudents.size >0){
-                mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-                var createReportRequestModel = CreateReportRequestModel()
-                createReportRequestModel.students = selectedStudents
-                viewModel.createDailyReport(createReportRequestModel)
+
+
+                val dialog = AlertDialog.Builder(this, 5)
+                    .setCancelable(false)
+                    .setIcon(R.drawable.kera_box)
+                    .setTitle(resources.getString(R.string.creat_report))
+                    .setMessage(resources.getString(R.string.create_new_report_q))
+                    .setNegativeButton(resources.getString(R.string.no)){
+                            dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton(
+                        resources.getString(R.string.yes)
+                    ) { dialog, which ->
+                        mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+                        var createReportRequestModel = CreateReportRequestModel()
+                        createReportRequestModel.students = selectedStudents
+                        viewModel.createDailyReport(createReportRequestModel)
+                    }
+                dialog.show()
+
+
+
+
             }else{
                 showMessage(getString(R.string.please_select_at_least_one_student))
             }

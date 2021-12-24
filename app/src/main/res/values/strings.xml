@@ -140,5 +140,9 @@
     <string name="error_pulishinng">Error Publishing Report</string>
     <string name="published">Published</string>
     <string name="draft">Draft</string>
+    <string name="creat_report">Create new Report ?</string>
+    <string name="create_new_report_q">By pressing yes you will create a new one to the selected students...</string>
+    <string name="log_out_q">Are you sure ?</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
