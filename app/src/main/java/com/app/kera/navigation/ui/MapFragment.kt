@@ -129,6 +129,7 @@ class MapFragment : Fragment(), LocationListener {
                 addCustomMarkerFromURL(school)
                 schoolsLocations.add(latLng)
                 Log.e("logos", "l : " + school.image);
+                Log.e("locations ", "l : " + latLng.latitude+" "+latLng.longitude);
             }
         })
     }
@@ -150,7 +151,7 @@ class MapFragment : Fragment(), LocationListener {
                 ) {
                     val marker: Marker = mMap!!.addMarker(
                         MarkerOptions().title(school.name)
-                            .position(LatLng(school.lat, school.lat))
+                            .position(LatLng(school.lat, school.long))
 
                             .icon(
                                 BitmapDescriptorFactory.fromBitmap(

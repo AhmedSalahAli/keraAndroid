@@ -23,6 +23,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.Fab_Bottom_app_bar.NoActionBar" >
 
@@ -38,8 +39,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.app.kera.attendanceHistory.AttendanceHistory" />
-        <activity android:name="com.app.kera.qrCode.QRActivity" />
+        <activity android:name="com.app.kera.attendanceHistory.AttendanceHistory"  android:screenOrientation="portrait"/>
+        <activity android:name="com.app.kera.qrCode.QRActivity"  android:screenOrientation="portrait"/>
 
         <service
             android:name="com.app.kera.data.network.MyFirebaseMessagingService"
@@ -50,12 +51,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.app.kera.keraLuncher.KeraConfigrationsLuncher" />
-        <activity android:name="com.app.kera.visitor.SideViewMain" />
+        <activity android:name="com.app.kera.keraLuncher.KeraConfigrationsLuncher" android:screenOrientation="portrait" />
+        <activity android:name="com.app.kera.visitor.SideViewMain" android:screenOrientation="portrait" />
         <activity
             android:name="com.app.kera.addLocation.AddLocation"
-            android:theme="@style/Theme.Fab_Bottom_app_bar.fullscreen" />
-        <activity android:name="com.app.kera.dailyReport.ui.DailyReportActivity" />
+            android:theme="@style/Theme.Fab_Bottom_app_bar.fullscreen"  android:screenOrientation="portrait"/>
+        <activity android:name="com.app.kera.dailyReport.ui.DailyReportActivity" android:screenOrientation="portrait" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -67,41 +68,45 @@
         <activity
             android:name="com.app.kera.teacherDailyReport.writeReport.WriteReportActivity"
             android:label="@string/title_activity_write_report"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.app.kera.events.ui.eventsdetails.EventsDetailsActivity" />
-        <activity android:name="com.app.kera.events.ui.EventsActivity" />
-        <activity android:name="com.app.kera.registration.screen4.Registration4Activity" />
-        <activity android:name="com.app.kera.registration.screen3.Registration3Activity" />
+        <activity android:name="com.app.kera.events.ui.eventsdetails.EventsDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.app.kera.events.ui.EventsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.app.kera.registration.screen4.Registration4Activity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.app.kera.registration.screen3.Registration3Activity" android:screenOrientation="portrait" />
         <activity
             android:name="com.app.kera.registration.screen1.Registration1Activity"
-            android:theme="@style/Theme.Fab_Bottom_app_bar.NoActionBar" />
+            android:theme="@style/Theme.Fab_Bottom_app_bar.NoActionBar"  android:screenOrientation="portrait"/>
         <activity
             android:name="com.app.kera.pincode.PinCodeActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_pin_code"
             android:theme="@style/Theme.Fab_Bottom_app_bar.NoActionBar" />
-        <activity android:name="com.app.kera.main.ui.MainActivity" />
+        <activity android:name="com.app.kera.main.ui.MainActivity"  android:screenOrientation="portrait" />
         <activity
             android:name="com.app.kera.login.ui.LoginActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" /> <!-- <activity android:name=".main.ui.MainActivity" /> -->
-        <activity android:name="com.app.kera.registration.screen2.Registration2Activity" />
-        <activity android:name="com.app.kera.meals.MealsActivity" />
-        <activity android:name="com.app.kera.medical.MedicalReportActivity" />
-        <activity android:name="com.app.kera.education.EducationActivity" />
-        <activity android:name="com.app.kera.schoolDetails.ui.SchoolDetailsActivity" />
+        <activity android:name="com.app.kera.registration.screen2.Registration2Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.app.kera.meals.MealsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.app.kera.medical.MedicalReportActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.app.kera.education.EducationActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.app.kera.schoolDetails.ui.SchoolDetailsActivity" android:screenOrientation="portrait" />
         <activity
             android:name="com.app.kera.meals.details.MealsDetailsActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.app.kera.splash.ui.SplashActivity" >
+            android:windowSoftInputMode="adjustResize"  android:screenOrientation="portrait" />
+        <activity android:name="com.app.kera.splash.ui.SplashActivity"  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.app.kera.teacherMedicalReport.TeacherMedicalReportActivity" />
-        <activity android:name="com.app.kera.teacherDailyReport.ui.TeacherDailyReportActivity" />
-        <activity android:name="com.app.kera.contactUs.ContactUsActivity" />
-        <activity android:name="com.app.kera.teacherMedicalReport.writeMedicalReport.WriteMedicalReportActivity" />
+        <activity android:name="com.app.kera.teacherMedicalReport.TeacherMedicalReportActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.app.kera.teacherDailyReport.ui.TeacherDailyReportActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.app.kera.contactUs.ContactUsActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.app.kera.teacherMedicalReport.writeMedicalReport.WriteMedicalReportActivity" android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.version"
