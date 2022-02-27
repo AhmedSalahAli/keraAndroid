@@ -50,12 +50,12 @@ class MoodListAdapter(
         return moodList.options!!.size
     }
     override fun getItemViewType(position: Int): Int {
-        if (!moodList.options?.get(position)?.icon.isNullOrEmpty()) {
-
+        if (moodList.questionType == 2){
             return mood_view_type
-        } else {
+        }else{
             return second_view_type
         }
+
     }
     private var lastCheckedPosition = -1
     internal inner class RadioViewHolder(var item: ItemQuestionRadioBinding) :

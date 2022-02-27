@@ -1,8 +1,9 @@
 package com.app.kera.data.models.teacherDailyReport
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class DailyReportResponseModel {
+class DailyReportResponseModel : Serializable{
     @SerializedName("message")
     var message: String? = null
 
@@ -12,7 +13,7 @@ class DailyReportResponseModel {
     @SerializedName("data")
     var data: DataBean? = null
 
-    class DataBean {
+    class DataBean : Serializable {
         @SerializedName("status")
         var status = 0
 
@@ -22,7 +23,7 @@ class DailyReportResponseModel {
         @SerializedName("answers")
         var answers: ArrayList<AnswersBean>? = null
 
-        class StudentsBean {
+        class StudentsBean : Serializable{
             @SerializedName("_id")
             var id: String? = null
 
@@ -33,7 +34,7 @@ class DailyReportResponseModel {
             var profileImage: String? = null
         }
 
-        class AnswersBean {
+        class AnswersBean : Serializable {
             @SerializedName("question")
             var question: QuestionBean? = null
 
@@ -42,6 +43,9 @@ class DailyReportResponseModel {
 
             @SerializedName("answer")
             var answer: String? = null
+
+            @SerializedName("questionType")
+            var questionType: Int? = 0
 
             @SerializedName("options")
             var options: List<OptionsBean>? = null
@@ -54,7 +58,7 @@ class DailyReportResponseModel {
                 var value: String? = null
             }
 
-            class OptionsBean {
+        public    class OptionsBean : Serializable{
                 @SerializedName("selected")
                 var selected = false
 

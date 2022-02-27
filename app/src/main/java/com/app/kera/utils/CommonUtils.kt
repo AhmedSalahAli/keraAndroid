@@ -211,13 +211,19 @@ object CommonUtils {
     fun convertTimeStampToDate_dd(timestamp: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("dd", calendar).toString()
+        val date = DateFormat.format("d", calendar).toString()
+        return date
+    }
+    fun convertTimeStampToDate_EE(timestamp: String): String {
+        val calendar = Calendar.getInstance(Locale.ENGLISH)
+        calendar.timeInMillis = timestamp.toLong()
+        val date = DateFormat.format("EEE", calendar).toString()
         return date
     }
     fun convertTimeStampToDate_mm(timestamp: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("E", calendar).toString()
+        val date = DateFormat.format("MMM", calendar).toString()
         return date
     }
     fun convertTimeStampToEe(iso: String): String {

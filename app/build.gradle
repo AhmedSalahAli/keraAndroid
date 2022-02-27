@@ -15,8 +15,8 @@ android {
         applicationId 'com.app.kera'
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 16
-        versionName "1.1.7"
+        versionCode 19
+        versionName "1.1.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

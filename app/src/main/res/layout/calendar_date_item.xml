@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view_date_indicator"
         android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="@dimen/_55sdp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/rounded_blue_d2dce8_stroke_97b4d8"
         android:orientation="vertical">
@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/_3sdp"
+
             android:fontFamily="@font/sf_ui_display_regular"
             android:gravity="center"
             android:text="@{viewModel.displayDateDay}"
@@ -32,24 +32,43 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date_picker_dayS"
             tools:text="14" />
 
         <TextView
-            android:id="@+id/tv_date_picker_day"
+            android:id="@+id/tv_date_picker_dayS"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginBottom="@dimen/_3sdp"
             android:fontFamily="@font/sf_ui_display_regular"
             android:gravity="center"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="@{viewModel.dispayDateDayS.split(` `)[0]}"
+            android:textColor="#1A2F50"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:text="M" />
+
+        <TextView
+            android:id="@+id/tv_date_picker_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sf_ui_display_regular"
+            android:gravity="center"
             android:text="@{viewModel.displayDateMonth.split(` `)[0]}"
             android:textColor="#1A2F50"
             android:textSize="@dimen/_9ssp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date_picker_day_week"
             tools:text="M" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

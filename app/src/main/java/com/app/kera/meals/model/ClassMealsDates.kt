@@ -5,6 +5,7 @@ import com.app.kera.utils.CommonUtils.convertTimeStampToDate_mm_dd_yyyy
 
 class ClassMealsDates(
     var displayDateDay: String,
+    var dispayDateDayS:String,
     var displayDateMonth: String,
     var actualDate: String
 ){
@@ -13,7 +14,9 @@ class ClassMealsDates(
             return dates.map {
                 ClassMealsDates(
                     CommonUtils.convertTimeStampToDate_dd(it),
+                    CommonUtils.convertTimeStampToDate_EE(it),
                     CommonUtils.convertTimeStampToDate_mm(it),
+
                     convertTimeStampToDate_mm_dd_yyyy(it)
                 )
             } as ArrayList

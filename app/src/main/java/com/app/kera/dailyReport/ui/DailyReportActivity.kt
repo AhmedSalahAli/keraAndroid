@@ -2,6 +2,7 @@ package com.app.kera.dailyReport.ui
 
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -23,6 +24,7 @@ import com.app.kera.data.models.DisplayDailyReportResponseModel
 import com.app.kera.databinding.ActivityDailyReportBinding
 import com.app.kera.profile.StudentsData
 import com.app.kera.profile.adapter.ChildrenAdapter
+import com.app.kera.teacherDailyReport.writeReport.WriteReportActivity
 import com.app.kera.utils.CommonUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -352,6 +354,15 @@ class DailyReportActivity : AppCompatActivity(), ChildrenAdapter.CallBack,
 
         viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
         // viewModel.fromDate.value!!
+    }
+
+    override fun onReportClick(report: DisplayDailyReportResponseModel.DataBean.DocsBean) {
+        val intent = Intent(
+            this@DailyReportActivity,
+            ReportDetails()::class.java
+        )
+        intent.putExtra("report", report)
+        startActivity(intent)
     }
 
     override fun onReplyClicked(id: String) {

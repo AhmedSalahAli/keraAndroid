@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".dailyReport.ui.DailyReportActivity">
+    <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".dailyReport.ui.DailyReportActivity">
 
-    <data>
+        <data>
 
-        <variable
-            name="viewModel"
-            type="com.app.kera.dailyReport.ui.DailyReportViewModel" />
+            <variable
+                name="viewModel"
+                type="com.app.kera.dailyReport.ui.DailyReportViewModel" />
 
-        <variable
-            name="adapter"
-            type="com.app.kera.dailyReport.adapter.DailyReportOuterAdapter" />
+            <variable
+                name="adapter"
+                type="com.app.kera.dailyReport.adapter.DailyReportOuterAdapter" />
 
-        <variable
-            name="childrenAdapter"
-            type="com.app.kera.profile.adapter.ChildrenAdapter" />
-    </data>
+            <variable
+                name="childrenAdapter"
+                type="com.app.kera.profile.adapter.ChildrenAdapter" />
+        </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,8 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/CustomCardCorners"
-            app:cardElevation="@dimen/_20sdp"
-
+            app:cardElevation="@dimen/_8sdp"
+            android:outlineSpotShadowColor="@color/pink_label"
+            android:outlineAmbientShadowColor="@color/pink_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

@@ -109,6 +109,7 @@
             app:veilLayout_baseAlpha="0.6"
             app:veilLayout_highlightAlpha="1.0"
             app:veilLayout_dropOff="0.5"
+
             app:veilLayout_radius="6dp"
             android:layout_marginTop="29dp"
             android:layout_marginStart="12dp"
@@ -120,7 +121,7 @@
             android:id="@+id/dates_constraint"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_100sdp"
-
+            android:paddingTop="@dimen/_5sdp"
             android:background="@drawable/rounded_grey_d2dce8_grey_stroke"
             android:elevation="10dp"
           >
@@ -130,8 +131,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="32dp"
                 android:orientation="horizontal"
                 android:overScrollMode="ifContentScrolls"
                 app:adapter="@{datesAdapter}"
@@ -139,6 +140,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:spanCount="1"
                 tools:listitem="@layout/calendar_date_item" />
 

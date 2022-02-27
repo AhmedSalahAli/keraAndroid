@@ -5,6 +5,7 @@ import appScreensModule
 import com.app.kera.attendanceHistory.di.AttendanceModule
 import com.app.kera.contactUs.di.contactUsModule
 import com.app.kera.dailyReport.di.dailyReportModule
+import com.app.kera.dailyReport.di.reportDetailsModule
 import com.app.kera.data.network.apiRepoModule
 import com.app.kera.education.di.educationModule
 import com.app.kera.events.di.eventsModule
@@ -52,6 +53,7 @@ var allFeatures = listOf(
     apiRepoModule,
     teacherDailyReportModule,
     dailyReportModule,
-    sideMenuModule
+    sideMenuModule,
+    reportDetailsModule
 
 )

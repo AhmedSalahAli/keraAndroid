@@ -41,11 +41,11 @@ class DailyReportOuterAdapter(
             binding.model = dailyReportList[position]
             dailyReportList[position].dateConverted =
                 CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyyTT(dailyReportList[position].date!!)
-            binding.recycler.adapter = DailyReportAdapter(dailyReportList[position].answers)
-            binding.textViewReply.setOnClickListener {
-                callBack.onReplyClicked(dailyReportList[position].id!!)
-            }
-            binding.beforeTextViewDate.text =  CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyyTT(dailyReportList[position].date!!)
+//            binding.recycler.adapter = DailyReportAdapter(dailyReportList[position].answers)
+//            binding.textViewReply.setOnClickListener {
+//                callBack.onReplyClicked(dailyReportList[position].id!!)
+//            }
+          //  binding.beforeTextViewDate.text =  CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyyTT(dailyReportList[position].date!!)
             binding.textViewDate.text =  CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyy(dailyReportList[position].date!!)
             binding.textViewTime.text =  CommonUtils.convertTimeStampToDate_TT(dailyReportList[position].date!!)
             for (it in dailyReportList[position].answers!!){
@@ -53,34 +53,38 @@ class DailyReportOuterAdapter(
                     binding.txtDesc.text = it.answer
                 }
             }
-            binding.iconExpand.setOnClickListener({
-                if (binding.beforeExpand.isVisible) {
-
-                    binding.beforeExpand.visibility = View.GONE
-                    binding.afterExpand.visibility = View.VISIBLE
-
-                   // CommonUtilsJava.expand(binding.outerReportItem, binding.afterExpand, binding.beforeExpand)
-
-
-                } else {
-                    binding.beforeExpand.visibility = View.VISIBLE
-                    binding.afterExpand.visibility = View.GONE
-                }
+            binding.root.setOnClickListener(View.OnClickListener {
+                callBack.onReportClick(dailyReportList[position])
             })
-            binding.iconExpand2.setOnClickListener({
-                if (binding.beforeExpand.isVisible) {
-                    binding.beforeExpand.visibility = View.GONE
-                    binding.afterExpand.visibility = View.VISIBLE
-                } else {
-                    binding.beforeExpand.visibility = View.VISIBLE
-                    binding.afterExpand.visibility = View.GONE
-
-                }
-            })
+//            binding.iconExpand.setOnClickListener({
+//                if (binding.beforeExpand.isVisible) {
+//
+//                    binding.beforeExpand.visibility = View.GONE
+//                    binding.afterExpand.visibility = View.VISIBLE
+//
+//                   // CommonUtilsJava.expand(binding.outerReportItem, binding.afterExpand, binding.beforeExpand)
+//
+//
+//                } else {
+//                    binding.beforeExpand.visibility = View.VISIBLE
+//                    binding.afterExpand.visibility = View.GONE
+//                }
+//            })
+//            binding.iconExpand2.setOnClickListener({
+//                if (binding.beforeExpand.isVisible) {
+//                    binding.beforeExpand.visibility = View.GONE
+//                    binding.afterExpand.visibility = View.VISIBLE
+//                } else {
+//                    binding.beforeExpand.visibility = View.VISIBLE
+//                    binding.afterExpand.visibility = View.GONE
+//
+//                }
+//            })
         }
     }
 
     interface OnReplyClicked {
+        fun onReportClick(report :DisplayDailyReportResponseModel.DataBean.DocsBean );
         fun onReplyClicked(id: String)
     }
 
