@@ -7,7 +7,8 @@ class ClassMealsDates(
     var displayDateDay: String,
     var dispayDateDayS:String,
     var displayDateMonth: String,
-    var actualDate: String
+    var actualDate: String,
+    var dateTimestamp: Long
 ){
     companion object{
         fun convertDate(dates : ArrayList<String>) : ArrayList<ClassMealsDates>{
@@ -16,8 +17,8 @@ class ClassMealsDates(
                     CommonUtils.convertTimeStampToDate_dd(it),
                     CommonUtils.convertTimeStampToDate_EE(it),
                     CommonUtils.convertTimeStampToDate_mm(it),
-
-                    convertTimeStampToDate_mm_dd_yyyy(it)
+                    convertTimeStampToDate_mm_dd_yyyy(it),
+                    it.toLong()
                 )
             } as ArrayList
         }

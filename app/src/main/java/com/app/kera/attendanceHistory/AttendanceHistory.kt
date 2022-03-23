@@ -82,7 +82,7 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
         viewDataBinding.imageViewBack.setOnClickListener {
             finish()
         }
-        viewModel.attendanceList.observe(this, {
+        viewModel.attendanceList.observe(this) {
             // CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.recyclerAttendance.unVeil()
 
@@ -90,24 +90,25 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
 
             totalNumberOfPages = 1
 
-            viewDataBinding.listAdapter = AttendanceListAdapter(it,this)
+            viewDataBinding.listAdapter = AttendanceListAdapter(it, this)
             viewDataBinding.listAdapter!!.notifyDataSetChanged()
-        })
+        }
         viewModel.getDates()
-        viewModel.datesListLiveData.observe(this, {
+        viewModel.datesListLiveData.observe(this) {
             viewDataBinding.veilLayout.unVeil()
 
             viewDataBinding.datesAdapter!!.datesList = it
 
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
 
-        })
+        }
 
     }
 
-    override fun onDateClick(date: String) {
+    override fun onDateClick(position: Int,date: String) {
         viewDataBinding.recyclerAttendance.veil()
         viewModel.getAttendanceList(page,date)
+
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {

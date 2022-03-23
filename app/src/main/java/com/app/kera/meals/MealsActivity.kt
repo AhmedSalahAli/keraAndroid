@@ -13,12 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.kera.R
 import com.app.kera.databinding.ActivityMealsBinding
 import com.app.kera.education.adapter.DateAdapter
 import com.app.kera.meals.adapter.MealsListAdapter
 import com.app.kera.meals.details.MealsDetailsActivity
+import com.app.kera.meals.model.ClassMealsDates
 import com.app.kera.profile.StudentsData
 import com.app.kera.profile.adapter.ChildrenAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,9 +50,14 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         window.statusBarColor = ContextCompat.getColor(this, R.color.white);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
+
+
         viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this,this)
         viewDataBinding.mealsAdapter = MealsListAdapter(ArrayList(), this)
         viewDataBinding.childrenAdapter = ChildrenAdapter(ArrayList(), this,viewModel.getAppRepoInstance())
+
+
+
 
         accessType = viewModel.getUserType()
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
@@ -92,72 +99,86 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
                 stateOfChildrenFrame(true)
             }
         }
-        viewModel.profileUIModel.observe(this, {
+        viewModel.profileUIModel.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.childrenAdapter!!.children = it.students!!
             viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
-            if (it.students!!.size ==1){
-                viewDataBinding.imageViewExchange.visibility =  View.GONE
-            }else{
-                viewDataBinding.imageViewExchange.visibility =  View.VISIBLE
+            if (it.students!!.size == 1) {
+                viewDataBinding.imageViewExchange.visibility = View.GONE
+            } else {
+                viewDataBinding.imageViewExchange.visibility = View.VISIBLE
 
             }
-        })
-        viewModel.apiError.observe(this, {
+        }
+        viewModel.apiError.observe(this) {
             viewDataBinding.recyclerMeals.unVeil()
             showNoData()
             viewDataBinding.datesAdapter!!.datesList.clear()
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
-        })
-        viewModel.apiErrorDates.observe(this, {
+        }
+        viewModel.apiErrorDates.observe(this) {
             viewDataBinding.veilLayout.unVeil()
             viewDataBinding.datesAdapter!!.datesList.clear()
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
-        })
+        }
 
-        viewModel.datesListLiveData.observe(this, {
+        viewModel.datesListLiveData.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
-            if (it.size > 0 ){
+            if (it.size > 0) {
                 viewDataBinding.datesAdapter!!.datesList = it
+                run breaker@{
+                    it.forEach { it1 ->
+                        if (it1.dateTimestamp >= System.currentTimeMillis()) {
+                            viewDataBinding.datesAdapter!!.selectedItem=it.indexOf(it1)
+                            actualeDate = it1.actualDate
+                            viewDataBinding.datesRecycler.smoothScrollToPosition(it.indexOf(it1))
+                            return@breaker
+                        }
 
-
-
+                    }
+                }
+                if (actualeDate.isNullOrEmpty()){
+                    actualeDate = it[0].actualDate
+                }
                 if (accessType == "teacher") {
 
-                    viewModel.getMeals(viewModel.getTeacheerProfile().classNumber!!, it[0].actualDate)
+                    viewModel.getMeals(
+                        viewModel.getTeacheerProfile().classNumber!!,
+                        actualeDate
+                    )
                 } else {
                     viewModel.getMeals(
                         viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
-                        it[0].actualDate
+                        actualeDate
                     )
                 }
-                actualeDate=it[0].actualDate
+                actualeDate = it[0].actualDate
 //            viewModel.getMeals(
 //                viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
 //                it[0].actualDate
 //            )
-            }else{
+            } else {
                 showNoData()
                 viewDataBinding.datesAdapter!!.datesList.clear()
             }
 
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
-        })
+        }
 
-        viewModel.mealsList.observe(this, {
-          //  CommonUtils.hideLoading(mProgressDialog!!)
+        viewModel.mealsList.observe(this) {
+            //  CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.recyclerMeals.unVeil()
 
             viewDataBinding.mealsAdapter!!.mealsList = it
 
             viewDataBinding.mealsAdapter!!.notifyDataSetChanged()
-            if (it.size == 0){
+            if (it.size == 0) {
                 showNoData()
-            }else{
+            } else {
                 hideNoData()
             }
-        })
+        }
 
         viewDataBinding.imageViewBack.setOnClickListener {
             finish()
@@ -179,11 +200,11 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
     }
 
     private fun messageObserver() {
-        viewModel.message.observe(this@MealsActivity, {
+        viewModel.message.observe(this@MealsActivity) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
             showMessage(it)
-        })
+        }
     }
 
     private fun showMessage(it: String) {
@@ -193,7 +214,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         ).show();
     }
 
-    override fun onDateClick(date: String) {
+    override fun onDateClick(position:Int,date: String) {
       //  mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
         viewDataBinding.recyclerMeals.veil()
         if (accessType == "teacher") {
@@ -201,6 +222,8 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         } else {
             viewModel.getMeals(viewModel.getSelectedChildDataFromSharedPref()?.classId!!, date)
         }
+
+
         actualeDate = date
     }
     fun stateOfChildrenFrame(state:Boolean){

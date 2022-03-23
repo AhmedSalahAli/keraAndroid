@@ -189,7 +189,7 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
             }
         }
     }
-    override fun onDateClick(date: String) {
+    override fun onDateClick(position: Int,date: String) {
 
         if (accessType == "teacher") {
             viewModel.getEducationList(viewModel.getTeacheerProfile().classNumber!!, date)

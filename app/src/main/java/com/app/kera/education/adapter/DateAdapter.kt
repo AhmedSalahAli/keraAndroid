@@ -1,6 +1,7 @@
 package com.app.kera.education.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ class DateAdapter(
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
     var selectedItem = 0
-
+    var isDateAvailable =false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return ScheduleListHolder(
             CalendarDateItemBinding.inflate(
@@ -31,16 +32,22 @@ class DateAdapter(
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.onBind(position)
         holder.itemView.setOnClickListener {
-            itemClickNavigator.onDateClick(datesList[position].actualDate)
+            itemClickNavigator.onDateClick(selectedItem,datesList[position].actualDate)
             notifyItemChanged(selectedItem)
             selectedItem = position
             notifyItemChanged(selectedItem)
         }
+
     }
 
     inner class ScheduleListHolder(var binding: CalendarDateItemBinding) :
         BaseViewHolder(binding.root) {
         override fun onBind(position: Int) {
+            binding.viewModel = datesList[position]
+
+
+
+
             if (selectedItem == position) {
                 binding.viewDateIndicator.setBackgroundResource(R.drawable.rounded_white_10)
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -52,12 +59,12 @@ class DateAdapter(
                     binding.tvDatePickerDayWeek.typeface = context.resources.getFont(R.font.sf_ui_display_regular)
                 }
             }
-            binding.viewModel = datesList[position]
+
 
         }
     }
 
     interface ItemClickNavigator {
-        fun onDateClick(date: String)
+        fun onDateClick(position :Int ,date: String)
     }
 }
