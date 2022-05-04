@@ -25,7 +25,7 @@ class NavigationFragment() : Fragment() {
         viewDataBinding = DataBindingUtil.inflate(
             inflater, R.layout.navigation_fragment, container, false
         )
-        val tabTitles = arrayOf("Map", "List")
+        val tabTitles = arrayOf(getString(R.string.map), getString(R.string.list))
         viewDataBinding.viewPager.adapter = TabLayoutAdapter(
             childFragmentManager,
             tabTitles

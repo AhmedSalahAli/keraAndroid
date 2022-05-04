@@ -38,6 +38,7 @@
             app:veilFrame_layout="@layout/item_schools_list"
             app:veilFrame_veiled="true"
             app:veilFrame_shimmerEnable="true"
+            android:layoutDirection="ltr"
             app:veilLayout_baseColor="@color/light_grey_8c99a7"
             app:veilFrame_highlightColor="@color/blue_effcff"
             app:veilFrame_baseAlpha="0.6"
