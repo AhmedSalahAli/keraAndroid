@@ -38,7 +38,7 @@ class NeedToLogin : Fragment() {
 
         viewDataBinding.viewModel = viewModel
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
-        viewDataBinding.visitorLogin.setOnClickListener(View.OnClickListener {
+        viewDataBinding.root.setOnClickListener(View.OnClickListener {
             viewModel.logout()
         })
         viewModel.loggedOut.observe(viewLifecycleOwner, {

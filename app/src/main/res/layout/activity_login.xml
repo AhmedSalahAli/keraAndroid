@@ -15,7 +15,7 @@
         android:id="@+id/login_lay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background">
+        android:background="@drawable/background_alll">
 
         <!--        <ImageView-->
         <!--            android:layout_width="match_parent"-->
@@ -54,6 +54,8 @@
             android:layout_marginTop="100dp"
             android:background="@drawable/rounded_top_left_right_corners"
             android:elevation="10dp"
+            android:outlineAmbientShadowColor="@color/blue"
+            android:outlineSpotShadowColor="@color/blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

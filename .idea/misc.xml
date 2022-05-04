@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_daily_report.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_login.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_main.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_meals.xml" value="0.1" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/home_fragment.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/navigation_fragment.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/need_to_login_fragment.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.23333333333333334" />
       </map>
     </option>
   </component>

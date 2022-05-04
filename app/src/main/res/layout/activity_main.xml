@@ -1,4 +1,6 @@
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -7,8 +9,7 @@
             type="com.app.kera.main.ui.MainViewModel" />
 
     </data>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
@@ -18,27 +19,25 @@
         tools:context=".schoolDetails.ui.SchoolDetailsActivity">
 
 
-            <fragment
-                android:id="@+id/fragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:defaultNavHost="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-                app:layout_constraintVertical_bias="0.0"
-                app:navGraph="@navigation/nav_graph" />
-
-
-<!--        <com.example.kera.utils.NonSwipeableViewPager-->
+        <!--        <com.example.kera.utils.NonSwipeableViewPager-->
 <!--            android:id="@+id/ViewPager"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="match_parent"-->
 <!--            />-->
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar2"
@@ -48,7 +47,8 @@
             android:backgroundTint="#FCFDFD"
             app:fabCradleMargin="8dp"
             app:elevation="@dimen/_10sdp"
-
+            android:outlineSpotShadowColor="@color/blue"
+            android:outlineAmbientShadowColor="@color/blue"
             app:fabCradleRoundedCornerRadius="10dp"
 
             >
