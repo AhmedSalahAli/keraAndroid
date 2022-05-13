@@ -17,7 +17,7 @@ class Registration1ViewModel(val appRepo: AppRepo) : ViewModel() {
                 step.value = response.application
 
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 res.value = true
 
             }

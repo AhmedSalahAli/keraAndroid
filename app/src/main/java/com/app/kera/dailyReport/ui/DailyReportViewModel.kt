@@ -32,7 +32,7 @@ class DailyReportViewModel(var appRepo: AppRepo) : ViewModel() {
                 val data = appRepo.getDailyReportData(studentID, fromDate, toDate,page)
                 response.value = data
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -43,7 +43,7 @@ class DailyReportViewModel(var appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getProfileData("en", 1, "user")
                 profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -57,7 +57,7 @@ class DailyReportViewModel(var appRepo: AppRepo) : ViewModel() {
 
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

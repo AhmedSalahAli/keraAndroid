@@ -19,4 +19,8 @@
     <string name="create_new_report_q">By pressing yes you will create a new one to the selected students...</string>
     <string name="log_out_q">Are you sure ?</string>
     <string name="cancel">Cancel</string>
+    <string name="changelanguage">Change Language</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="ok">Ok</string>
 </resources>

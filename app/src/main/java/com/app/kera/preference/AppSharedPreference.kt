@@ -9,9 +9,10 @@ class AppSharedPreference constructor(context: Context, var prefName: String) :
     private val mPrefs: SharedPreferences =
         context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
 
-    override fun getString(key: String): String? {
-        return mPrefs.getString(key, null)
+    override fun getString(key: String,def:String): String? {
+        return mPrefs.getString(key, def)
     }
+
 
     override fun saveString(key: String, value: String) {
         mPrefs.edit().putString(key, value).apply()

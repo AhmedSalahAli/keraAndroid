@@ -63,6 +63,8 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
         window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
+
+        viewModel.logo.value = viewModel.getNurseryLogo()
         viewModel.getNotifications(currentPage)
        viewDataBinding. swipeRefresh.setOnRefreshListener(this)
         val layoutManager = LinearLayoutManager(requireContext())

@@ -12,6 +12,12 @@ class SideMenuViewModel(val appRepo: AppRepo) : ViewModel() {
         appRepo.logOut()
         loggedOut.value = true
     }
+     fun saveLang(lang: String?) {
+        appRepo.saveLang(lang)
+    }
+    fun getLang() : String?{
+        return appRepo.getLang()
+    }
     fun getUserType() : String{
         return appRepo.getUserTypeFromSharedPref()
     }

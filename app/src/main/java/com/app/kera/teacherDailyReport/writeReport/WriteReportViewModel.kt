@@ -24,7 +24,7 @@ class WriteReportViewModel(val appRepo: AppRepo) : ViewModel() {
                 val data = appRepo.getTeacherDailyReportData(reportID)
                 response.value = data
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -38,7 +38,7 @@ class WriteReportViewModel(val appRepo: AppRepo) : ViewModel() {
                     updateDailyReportQuestionBoolean.value = true
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -52,7 +52,7 @@ class WriteReportViewModel(val appRepo: AppRepo) : ViewModel() {
                     publishReportResultBoolean.value = true
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

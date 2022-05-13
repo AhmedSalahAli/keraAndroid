@@ -32,7 +32,7 @@ class ReportDetailsViewModel(var appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getProfileData("en", 1, "user")
                 profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -46,7 +46,7 @@ class ReportDetailsViewModel(var appRepo: AppRepo) : ViewModel() {
 
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

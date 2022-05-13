@@ -1,7 +1,10 @@
 package com.app.kera.splash.ui
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +23,8 @@ import com.app.kera.app.ForceUpdateChecker
 import com.app.kera.databinding.ActivitySplashBinding
 import com.app.kera.login.ui.LoginActivity
 import com.app.kera.main.ui.MainActivity
+import com.app.kera.preference.SharedPrefKeys
+import com.app.kera.utils.CommonUtils
 import com.app.kera.utils.Configurations
 import com.app.kera.utils.Configurations.Companion.API_PATH
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -31,16 +36,19 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParamsListner {
 
     private val splashViewModel: SplashViewModel by viewModel()
     lateinit var viewDataBinding: ActivitySplashBinding
+    var sharedPreferences: SharedPreferences? = null
+
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ForceUpdateChecker.with(this).onCheckConfigParams(this).config()
-
+        lannguage(this)
         val config: ImagePipelineConfig = ImagePipelineConfig.newBuilder(this)
             .setProgressiveJpegConfig(SimpleProgressiveJpegConfig())
             .setResizeAndRotateEnabledForNetwork(true)
@@ -62,7 +70,15 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
 
 
     }
+    fun lannguage(newBase: Context?) {
+        sharedPreferences = newBase!!.getSharedPreferences("keraPreference", Context.MODE_PRIVATE)
 
+        CommonUtils.setLocale(this,  sharedPreferences!!.getString(
+            SharedPrefKeys.APP_LANG,
+            "en"
+        )!!)
+
+    }
     @RequiresApi(api = Build.VERSION_CODES.P)
     fun requestLocationPermission() {
         Dexter.withActivity(this)
@@ -117,7 +133,15 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
         viewDataBinding.blurLayout.pauseBlur()
         super.onStop()
     }
-
+    companion object {
+        fun getStartIntent(context: Context, bundle: Bundle?): Intent {
+            val intent = Intent(
+                context, SplashActivity::class.java
+            )
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            return intent
+        }
+    }
     override fun onCheckConfigParams(BaseUrl: String?) {
         if (BaseUrl != null) {
             //Configurations.BASE_URL = BaseUrl+API_PATH

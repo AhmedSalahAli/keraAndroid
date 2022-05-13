@@ -13,12 +13,16 @@ class NotificationViewModel(val appRepo: AppRepo) : ViewModel() {
     var logo = MutableLiveData<String>()
 
     init {
-        logo.value = getNurseryLogo()
+       // logo.value = getNurseryLogo()
     }
 
     fun getNurseryLogo(): String {
+        return if (!appRepo.getNurseryLogoFromSharedPreference().isNullOrEmpty()){
+            appRepo.getNurseryLogoFromSharedPreference()
+        }else{
+            ""
+        }
 
-        return appRepo.getNurseryLogoFromSharedPreference()
     }
     fun getNotifications(page : Int) {
         viewModelScope.launch {
@@ -28,7 +32,7 @@ class NotificationViewModel(val appRepo: AppRepo) : ViewModel() {
                 notificationsList.value =
                     NotificationItemUIModel.convertResponseModelTOUIModel(response.data!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

@@ -37,7 +37,7 @@ class TeacherMedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getTeacherStudentsByClassID("en", 1, classId)
                 studentsList.value = StudentItemUIModel.convertResponseModelToUIModel(response)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -49,7 +49,7 @@ class TeacherMedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.createMedicalReport(requestModel)
                 createdReportResponseID.value = response.data?.id
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -62,7 +62,7 @@ class TeacherMedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
                 latestReportsList.value =
                     LatestReportItemUIModel.convertResponseModelTOUIModel(response.reports!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }}

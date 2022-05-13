@@ -21,7 +21,7 @@ class AppScreen1ViewModel(val appRepo: AppRepo) : ViewModel() {
                     applicationId.value = data.applicationId
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

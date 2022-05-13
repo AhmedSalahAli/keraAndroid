@@ -15,6 +15,7 @@ import com.app.kera.events.model.EventDetailsResponseModel
 import com.app.kera.meals.details.MealCommentPostModel
 import com.app.kera.preference.AppSharedPreference
 import com.app.kera.preference.SharedPrefKeys
+import com.app.kera.preference.SharedPrefKeys.Companion.APP_LANG
 import com.app.kera.preference.SharedPrefKeys.Companion.CHILD_Data
 import com.app.kera.preference.SharedPrefKeys.Companion.ISUSERLOGGEDIN
 import com.app.kera.preference.SharedPrefKeys.Companion.LOGIN_DATA
@@ -40,33 +41,35 @@ import com.google.gson.reflect.TypeToken
 
 class AppRepo(val sharedPreference: AppSharedPreference) {
 
-    private var service: ApiService = RetrofitClient(sharedPreference.getString(TOKEN)).getService()
+    private var service: ApiService = RetrofitClient(sharedPreference.getString(TOKEN,""),
+        getLang().toString()
+    ).getService()
 
     suspend fun getSchoolsList(page: Int): SchoolsListResponseModel =
-        service.getSchoolsList(page, "en", 1)
+        service.getSchoolsList(page,  1)
     suspend fun getUpcomingEventList(page: Int): ClassUpcomingResponseModel =
-        service.getUpcomingEventList(page, "en", 1)
+        service.getUpcomingEventList(page,  1)
     suspend fun getPreviousEventList(page: Int): ClassUpcomingResponseModel =
-        service.getPreviousEventList(page, "en", 1)
+        service.getPreviousEventList(page,  1)
     suspend fun getSchoolDetails(id: String): SchoolDetailsResponseModel =
-        service.getSchoolDetails(id, "en", 1)
+        service.getSchoolDetails(id,  1)
 
     suspend fun getClassMealsDates(classID: String): DatesResponseModel =
         service.getClassMealsDates(classID)
 
     suspend fun getClassMeals(classID: String, fromDate: String): ClassMealsResponseModel =
-        service.getClassMeals(classID, "en", 1, fromDate,fromDate)
+        service.getClassMeals(classID,  1, fromDate,fromDate)
 
     suspend fun getClassMealDetails(classID: String): MealDetailsResponseModel =
-        service.getClassMealDetails(classID, "en", 1)
+        service.getClassMealDetails(classID,  1)
     suspend fun getEventDetails(classID: String): EventDetailsResponseModel =
-        service.getEventDetails(classID, "en", 1)
+        service.getEventDetails(classID,  1)
 
     suspend fun getEducationDates(classID: String): DatesResponseModel =
         service.getClassEducationDates(classID)
 
     suspend fun getAttendanceDates(): DatesResponseModel =
-        service.getClassAttendanceDates( "en", 1)
+        service.getClassAttendanceDates(  1)
 
     suspend fun getEducationList(
         classID: String,
@@ -74,29 +77,29 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         language: String,
         version: Int
     ): EducationResponseModel =
-        service.getClassEducationList(classID, fromDate,fromDate, language, version)
+        service.getClassEducationList(classID, fromDate,fromDate, version)
     suspend fun getAttendanceList(
         page: Int,
         fromDate: String,
 
     ): AttendanceResponseModel =
-        service.getAttendanceList(page, "en", 1, fromDate)
+        service.getAttendanceList(page,  1, fromDate)
     suspend fun getHomeNews(classID: String, pageNumber: Int): NewsResponseModel =
-        service.getHomeNews(classID, pageNumber, "en", 1)
+        service.getHomeNews(classID, pageNumber,  1)
 
     suspend fun postMealComment(commentPostModel: MealCommentPostModel) =
         service.postMealComment(commentPostModel)
 
     suspend fun getProfileData(language: String, version: Int, type: String) =
-        service.getProfileData(language, version, type)
+        service.getProfileData( version, type)
     suspend fun getAppStep(language: String, version: Int, udid: String) =
-        service.getAppStep(language, version,udid)
+        service.getAppStep( version,udid)
 
     suspend fun getTeacherProfileData(language: String, version: Int) =
-        service.getTeacherProfileData(language, version)
+        service.getTeacherProfileData( version)
 
     suspend fun login(language: String, version: Int, loginRequestModel: LoginRequestModel) =
-        service.login(language, version, loginRequestModel)
+        service.login( version, loginRequestModel)
 
     suspend fun verifyPhoneNumber(
         language: String,
@@ -104,16 +107,16 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         verifyPhoneRequestModel: VerifyPhoneRequestModel,
         token: String
     ) =
-        service.verifyPhone(language, version, verifyPhoneRequestModel, "Bearer $token")
+        service.verifyPhone( version, verifyPhoneRequestModel, "Bearer $token")
 
     suspend fun getClasses(language: String, version: Int) =
-        service.getTeacherReportClasses(language, version)
+        service.getTeacherReportClasses( version)
 
     suspend fun getTeacherStudentsByClassID(language: String, version: Int, classID: String) =
-        service.getTeacherStudentsByClassID(language, version, classID)
+        service.getTeacherStudentsByClassID( version, classID)
 
     suspend fun getTeacherLatestReportsClassID(language: String, version: Int, page: Int) =
-        service.getLatestReportsByClassID(language, version, page)
+        service.getLatestReportsByClassID( version, page)
 
     fun saveTokenInSharedPref(token: String) {
         sharedPreference.saveString(TOKEN, token)
@@ -130,10 +133,10 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         sharedPreference.saveString(TEACHER_DATA, Gson().toJson(teacherProfileUIModel))
     }
     fun getTeacherData(): TeacherProfileUIModel {
-        return Gson().fromJson(sharedPreference.getString(TEACHER_DATA), TeacherProfileUIModel::class.java)
+        return Gson().fromJson(sharedPreference.getString(TEACHER_DATA,""), TeacherProfileUIModel::class.java)
     }
     fun getProfileData(): ProfileUIModel {
-        return Gson().fromJson(sharedPreference.getString(LOGIN_DATA), ProfileUIModel::class.java)
+        return Gson().fromJson(sharedPreference.getString(LOGIN_DATA,""), ProfileUIModel::class.java)
     }
 
     fun saveUserLoggedIN() {
@@ -145,11 +148,11 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
     }
 
     fun getSelectedChildData(): StudentsData? {
-        return Gson().fromJson(sharedPreference.getString(CHILD_Data), StudentsData::class.java)
+        return Gson().fromJson(sharedPreference.getString(CHILD_Data,""), StudentsData::class.java)
     }
 
     fun getChildID(): String {
-        return sharedPreference.getString(STUDENTID)!!
+        return sharedPreference.getString(STUDENTID,"")!!
     }
 
     fun getIsUserLoggedIn(): Boolean {
@@ -157,63 +160,63 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
     }
 
     fun getUserTypeFromSharedPref(): String {
-        return sharedPreference.getString(USERTYPE)!!
+        return sharedPreference.getString(USERTYPE,"")!!
     }
 
     suspend fun favouriteSchool(language: String, requestModel: FavouriteSchoolRequestModel) =
-        service.favouriteSchool(language, 1, requestModel)
+        service.favouriteSchool( 1, requestModel)
 
 
     fun getLoginResponseModelFromSharedPref(): ProfileResponseModel? {
         return Gson().fromJson(
-            sharedPreference.getString(LOGIN_DATA),
+            sharedPreference.getString(LOGIN_DATA,""),
             object : TypeToken<ProfileResponseModel>() {}.type
         )
     }
 
     suspend fun getTeacherDailyReportData(reportID: String) =
-        service.getTeacherDailyReportData("en", 1, reportID)
+        service.getTeacherDailyReportData( 1, reportID)
     suspend fun getTeacherMedicalReportData(reportID: String) =
-        service.getTeacherMedicalReportData("en", 1, reportID)
+        service.getTeacherMedicalReportData( 1, reportID)
     suspend fun updateDailyReportQuestion(updateQuestionRequestModel: UpdateQuestionRequestModel) =
-        service.updateDailyReportQuestion("en", 1, updateQuestionRequestModel)
+        service.updateDailyReportQuestion( 1, updateQuestionRequestModel)
     suspend fun updateMedicalReportQuestion(updateQuestionRequestModel: UpdateMedicalRequestModel) =
-        service.updateMedicalReportQuestion("en", 1, updateQuestionRequestModel)
+        service.updateMedicalReportQuestion( 1, updateQuestionRequestModel)
 
     suspend fun createDailyReport(requestModel: CreateReportRequestModel) =
-        service.createDailyReport("en", 1, requestModel)
+        service.createDailyReport( 1, requestModel)
     suspend fun createMedicalReport(requestModel: CreateReportRequestModel) =
-        service.createMedicalReport("en", 1, requestModel)
-    suspend fun getLatestReports(page: Int) = service.getLatestReports("en", 1, page)
+        service.createMedicalReport( 1, requestModel)
+    suspend fun getLatestReports(page: Int) = service.getLatestReports( 1, page)
 
-    suspend fun getLatestMedicalReports(page: Int) = service.getLatestMedicalReports("en", 1, page)
-    suspend fun getNotifications(page: Int) = service.getNotifications("en", 1, page)
+    suspend fun getLatestMedicalReports(page: Int) = service.getLatestMedicalReports( 1, page)
+    suspend fun getNotifications(page: Int) = service.getNotifications( 1, page)
 
     suspend fun publishReport(requestModel: PublishReportRequestModel) =
-        service.publishReport("en", 1, requestModel)
+        service.publishReport( 1, requestModel)
     suspend fun publishMedicalReport(requestModel: PublishReportRequestModel) =
-        service.publishMedicalReport("en", 1, requestModel)
+        service.publishMedicalReport( 1, requestModel)
     suspend fun publishReplay(requestModel: PublishReplay) =
-        service.publishReplay("en", 1, requestModel)
+        service.publishReplay( 1, requestModel)
     suspend fun publishApp1(requestModel: PublishAppStep1Model) =
-        service.publishApp1("en", 1, requestModel)
+        service.publishApp1( 1, requestModel)
     suspend fun publishApp2(requestModel: PublishAppStep2Model) =
-        service.publishApp2("en", 1, requestModel)
+        service.publishApp2( 1, requestModel)
     suspend fun publishApp3(requestModel: PublishAppStep3) =
-        service.publishApp3("en", 1, requestModel)
+        service.publishApp3( 1, requestModel)
     suspend fun publishApp4(requestModel: SumbitFinalForm) =
-        service.publishApp4("en", 1, requestModel)
+        service.publishApp4( 1, requestModel)
     suspend fun getDailyReportData(studentID: String, fromDate: String, toDate: String,page:Int) =
-        service.getDailyReport("en", 1, studentID,page, fromDate, toDate)
+        service.getDailyReport( 1, studentID,page, fromDate, toDate)
     suspend fun getMedicalReportData(studentID: String, fromDate: String, toDate: String,page:Int) =
-        service.getMedicalReport("en", 1, studentID,page, fromDate, toDate)
+        service.getMedicalReport( 1, studentID,page, fromDate, toDate)
     suspend fun getAssociationTerms(associationId:String) =
-        service.getAssociationTerms("en", 1,associationId)
+        service.getAssociationTerms( 1,associationId)
     suspend fun getHomeNurseryData() =
-        service.getHomeNurseryData("en", 1)
+        service.getHomeNurseryData( 1)
     suspend fun publishAttendanceQrCode(requestModel: QrCodeModel) =
-        service.publishAttendanceQrCode("en", 1, requestModel)
-    suspend fun getMapData() = service.getMapData("en", 1)
+        service.publishAttendanceQrCode( 1, requestModel)
+    suspend fun getMapData() = service.getMapData( 1)
 
 
     fun logOut() {
@@ -225,12 +228,17 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
     fun saveFcmData(fcmModelRequest: FcmModelRequest) {
         sharedPreference.saveString(SharedPrefKeys.FCM_DATA, Gson().toJson(fcmModelRequest))
     }
-
+    fun saveLang(lang: String?) {
+        lang?.let { sharedPreference.saveString(APP_LANG, it) }
+    }
+    fun getLang(): String? {
+      return  sharedPreference!!.getString(APP_LANG, "en")
+    }
     fun saveNurseryLogoToSharedPreference(logo: String?) {
         sharedPreference.saveString(NURSERY_LOGO, logo!!)
     }
 
     fun getNurseryLogoFromSharedPreference(): String {
-        return sharedPreference.getString(NURSERY_LOGO)!!
+        return sharedPreference.getString(NURSERY_LOGO,"")!!
     }
 }

@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 
 interface SharedPreference {
     // Adding all CRUD options for Shared Preferences
-    fun getString(key: String): String?
+    fun getString(key: String,default: String): String?
 
     fun saveString(key: String, value: String)
 

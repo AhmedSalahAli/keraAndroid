@@ -1,8 +1,15 @@
 package com.app.kera.app
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
+import android.os.Build
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
+import com.app.kera.preference.SharedPrefKeys
+import com.app.kera.preference.SharedPrefKeys.Companion.APP_LANG
+import com.app.kera.utils.CommonUtils
 
 import com.app.kera.utils.Configurations
 import com.app.kera.utils.Configurations.Companion.API_PATH
@@ -20,6 +27,7 @@ import kotlin.collections.HashMap
 
 class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
     private val TAG: String = MyApp::class.java.simpleName
+    var sharedPreferences: SharedPreferences? = null
 
     companion object {
         lateinit var application: MyApp
@@ -30,7 +38,7 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         application = this
         ForceUpdateChecker.with(this).onCheckConfigParams(this).config()
-
+        lannguage(this)
         BlurKit.init(this);
         startKoin {
             androidLogger(Level.DEBUG)
@@ -41,6 +49,7 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
                 modules
             )
         }
+
         initFirebaseRemoteConfig()
 
     }
@@ -53,6 +62,7 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
                 .build()
             setConfigSettingsAsync(configSettings)
             //set this during development
+
 
             // set in-app defaults
             val remoteConfigDefaults: MutableMap<String?, Any?> = HashMap<String?, Any?>()
@@ -73,6 +83,15 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
                 }
             }
         }
+
+    }
+    fun lannguage(newBase: Context?) {
+        sharedPreferences = newBase!!.getSharedPreferences("keraPreference", Context.MODE_PRIVATE)
+
+        CommonUtils.setLocale(this,  sharedPreferences!!.getString(
+            SharedPrefKeys.APP_LANG,
+            "en"
+        )!!)
 
     }
     override fun onCheckConfigParams(BaseUrl: String?) {

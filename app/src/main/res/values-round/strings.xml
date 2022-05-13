@@ -15,4 +15,8 @@
     <string name="error_pulishinng">Error Publishing Report</string>
     <string name="published">Published</string>
     <string name="draft">Draft</string>
+    <string name="changelanguage">Change Language</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="ok">Ok</string>
 </resources>

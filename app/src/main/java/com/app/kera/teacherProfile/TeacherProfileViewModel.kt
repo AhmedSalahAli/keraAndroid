@@ -13,7 +13,7 @@ class TeacherProfileViewModel(val appRepo: AppRepo) : ViewModel() {
     var logo = MutableLiveData<String>()
 
     init {
-        logo.value = getNurseryLogo()
+     //   logo.value = getNurseryLogo()
     }
 
     fun getProfileData() {
@@ -23,7 +23,7 @@ class TeacherProfileViewModel(val appRepo: AppRepo) : ViewModel() {
                 profileUIModel.value =
                     TeacherProfileUIModel.mapResponseModelToUIModel(response.data!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

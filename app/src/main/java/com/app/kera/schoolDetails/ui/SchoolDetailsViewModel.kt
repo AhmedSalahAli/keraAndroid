@@ -28,7 +28,7 @@ class SchoolDetailsViewModel(val appRepo: AppRepo) : ViewModel() {
 //                    getSchoolsList(3)
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 anApiFailed.value = true
             }
         }

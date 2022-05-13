@@ -27,7 +27,7 @@ class HomeViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getHomeNews(id, page)
                 newsList.value = HomeNewsUIModel.convertResponseModelToUIModel(response.data!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -39,7 +39,7 @@ class HomeViewModel(val appRepo: AppRepo) : ViewModel() {
                 homeNurseryData.value = ImagesUIModel.convertResponseModelToUIModel(response.data!!)
                 saveNurseryLogoToSharedPreference(response.data!!.logo)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -75,7 +75,7 @@ class HomeViewModel(val appRepo: AppRepo) : ViewModel() {
                 teacherProfileUIModel.value =
                     TeacherProfileUIModel.mapResponseModelToUIModel(response.data!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

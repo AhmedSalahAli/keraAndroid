@@ -20,7 +20,7 @@ class SchoolsListViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getSchoolsList(page)
                 schoolsList.value = SchoolListUIModel.convertResponseModelToUIModel(response.data!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 anApiFailed.value = true
             }
         }
@@ -35,7 +35,7 @@ class SchoolsListViewModel(val appRepo: AppRepo) : ViewModel() {
 //                    getSchoolsList(3)
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 anApiFailed.value = true
             }
         }

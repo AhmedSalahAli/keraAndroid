@@ -1,9 +1,12 @@
 package com.app.kera.utils
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -36,7 +39,14 @@ object CommonUtils {
     fun getDeviceId(context: Context): String {
         return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
     }
-
+    fun setLocale(activity: Context, languageCode: String?) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val resources: Resources = activity.resources
+        val config: Configuration = resources.getConfiguration()
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.getDisplayMetrics())
+    }
     fun isEmailValid(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }

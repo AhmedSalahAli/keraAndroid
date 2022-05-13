@@ -15,12 +15,15 @@ import com.app.kera.app.ForceUpdateChecker
 import com.app.kera.contactUs.ContactUsActivity
 import com.app.kera.databinding.SideMenuFragmentBinding
 import com.app.kera.login.ui.LoginActivity
+import com.app.kera.splash.ui.SplashActivity
 import com.app.kera.teacherDailyReport.model.CreateReportRequestModel
 import com.app.kera.utils.CommonUtils
 import com.app.kera.utils.Constants.Companion.aboutLinkApp
 import com.app.kera.utils.Constants.Companion.privacyPolicyLinkApp
 import com.app.kera.utils.Constants.Companion.termsLinkApp
 import com.app.kera.visitor.SideViewMain
+import com.google.android.datatransport.runtime.backends.BackendResponse.ok
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SideMenuFragment : Fragment() {
@@ -73,11 +76,48 @@ class SideMenuFragment : Fragment() {
             dialog.show()
 
         }
-        viewModel.loggedOut.observe(viewLifecycleOwner, {
+        viewModel.loggedOut.observe(viewLifecycleOwner) {
             var intent = Intent(context, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
-        })
+        }
+        viewDataBinding.constraintLogoutLang.setOnClickListener {
+            val singleItems = arrayOf(getString(R.string.english), getString(R.string.arabic))
+            var checkedItem = 0
+            var fakeCheckedItem = 0
+            if (viewModel.getLang().equals("en")){
+                 checkedItem = 0
+                 fakeCheckedItem = 0
+        }else{
+                 checkedItem = 1
+                 fakeCheckedItem = 1
+            }
+
+
+            context?.let { it1 ->
+                MaterialAlertDialogBuilder(it1,R.style.Theme_AppCompat_Light_Dialog)
+                    .setTitle(resources.getString(R.string.changelanguage))
+                    .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                        // Respond to neutral button press
+                    }
+                    .setPositiveButton(resources.getString(R.string.ok)) { dialog, which ->
+                        // Respond to positive button press
+                    }
+                    // Single-choice items (initialized with checked item)
+                    .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
+
+                            if (singleItems[which] == getString(R.string.english)){
+                                viewModel.saveLang("en")
+                            }else{
+                                viewModel.saveLang("ar")
+                            }
+                        Log.e("lang",singleItems[which])
+                                 startActivity(SplashActivity.getStartIntent(requireContext(), null))
+
+                    }
+                    .show()
+            }
+        }
         viewDataBinding.constraintAboutKera.setOnClickListener(View.OnClickListener {
             var intent = Intent(context, SideViewMain::class.java)
             intent.putExtra("SideUrl", aboutLinkApp)

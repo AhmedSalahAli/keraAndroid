@@ -44,15 +44,18 @@ class TeacherProfileFragment : Fragment() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         viewDataBinding.veilLayout.veil()
         viewModel.getProfileData()
+        viewModel.logo.value = viewModel.getNurseryLogo()
 
-        viewModel.profileUIModel.observe(viewLifecycleOwner, {
-            if (!it.image.isNullOrEmpty()){
-                Glide.with(view.context).load(it.image).error(R.drawable.ic_person).into(viewDataBinding.imageView54)
-            }else{
-                Glide.with(view.context).load(R.drawable.ic_person).error(R.drawable.ic_person).into(viewDataBinding.imageView54)
+        viewModel.profileUIModel.observe(viewLifecycleOwner) {
+            if (!it.image.isNullOrEmpty()) {
+                Glide.with(view.context).load(it.image).error(R.drawable.ic_person)
+                    .into(viewDataBinding.imageView54)
+            } else {
+                Glide.with(view.context).load(R.drawable.ic_person).error(R.drawable.ic_person)
+                    .into(viewDataBinding.imageView54)
             }
             viewDataBinding.veilLayout.unVeil()
-        })
+        }
         viewDataBinding.constraintLayout10.setOnClickListener(View.OnClickListener {
             startActivity(Intent(context, QRActivity::class.java))
 

@@ -20,7 +20,7 @@ class AttendanceViewModel (val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getAttendanceDates()
                 datesListLiveData.value = ClassMealsDates.convertDate(response.data!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

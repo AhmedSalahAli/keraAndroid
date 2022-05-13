@@ -51,22 +51,24 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
        // mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
         viewModel.getProfileData()
         messageObserver()
+        viewModel.logo.value = viewModel.getNurseryLogo()
 
        // Glide.with(this).load(viewModel.selectedUser.value?.profileImage).error(requireContext().resources.getDrawable(R.drawable.ic_person)).into(viewDataBinding.imageView54)
         viewDataBinding.veilLayout.veil()
-        viewModel.profileUIModel.observe(viewLifecycleOwner, {
-           // CommonUtils.hideLoading(mProgressDialog!!)
+        viewModel.profileUIModel.observe(viewLifecycleOwner) {
+            // CommonUtils.hideLoading(mProgressDialog!!)
 
             viewDataBinding.veilLayout.unVeil()
-            viewDataBinding.adapter = ChildrenAdapter(it.students!!, this,viewModel.getAppRepoInstance())
+            viewDataBinding.adapter =
+                ChildrenAdapter(it.students!!, this, viewModel.getAppRepoInstance())
             viewDataBinding.adapter!!.notifyDataSetChanged()
-            if (it.students!!.size ==1){
-                viewDataBinding.imageViewExchange.visibility =  View.GONE
-            }else{
-                viewDataBinding.imageViewExchange.visibility =  View.VISIBLE
+            if (it.students!!.size == 1) {
+                viewDataBinding.imageViewExchange.visibility = View.GONE
+            } else {
+                viewDataBinding.imageViewExchange.visibility = View.VISIBLE
 
             }
-        })
+        }
 
         viewDataBinding.imageViewExchange.setOnClickListener {
 

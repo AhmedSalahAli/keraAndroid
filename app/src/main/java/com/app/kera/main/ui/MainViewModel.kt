@@ -27,6 +27,7 @@ class MainViewModel(val appRepo: AppRepo) : ViewModel() {
             isSetUp.value = setUp
         }
     }
+
     fun getNurseryData() {
         viewModelScope.launch {
             try {
@@ -34,7 +35,7 @@ class MainViewModel(val appRepo: AppRepo) : ViewModel() {
                 homeNurseryData.value = ImagesUIModel.convertResponseModelToUIModel(response.data!!)
                 saveNurseryLogoToSharedPreference(response.data!!.logo)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

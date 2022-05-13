@@ -22,7 +22,7 @@ class WriteMedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
                 val data = appRepo.getTeacherMedicalReportData(reportID)
                 response.value = data
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -35,7 +35,7 @@ class WriteMedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
                     updateDailyReportQuestionBoolean.value = true
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -48,7 +48,7 @@ class WriteMedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
                     publishReportResultBoolean.value = true
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

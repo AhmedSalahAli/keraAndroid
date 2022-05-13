@@ -31,7 +31,7 @@ class QRViewModel(val appRepo: AppRepo) : ViewModel()  {
 
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

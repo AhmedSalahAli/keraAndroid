@@ -30,7 +30,7 @@ class MealsViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getClassMealsDates(classID)
                 datesListLiveData.value = ClassMealsDates.convertDate(response.data!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 apiError.value = true
                 apiErrorDates.value = true
             }
@@ -42,7 +42,7 @@ class MealsViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getProfileData("en", 1, "user")
                 profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 apiError.value = true
             }
         }
@@ -54,7 +54,7 @@ class MealsViewModel(val appRepo: AppRepo) : ViewModel() {
                 mealsList.value =
                     MealsItemUIModel.convertResponseModelToUIModel(response.data?.Meals)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 apiError.value = true
             }
         }

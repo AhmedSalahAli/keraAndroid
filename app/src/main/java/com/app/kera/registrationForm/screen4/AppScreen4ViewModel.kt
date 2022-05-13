@@ -19,7 +19,7 @@ class AppScreen4ViewModel(val appRepo: AppRepo) : ViewModel() {
                 val data = appRepo.getAssociationTerms(associationId)
                 response.value = data
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -33,7 +33,7 @@ class AppScreen4ViewModel(val appRepo: AppRepo) : ViewModel() {
 
                 }
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

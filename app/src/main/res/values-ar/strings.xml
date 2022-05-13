@@ -11,7 +11,7 @@
     <string name="nearby">قريب</string>
     <string name="the_quick_brown_fox_jumps_over_a_lazy_dog_djs_flock_by_when_mtv_ax_quiz_prog_junk_mtv_quiz_graced_by_fox_whelps_bawds_jog_flick_quartz_vex_nymphs_waltz_bad_nymph_for_quick_jigs_vex">كيرا هي خدمة لمرحلة ما قبل المدرسة ، ودليل محلي لمرحلة ما قبل المدرسة ، حيث يمكنك العثور على دور الحضانة القريبة في منطقتك</string>
     <string name="about_kera">معلومات عنا</string>
-    <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="terms_amp_conditions"><![CDATA[الشروط والأحكام]]></string>
     <string name="log_out">تسجيل خروج</string>
     <string name="preschool_name">اسم الحضانة</string>
     <string name="subscribe">إشتراك</string>
@@ -144,5 +144,9 @@
     <string name="create_new_report_q">بالضغط على نعم ، ستنشئ واحدة جديدة للطلاب المختارين ...</string>
     <string name="log_out_q">هل انت متأكد ؟</string>
     <string name="cancel">إلغاء</string>
+    <string name="changelanguage">تغيير اللغة</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="ok">Ok</string>
 
 </resources>

@@ -25,7 +25,7 @@ class MedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
                 val data = appRepo.getMedicalReportData(studentID, fromDate, toDate,page)
                 response.value = data
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }
@@ -36,7 +36,7 @@ class MedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getProfileData("en", 1, "user")
                 profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

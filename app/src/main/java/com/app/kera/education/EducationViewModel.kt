@@ -32,7 +32,7 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
                 educationList.value =
                     EducationListItemModel.convertResponseModelToUIModel(response.data)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 apiError.value = true
             }
         }
@@ -45,7 +45,7 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
                 datesListLiveData.value = ClassMealsDates.convertDate(response.data!!)
 
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 apiError.value = true
                 apiErrorDates.value = true
             }
@@ -78,7 +78,7 @@ class EducationViewModel(val appRepo: AppRepo) : ViewModel() {
                 profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
             } catch (e: Exception) {
                 apiError.value = true
-                message.value = e.toString()
+              
             }
         }
     }

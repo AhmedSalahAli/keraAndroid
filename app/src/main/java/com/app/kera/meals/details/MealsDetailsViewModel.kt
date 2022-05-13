@@ -34,7 +34,7 @@ class MealsDetailsViewModel(val appRepo: AppRepo) : ViewModel() {
                 }
             }catch (e : Exception){
                 postCommentObserver.value = false
-                message.value = e.toString()
+              
             }
 
         }
@@ -59,7 +59,7 @@ class MealsDetailsViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getProfileData("en", 1, "user")
                 profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
             }
         }
     }

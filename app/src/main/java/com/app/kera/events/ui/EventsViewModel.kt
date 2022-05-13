@@ -26,7 +26,7 @@ class EventsViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getUpcomingEventList(page)
                 upcomingEventList.value = UpcomingItemUIModel.convertResponseModelToUIModel(response.data?.docs!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 anApiFailed.value = true
             }
         }
@@ -37,7 +37,7 @@ class EventsViewModel(val appRepo: AppRepo) : ViewModel() {
                 val response = appRepo.getPreviousEventList(page)
                 previousEventList.value = UpcomingItemUIModel.convertResponseModelToUIModel(response.data?.docs!!)
             } catch (e: Exception) {
-                message.value = e.toString()
+              
                 anApiFailed.value = true
             }
         }

@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpda
         viewDataBinding.bottomNavigationView.uncheckAllItems()
         viewDataBinding.bottomNavigationView.setupWithNavController(navController)
 
-
+        mainViewModel.getNurseryData()
 
 
 
@@ -106,15 +106,15 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpda
 
         fm.beginTransaction().add(R.id.fragment, notification, "3").hide(notification).commit();
         fm.beginTransaction().add(R.id.fragment, nearBy, "2").hide(nearBy).commit();
-        if (accessType == "visitor") {
+        active = if (accessType == "visitor") {
             fm.beginTransaction().add(R.id.fragment, needtologin, "1").commit();
             fm.beginTransaction().add(R.id.fragment, home, "4").hide(home).commit();
-            active = needtologin
+            needtologin
         }else{
             fm.beginTransaction().add(R.id.fragment, home, "1").commit();
             fm.beginTransaction().add(R.id.fragment, needtologin, "4").hide(needtologin).commit();
 
-            active = home
+            home
         }
 
 
