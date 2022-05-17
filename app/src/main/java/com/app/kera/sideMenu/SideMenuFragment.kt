@@ -97,12 +97,11 @@ class SideMenuFragment : Fragment() {
             context?.let { it1 ->
                 MaterialAlertDialogBuilder(it1,R.style.Theme_AppCompat_Light_Dialog)
                     .setTitle(resources.getString(R.string.changelanguage))
+                    .setIcon(R.mipmap.ic_launcher)
                     .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
                         // Respond to neutral button press
                     }
-                    .setPositiveButton(resources.getString(R.string.ok)) { dialog, which ->
-                        // Respond to positive button press
-                    }
+
                     // Single-choice items (initialized with checked item)
                     .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
 
