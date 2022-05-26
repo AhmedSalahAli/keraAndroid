@@ -71,7 +71,7 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
         viewModel.getClasses()
         viewModel.getLatestReports(page)
         viewDataBinding.classesAdapter = MedicalReportClassesListAdapter(ArrayList(), this, this)
-        viewDataBinding.latestReportsAdapter = LatestReportsListAdapter(ArrayList(), this)
+        viewDataBinding.latestReportsAdapter = LatestReportsListAdapter(ArrayList(), this,this)
         classesListObservation()
         studentsListObservation()
         getLatestReportsObservation()

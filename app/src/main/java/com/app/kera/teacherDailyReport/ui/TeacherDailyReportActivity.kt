@@ -123,7 +123,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         classesListObservation()
         studentsListObservation()
         viewDataBinding.classesAdapter = ClassesListAdapter(ArrayList(), this, this)
-        viewDataBinding.latestReportsAdapter = LatestReportsListAdapter(ArrayList(), this)
+        viewDataBinding.latestReportsAdapter = LatestReportsListAdapter(ArrayList(), this,this)
         backClickListener()
         createReportClickListener()
         createReportObservation()
@@ -200,20 +200,20 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     }
 
     private fun getLatestReportsObservation() {
-        viewModel.latestReportsList.observe(this, {
+        viewModel.latestReportsList.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.recyclerLatestReports.unVeil()
             totalNumberOfPages = it.pages
             latestReports.addAll(it.reports)
             viewDataBinding.latestReportsAdapter!!.reportsList = latestReports
             viewDataBinding.latestReportsAdapter!!.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun createReportObservation() {
-        viewModel.createdReportResponseID.observe(this, {
+        viewModel.createdReportResponseID.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
-            if (!it.isNullOrEmpty()){
+            if (!it.isNullOrEmpty()) {
                 val intent = Intent(
                     this@TeacherDailyReportActivity,
                     WriteReportActivity()::class.java
@@ -222,7 +222,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
                 startActivity(intent)
             }
 
-        })
+        }
     }
 
     private fun createReportClickListener() {

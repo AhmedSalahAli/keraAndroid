@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import com.app.kera.R
 import com.app.kera.databinding.ActivityWriteReportBinding
 import com.app.kera.teacherDailyReport.model.PublishReportRequestModel
@@ -54,10 +55,11 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
 
         viewDataBinding.adapter = OuterAdapter(ArrayList(), this, this,this, this,0)
         viewDataBinding.studentsAdapter = WriteReportStudentsAdapter(ArrayList())
-
+        viewDataBinding.recyclerView6.layoutManager = GridLayoutManager(this,
+            1, GridLayoutManager.HORIZONTAL,false)
         viewDataBinding.textViewDate.text = CommonUtils.getCurrentDate_EEE_MM_YYY()
 
-        viewModel.response.observe(this, {
+        viewModel.response.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.adapter!!.dailyReportList = it.data!!.answers!!
             viewDataBinding.adapter!!.status = it.data!!.status
@@ -73,19 +75,19 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
                 viewDataBinding.textViewNumberOfStudents.text =
                     "${it.data!!.students?.size} student is selected"
             }
-            if (it.data!!.status == 1){
+            if (it.data!!.status == 1) {
                 viewDataBinding.imageViewPublishReport.visibility = View.VISIBLE
-               // viewDataBinding.imageViewPublishReport.isClickable = true
-            }else{
+                // viewDataBinding.imageViewPublishReport.isClickable = true
+            } else {
                 viewDataBinding.imageViewPublishReport.visibility = View.INVISIBLE
                 //viewDataBinding.imageViewPublishReport.isClickable = false
             }
-        })
+        }
 
-        viewModel.updateDailyReportQuestionBoolean.observe(this, {
+        viewModel.updateDailyReportQuestionBoolean.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
 
-        })
+        }
 
 
 
@@ -116,24 +118,24 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
 
         }
 
-        viewModel.publishReportResultBoolean.observe(this, {
+        viewModel.publishReportResultBoolean.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
-            if (it){
+            if (it) {
                 showMessage(resources.getString(R.string.report_published_successfully))
-            }else{
+            } else {
                 showMessage(resources.getString(R.string.error_pulishinng))
             }
 
-        })
+        }
 
     }
 
 
     private fun messageObserver() {
-        viewModel.message.observe(this@WriteReportActivity, {
+        viewModel.message.observe(this@WriteReportActivity) {
             CommonUtils.hideLoading(mProgressDialog!!)
             showMessage(it)
-        })
+        }
     }
 
     private fun showMessage(it: String) {

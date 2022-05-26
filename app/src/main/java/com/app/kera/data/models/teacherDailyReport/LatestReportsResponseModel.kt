@@ -1,6 +1,7 @@
 package com.app.kera.data.models.teacherDailyReport
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 class LatestReportsResponseModel {
     @SerializedName("message")
@@ -46,6 +47,10 @@ class LatestReportsResponseModel {
 
             @SerializedName("isPublished")
             var isPublished: Boolean? = false
+
+            @SerializedName("students")
+            var students: ArrayList<DailyReportResponseModel.DataBean.StudentsBean> = ArrayList()
         }
+
     }
 }

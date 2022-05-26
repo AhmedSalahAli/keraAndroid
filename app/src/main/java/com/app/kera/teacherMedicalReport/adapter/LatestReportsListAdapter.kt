@@ -1,17 +1,22 @@
 package com.app.kera.teacherMedicalReport.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.kera.R
+import com.app.kera.data.models.teacherDailyReport.DailyReportResponseModel
 import com.app.kera.databinding.ItemTeacherMedicalReportReportBinding
 import com.app.kera.teacherMedicalReport.model.LatestReportItemUIModel
+import com.app.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter
 import com.app.kera.utils.BaseViewHolder
 
 class LatestReportsListAdapter(
     var reportsList: ArrayList<LatestReportItemUIModel.ReportModel>,
-    var callBack: CallBack
+    var callBack: CallBack,
+    var context:Context
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -38,6 +43,14 @@ class LatestReportsListAdapter(
         BaseViewHolder(item.root) {
         override fun onBind(position: Int) {
             item.model = reportsList[position]
+            item.recyclerView6.layoutManager = GridLayoutManager(
+                context,
+                1,GridLayoutManager.HORIZONTAL, false
+            )
+            item.studentsAdapter = WriteReportStudentsAdapter(ArrayList())
+            item.studentsAdapter!!.studentsList = reportsList[position]!!.students
+            item.studentsAdapter!!.notifyDataSetChanged()
+
             if (reportsList[position].isPublished!!){
                item.txtPublished.setImageResource(R.drawable.ic_baseline_check_circle_24_success)
 
