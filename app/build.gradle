@@ -118,4 +118,6 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
     // location
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
 }

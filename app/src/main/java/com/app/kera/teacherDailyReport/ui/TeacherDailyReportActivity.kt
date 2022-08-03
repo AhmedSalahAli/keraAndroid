@@ -109,7 +109,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         viewDataBinding.recyclerLatestReports.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)) // sets LayoutManager
         viewDataBinding.recyclerLatestReports.addVeiledItems(15)
         viewDataBinding.recyclerLatestReports.veil()
-        viewDataBinding.recyclerLatestReports.setNestedScrollingEnabled(true);
+        viewDataBinding.recyclerLatestReports.isNestedScrollingEnabled = true;
         viewDataBinding.recyclerLatestReports.getRecyclerView().setPadding(40,40,40,30)
         viewDataBinding.recyclerLatestReports .getRecyclerView().clipToPadding = false
         viewDataBinding.recyclerLatestReports.getVeiledRecyclerView().setPadding(40,40,40,30)
@@ -178,7 +178,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
                 for (student in viewDataBinding.studentsAdapter!!.studentsList) {
                     student.isSelected.set(false)
                 }
-                viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
+                viewDataBinding.checkBoxSelectAll.text = getString(R.string.select_all)
 
                 Log.e("selectedStudents", selectedStudents.size.toString())
             }
@@ -195,7 +195,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         selectedStudents.clear()
         checkNumberOfSelectedStudents()
         viewDataBinding.checkBoxSelectAll.isChecked = false
-        viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
+        viewDataBinding.checkBoxSelectAll.text = getString(R.string.select_all)
 
     }
 
@@ -266,22 +266,22 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     }
 
     private fun classesListObservation() {
-        viewModel.classesList.observe(this, {
+        viewModel.classesList.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.recyclerView7.unVeil()
             viewDataBinding.textViewNumberOfClasses.text = "${it.size} classes today"
             viewDataBinding.classesAdapter!!.classesList = it
             viewDataBinding.classesAdapter!!.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun studentsListObservation() {
-        viewModel.studentsList.observe(this, {
+        viewModel.studentsList.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.recyclerView9.unVeil()
             viewDataBinding.studentsAdapter = StudentsListAdapter(it, this, this)
             viewDataBinding.studentsAdapter!!.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun searchClickListener() {
@@ -299,10 +299,10 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     }
 
     private fun messageObserver() {
-        viewModel.message.observe(this@TeacherDailyReportActivity, {
+        viewModel.message.observe(this@TeacherDailyReportActivity) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             showMessage(it)
-        })
+        }
     }
 
     private fun showMessage(it: String) {

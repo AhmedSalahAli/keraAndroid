@@ -39,10 +39,12 @@
             app:veilFrame_veiled="true"
             app:veilFrame_shimmerEnable="true"
             android:layoutDirection="ltr"
+
             app:veilLayout_baseColor="@color/light_grey_8c99a7"
             app:veilFrame_highlightColor="@color/blue_effcff"
-            app:veilFrame_baseAlpha="0.6"
-            app:veilFrame_highlightAlpha="1.0"
+            app:veilFrame_baseAlpha="0.3"
+
+            app:veilFrame_highlightAlpha="0.1"
             app:veilFrame_radius="8dp"
             android:clipToPadding="false"
              />

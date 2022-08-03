@@ -111,7 +111,7 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
             .check()
     }
     private fun appSettingObservation() {
-        splashViewModel.isAuthorized.observe(this, {
+        splashViewModel.isAuthorized.observe(this) {
             if (it) {
                 startActivity(Intent(this, MainActivity::class.java).apply {})
                 finish()
@@ -121,7 +121,7 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
                 finish()
 //                navigateToUriWithClearStack(R.string.on_boarding)
             }
-        })
+        }
     }
 
     override fun onStart() {
