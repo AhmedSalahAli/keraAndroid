@@ -33,7 +33,7 @@ class KeraConfigrationsLuncher : AppCompatActivity() {
 
     }
     private fun userProfileDataObservation() {
-        ViewModel.profileUIModel.observe(this, {
+        ViewModel.profileUIModel.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
 
 
@@ -42,7 +42,7 @@ class KeraConfigrationsLuncher : AppCompatActivity() {
                 ViewModel.saveChildDataToSharedPref(it.students!![0])
             }
 
-        })
+        }
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

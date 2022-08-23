@@ -41,31 +41,32 @@ class ReportDetails : AppCompatActivity() , CustomDialogClass.CallBack{
         }else{
             finish()
         }
-        viewModel.response.observe(this, {
+        viewModel.response.observe(this) {
             it.dateConverted =
                 CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyyTT(it.date!!)
             viewDataBinding.textViewReply.setOnClickListener {
 
             }
-            var reportID  = it.id
-            viewDataBinding.textViewDate.text =  CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyy(it.date!!)
-            viewDataBinding.textViewTime.text =  CommonUtils.convertTimeStampToDate_TT(it.date!!)
+            var reportID = it.id
+            viewDataBinding.textViewDate.text =
+                CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyy(it.date!!)
+            viewDataBinding.textViewTime.text = CommonUtils.convertTimeStampToDate_TT(it.date!!)
             viewDataBinding.recycler.adapter = DailyReportAdapter(it.answers)
             viewDataBinding.textViewReply.setOnClickListener(View.OnClickListener {
-                dialog =  CustomDialogClass.newInstance(this@ReportDetails, reportID.toString())
+                dialog = CustomDialogClass.newInstance(this@ReportDetails, reportID.toString())
                 dialog.show(this.supportFragmentManager, CustomDialogClass.TAG)
             })
 
 
-        })
+        }
         viewDataBinding.imageViewBack.setOnClickListener {
             finish()
         }
-        viewModel.publishReplayBoolean.observe(this, {
+        viewModel.publishReplayBoolean.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
             dialog.dismiss()
 
-        })
+        }
 
     }
 
@@ -82,15 +83,16 @@ class ReportDetails : AppCompatActivity() , CustomDialogClass.CallBack{
             requestModel.reply = comment
             requestModel.reportId = id
             requestModel.type = "daily"
+            requestModel.studentId = viewModel.getSelectedChildDataFromSharedPref()?.studentId
             viewModel.sendReplay(requestModel)
             messageObserver()
         }
     }
     private fun messageObserver() {
-        viewModel.message.observe(this, {
+        viewModel.message.observe(this) {
             showMessage(it)
             CommonUtils.hideLoading(mProgressDialog!!)
-        })
+        }
 
     }
     private fun showMessage(it: String) {

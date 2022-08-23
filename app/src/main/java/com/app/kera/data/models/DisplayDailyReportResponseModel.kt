@@ -1,5 +1,7 @@
 package com.app.kera.data.models
 
+import androidx.constraintlayout.solver.state.Dimension.Parent
+import com.app.kera.data.models.teacherDailyReport.DailyReportResponseModel
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -42,7 +44,6 @@ class DisplayDailyReportResponseModel {
 
             @SerializedName("answers")
             var answers: ArrayList<AnswersBean>? = null
-
             class TeacherBean :Serializable {
                 @SerializedName("_id")
                 var id: String? = null

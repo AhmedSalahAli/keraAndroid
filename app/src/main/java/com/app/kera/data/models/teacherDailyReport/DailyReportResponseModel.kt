@@ -23,6 +23,35 @@ class DailyReportResponseModel : Serializable{
         @SerializedName("answers")
         var answers: ArrayList<AnswersBean>? = null
 
+
+        @SerializedName("replies"  ) var replies  : ArrayList<Replies>  = arrayListOf()
+
+
+        data class Replies (
+
+            @SerializedName("_id"       ) var Id        : String?  = null,
+            @SerializedName("parent"    ) var parent    : Parent?  = Parent(),
+            @SerializedName("reply"     ) var reply     : String?  = null,
+            @SerializedName("student"   ) var student   : Student? = Student(),
+            @SerializedName("createdAt" ) var createdAt : String?  = null,
+            @SerializedName("updatedAt" ) var updatedAt : String?  = null
+
+        ) : Serializable
+        data class Parent (
+
+            @SerializedName("_id"          ) var Id           : String? = null,
+            @SerializedName("username"     ) var username     : String? = null,
+            @SerializedName("profileImage" ) var profileImage : String? = null
+
+        ) : Serializable
+        data class Student (
+
+            @SerializedName("_id"          ) var Id           : String? = null,
+            @SerializedName("username"     ) var username     : String? = null,
+            @SerializedName("profileImage" ) var profileImage : String? = null
+
+        ) : Serializable
+
         class StudentsBean : Serializable{
             @SerializedName("_id")
             var id: String? = null

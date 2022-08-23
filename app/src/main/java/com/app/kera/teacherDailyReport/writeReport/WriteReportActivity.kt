@@ -20,6 +20,7 @@ import com.app.kera.R
 import com.app.kera.databinding.ActivityWriteReportBinding
 import com.app.kera.teacherDailyReport.model.PublishReportRequestModel
 import com.app.kera.teacherDailyReport.model.UpdateQuestionRequestModel
+import com.app.kera.teacherDailyReport.writeReport.adapter.CommentsAdapter
 import com.app.kera.teacherDailyReport.writeReport.adapter.MoodListAdapter
 import com.app.kera.teacherDailyReport.writeReport.adapter.OuterAdapter
 import com.app.kera.teacherDailyReport.writeReport.adapter.RadioListAdapter
@@ -53,6 +54,8 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
         viewModel.getDailyReportData(reportID)
         backButtonClickListener()
 
+
+        viewDataBinding.commentsAdapter = CommentsAdapter(ArrayList())
         viewDataBinding.adapter = OuterAdapter(ArrayList(), this, this,this, this,0)
         viewDataBinding.studentsAdapter = WriteReportStudentsAdapter(ArrayList())
         viewDataBinding.recyclerView6.layoutManager = GridLayoutManager(this,
@@ -64,6 +67,9 @@ class WriteReportActivity : AppCompatActivity(), MoodListAdapter.MoodCallBack,
             viewDataBinding.adapter!!.dailyReportList = it.data!!.answers!!
             viewDataBinding.adapter!!.status = it.data!!.status
             viewDataBinding.adapter!!.notifyDataSetChanged()
+
+            viewDataBinding.commentsAdapter!!.commentList  =  it.data!!.replies
+            viewDataBinding.commentsAdapter!!.notifyDataSetChanged()
 
             viewDataBinding.studentsAdapter!!.studentsList = it.data!!.students!!
             viewDataBinding.studentsAdapter!!.notifyDataSetChanged()

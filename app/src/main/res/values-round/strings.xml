@@ -19,4 +19,5 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="ok">Ok</string>
+    <string name="parent_comments">Parent Comments</string>
 </resources>

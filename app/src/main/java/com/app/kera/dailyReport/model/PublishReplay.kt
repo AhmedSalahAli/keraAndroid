@@ -9,5 +9,7 @@ class PublishReplay {
     var reportId: String? = null
     @SerializedName("reply")
     var reply: String? = null
+    @SerializedName("studentId")
+    var studentId: String? = null
 
 }

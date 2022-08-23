@@ -96,9 +96,9 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
                             finish();
                             return;
                         }*/
-                    splashViewModel.timerFinished.observe(this@SplashActivity, {
+                    splashViewModel.timerFinished.observe(this@SplashActivity) {
                         appSettingObservation()
-                    })
+                    }
                 }
 
                 override fun onPermissionRationaleShouldBeShown(

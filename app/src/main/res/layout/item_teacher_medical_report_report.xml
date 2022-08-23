@@ -13,6 +13,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/item_latest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_20ssp"
@@ -81,8 +82,9 @@
                 android:clipToPadding="false"
                 android:orientation="horizontal"
                 android:paddingStart="10dp"
+                android:contextClickable="true"
+
                 android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
-                android:clickable="false"
                 android:layout_marginBottom="5dp"
                 app:adapter="@{studentsAdapter}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

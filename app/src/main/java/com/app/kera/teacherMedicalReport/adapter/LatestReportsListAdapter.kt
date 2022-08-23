@@ -2,16 +2,18 @@ package com.app.kera.teacherMedicalReport.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
+import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SimpleOnItemTouchListener
 import com.app.kera.R
-import com.app.kera.data.models.teacherDailyReport.DailyReportResponseModel
 import com.app.kera.databinding.ItemTeacherMedicalReportReportBinding
 import com.app.kera.teacherMedicalReport.model.LatestReportItemUIModel
 import com.app.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter
 import com.app.kera.utils.BaseViewHolder
+
+
 
 class LatestReportsListAdapter(
     var reportsList: ArrayList<LatestReportItemUIModel.ReportModel>,
@@ -32,7 +34,6 @@ class LatestReportsListAdapter(
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.onBind(position)
 
-        holder.itemView.setOnClickListener { callBack.onReportItemClicked(reportsList[position].id) }
     }
 
     override fun getItemCount(): Int {
@@ -43,6 +44,9 @@ class LatestReportsListAdapter(
         BaseViewHolder(item.root) {
         override fun onBind(position: Int) {
             item.model = reportsList[position]
+
+            item.itemLatest.setOnClickListener { callBack.onReportItemClicked(reportsList[position].id) }
+            item.recyclerView6.isClickable = false
             item.recyclerView6.layoutManager = GridLayoutManager(
                 context,
                 1,GridLayoutManager.HORIZONTAL, false
