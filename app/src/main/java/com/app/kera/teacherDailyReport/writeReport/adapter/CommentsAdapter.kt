@@ -9,6 +9,7 @@ import com.app.kera.databinding.ItemActivityBinding
 import com.app.kera.databinding.ItemCommentBinding
 import com.app.kera.databinding.ItemDailyReportTeacherCommentBinding
 import com.app.kera.utils.BaseViewHolder
+import com.app.kera.utils.CommonUtils
 
 class CommentsAdapter(
     var commentList: List<DailyReportResponseModel.DataBean.Replies>?,
@@ -38,6 +39,11 @@ class CommentsAdapter(
 
                 item.model = commentList!![position]
 
+            item.txtDate.text = commentList!![position].createdAt?.let {
+                CommonUtils.convertIsoToDate(
+                    it
+                )
+            }
 
 
 
