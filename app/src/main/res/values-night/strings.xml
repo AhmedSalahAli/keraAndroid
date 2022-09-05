@@ -24,4 +24,18 @@
     <string name="arabic">Arabic</string>
     <string name="ok">Ok</string>
     <string name="parent_comments">Parent Comments</string>
+    <string name="message_the">Message the</string>
+    <string name="principals">Principals</string>
+    <string name="no_students">No students are selected</string>
+    <string name="latest_report">Latest Reports</string>
+    <string name="days">Days</string>
+    <string name="Contact">Contact</string>
+    <string name="child_first_name">Child first Name</string>
+    <string name="Nationality">Nationality</string>
+    <string name="father_data">Father\'s data</string>
+    <string name="mother_data">Mother\'s Data</string>
+    <string name="relative_data">Relative\'s Data</string>
+    <string name="relative_details">Trusted person, able to pick-up the Child, and to deal with.</string>
+    <string name="Relationship">Relationship</string>
+    <string name="home_address">Home Address</string>
 </resources>

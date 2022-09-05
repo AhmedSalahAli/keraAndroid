@@ -64,19 +64,21 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
                 stateOfChildrenFrame(true)
             }
         }
-        viewModel.profileUIModel.observe(this, {
+        viewModel.profileUIModel.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.childrenAdapter!!.children = it.students!!
             viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
-            if (it.students!!.size ==1){
-                viewDataBinding.imageViewExchange.visibility =  View.GONE
-            }else{
-                viewDataBinding.imageViewExchange.visibility =  View.VISIBLE
+            if (it.students!!.size == 1) {
+                viewDataBinding.imageViewExchange.visibility = View.GONE
+            } else {
+                viewDataBinding.imageViewExchange.visibility = View.VISIBLE
 
             }
-        })
+        }
 
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+        viewDataBinding.veilLayout.veil()
+
         viewDataBinding.veilLayout.veil()
         viewDataBinding.recyclerEducation.setAdapter(viewDataBinding.listAdapter) // sets your own adapter
         viewDataBinding.recyclerEducation.setLayoutManager(
@@ -84,6 +86,8 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
                 LinearLayoutManager.VERTICAL,false)
         ) // sets LayoutManager
         viewDataBinding.recyclerEducation.addVeiledItems(15)
+        viewDataBinding.recyclerEducation.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerEducation.veil()
         if (accessType == "teacher") {
             viewModel.getDates(viewModel.getTeacheerProfile().classNumber!!)

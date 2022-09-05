@@ -51,7 +51,9 @@ class SchoolDetailsActivity : AppCompatActivity(), PhonesAdapter.CallBack , Imag
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+        viewDataBinding.veilLayout.layoutDirection = View.LAYOUT_DIRECTION_LTR
         viewDataBinding.veilLayout.veil()
+
         viewModel.getSchoolsList(intent.getStringExtra("SchoolID")!!)
 
         viewDataBinding.tagsAdapter = TagsAdapter(ArrayList())
@@ -61,14 +63,14 @@ class SchoolDetailsActivity : AppCompatActivity(), PhonesAdapter.CallBack , Imag
         }
 
 
-        viewModel.schoolDetails.observe(this, {
+        viewModel.schoolDetails.observe(this) {
             // CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
             viewDataBinding.tagsAdapter!!.tags = it.tags
             viewDataBinding.tagsAdapter!!.notifyDataSetChanged()
 
             it.images.removeIf(String::isEmpty)
-            val adapter = ImagesAdapter(it.images, this,this)
+            val adapter = ImagesAdapter(it.images, this, this)
             viewDataBinding.recyclerView.setSliderAdapter(adapter)
 
 
@@ -88,7 +90,7 @@ class SchoolDetailsActivity : AppCompatActivity(), PhonesAdapter.CallBack , Imag
 
             }
 
-        })
+        }
 
         viewDataBinding.textView18.setOnClickListener(View.OnClickListener {
             if (lat != 0.0 && long != 0.0) {

@@ -74,10 +74,12 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
         viewDataBinding.recyclerView.setLayoutManager(manager)
         viewDataBinding.recyclerView.setAdapter(viewDataBinding.adapter) // sets your own adapter
         viewDataBinding.recyclerView.addVeiledItems(15)
+        viewDataBinding.recyclerView.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerView.veil()
 
 
-        val scale = resources.getDimension(R.dimen._120sdp)
+        val scale = resources.getDimension(R.dimen._145sdp)
         val padding_in_px = (scale + 0.5f).toInt()
         viewDataBinding.recyclerView.getRecyclerView().setPadding(
             0,

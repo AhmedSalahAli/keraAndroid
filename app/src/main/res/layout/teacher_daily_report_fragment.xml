@@ -53,7 +53,7 @@
                     android:layout_marginBottom="12dp"
                     android:src="@drawable/ic_rounded_back"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -78,7 +78,7 @@
                     android:layout_marginEnd="24dp"
                     android:src="@drawable/ic_send_report_icon"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imageView_back" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -279,7 +279,7 @@
                         android:textSize="@dimen/_9ssp"
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
                         app:layout_constraintTop_toBottomOf="@+id/recyclerView9"
-                        tools:text="12 Students are selected" />
+                        tools:text="@string/no_students" />
 
                     <TextView
                         android:id="@+id/textView123"
@@ -287,7 +287,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
                         android:fontFamily="@font/sf_ui_display_medium"
-                        android:text="Latest reports"
+                        android:text="@string/latest_report"
                         android:textColor="#ADBBC7"
                         android:textSize="@dimen/_10ssp"
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
@@ -343,7 +343,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Select All"
+                            android:text="@string/select_all"
 
                             android:buttonTint="@color/orange_FFBB3B"
                             android:textSize="@dimen/_14sdp"

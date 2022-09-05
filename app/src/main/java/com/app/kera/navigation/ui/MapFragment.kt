@@ -122,16 +122,16 @@ class MapFragment : Fragment(), LocationListener {
         }
 
     private fun schoolListObserver() {
-        viewModel.schoolsLocations.observe(viewLifecycleOwner, {
+        viewModel.schoolsLocations.observe(viewLifecycleOwner) {
             for (school in it) {
                 val latLng = LatLng(school.lat, school.long)
 
                 addCustomMarkerFromURL(school)
                 schoolsLocations.add(latLng)
                 Log.e("logos", "l : " + school.image);
-                Log.e("locations ", "l : " + latLng.latitude+" "+latLng.longitude);
+                Log.e("locations ", "l : " + latLng.latitude + " " + latLng.longitude);
             }
-        })
+        }
     }
     private fun addCustomMarkerFromURL(school: MapLatLongList) {
         if (mMap == null) {

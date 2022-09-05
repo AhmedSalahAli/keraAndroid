@@ -18,7 +18,9 @@
         android:layout_margin="10dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_white"
-        android:elevation="10dp">
+        android:elevation="20dp"
+        android:outlineAmbientShadowColor="#CCD36A"
+        android:outlineSpotShadowColor="#767C28">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -49,19 +51,21 @@
 
             <ImageView
                 android:id="@+id/imageView_school_logo"
-                android:layout_width="@dimen/_37sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_48sdp"
                 android:scaleType="centerInside"
+                android:paddingEnd="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="@+id/guideline7"
                 app:layout_constraintTop_toTopOf="@+id/guideline8"
                 app:srcCompat="@drawable/nearby_marker" />
 
             <ImageView
                 android:id="@+id/imageView92"
-                android:layout_width="@dimen/_12sdp"
-                android:layout_height="@dimen/_12sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:layout_marginTop="6dp"
-                android:scaleType="centerCrop"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_about_kera"
                 app:image="@{model.logo}"
                 app:layout_constraintEnd_toEndOf="@+id/imageView_school_logo"
@@ -181,6 +185,8 @@
                 android:text="@{model.title}"
                 android:textColor="#CCD36A"
                 android:textSize="12sp"
+                android:maxLength="20"
+                android:ellipsize="end"
                 app:layout_constraintBottom_toBottomOf="@+id/textView5"
                 app:layout_constraintEnd_toStartOf="@+id/guideline9"
                 app:layout_constraintTop_toTopOf="@+id/textView5"
@@ -198,14 +204,16 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tags_recycler"
-                android:layout_width="@dimen/_75sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                app:layout_constraintEnd_toStartOf="@+id/imageView10"
                 app:layout_constraintStart_toStartOf="@+id/guideline7"
                 app:layout_constraintTop_toTopOf="@+id/imageView10"
                 app:spanCount="1"
+                tools:itemCount="2"
                 tools:listitem="@layout/item_tags" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

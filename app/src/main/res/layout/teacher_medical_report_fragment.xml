@@ -53,7 +53,7 @@
                     android:layout_marginBottom="12dp"
                     android:src="@drawable/ic_rounded_back"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -89,7 +89,7 @@
                     android:layout_marginEnd="24dp"
                     android:src="@drawable/ic_send_report_icon"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imageView_back" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -215,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="35dp"
                         android:fontFamily="@font/sf_ui_display_regular"
-                        android:text="Students"
+                        android:text="@string/students"
                         android:textColor="#5881A4"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
@@ -284,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:fontFamily="@font/sf_ui_display_regular"
-                        android:text="no Students are selected"
+                        android:text="@string/no_students"
                         android:textColor="#F2818A"
                         android:textSize="@dimen/_9ssp"
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
@@ -296,7 +296,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
                         android:fontFamily="@font/sf_ui_display_regular"
-                        android:text="Latest reports"
+                        android:text="@string/latest_report"
                         android:textColor="#ADBBC7"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
@@ -307,7 +307,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/sf_ui_display_regular"
-                        android:text="Mark as abscent"
+                        android:text="@string/mark_as_abscent"
                         android:textColor="#1A2F50"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toStartOf="@+id/guideline44"
@@ -315,7 +315,7 @@
 
                     <com.skydoves.androidveil.VeilRecyclerFrameView
                         android:id="@+id/recycler_latest_reports"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="300dp"
                         android:layout_marginTop="8dp"
                         android:orientation="vertical"
@@ -351,7 +351,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Select All"
+                            android:text="@string/select_all"
 
                             android:buttonTint="@color/orange_FFBB3B"
                             android:textSize="@dimen/_14sdp"

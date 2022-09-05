@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.app.TaskStackBuilder
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -14,12 +15,19 @@ import com.bumptech.glide.Glide
 import com.app.kera.R
 
 import com.app.kera.dailyReport.ui.DailyReportActivity
+import com.app.kera.dailyReport.ui.ReportDetails
+import com.app.kera.data.models.NotificationModel
 import com.app.kera.databinding.NotificationFragmentBinding
+import com.app.kera.main.ui.MainActivity
 import com.app.kera.medical.MedicalReportActivity
 import com.app.kera.notification.adapter.PaginationListener
 import com.app.kera.notification.adapter.PaginationListener.PAGE_START
 import com.app.kera.notification.adapter.PostRecyclerAdapter
 import com.app.kera.notification.model.NotificationItemUIModel
+import com.app.kera.teacherDailyReport.ui.TeacherDailyReportActivity
+import com.app.kera.teacherDailyReport.writeReport.WriteReportActivity
+import com.app.kera.teacherMedicalReport.TeacherMedicalReportActivity
+import com.app.kera.teacherMedicalReport.writeMedicalReport.WriteMedicalReportActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -65,7 +73,12 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
 
 
         viewModel.logo.value = viewModel.getNurseryLogo()
-        viewModel.getNotifications(currentPage)
+        if (viewModel.getUserType() == "user"){
+            viewModel.getNotifications(currentPage)
+        }else if (viewModel.getUserType() == "teacher"){
+            viewModel.getTeacherNotifications(currentPage)
+        }
+
        viewDataBinding. swipeRefresh.setOnRefreshListener(this)
         val layoutManager = LinearLayoutManager(requireContext())
 
@@ -82,10 +95,11 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
         viewDataBinding.recyclerNotifications.getRecyclerView().setHasFixedSize(true)
 
         viewDataBinding.recyclerNotifications.addVeiledItems(15)
-        viewDataBinding.recyclerNotifications.getRecyclerView().setPadding(0, 100, 0, 200)
+        viewDataBinding.recyclerNotifications.getRecyclerView().setPadding(0, 50, 0, 200)
         viewDataBinding.recyclerNotifications .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerNotifications.getVeiledRecyclerView().setPadding(0, 100, 0, 200)
+        viewDataBinding.recyclerNotifications.getVeiledRecyclerView().setPadding(0, 50, 0, 200)
         viewDataBinding.recyclerNotifications .getVeiledRecyclerView().clipToPadding = false
+        viewDataBinding.recyclerNotifications.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
         viewDataBinding.recyclerNotifications.veil()
         manager = LinearLayoutManager(requireContext())
         viewDataBinding.recyclerNotifications.setLayoutManager(layoutManager)
@@ -99,7 +113,12 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
 
                 this@NotificationFragment.isLoading = true;
                 currentPage++;
-                viewModel.getNotifications(currentPage)
+                if (viewModel.getUserType() == "user"){
+                    viewModel.getNotifications(currentPage)
+                }else if (viewModel.getUserType() == "teacher"){
+                    viewModel.getTeacherNotifications(currentPage)
+                }
+
             }
 
             override fun isLastPage(): Boolean {
@@ -142,7 +161,7 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
 //                }
 //            }
 //        })
-        viewModel.notificationsList.observe(viewLifecycleOwner, {
+        viewModel.notificationsList.observe(viewLifecycleOwner) {
             viewDataBinding.recyclerNotifications.unVeil()
 
             var items: ArrayList<NotificationItemUIModel.NotificationModel> = ArrayList()
@@ -177,7 +196,7 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
                 isLastPage = true
             }
             isLoading = false
-            Log.e("items Count L ",""+ adapter!!.items.size)
+            Log.e("items Count L ", "" + adapter!!.items.size)
             if (adapter!!.items.size == 0) {
                 showNoData()
             } else {
@@ -202,7 +221,7 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
 //            } else {
 //                hideNoData()
 //            }
-        })
+        }
         messageObserver()
         viewModel.logo.observe(viewLifecycleOwner, Observer {
             if (it == "visitor") {
@@ -215,23 +234,119 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
 
     }
 
-    override fun onItemClicked(notificationType: String?) {
-
-        if (notificationType!!.equals("1")){
-
-            startActivity(Intent(requireContext(), MedicalReportActivity::class.java))
+    override fun onItemClicked(  notificationModelItem: NotificationItemUIModel.NotificationModel ) {
 
 
-        }else if (notificationType!!.equals("2")){
+        val notificationModel = NotificationModel()
+        notificationModel.reportId = notificationModelItem.relatedId
+        notificationModel.userType = notificationModelItem.userType
+        notificationModel.type = notificationModelItem.notificationType
 
-            startActivity(Intent(requireContext(), DailyReportActivity::class.java))
+
+        //notificationModel.bundle = notificationBundle
+
+        if (notificationModel.userType.equals("user")) {
+            if (notificationModel.type.equals("daily")) {
+
+
+
+
+                val intentReport: Intent = Intent(
+                    requireContext(),
+                    DailyReportActivity::class.java
+                )
+
+                startActivity(intentReport)
+
+
+
+            } else if (notificationModel.type.equals("medical")) {
+
+
+
+
+
+                val intentReport: Intent = Intent(
+                    requireContext(),
+                    MedicalReportActivity::class.java
+                )
+
+                startActivity(intentReport)
+
+
+            } else {
+
+                val intent: Intent = Intent(requireContext(), MainActivity::class.java)
+                val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(requireContext())
+
+                val intentReport: Intent = Intent(
+                    requireContext(),
+                    MainActivity::class.java
+                )
+
+                startActivity(intentReport)
+
+            }
+        } else if (notificationModel.userType.equals("teacher")) {
+            if (notificationModel.type.equals("daily")) {
+
+
+
+
+
+                val intentReports: Intent = Intent(
+                    requireContext(),
+                    TeacherDailyReportActivity::class.java
+                )
+                val intentReportDetails: Intent = Intent(
+                    requireContext(),
+                    WriteReportActivity::class.java
+                )
+                intentReportDetails.putExtra("reportID", notificationModel.reportId)
+
+
+
+                startActivity(intentReports)
+                startActivity(intentReportDetails)
+
+            } else if (notificationModel.type.equals("medical")) {
+
+
+
+                val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(requireContext())
+
+
+                val intentReports: Intent = Intent(
+                    requireContext(),
+                    TeacherMedicalReportActivity::class.java
+                )
+                val intentReportDetails: Intent = Intent(
+                    requireContext(),
+                    WriteMedicalReportActivity::class.java
+                )
+                stackBuilder.addParentStack(MainActivity::class.java)
+
+                startActivity(intentReports)
+                startActivity(intentReportDetails)
+
+            } else {
+
+
+
+            }
+        } else {
+
         }
+
+
     }
     private fun messageObserver() {
-        viewModel.message.observe(viewLifecycleOwner, {
+        viewModel.message.observe(
+            viewLifecycleOwner,
+        ) {
             viewDataBinding.recyclerNotifications.unVeil()
             showNoData()
-        })
+        }
     }
     private fun showNoData() {
         viewDataBinding.recyclerNotifications.visibility = View.GONE
@@ -250,6 +365,11 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
         isLastPage = false;
         adapter!!.clear();
         viewDataBinding.recyclerNotifications.veil()
-        viewModel.getNotifications(currentPage)
+        if (viewModel.getUserType() == "user"){
+            viewModel.getNotifications(currentPage)
+        }else if (viewModel.getUserType() == "teacher"){
+            viewModel.getTeacherNotifications(currentPage)
+        }
+
     }
 }

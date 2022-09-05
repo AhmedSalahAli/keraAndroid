@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.kera.data.network.AppRepo
 import com.app.kera.teacherDailyReport.model.CreateReportRequestModel
+import com.app.kera.teacherMedicalReport.model.ImageRequest
 import com.app.kera.teacherMedicalReport.model.LatestReportItemUIModel
 import com.app.kera.teacherMedicalReport.model.StudentItemUIModel
 import com.app.kera.teacherMedicalReport.model.TeacherReportClassesUIModel

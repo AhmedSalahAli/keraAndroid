@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.app.kera.navigation.ui.MapFragment
+import com.app.kera.navigation.ui.NavigationMapFragment
 import com.app.kera.schoolsList.SchoolsListFragment
 
 

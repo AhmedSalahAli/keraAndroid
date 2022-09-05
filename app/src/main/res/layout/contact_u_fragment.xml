@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sf_ui_display_regular"
-                android:text="Contact"
+                android:text="@string/Contact"
                 android:textColor="#152D4A"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
@@ -44,7 +44,7 @@
                 android:layout_marginStart="31dp"
 
                 android:src="@drawable/ic_rounded_back"
-                android:layout_gravity="start|center"
+                android:layout_gravity="left|center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </com.google.android.material.card.MaterialCardView>
@@ -108,7 +108,7 @@
                                     android:layout_marginTop="@dimen/_10sdp"
                                     android:fontFamily="@font/sf_ui_display_regular"
                                     android:text="@string/subject"
-                                    android:textColor="#5881A4"
+                                    android:textColor="#152D4A"
                                     android:textSize="@dimen/_13ssp"
                                     app:layout_constraintStart_toStartOf="@+id/guideline46"
                                     app:layout_constraintTop_toBottomOf="@+id/imageView78" />
@@ -146,10 +146,10 @@
                                     android:background="@drawable/rounded_blue_effcff_stroke_6f819d"
                                     android:fontFamily="@font/sf_ui_display_regular"
                                     android:hint="@string/topic_here"
-                                    android:paddingLeft="43dp"
+                                    android:paddingStart="43dp"
 
                                     android:text="@={viewModel.contactUsUIModel.topic}"
-                                    android:textColorHint="#152D4A"
+
                                     android:textSize="@dimen/_13ssp"
                                     android:textStyle="bold"
                                     app:layout_constraintEnd_toStartOf="@+id/guideline47"
@@ -164,7 +164,7 @@
                                     android:layout_marginTop="31dp"
                                     android:fontFamily="@font/sf_ui_display_regular"
                                     android:text="@string/message"
-                                    android:textColor="#5881A4"
+                                    android:textColor="#152D4A"
                                     android:textSize="@dimen/_13ssp"
                                     app:layout_constraintStart_toStartOf="@+id/guideline46"
                                     app:layout_constraintTop_toBottomOf="@+id/textView128" />
@@ -184,15 +184,14 @@
                                         android:scrollbars="vertical"
 
 
-                                        android:textColorHint="#152D4A"
+
                                         android:textSize="@dimen/_13ssp"
                                         android:textStyle="bold"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toStartOf="@+id/guideline47"
                                         app:layout_constraintStart_toStartOf="@+id/guideline46"
                                         app:layout_constraintTop_toBottomOf="@+id/textView129"
-                                        tools:hint="The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras." />
-
+                                        android:hint="@string/message"/>
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

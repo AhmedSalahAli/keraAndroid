@@ -60,10 +60,10 @@
                 android:id="@+id/imageView_qr_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
                 android:layout_marginBottom="12dp"
                 android:src="@drawable/ic_qr"
-               android:layout_gravity="bottom|end"
+               android:layout_gravity="bottom|right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </com.google.android.material.card.MaterialCardView>
@@ -200,12 +200,15 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout_education"
                         android:layout_width="0dp"
+
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="13dp"
                         android:layout_marginEnd="30dp"
                         android:background="@drawable/shadow"
-                        android:elevation="4dp"
+                        android:elevation="@dimen/_10sdp"
+                        android:outlineAmbientShadowColor="@color/blue"
+                        android:outlineSpotShadowColor="@color/blue"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/veilLayout">
@@ -250,7 +253,9 @@
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
                         android:layout_marginTop="12dp"
-
+                        android:elevation="@dimen/_10sdp"
+                        android:outlineAmbientShadowColor="@color/blue"
+                        android:outlineSpotShadowColor="@color/blue"
                         android:background="@drawable/oval_light_blue"
                         app:layout_constraintStart_toStartOf="@+id/constraintLayout_education"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout_education">
@@ -261,6 +266,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
+                            android:elevation="@dimen/_10sdp"
                             android:src="@drawable/ic_daily_r"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -272,6 +278,9 @@
                         android:id="@+id/constraintLayout_events"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
+                        android:elevation="@dimen/_10sdp"
+                        android:outlineAmbientShadowColor="@color/blue"
+                        android:outlineSpotShadowColor="@color/blue"
                         android:background="@drawable/oval_light_blue"
                         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_daily_reports"
                         app:layout_constraintEnd_toEndOf="@+id/constraintLayout_education"
@@ -305,6 +314,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_medical_ic"
+                            android:elevation="@dimen/_10sdp"
+                            android:outlineAmbientShadowColor="@color/blue"
+                            android:outlineSpotShadowColor="@color/blue"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -316,6 +328,9 @@
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
                         android:layout_marginTop="12dp"
+                        android:elevation="@dimen/_10sdp"
+                        android:outlineAmbientShadowColor="@color/blue"
+                        android:outlineSpotShadowColor="@color/blue"
                         android:background="@drawable/oval_light_blue"
                         app:layout_constraintEnd_toEndOf="@+id/constraintLayout_events"
                         app:layout_constraintStart_toStartOf="@+id/constraintLayout_events"
@@ -403,7 +418,7 @@
                     android:layout_marginBottom="32dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:elevation="1dp"
+
                     android:background="@drawable/rounded_light_grey"
 
                     app:layout_constraintTop_toBottomOf="@+id/constraint_1">
@@ -413,10 +428,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:layout_marginTop="8dp"
+                        android:layout_margin="20dp"
                         android:fontFamily="@font/sf_ui_display_black"
                         android:text="@string/latest_news"
-                        android:textColor="#5881A4"
+                        android:textColor="#0D3F6A"
                         android:textSize="14dp"
 
                         android:layout_marginStart="16dp"

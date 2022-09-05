@@ -57,7 +57,7 @@
     <string name="education">التعليم</string>
     <string name="see_more"><u>مشاهدة المزيد</u></string>
     <string name="comment_about_this_meal">تقليقك على هذه الوجة...</string>
-    <string name="medical">طبي</string>
+    <string name="medical">تقارير طبية</string>
     <string name="events">الفعاليات</string>
     <string name="daily_reports">تقارير يومية</string>
     <string name="meals">الوجبات</string>
@@ -145,9 +145,23 @@
     <string name="log_out_q">هل انت متأكد ؟</string>
     <string name="cancel">إلغاء</string>
     <string name="changelanguage">تغيير اللغة</string>
-    <string name="english">English</string>
-    <string name="arabic">Arabic</string>
-    <string name="ok">Ok</string>
-    <string name="parent_comments">Parent Comments</string>
+    <string name="english">انجليزي</string>
+    <string name="arabic">عربي</string>
+    <string name="ok">نعم</string>
+    <string name="parent_comments">تعليق الأهل</string>
+    <string name="message_the">ارسل الى </string>
+    <string name="principals">المدراء</string>
+    <string name="no_students">لم يتم اختيار أي طلاب</string>
+    <string name="latest_report">أحدث التقارير</string>
+    <string name="days">أيام</string>
+    <string name="Contact">Contact</string>
+    <string name="child_first_name">الاسم الأول للطفل</string>
+    <string name="Nationality">جنسية</string>
+    <string name="father_data">بيانات الأب</string>
+    <string name="mother_data">بيانات الأم</string>
+    <string name="relative_data">البيانات النسبية</string>
+    <string name="relative_details">شخص موثوق به قادر على حمل الطفل والتعامل معه.</string>
+    <string name="Relationship">صلة</string>
+    <string name="home_address">عنوان البيت</string>
 
 </resources>

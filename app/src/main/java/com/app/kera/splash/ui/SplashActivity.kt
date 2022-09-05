@@ -1,6 +1,7 @@
 package com.app.kera.splash.ui
 
 import android.Manifest
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,22 +15,33 @@ import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.TaskStackBuilder
 
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import com.app.kera.R
 import com.app.kera.app.ForceUpdateChecker
+import com.app.kera.dailyReport.ui.DailyReportActivity
+import com.app.kera.dailyReport.ui.ReportDetails
+import com.app.kera.data.models.NotificationModel
 import com.app.kera.databinding.ActivitySplashBinding
 import com.app.kera.login.ui.LoginActivity
 import com.app.kera.main.ui.MainActivity
+import com.app.kera.medical.MedicalReportActivity
 import com.app.kera.preference.SharedPrefKeys
+import com.app.kera.splash.ui.SplashActivity.Companion.getStartIntent
+import com.app.kera.teacherDailyReport.ui.TeacherDailyReportActivity
+import com.app.kera.teacherDailyReport.writeReport.WriteReportActivity
+import com.app.kera.teacherMedicalReport.TeacherMedicalReportActivity
+import com.app.kera.teacherMedicalReport.writeMedicalReport.WriteMedicalReportActivity
 import com.app.kera.utils.CommonUtils
 import com.app.kera.utils.Configurations
 import com.app.kera.utils.Configurations.Companion.API_PATH
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig
+import com.google.gson.Gson
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -113,8 +125,8 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
     private fun appSettingObservation() {
         splashViewModel.isAuthorized.observe(this) {
             if (it) {
-                startActivity(Intent(this, MainActivity::class.java).apply {})
-                finish()
+
+                navUser()
 //                navigateToUriWithClearStack(R.string.home_user)
             } else {
                 startActivity(Intent(this, LoginActivity::class.java).apply {})
@@ -122,6 +134,127 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
 //                navigateToUriWithClearStack(R.string.on_boarding)
             }
         }
+    }
+
+    private fun navUser() {
+        if (intent.hasExtra("type")) {
+
+            val intent = intent
+            val notificationBundle = intent.extras
+
+            val notificationModel = NotificationModel()
+            notificationModel.reportId = notificationBundle?.get("reportId").toString()
+            notificationModel.userType = notificationBundle?.get("userType").toString()
+            notificationModel.reportType = notificationBundle?.get("reportType").toString()
+            notificationModel.type = notificationBundle?.get("type").toString()
+
+
+            //notificationModel.bundle = notificationBundle
+
+            if (notificationModel.userType.equals("user")) {
+                if (notificationModel.type.equals("daily")) {
+
+                    val intent: Intent = Intent(applicationContext, MainActivity::class.java)
+                    val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(applicationContext)
+
+                    val intentReport: Intent = Intent(
+                        applicationContext,
+                        DailyReportActivity::class.java
+                    )
+                    stackBuilder.addParentStack(MainActivity::class.java)
+                    stackBuilder.addNextIntent(intent)
+                    stackBuilder.addNextIntent(intentReport).startActivities()
+                    finish()
+
+
+                } else if (notificationModel.type.equals("medical")) {
+
+
+                    val intent: Intent = Intent(applicationContext, MainActivity::class.java)
+                    val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(applicationContext)
+
+                    val intentReport: Intent = Intent(
+                        applicationContext,
+                        MedicalReportActivity::class.java
+                    )
+                    stackBuilder.addParentStack(MainActivity::class.java)
+                    stackBuilder.addNextIntent(intent)
+                    stackBuilder.addNextIntent(intentReport).startActivities()
+                    finish()
+
+                } else {
+
+                    val intent: Intent = Intent(applicationContext, MainActivity::class.java)
+                    val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(applicationContext)
+
+                    val intentReport: Intent = Intent(
+                        applicationContext,
+                        MainActivity::class.java
+                    )
+                    stackBuilder.addParentStack(MainActivity::class.java)
+                    stackBuilder.addNextIntent(intent)
+                    stackBuilder.addNextIntent(intentReport).startActivities()
+                    finish()
+                }
+            } else if (notificationModel.userType.equals("teacher")) {
+                if (notificationModel.type.equals("daily")) {
+
+                    val intent: Intent = Intent(applicationContext, MainActivity::class.java)
+                    val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(applicationContext)
+
+
+                    val intentReports: Intent = Intent(
+                        applicationContext,
+                        TeacherDailyReportActivity::class.java
+                    )
+                    val intentReportDetails: Intent = Intent(
+                        applicationContext,
+                        WriteReportActivity::class.java
+                    )
+                    intentReportDetails.putExtra("reportID", notificationModel.reportId)
+
+                    stackBuilder.addParentStack(MainActivity::class.java)
+                    stackBuilder.addNextIntent(intent)
+                    stackBuilder.addNextIntent(intentReports)
+                    stackBuilder.addNextIntent(intentReportDetails).startActivities()
+                    finish()
+                } else if (notificationModel.type.equals("medical")) {
+
+
+                    val intent: Intent = Intent(applicationContext, MainActivity::class.java)
+                    val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(applicationContext)
+
+
+                    val intentReports: Intent = Intent(
+                        applicationContext,
+                        TeacherMedicalReportActivity::class.java
+                    )
+                    val intentReportDetails: Intent = Intent(
+                        applicationContext,
+                        WriteMedicalReportActivity::class.java
+                    )
+                    stackBuilder.addParentStack(MainActivity::class.java)
+                    stackBuilder.addNextIntent(intent)
+                    stackBuilder.addNextIntent(intentReports)
+                    stackBuilder.addNextIntent(intentReportDetails).startActivities()
+                    finish()
+                } else {
+
+                    startActivity(Intent(this, MainActivity::class.java).apply {})
+                    finish()
+
+                }
+            } else {
+                startActivity(Intent(this, MainActivity::class.java).apply {})
+                finish()
+
+            }
+        }else{
+            startActivity(Intent(this, MainActivity::class.java).apply {})
+            finish()
+
+        }
+
     }
 
     override fun onStart() {

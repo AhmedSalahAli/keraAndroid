@@ -62,7 +62,7 @@
                 android:layout_marginBottom="11dp"
                 android:src="@drawable/ic_rounded_back"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -85,7 +85,7 @@
                  android:layout_margin="15dp"
                 app:image="@{viewModel.selectedUser.profileImage}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                  />
 
             <ImageView
@@ -159,7 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="This week "
+                    android:text="@string/this_week"
                     android:textColor="#1A2F50"
                     android:textSize="@dimen/_9ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -171,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="Days"
+                    android:text="@string/days"
                     android:textColor="#1A2F50"
                     android:textSize="@dimen/_11ssp"
                     android:textStyle="bold"
@@ -190,11 +190,11 @@
 
                 <TextView
                     android:id="@+id/textView90"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="26dp"
+                    android:layout_height="17dp"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="Next"
+                    android:text="@string/next"
                     android:textColor="#1A2F50"
                     android:textSize="@dimen/_11ssp"
                     android:textStyle="bold"
@@ -206,7 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="The week "
+                    android:text="@string/the_week"
                     android:textColor="#1A2F50"
                     android:textSize="@dimen/_9ssp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView90"

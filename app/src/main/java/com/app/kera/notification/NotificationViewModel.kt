@@ -24,6 +24,9 @@ class NotificationViewModel(val appRepo: AppRepo) : ViewModel() {
         }
 
     }
+    fun getUserType() : String{
+        return appRepo.getUserTypeFromSharedPref()
+    }
     fun getNotifications(page : Int) {
         viewModelScope.launch {
             try {
@@ -33,6 +36,18 @@ class NotificationViewModel(val appRepo: AppRepo) : ViewModel() {
                     NotificationItemUIModel.convertResponseModelTOUIModel(response.data!!)
             } catch (e: Exception) {
               
+            }
+        }
+    }
+    fun getTeacherNotifications(page : Int) {
+        viewModelScope.launch {
+            try {
+                val response = appRepo.getTeacherNotifications(page)
+
+                notificationsList.value =
+                    NotificationItemUIModel.convertResponseModelTOUIModel(response.data!!)
+            } catch (e: Exception) {
+
             }
         }
     }

@@ -41,11 +41,11 @@ class NeedToLogin : Fragment() {
         viewDataBinding.root.setOnClickListener(View.OnClickListener {
             viewModel.logout()
         })
-        viewModel.loggedOut.observe(viewLifecycleOwner, {
+        viewModel.loggedOut.observe(viewLifecycleOwner) {
             var intent = Intent(context, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
-        })
+        }
     }
 
 

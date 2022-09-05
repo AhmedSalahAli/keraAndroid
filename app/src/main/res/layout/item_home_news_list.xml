@@ -18,7 +18,8 @@
 
         android:background="@drawable/rounded_white_fcfdfd_top_right_left_bottom_left"
         android:elevation="10dp"
-
+        android:outlineSpotShadowColor="#5881A4"
+        android:outlineAmbientShadowColor="#5881A4"
         android:padding="10dp">
 
         <TextView

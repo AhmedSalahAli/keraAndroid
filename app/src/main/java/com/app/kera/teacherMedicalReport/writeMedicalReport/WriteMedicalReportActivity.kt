@@ -1,7 +1,11 @@
 package com.app.kera.teacherMedicalReport.writeMedicalReport
 
+import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -13,9 +17,13 @@ import com.app.kera.R
 import com.app.kera.data.models.teacherMedicalReport.UpdateMedicalRequestModel
 import com.app.kera.databinding.WriteMedicalReportFragmentBinding
 import com.app.kera.teacherDailyReport.model.PublishReportRequestModel
+import com.app.kera.teacherMedicalReport.model.ImageRequest
 import com.app.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter
 import com.app.kera.utils.CommonUtils
+import com.app.kera.utils.CommonUtilsJava
+import com.stfalcon.frescoimageviewer.ImageViewer
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.IOException
 
 class WriteMedicalReportActivity : AppCompatActivity() {
 
@@ -23,10 +31,13 @@ class WriteMedicalReportActivity : AppCompatActivity() {
     val viewModel: WriteMedicalReportViewModel by viewModel()
     var isYesCheckBoxChecked: Boolean = false
     var isNoCheckBoxChecked: Boolean = false
-    lateinit var reportID: String
+     var reportID: String =""
     private var mProgressDialog: ProgressDialog? = null
     private var ReportStatus:Int = 0
-
+    val REQUEST_CODE_ONE = 100
+    val REQUEST_CODE_TWO= 200
+    val REQUEST_CODE_THREE = 300
+    val images = ArrayList<String>()
     companion object {
         fun newInstance() = WriteMedicalReportActivity()
     }
@@ -51,22 +62,22 @@ class WriteMedicalReportActivity : AppCompatActivity() {
         viewDataBinding.studentsAdapter = WriteReportStudentsAdapter(ArrayList())
 
         viewDataBinding.textView132.text = CommonUtils.getCurrentDate_EEE_MM_YYY()
-        viewModel.response.observe(this, {
+        viewModel.response.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.textView138.setText(it.data!!.question2!!.answer)
-            if (it.data!!.question1!!.isYes){
+            if (it.data!!.question1!!.isYes) {
                 isYesCheckBoxChecked = true
                 isNoCheckBoxChecked = false
                 viewDataBinding.checkBoxYes.isChecked = true
                 recommendTourFields()
 
-            }else if (it.data!!.question1!!.isNo){
+            } else if (it.data!!.question1!!.isNo) {
                 isNoCheckBoxChecked = true
                 isYesCheckBoxChecked = false
                 viewDataBinding.checkBoxNo.isChecked = true
                 recommendTourFields()
 
-            }else{
+            } else {
 
             }
             viewDataBinding.studentsAdapter!!.studentsList = it.data!!.students!!
@@ -80,7 +91,7 @@ class WriteMedicalReportActivity : AppCompatActivity() {
                     "${it.data!!.students?.size} student is selected"
             }
             ReportStatus = it.data!!.status!!
-            if (it.data!!.status == 1){
+            if (it.data!!.status == 1) {
                 viewDataBinding.imageView80.visibility = View.VISIBLE
                 viewDataBinding.constraintlayoutNo.isClickable = true
                 viewDataBinding.constraintLayoutYes.isClickable = true
@@ -88,17 +99,8 @@ class WriteMedicalReportActivity : AppCompatActivity() {
                 viewDataBinding.textView138.isEnabled = true
 
 
-                if (it.data!!.images!![0].isEmpty()){
-                    Glide.with(this).load(resources.getDrawable(R.drawable.upload_picc)).error(R.drawable.upload_picc).into(viewDataBinding.imageView2)
 
-                }
-                if (it.data!!.images!![1].isEmpty()){
-                    Glide.with(this).load(resources.getDrawable(R.drawable.upload_picc)).error(R.drawable.upload_picc).into(viewDataBinding.imageView1)
-                }
-                if (it.data!!.images!![2].isEmpty()){
-                    Glide.with(this).load(resources.getDrawable(R.drawable.upload_picc)).error(R.drawable.upload_picc).into(viewDataBinding.imageView83)
-                }
-            }else{
+            } else {
                 viewDataBinding.imageView80.visibility = View.INVISIBLE
                 viewDataBinding.constraintLayoutYes.isClickable = false
                 viewDataBinding.constraintlayoutNo.isClickable = false
@@ -106,10 +108,26 @@ class WriteMedicalReportActivity : AppCompatActivity() {
                 viewDataBinding.textView138.isEnabled = false
 
             }
-            Glide.with(this).load(it.data!!.images!![0]).error(R.drawable.upload_picc).into(viewDataBinding.imageView2)
-            Glide.with(this).load(it.data!!.images!![1]).error(R.drawable.upload_picc).into(viewDataBinding.imageView1)
-            Glide.with(this).load(it.data!!.images!![2]).error(R.drawable.upload_picc).into(viewDataBinding.imageView83)
-        })
+//            if (it.data!!.images!![0].isEmpty()) {
+//                Glide.with(this).load(resources.getDrawable(R.drawable.upload_picc))
+//                    .error(R.drawable.upload_picc).into(viewDataBinding.imageView2)
+//
+//            }
+//            if (it.data!!.images!![1].isEmpty()) {
+//                Glide.with(this).load(resources.getDrawable(R.drawable.upload_picc))
+//                    .error(R.drawable.upload_picc).into(viewDataBinding.imageView1)
+//            }
+//            if (it.data!!.images!![2].isEmpty()) {
+//                Glide.with(this).load(resources.getDrawable(R.drawable.upload_picc))
+//                    .error(R.drawable.upload_picc).into(viewDataBinding.imageView83)
+//            }
+            Glide.with(this).load(it.data!!.images!![0]).error(R.drawable.upload_picc)
+                .into(viewDataBinding.imageView2)
+            Glide.with(this).load(it.data!!.images!![1]).error(R.drawable.upload_picc)
+                .into(viewDataBinding.imageView1)
+            Glide.with(this).load(it.data!!.images!![2]).error(R.drawable.upload_picc)
+                .into(viewDataBinding.imageView83)
+        }
         viewDataBinding.imageView80.setOnClickListener {
 
             mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
@@ -120,14 +138,70 @@ class WriteMedicalReportActivity : AppCompatActivity() {
         }
         checkBoxNoClickListener()
         checkBoxYesClickListener()
+        imagesListener()
         recommendTourFields()
-        viewModel.updateDailyReportQuestionBoolean.observe(this, {
+        viewModel.updateDailyReportQuestionBoolean.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
             finish()
-        })
+        }
 
     }
 
+    private fun imagesListener() {
+
+        viewDataBinding.constraintLayout30.setOnClickListener(View.OnClickListener {
+            if (ReportStatus == 1){
+                openGalleryForImageOne()
+            }else{
+                showImages(0)
+            }
+
+        })
+        viewDataBinding.constraintLayout3.setOnClickListener(View.OnClickListener {
+
+            if (ReportStatus == 1){
+                openGalleryForImageTwo()
+            }else{
+                showImages(1)
+            }
+        })
+        viewDataBinding.constraintLayout32.setOnClickListener(View.OnClickListener {
+
+            if (ReportStatus == 1){
+                openGalleryForImageThree()
+            }else{
+                showImages(2)
+            }
+
+        })
+    }
+
+    private fun showImages(position :Int) {
+        if (images.size>0){
+            ImageViewer.Builder<String>(this, images)
+                .setStartPosition(position)
+                .hideStatusBar(false)
+                .allowZooming(true)
+                .allowSwipeToDismiss(true)
+                .show()
+        }
+    }
+
+    private fun openGalleryForImageOne() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE_ONE)
+    }
+    private fun openGalleryForImageTwo() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE_TWO)
+    }
+    private fun openGalleryForImageThree() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE_THREE)
+    }
     override fun onBackPressed() {
 
         if (ReportStatus == 1){
@@ -160,6 +234,8 @@ class WriteMedicalReportActivity : AppCompatActivity() {
         updateQuestionRequestModel.question2 = viewDataBinding.textView138.text.toString()
         updateQuestionRequestModel.reportId = reportID
         viewModel.updateMedicalReportQuestion(updateQuestionRequestModel, reportID)
+
+
     }
     private fun checkBoxNoClickListener() {
         viewDataBinding.constraintlayoutNo.setOnClickListener {
@@ -208,6 +284,55 @@ class WriteMedicalReportActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK ){
+
+            if (data!=null){
+                try {
+                    val imageUri: Uri? = data!!.data
+                    var  selectedImage= MediaStore.Images.Media.getBitmap(
+                        contentResolver,
+                        imageUri
+                    )
+
+                    when(requestCode){
+                        REQUEST_CODE_ONE->{
+
+                                viewModel.updateMedicalImage(ImageRequest(reportID,"data:image/jpeg;base64,"+CommonUtilsJava().encodeImage(selectedImage)))
+                                Glide.with(this).load(data?.data).error(R.drawable.upload_picc).into(viewDataBinding.imageView83)
+
+                        }
+                        REQUEST_CODE_TWO->{
+
+                                viewModel.updateMedicalImage(ImageRequest(reportID,"data:image/jpeg;base64,"+CommonUtilsJava().encodeImage(selectedImage)))
+                                Glide.with(this).load(data?.data).error(R.drawable.upload_picc).into(viewDataBinding.imageView1)
+
+                        }
+                        REQUEST_CODE_THREE->{
+
+                                viewModel.updateMedicalImage(ImageRequest(reportID,"data:image/jpeg;base64,"+CommonUtilsJava().encodeImage(selectedImage)))
+                                Glide.with(this).load(data?.data).error(R.drawable.upload_picc).into(viewDataBinding.imageView2)
+                            }
+                        }
+
+
+
+
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+
+
+
+            }
+
+
+
+
+
+        }
+    }
     private fun recommendTourFields() {
         if (isYesCheckBoxChecked) {
             viewDataBinding.constraintLayoutYes.background =

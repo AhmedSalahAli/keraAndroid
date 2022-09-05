@@ -33,7 +33,7 @@ class MedicalReportResponseModel {
         var question2: AnswersBean2? = null
 
         @SerializedName("images")
-        var images: ArrayList<String>? = null
+        var images: ArrayList<String>? =  ArrayList()
 
 
         class TeacherBean {

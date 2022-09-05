@@ -7,7 +7,10 @@
     android:layout_marginStart="13dp"
     android:background="@drawable/rounded_white_dashed_stroke_d0d6db"
     android:elevation="15dp"
+    android:outlineSpotShadowColor="@color/blue"
+    android:outlineAmbientShadowColor="@color/blue"
     android:id="@+id/notfy_container"
+    android:padding="@dimen/_5sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -39,7 +42,7 @@
             android:layout_height="@dimen/_23sdp"
             android:layout_marginStart="5dp"
             android:layout_marginBottom="40dp"
-
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@+id/view2"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
             app:layout_constraintTop_toTopOf="@+id/textView82"

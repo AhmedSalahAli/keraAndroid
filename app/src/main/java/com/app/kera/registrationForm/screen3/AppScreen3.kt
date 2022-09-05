@@ -103,16 +103,16 @@ class AppScreen3 : Fragment() {
 
             messageObserver();
         }
-        viewModel.publishApp1Boolean.observe(viewLifecycleOwner, {
+        viewModel.publishApp1Boolean.observe(viewLifecycleOwner) {
             CommonUtils.hideLoading(mProgressDialog!!)
             val fragment = AppScreen4()
             val bundle = Bundle()
             bundle.putString("applicationId", applicationId)
-            bundle.putString("profileImage",base64)
+            bundle.putString("profileImage", base64)
             bundle.putString("profileUrl", ImageUrl)
             fragment.arguments = bundle
             (activity as Registration1Activity?)?.switchFragment(fragment)
-        })
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -124,15 +124,15 @@ class AppScreen3 : Fragment() {
                     long = data!!.getFloatExtra("long",0.0f)!!
 
                 viewDataBinding.textView52.text = "("+lat+","+long+")"
-                viewDataBinding.textView50.setText(""+CommonUtilsJava.getAddress(requireContext(),lat,long))
+                viewDataBinding.textView50.setText(""+CommonUtils.getAddressFromMap(requireContext(),lat.toDouble(),long.toDouble()))
                 }
 
             }
         }
     private fun messageObserver() {
-        viewModel.message.observe(viewLifecycleOwner, {
+        viewModel.message.observe(viewLifecycleOwner) {
             showMessage(it)
-        })
+        }
 
     }
     private fun showMessage(it: String) {

@@ -8,6 +8,7 @@ import com.app.kera.data.models.teacherMedicalReport.MedicalReportResponseModel
 import com.app.kera.data.models.teacherMedicalReport.UpdateMedicalRequestModel
 import com.app.kera.data.network.AppRepo
 import com.app.kera.teacherDailyReport.model.PublishReportRequestModel
+import com.app.kera.teacherMedicalReport.model.ImageRequest
 import kotlinx.coroutines.launch
 
 class WriteMedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
@@ -36,6 +37,16 @@ class WriteMedicalReportViewModel(val appRepo: AppRepo) : ViewModel() {
                 }
             } catch (e: Exception) {
               
+            }
+        }
+    }
+    fun updateMedicalImage(requestModel: ImageRequest) {
+        viewModelScope.launch {
+            try {
+                val response = appRepo.uploadImage(requestModel)
+
+            } catch (e: Exception) {
+
             }
         }
     }

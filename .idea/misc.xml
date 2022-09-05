@@ -4,26 +4,48 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable-mdpi/rounded_light_blue_top_bottom_right.xml" value="0.1" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable/ic_notification.xml" value="0.178" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable/ic_person.xml" value="0.178" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable/rounded_30_shadow_bottom.xml" value="0.1895" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable/rounded_background_blur.xml" value="0.1895" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable/rounded_background_strok_only.xml" value="0.1895" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable/rounded_light_blue_top_bottom_left.xml" value="0.1" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable/rounded_red_sroke.xml" value="0.178" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable/rounded_white_dashed_stroke_e9eff7.xml" value="0.1755" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/drawable/rounded_white_fcfcfc_stroke_eeeff0.xml" value="0.1895" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_attendance_history.xml" value="0.18229166666666666" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_daily_report.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_education.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_events.xml" value="0.18640444634459172" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_kera_configrations_luncher.xml" value="0.1859375" />
-        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_login.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_login.xml" value="0.14407866609662248" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_main.xml" value="0.23333333333333334" />
-        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_meals.xml" value="0.1" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_meals.xml" value="0.176" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_medical_report.xml" value="0.18640444634459172" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_pin_code.xml" value="0.1" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_report_details.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_splash.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/activity_write_report.xml" value="0.20084072863148061" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/app_screen1_fragment.xml" value="0.18640444634459172" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/app_screen2_fragment.xml" value="0.264" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/app_screen3_fragment.xml" value="0.18640444634459172" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/app_screen4_fragment.xml" value="0.18640444634459172" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/contact_u_fragment.xml" value="0.18640444634459172" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/fragment_maps.xml" value="0.1390625" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/home_details_list_item.xml" value="0.128125" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/home_fragment.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_activity.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_comment.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_daily_report_activities.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_daily_report_outer_item.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_daily_report_teacher_comment.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_home_news_list.xml" value="0.1735784523300556" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_meals.xml" value="0.12398460880718255" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_mood.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_notfy.xml" value="0.19479166666666667" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_notification.xml" value="0.125" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_schools_list.xml" value="0.2" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_student.xml" value="0.1" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_student_name_image_small.xml" value="0.19791666666666666" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_teacher_comment.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/item_teacher_medical_report_report.xml" value="0.22395833333333334" />
@@ -31,11 +53,19 @@
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/navigation_fragment.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/navigation_map_fragment.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/need_to_login_fragment.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/notification_fragment.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/profile_fragment.xml" value="0.11543394613082514" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/school_details_fragment.xml" value="0.264" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/schools_list_fragment.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/side_menu_fragment.xml" value="0.2" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/teacher_daily_report_fragment.xml" value="0.22395833333333334" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/teacher_medical_report_fragment.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/teacher_profile_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/view_custom_marker.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/layout/write_medical_report_fragment.xml" value="0.2" />
         <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.16" />
+        <entry key="..\:/Users/zedmo/StudioProjects/keraAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1125" />
       </map>
     </option>
   </component>

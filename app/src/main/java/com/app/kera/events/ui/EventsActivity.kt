@@ -55,6 +55,8 @@ class EventsActivity : AppCompatActivity() ,UpcomingListAdapter.CallBack,Previou
         viewDataBinding.recyclerView4.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)) // sets LayoutManager
         viewDataBinding.recyclerView4.getVeiledRecyclerView().layoutManager  = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         viewDataBinding.recyclerView4.addVeiledItems(15)
+        viewDataBinding.recyclerView4.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerView4.veil()
 
         viewDataBinding.recyclerView3.setLayoutManager(manager)

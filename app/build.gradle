@@ -15,8 +15,8 @@ android {
         applicationId 'com.app.kera'
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 19
-        versionName "1.1.9"
+        versionCode 22
+        versionName "1.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -119,5 +119,6 @@ dependencies {
     // location
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation 'com.airbnb.android:lottie:3.6.1'
 
 }

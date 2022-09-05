@@ -366,7 +366,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_height="128dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/rounded_white_dashed_stroke_e9eff7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -375,101 +375,131 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout29"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/rounded_white_light_grey_eeeff0_stroke"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="14dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_marginBottom="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.app.kera.utils.RoundCornerLayout
-                        android:id="@+id/constraintLayout30"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginEnd="20dp"
-                        app:layout_constraintCircleRadius="5dp"
-                        android:background="@drawable/rounded_white_orange_stroke"
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-
-                        app:layout_constraintHorizontal_bias="0.5"
-
-                        >
-
-
-
-
-                        <ImageView
-                            android:id="@+id/imageView83"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:src="@tools:sample/avatars" />
-                    </com.app.kera.utils.RoundCornerLayout>
-                    <com.app.kera.utils.RoundCornerLayout
-                        android:id="@+id/constraintLayout32"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginStart="20dp"
+                        android:padding="@dimen/_1sdp"
                         android:background="@drawable/rounded_red_sroke"
+                        android:layout_marginEnd="5dp"
+                        android:id="@+id/constraintLayout30">
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="@dimen/_90sdp"
+                            android:layout_height="@dimen/_90sdp"
+
+                            app:layout_constraintCircleRadius="5dp"
+
+
+                            app:layout_constraintHorizontal_bias="0.5"
+
+                            >
+
+
+                            <ImageView
+                                android:id="@+id/imageView83"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/upload_picc"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.cardview.widget.CardView>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/constraintLayout32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_red_sroke"
+                        android:padding="@dimen/_1sdp"
+
+                        android:layout_marginStart="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="@dimen/_90sdp"
+                            android:layout_height="@dimen/_90sdp"
+
+                            app:cardCornerRadius="5dp"
+                            android:elevation="@dimen/_100sdp"
+
+
+                            app:layout_constraintHorizontal_bias="0.5"
+                            >
 
 
 
-                        app:layout_constraintHorizontal_bias="0.5"
-                       >
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:elevation="@dimen/_1sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:src="@drawable/upload_picc" />
+                        </androidx.cardview.widget.CardView>
+                    </FrameLayout>
 
 
-
-
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:src="@drawable/upload_picc" />
-                    </com.app.kera.utils.RoundCornerLayout>
-
-                    <com.app.kera.utils.RoundCornerLayout
-                        android:id="@+id/constraintLayout3"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="@drawable/rounded_white_orange_stroke"
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_red_sroke"
+                        android:padding="@dimen/_1sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/constraintLayout30"
-                        app:layout_constraintHorizontal_bias="0.5"
+
                         app:layout_constraintStart_toEndOf="@+id/constraintLayout32"
 
 
                         app:layout_constraintTop_toTopOf="parent">
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/constraintLayout3"
+                            android:layout_width="@dimen/_90sdp"
+                            android:layout_height="@dimen/_90sdp"
 
 
-                        <ImageView
-                            android:id="@+id/imageView1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            app:layout_constraintHorizontal_bias="0.5"
 
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:src="@tools:sample/avatars" />
-                    </com.app.kera.utils.RoundCornerLayout>
+
+                            >
+
+
+                            <ImageView
+                                android:id="@+id/imageView1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:src="@drawable/upload_picc" />
+                        </androidx.cardview.widget.CardView>
+                    </FrameLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

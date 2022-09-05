@@ -233,7 +233,7 @@ class AppScreen1 : Fragment() {
 
             messageObserver();
         }
-            viewModel.publishApp1Boolean.observe(viewLifecycleOwner, {
+            viewModel.publishApp1Boolean.observe(viewLifecycleOwner) {
                 CommonUtils.hideLoading(mProgressDialog!!)
 
                 viewModel.applicationId.observe(viewLifecycleOwner, {
@@ -241,12 +241,12 @@ class AppScreen1 : Fragment() {
                     val fragment = AppScreen2()
                     val bundle = Bundle()
                     bundle.putString("applicationId", it)
-                    bundle.putString("profileImage",encodedImage)
+                    bundle.putString("profileImage", encodedImage)
                     fragment.arguments = bundle
                     (activity as Registration1Activity?)?.switchFragment(fragment)
                 })
-            })
-    }
+            }
+        }
     private fun messageObserver() {
         viewModel.message.observe(viewLifecycleOwner, {
             showMessage(it)

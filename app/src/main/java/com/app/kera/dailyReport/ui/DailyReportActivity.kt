@@ -101,6 +101,8 @@ class DailyReportActivity : AppCompatActivity(), ChildrenAdapter.CallBack,
         viewDataBinding.recyclerView10.setLayoutManager(manager)
         viewDataBinding.recyclerView10.setAdapter(viewDataBinding.adapter) // sets your own adapter
         viewDataBinding.recyclerView10.addVeiledItems(15)
+        viewDataBinding.recyclerView10.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerView10.veil()
         viewDataBinding.recyclerView10.getRecyclerView().setPadding(0, padding_in_px, 0, 0)
         viewDataBinding.recyclerView10 .getRecyclerView().clipToPadding = false

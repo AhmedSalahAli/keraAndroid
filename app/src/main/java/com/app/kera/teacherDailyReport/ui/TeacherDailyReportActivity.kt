@@ -90,6 +90,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         viewDataBinding.recyclerView9 .getRecyclerView().clipToPadding = false
         viewDataBinding.recyclerView9.getVeiledRecyclerView().setPadding(80,60,60,60)
         viewDataBinding.recyclerView9 .getVeiledRecyclerView().clipToPadding = false
+        viewDataBinding.recyclerView9.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
 
         viewDataBinding.recyclerView9.addVeiledItems(15)
         viewDataBinding.recyclerView9.veil()
@@ -103,11 +104,15 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         viewDataBinding.recyclerView7.getVeiledRecyclerView().setPadding(80,60,60,60)
         viewDataBinding.recyclerView7 .getVeiledRecyclerView().clipToPadding = false
         viewDataBinding.recyclerView7.addVeiledItems(10)
+        viewDataBinding.recyclerView7.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerView7.veil()
 
         viewDataBinding.recyclerLatestReports.setAdapter(viewDataBinding.latestReportsAdapter) // sets your own adapter
         viewDataBinding.recyclerLatestReports.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)) // sets LayoutManager
         viewDataBinding.recyclerLatestReports.addVeiledItems(15)
+        viewDataBinding.recyclerLatestReports.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerLatestReports.veil()
         viewDataBinding.recyclerLatestReports.isNestedScrollingEnabled = true;
         viewDataBinding.recyclerLatestReports.getRecyclerView().setPadding(40,40,40,30)

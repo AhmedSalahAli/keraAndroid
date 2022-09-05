@@ -86,6 +86,8 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
         )
         viewDataBinding.recyclerView9.getRecyclerView().adapter = viewDataBinding.studentsAdapter // sets your own adapter
         viewDataBinding.recyclerView9.addVeiledItems(20)
+        viewDataBinding.recyclerView9.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerView9.veil()
         viewDataBinding.recyclerView9.getRecyclerView().setPadding(80,60,60,60)
         viewDataBinding.recyclerView9 .getRecyclerView().clipToPadding = false
@@ -99,6 +101,8 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
         ) // sets LayoutManager
         viewDataBinding.recyclerView7.setAdapter(viewDataBinding.classesAdapter) // sets your own adapter
         viewDataBinding.recyclerView7.addVeiledItems(15)
+        viewDataBinding.recyclerView7.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerView7.veil()
         viewDataBinding.recyclerView7.getRecyclerView().setPadding(80,60,60,60)
         viewDataBinding.recyclerView7 .getRecyclerView().clipToPadding = false
@@ -111,6 +115,8 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
         viewDataBinding.recyclerLatestReports.setAdapter(viewDataBinding.latestReportsAdapter) // sets your own adapter
         viewDataBinding.recyclerLatestReports.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)) // sets LayoutManager
         viewDataBinding.recyclerLatestReports.addVeiledItems(15)
+        viewDataBinding.recyclerLatestReports.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerLatestReports.veil()
         viewDataBinding.recyclerLatestReports.setNestedScrollingEnabled(true);
         viewDataBinding.recyclerLatestReports.getRecyclerView().setPadding(0,0,0,200)
@@ -189,15 +195,22 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
     override fun onResume() {
         super.onResume()
         viewModel.getClasses()
+        latestReports.clear()
+
+        page = 1
         viewModel.getLatestReports(page)
         selectedStudents.clear()
         checkNumberOfSelectedStudents()
         viewDataBinding.checkBoxSelectAll.isChecked = false
-        viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
+        viewDataBinding.checkBoxSelectAll.text = getString(R.string.select_all)
 
     }
     private fun createReportObservation() {
-        viewModel.createdReportResponseID.observe(this, {
+        viewModel.createdReportResponseID.observe(this) {
+
+
+
+
             CommonUtils.hideLoading(mProgressDialog!!)
             val intent = Intent(
                 this@TeacherMedicalReportActivity,
@@ -205,35 +218,35 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
             )
             intent.putExtra("reportID", it)
             startActivity(intent)
-        })
+        }
     }
     private fun getLatestReportsObservation() {
-        viewModel.latestReportsList.observe(this, {
+        viewModel.latestReportsList.observe(this) {
             viewDataBinding.recyclerLatestReports.unVeil()
 
             totalNumberOfPages = it.pages
             latestReports.addAll(it.reports)
             viewDataBinding.latestReportsAdapter!!.reportsList = latestReports
             viewDataBinding.latestReportsAdapter!!.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun classesListObservation() {
-        viewModel.classesList.observe(this, {
+        viewModel.classesList.observe(this) {
             viewDataBinding.recyclerView7.unVeil()
 
             viewDataBinding.textView118.text = "${it.size} classes today"
             viewDataBinding.classesAdapter!!.classesList = it
             viewDataBinding.classesAdapter!!.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun studentsListObservation() {
-        viewModel.studentsList.observe(this, {
+        viewModel.studentsList.observe(this) {
             viewDataBinding.recyclerView9.unVeil()
             viewDataBinding.studentsAdapter = StudentsListAdapter(it, this, this)
             viewDataBinding.studentsAdapter!!.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun searchClickListener() {
@@ -251,10 +264,21 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
     }
 
     override fun onClassClicked(classID: String?) {
+//        viewDataBinding.recyclerView9.veil()
+//        viewModel.getStudentsByClass(classID!!)
+//        viewDataBinding.checkBoxSelectAll.isChecked = false
+//        viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
+
         viewDataBinding.recyclerView9.veil()
-        viewModel.getStudentsByClass(classID!!)
+
+        selectedStudents.clear()
+        for (student in viewDataBinding.studentsAdapter!!.studentsList) {
+            student.isSelected.set(false)
+        }
         viewDataBinding.checkBoxSelectAll.isChecked = false
         viewDataBinding.checkBoxSelectAll.setText(getString(R.string.select_all))
+        viewModel.getStudentsByClass(classID!!)
+        checkNumberOfSelectedStudents()
     }
 
     override fun onStudentClicked(studentID: String?) {
@@ -278,7 +302,7 @@ class TeacherMedicalReportActivity : AppCompatActivity(),
             viewDataBinding.textViewStudentsSelected.text =
                 "${selectedStudents.size} students are selected"
         } else if (selectedStudents.size == 0) {
-            viewDataBinding.textViewStudentsSelected.text = " no student is selected"
+            viewDataBinding.textViewStudentsSelected.text = getString(R.string.no_students)
         } else {
             viewDataBinding.textViewStudentsSelected.text =
                 "${selectedStudents.size} student is selected"

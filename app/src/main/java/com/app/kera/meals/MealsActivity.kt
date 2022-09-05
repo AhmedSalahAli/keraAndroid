@@ -66,6 +66,8 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
 
         viewDataBinding.recyclerMeals.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)) // sets LayoutManager
         viewDataBinding.recyclerMeals.addVeiledItems(15)
+        viewDataBinding.recyclerMeals.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerMeals.veil()
 
         if (accessType == "teacher") {

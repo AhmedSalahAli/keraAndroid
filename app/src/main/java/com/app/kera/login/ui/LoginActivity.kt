@@ -58,11 +58,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
 
-        viewModel.loginFailed.observe(this, {
+        viewModel.loginFailed.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
 
-        })
-        viewModel.loginResponse.observe(this, {
+        }
+        viewModel.loginResponse.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
             if (it.status == 200) {
                 val myIntent = Intent(this, PinCodeActivity::class.java)
@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 showMessage(it.message!!)
             }
-        })
+        }
         messageObserver()
     }
 

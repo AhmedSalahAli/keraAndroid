@@ -27,6 +27,7 @@ import com.app.kera.registrationForm.screen4.model.SumbitFinalForm
 import com.app.kera.teacherDailyReport.model.CreateReportRequestModel
 import com.app.kera.teacherDailyReport.model.PublishReportRequestModel
 import com.app.kera.teacherDailyReport.model.UpdateQuestionRequestModel
+import com.app.kera.teacherMedicalReport.model.ImageRequest
 import retrofit2.http.*
 
 interface ApiService {
@@ -211,6 +212,15 @@ interface ApiService {
         @Body requestModel: CreateReportRequestModel
     ): CreateReportResponseModel
 
+
+    @PUT("teacher/update/mediacl-report/image")
+    suspend fun uploadImage(
+
+        @Header("v") version: Int,
+        @Body requestModel: ImageRequest,
+    ): GeneralResponse
+
+
     @GET("teacher/latest/reports/{page}")
     suspend fun getLatestReports(
        
@@ -228,6 +238,13 @@ interface ApiService {
     @GET("user/notifications/{page}")
     suspend fun getNotifications(
        
+        @Header("v") version: Int,
+        @Path("page") page: Int
+    ): NotificationsResponseModel
+
+    @GET("teacher/notifications/{page}")
+    suspend fun getTeacherNotifications(
+
         @Header("v") version: Int,
         @Path("page") page: Int
     ): NotificationsResponseModel

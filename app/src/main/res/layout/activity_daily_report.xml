@@ -48,7 +48,7 @@
                     android:layout_marginStart="33dp"
                     android:layout_marginTop="33dp"
                     android:src="@drawable/ic_rounded_back"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="11dp"
                     android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="Daily reports"
+                    android:text="@string/daily_reports"
                     android:textColor="#152D4A"
                     android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
@@ -121,7 +121,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/textView_from"
                         app:layout_constraintStart_toEndOf="@+id/textView_from"
                         app:layout_constraintTop_toTopOf="@+id/textView_from"
-                        tools:text="Start" />
+                        tools:text="@string/start" />
 
                     <TextView
                         android:id="@+id/textView_to"
@@ -147,7 +147,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/textView_to"
                         app:layout_constraintStart_toEndOf="@+id/textView_to"
                         app:layout_constraintTop_toTopOf="@+id/textView_to"
-                        tools:text="End" />
+                        tools:text="@string/end" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <de.hdodenhof.circleimageview.CircleImageView

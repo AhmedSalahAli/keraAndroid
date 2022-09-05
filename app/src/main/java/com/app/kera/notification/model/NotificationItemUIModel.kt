@@ -1,6 +1,7 @@
 package com.app.kera.notification.model
 
 import com.app.kera.utils.CommonUtils
+import java.io.Serializable
 
 class NotificationItemUIModel (
     var pages: Int,
@@ -10,13 +11,15 @@ class NotificationItemUIModel (
 ) {
 
     class NotificationModel(
-        var id: String? = "",
+        var _id: String? = "",
         var date: String? = "",
         var title: String? = "",
         var body: String? = "",
+        var relatedId: String? = "",
+        var userType: String? = "",
         var notificationIcon: String? = "",
         var notificationType: String? = ""
-    )
+    ):Serializable
 
     companion object {
         fun convertResponseModelTOUIModel(responseModel: NotificationsResponseModel.DataBean): NotificationItemUIModel {
@@ -26,10 +29,12 @@ class NotificationItemUIModel (
                 responseModel.total,
                 responseModel.docs?.map {
                     NotificationModel(
-                        it._id,
+                        it.Id,
                         CommonUtils.getTimeDateFromTimeStamp(it.NotificationDate!!.toLong()),
                         it.title,
                         it.body,
+                        it.relatedId,
+                        it.userType,
                         it.notificationIcon,
                         it.notificationType
                     )

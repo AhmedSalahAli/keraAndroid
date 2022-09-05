@@ -3,6 +3,7 @@ package com.app.kera.data.network
 import android.app.NotificationManager
 import android.util.Log
 import androidx.core.content.ContextCompat
+import com.app.kera.data.models.NotificationModel
 import com.app.kera.utils.NotificationUtility.sendNotification
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -16,21 +17,30 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     //this is called when a message is received
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
+        val notificationModel = NotificationModel()
         //check messages
+
         Log.d(TAG, "From: ${remoteMessage.from}")
+        notificationModel.from = remoteMessage.from
+
 
         // Check if message contains a data payload, you can get the payload here and add as an intent to your activity
         remoteMessage.data.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
-            //get the data
+            notificationModel.reportId = remoteMessage.data["reportId"]
+            notificationModel.userType = remoteMessage.data["userType"]
+            notificationModel.reportType = remoteMessage.data["reportType"]
+            notificationModel.type = remoteMessage.data["type"]
+            remoteMessage.notification?.let {
+                Log.d(TAG, "Message Notification Body: ${it.body}")
+                notificationModel.title =  it.title
+                notificationModel.body  = it.body
+                sendNotification(notificationModel)
+            }
         }
 
         // Check if message contains a notification payload, send notification
-        remoteMessage.notification?.let {
-            Log.d(TAG, "Message Notification Body: ${it.body}")
-            sendNotification(it.body!!)
 
-        }
 
     }
 
@@ -51,9 +61,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     }
 
-    private fun sendNotification(messageBody: String){
+    private fun sendNotification(notificationModel: NotificationModel){
         val notificationManager = ContextCompat.getSystemService(applicationContext, NotificationManager::class.java) as NotificationManager
-        notificationManager.sendNotification(messageBody, applicationContext)
+        notificationManager.sendNotification(notificationModel, applicationContext)
     }
 
 

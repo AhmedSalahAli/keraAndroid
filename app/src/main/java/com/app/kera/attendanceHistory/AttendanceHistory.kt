@@ -48,6 +48,8 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
         viewDataBinding.recyclerAttendance.setLayoutManager(manager)
         viewDataBinding.recyclerAttendance.setAdapter(viewDataBinding.listAdapter) // sets your own adapter
         viewDataBinding.recyclerAttendance.addVeiledItems(15)
+        viewDataBinding.recyclerAttendance.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         viewDataBinding.recyclerAttendance.veil()
 
         viewDataBinding.recyclerAttendance.getRecyclerView().addOnScrollListener(object :

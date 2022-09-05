@@ -14,28 +14,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splash">
+     >
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/pb_success"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
 
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/logo_anim" />
         <io.alterac.blurkit.BlurLayout
             android:id="@+id/blurLayout"
-            android:layout_width="157dp"
-            android:layout_height="185dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:blk_blurRadius="12"
             app:blk_downscaleFactor="0.2"
             app:blk_cornerRadius="30dp"
             app:blk_fps="0"
-
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/kera" />
+                android:visibility="gone"
+                 />
         </io.alterac.blurkit.BlurLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,6 +34,7 @@ import com.app.kera.registrationForm.screen4.model.SumbitFinalForm
 import com.app.kera.teacherDailyReport.model.CreateReportRequestModel
 import com.app.kera.teacherDailyReport.model.PublishReportRequestModel
 import com.app.kera.teacherDailyReport.model.UpdateQuestionRequestModel
+import com.app.kera.teacherMedicalReport.model.ImageRequest
 import com.app.kera.teacherProfile.TeacherProfileUIModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -187,10 +188,18 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         service.createDailyReport( 1, requestModel)
     suspend fun createMedicalReport(requestModel: CreateReportRequestModel) =
         service.createMedicalReport( 1, requestModel)
+
+
+    suspend fun uploadImage(requestModel: ImageRequest) =
+        service.uploadImage( 1, requestModel)
+
     suspend fun getLatestReports(page: Int) = service.getLatestReports( 1, page)
 
     suspend fun getLatestMedicalReports(page: Int) = service.getLatestMedicalReports( 1, page)
     suspend fun getNotifications(page: Int) = service.getNotifications( 1, page)
+
+    suspend fun getTeacherNotifications(page: Int) = service.getTeacherNotifications( 1, page)
+
 
     suspend fun publishReport(requestModel: PublishReportRequestModel) =
         service.publishReport( 1, requestModel)

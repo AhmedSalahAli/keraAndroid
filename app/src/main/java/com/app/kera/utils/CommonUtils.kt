@@ -10,6 +10,8 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.location.Address
+import android.location.Geocoder
 import android.net.Uri
 import android.provider.MediaStore
 import android.provider.Settings
@@ -345,6 +347,24 @@ object CommonUtils {
         } catch (e: Exception) {
             "date"
         }
+    }
+    fun getAddressFromMap(context: Context, latitude: Double, longitude: Double) :String{
+        val addresses: List<Address>
+        val geocoder: Geocoder = Geocoder(context, Locale.getDefault())
+
+        addresses = geocoder.getFromLocation(
+            latitude,
+            longitude,
+            1
+        ) // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+        return if (addresses.isNotEmpty()){
+            addresses[0].getAddressLine(0)
+        }else{
+            ""
+        }
+
+
     }
 
 }

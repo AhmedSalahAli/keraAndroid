@@ -39,13 +39,15 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="@dimen/_140sdp"
+            android:layout_marginTop="@dimen/_70sdp"
             android:src="@drawable/kera"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -67,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/sf_ui_display_regular"
+                android:fontFamily="@font/sf_ui_display_semibold"
                 android:text="@string/sign_in"
                 android:textColor="#0093DE"
                 android:textSize="@dimen/_17ssp"
@@ -76,11 +78,11 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
+                android:id="@+id/guideline3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="20dp" />
+                app:layout_constraintGuide_end="20dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
@@ -90,32 +92,33 @@
                 app:layout_constraintGuide_begin="20dp" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline3"
+                android:id="@+id/guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="20dp" />
+                app:layout_constraintGuide_begin="20dp" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="11dp"
+                android:layout_marginTop="36dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/lato"
                 android:maxLines="3"
-                android:textAlignment="center"
                 android:text="@string/the_quick_brown_fox_jumps_over_a_lazy_dog_djs_flock_by_when_mtv_ax_quiz_prog_junk_mtv_quiz_graced_by_fox_whelps_bawds_jog_flick_quartz_vex_nymphs_waltz_bad_nymph_for_quick_jigs_vex_fox_nymphs_grab"
+                android:textAlignment="center"
                 android:textColor="#97B4D8"
                 android:textSize="@dimen/_11ssp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <EditText
                 android:id="@+id/textView3"
-                android:layout_width="300dp"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/_37sdp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="75dp"
@@ -123,7 +126,9 @@
                 android:background="@drawable/rounded_white_blue_stroke"
                 android:elevation="5dp"
                 android:ems="10"
-                android:fontFamily="@font/lato_light"
+                android:outlineSpotShadowColor="#0093DE"
+                android:outlineAmbientShadowColor="#0093DE"
+                android:fontFamily="@font/sf_ui_display_semibold"
                 android:hint="@string/phone_number"
                 android:inputType="numberSigned"
                 android:maxEms="10"

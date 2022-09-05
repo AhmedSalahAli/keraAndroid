@@ -117,8 +117,8 @@
 
             <ImageView
                 android:id="@+id/imageView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/kera" />
         </io.alterac.blurkit.BlurLayout>

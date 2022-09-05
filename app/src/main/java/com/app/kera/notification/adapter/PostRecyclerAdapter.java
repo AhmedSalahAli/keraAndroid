@@ -120,12 +120,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             NotificationItemUIModel.NotificationModel model = mPostItems.get(position);
 
-            Glide.with(context).load(model.getNotificationIcon()).into(imageView52);
+            Glide.with(context).load(model.getNotificationIcon()).error(R.drawable.ic_notification_circle_selected).into(imageView52);
             textView81.setText(model.getTitle());
             textView82.setText(model.getBody());
             textView84.setText(model.getDate());
             notfy_container.setOnClickListener(v -> {
-                callBack.onItemClicked(model.getNotificationType());
+                callBack.onItemClicked(model);
             });
 
         }
@@ -141,7 +141,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
     public interface CallBack {
         void onItemClicked(
-              String type
+                NotificationItemUIModel.NotificationModel notificationModel
         );
 
 
