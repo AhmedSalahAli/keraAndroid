@@ -8,6 +8,20 @@ ext {
     googlePlayVersion = "17.0.0"
 }
 android {
+    signingConfigs {
+        debug {
+            storeFile file('D:\\Kera\\KeraReleaseFiles\\kera.jks')
+            storePassword password
+            keyAlias 'key0'
+            keyPassword password
+        }
+        release {
+            storeFile file(JksUpload)
+            storePassword password
+            keyPassword password
+            keyAlias 'upload'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -15,10 +29,11 @@ android {
         applicationId 'com.app.kera'
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 22
-        versionName "1.2.2"
+        versionCode 24
+        versionName "1.2.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
