@@ -14,10 +14,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_alll">
+        android:background="@drawable/background">
 
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/topBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,11 +25,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            style="@style/CustomCardCorners"
-            android:outlineAmbientShadowColor="#CCD36A"
-            android:outlineSpotShadowColor="#ABB340"
+            style="@style/CustomCardViewCorners"
+            android:outlineAmbientShadowColor="@color/dark_blue"
+            android:outlineSpotShadowColor="@color/dark_blue"
             app:cardBackgroundColor="#FCFCFC"
-            app:cardElevation="@dimen/_15sdp"
+            app:cardElevation="@dimen/_10sdp"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout23"
@@ -81,7 +81,7 @@
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabLayout"
-                    style="@style/tab_text"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -92,13 +92,15 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline41"
                     app:layout_constraintTop_toBottomOf="@+id/view4"
                     app:tabGravity="fill"
-
-                    app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                    android:clipToPadding="false"
+                    app:tabTextAppearance="@style/tab_text"
                     app:tabIndicatorColor="#FFBB3B"
+                    app:tabIndicatorHeight="3dp"
                     app:tabMaxWidth="0dp"
                     app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/blue"
-                    app:tabTextColor="#C7CED5" />
+
+                    app:tabSelectedTextColor="@color/dark_blue"
+                    app:tabTextColor="@color/text_blue" />
 
                 <ImageView
                     android:id="@+id/imageView24"
@@ -110,7 +112,7 @@
                     app:layout_constraintTop_toTopOf="@+id/tabLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
 
 
@@ -142,7 +144,8 @@
             android:layout_height="match_parent"
 
 
-          />
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline54"

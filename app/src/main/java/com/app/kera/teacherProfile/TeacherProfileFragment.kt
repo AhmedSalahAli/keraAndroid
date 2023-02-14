@@ -47,6 +47,13 @@ class TeacherProfileFragment : Fragment() {
         viewModel.logo.value = viewModel.getNurseryLogo()
 
         viewModel.profileUIModel.observe(viewLifecycleOwner) {
+
+            if (it.address.isNullOrEmpty()){
+                viewDataBinding.textView122.text = getString(R.string.no_address)
+            }else{
+                viewDataBinding.textView122.text = it.address
+
+            }
             if (!it.image.isNullOrEmpty()) {
                 Glide.with(view.context).load(it.image).error(R.drawable.ic_person)
                     .into(viewDataBinding.imageView54)

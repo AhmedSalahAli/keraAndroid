@@ -58,22 +58,27 @@ class SideMenuFragment : Fragment() {
         }
 
         viewDataBinding.constraintLogout.setOnClickListener {
+            if (viewModel.getUserType() == "visitor"){
+                viewModel.logout()
+            }else{
+                val dialog = AlertDialog.Builder(requireContext(), 5)
+                    .setCancelable(false)
+                    .setIcon(R.drawable.kera_box)
+                    .setTitle(resources.getString(R.string.log_out))
+                    .setMessage(resources.getString(R.string.log_out_q))
+                    .setNegativeButton(resources.getString(R.string.cancel)){
+                            dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton(
+                        resources.getString(R.string.log_out)
+                    ) { dialog, which ->
+                        viewModel.logout()
+                    }
+                dialog.show()
+            }
 
-            val dialog = AlertDialog.Builder(requireContext(), 5)
-                .setCancelable(false)
-                .setIcon(R.drawable.kera_box)
-                .setTitle(resources.getString(R.string.log_out))
-                .setMessage(resources.getString(R.string.log_out_q))
-                .setNegativeButton(resources.getString(R.string.cancel)){
-                        dialog, which ->
-                    dialog.dismiss()
-                }
-                .setPositiveButton(
-                    resources.getString(R.string.log_out)
-                ) { dialog, which ->
-                    viewModel.logout()
-                }
-            dialog.show()
+
 
         }
         viewModel.loggedOut.observe(viewLifecycleOwner) {

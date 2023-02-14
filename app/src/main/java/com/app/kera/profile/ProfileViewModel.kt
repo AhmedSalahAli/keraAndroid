@@ -22,8 +22,12 @@ class ProfileViewModel(val appRepo: AppRepo) : ViewModel() {
     fun getProfileData() {
         viewModelScope.launch {
             try {
+
                 val response = appRepo.getProfileData("en", 1, "user")
-                profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
+                if (response!=null){
+                    profileUIModel.value = ProfileUIModel.mapResponseModelToUIModel(response.data)
+                }
+
             } catch (e: Exception) {
               
             }

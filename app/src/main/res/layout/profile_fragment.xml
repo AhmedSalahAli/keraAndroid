@@ -18,7 +18,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_alll"
+        android:background="@drawable/background"
         tools:context=".profile.ProfileFragment">
 
 
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_80sdp"
             style="@style/CustomCardCorners"
-            app:cardElevation="@dimen/_20sdp"
+            app:cardElevation="@dimen/_5sdp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,25 +58,25 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+            <com.skydoves.androidveil.VeilLayout
+                android:id="@+id/veilLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:veilLayout_veiled="true"
+                app:veilLayout_shimmerEnable="true"
+                app:veilLayout_baseColor="@color/gray_D2DCE8"
+                app:veilLayout_highlightColor="@color/white"
+                app:veilLayout_baseAlpha="0.6"
+                app:veilLayout_highlightAlpha="1.0"
+                app:veilLayout_dropOff="0.5"
+                app:veilLayout_radius="6dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                >
 
 
 
-        <com.skydoves.androidveil.VeilLayout
-            android:id="@+id/veilLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:veilLayout_veiled="true"
-            app:veilLayout_shimmerEnable="true"
-            app:veilLayout_baseColor="@color/gray_D2DCE8"
-            app:veilLayout_highlightColor="@color/white"
-            app:veilLayout_baseAlpha="0.6"
-            app:veilLayout_highlightAlpha="1.0"
-            app:veilLayout_dropOff="0.5"
-            app:veilLayout_radius="6dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-           >
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-
+                    android:padding="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -118,10 +118,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="70dp"
-                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:fontFamily="@font/sf_ui_diplay_bold"
                         android:text="@{viewModel.selectedUser.username}"
                         android:textColor="#152D4A"
-
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.498"
@@ -133,9 +133,9 @@
                         android:id="@+id/constraintLayout6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="56dp"
+                        android:layout_marginEnd="56dp"
                         android:layout_marginTop="32dp"
-                        android:layout_marginEnd="20dp"
                         android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -160,8 +160,7 @@
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/sf_ui_display_regular"
-                            android:text="@{viewModel.profileUIModel.address}"
-                            android:textColor="#8C99A7"
+                            android:textColor="#1279AD"
                             android:textSize="@dimen/_9ssp"
                             android:textAlignment="center"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView56"
@@ -186,9 +185,9 @@
                         android:id="@+id/constraintLayout8"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="56dp"
                         android:layout_marginTop="19dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginEnd="56dp"
                         android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -215,7 +214,7 @@
                             android:textAlignment="center"
                             android:fontFamily="@font/sf_ui_display_regular"
                             android:text="@{viewModel.profileUIModel.email}"
-                            android:textColor="#8C99A7"
+                            android:textColor="#1279AD"
                             android:textSize="@dimen/_9ssp"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
                             app:layout_constraintEnd_toStartOf="@+id/imageView7"
@@ -239,9 +238,9 @@
                         android:id="@+id/constraintLayout9"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="56dp"
                         android:layout_marginTop="19dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginEnd="56dp"
                         android:background="@drawable/rounded_white_d2dce8_stroke_97b4d8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -265,7 +264,7 @@
                             android:layout_marginEnd="8dp"
                             android:fontFamily="@font/sf_ui_display_regular"
                             android:text="@{viewModel.profileUIModel.phone}"
-                            android:textColor="#8C99A7"
+                            android:textColor="#1279AD"
                             android:textSize="@dimen/_9ssp"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView1"
                             app:layout_constraintEnd_toStartOf="@+id/imageView3"
@@ -345,7 +344,7 @@
                         android:layout_marginTop="38dp"
                         android:backgroundTint="@color/blue_effcff"
                         app:cardCornerRadius="@dimen/_20sdp"
-                        android:elevation="5dp"
+                        app:cardElevation="5dp"
 
                         android:layout_marginBottom="32dp">
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -372,6 +371,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="9dp"
+                                android:layout_marginEnd="@dimen/_9sdp"
                                 android:fontFamily="@font/sf_ui_display_regular"
                                 android:text="@string/message_the"
                                 android:textColor="#1A2F50"
@@ -385,11 +385,11 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
-                                android:fontFamily="@font/sf_ui_display_regular"
+                                android:fontFamily="@font/sf_ui_diplay_bold"
                                 android:text="@string/principals"
                                 android:textColor="#1A2F50"
                                 android:textSize="18sp"
-
+                                android:layout_marginStart="@dimen/_5sdp"
                                 app:layout_constraintBottom_toBottomOf="@+id/textView124"
 
                                 app:layout_constraintStart_toEndOf="@+id/textView124"
@@ -414,7 +414,7 @@
                             android:fontFamily="@font/sf_ui_display_regular"
                             android:gravity="center"
                             android:text="@{viewModel.selectedUser.className}"
-                            android:textColor="#8C99A7"
+                            android:textColor="#647487"
                             android:textSize="@dimen/_8ssp"
                             android:paddingStart="3dp"
                             android:paddingRight="3dp"
@@ -433,7 +433,7 @@
                             android:paddingStart="3dp"
                             android:paddingRight="3dp"
                             android:text="@{viewModel.selectedUser.studentCode}"
-                            android:textColor="#8C99A7"
+                            android:textColor="#647487"
                             android:textSize="@dimen/_8ssp"
                             app:layout_constraintEnd_toStartOf="@+id/textView87"
                             app:layout_constraintStart_toStartOf="parent"
@@ -449,15 +449,19 @@
                 android:id="@+id/imageView54"
                 android:layout_width="@dimen/_75sdp"
                 android:layout_height="@dimen/_75sdp"
-                android:elevation="@dimen/_12sdp"
+                android:elevation="@dimen/_10sdp"
+                android:src="@drawable/ic_person"
                 app:image="@{viewModel.selectedUser.profileImage}"
-                app:civ_circle_background_color="@color/white"
+               app:civ_border_color="@color/white"
+                app:civ_border_width="6dp"
+                android:outlineAmbientShadowColor="@color/blue"
+                android:outlineSpotShadowColor="@color/blue"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout18" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageView_exchange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -466,8 +470,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/imageView54"
                 app:layout_constraintStart_toStartOf="@+id/imageView54"
                 app:layout_constraintTop_toBottomOf="@+id/imageView54"
-                android:elevation="@dimen/_13sdp"
-                app:srcCompat="@drawable/ic_exchange" />
+                android:elevation="@dimen/_20sdp"
+               android:src="@drawable/ic_exchange" />
                 <FrameLayout
                     android:id="@+id/children_frame"
                     android:layout_width="wrap_content"

@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.app.kera.R
 import com.app.kera.contactUs.ContactUsActivity
 import com.app.kera.databinding.ProfileFragmentBinding
@@ -53,15 +54,30 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
         messageObserver()
         viewModel.logo.value = viewModel.getNurseryLogo()
 
-       // Glide.with(this).load(viewModel.selectedUser.value?.profileImage).error(requireContext().resources.getDrawable(R.drawable.ic_person)).into(viewDataBinding.imageView54)
         viewDataBinding.veilLayout.veil()
         viewModel.profileUIModel.observe(viewLifecycleOwner) {
             // CommonUtils.hideLoading(mProgressDialog!!)
 
+            if (it.address.isNullOrEmpty()){
+                viewDataBinding.textView122.text = getString(R.string.no_address)
+            }else{
+                viewDataBinding.textView122.text = it.address
+
+            }
+
             viewDataBinding.veilLayout.unVeil()
             viewDataBinding.adapter =
                 ChildrenAdapter(it.students!!, this, viewModel.getAppRepoInstance())
+
             viewDataBinding.adapter!!.notifyDataSetChanged()
+
+
+            if (it.students!!.size > 0){
+                viewModel.saveChildDataToSharedPref(it.students!![0])
+                viewModel.selectedUser.value = it.students!![0]
+            }
+
+
             if (it.students!!.size == 1) {
                 viewDataBinding.imageViewExchange.visibility = View.GONE
             } else {
@@ -69,6 +85,20 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
 
             }
         }
+        viewModel.selectedUser.observe(requireActivity(), Observer {
+            if (it!=null){
+                Glide.with(this).load(viewModel.selectedUser.value?.profileImage).error(requireContext().resources.getDrawable(R.drawable.ic_person)).into(viewDataBinding.imageView54)
+                viewModel.selectedUser.value!!.studentCode = "Code:" + (it.studentCode?.replace("Code:","")
+                    ?: "")
+                viewModel.selectedUser.value!!.className = "Class:" + it.className?.replace("Class:","")
+
+                //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+
+
+                viewDataBinding.adapter?.notifyDataSetChanged()
+            }
+
+        })
 
         viewDataBinding.imageViewExchange.setOnClickListener {
 
@@ -99,11 +129,11 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
         }
     }
     private fun messageObserver() {
-        viewModel.message.observe(viewLifecycleOwner, {
-           // CommonUtils.hideLoading(mProgressDialog!!)
+        viewModel.message.observe(viewLifecycleOwner) {
+            // CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.veilLayout.unVeil()
             showMessage(it)
-        })
+        }
     }
 
     private fun showMessage(it: String) {
@@ -137,12 +167,7 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
         stateOfChildrenFrame(false)
         viewModel.saveChildDataToSharedPref(student)
         viewModel.selectedUser.value = student
-        viewModel.selectedUser.value!!.studentCode = "Code:" + student.studentCode
-        viewModel.selectedUser.value!!.className = "Class:" + student.className
-        //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
 
-
-        viewDataBinding.adapter!!.notifyDataSetChanged()
     }
 
 //    fun hideLoading() {

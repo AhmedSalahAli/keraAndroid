@@ -23,7 +23,7 @@ class MealsListAdapter(
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.onBind(position)
-        holder.itemView.setOnClickListener { callBack.onItemClicked(mealsList[position].id) }
+
 
     }
 
@@ -35,7 +35,7 @@ class MealsListAdapter(
         BaseViewHolder(requestListItemBinding.root) {
         override fun onBind(position: Int) {
             requestListItemBinding.model = mealsList[position]
-
+            requestListItemBinding.view.setOnClickListener { callBack.onItemClicked(mealsList[position].id) }
 //            requestListItemBinding.submitButton.setOnClickListener {
 //                callBack.onItemClicked(optionsListItems[position].tripID)
 //            }

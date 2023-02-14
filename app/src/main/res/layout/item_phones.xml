@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{phone}"
+            android:fontFamily="@font/sf_ui_display_regular"
             android:textColor="#0093DE"
             android:textSize="@dimen/_10ssp"
             tools:text="01111111111"

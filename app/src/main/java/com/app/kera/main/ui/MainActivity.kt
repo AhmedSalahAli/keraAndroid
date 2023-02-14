@@ -57,16 +57,28 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpda
         viewDataBinding.viewModel = mainViewModel
         teacher = R.id.teacherProfileFragment
         accessType = mainViewModel.getUserType()
+
+        mainViewModel.getNurseryData()
+
+        viewDataBinding.bottomNavigationView.background = null
+        if (accessType == "visitor"){
+            viewDataBinding.bottomNavigationView.menu.clear(); //clear old inflated items.
+            viewDataBinding.bottomNavigationView.inflateMenu(R.menu.bottom_navigation_menu_visitor);
+            viewDataBinding.bottomNavigationView.menu.getItem(1).isEnabled = false
+        }else{
+            viewDataBinding.bottomNavigationView.menu.getItem(2).isEnabled = false
+        }
+
         val navController = findNavController(R.id.fragment)
         viewDataBinding.bottomNavigationView.uncheckAllItems()
         viewDataBinding.bottomNavigationView.setupWithNavController(navController)
 
-        mainViewModel.getNurseryData()
 
 
 
-        viewDataBinding.bottomNavigationView.background = null
-        viewDataBinding.bottomNavigationView.menu.getItem(2).isEnabled = false
+
+
+
 
 
         val bottomBarBackground = viewDataBinding.bottomAppBar2.background as MaterialShapeDrawable
@@ -83,9 +95,9 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpda
 
         viewDataBinding.floatingActionButton2.setOnClickListener(View.OnClickListener {
             if (accessType == "visitor") {
-                fm.beginTransaction().hide(active).show(needtologin).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                fm.beginTransaction().hide(active).show(nearBy).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .setCustomAnimations(R.anim.fade_in, R.anim.fade_out).commit()
-                active = needtologin
+                active = nearBy
             } else {
                 fm.beginTransaction().hide(active).show(home).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .setCustomAnimations(R.anim.fade_in, R.anim.fade_out).commit()
@@ -103,16 +115,25 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpda
         fm.beginTransaction().add(R.id.fragment, teacherProfile, "7").hide(teacherProfile).commit();
         fm.beginTransaction().add(R.id.fragment, profile, "6").hide(profile).commit();
         fm.beginTransaction().add(R.id.fragment, sideMenu, "5").hide(sideMenu).commit();
+        fm.beginTransaction().add(R.id.fragment, needtologin, "4").hide(needtologin).commit();
 
         fm.beginTransaction().add(R.id.fragment, notification, "3").hide(notification).commit();
-        fm.beginTransaction().add(R.id.fragment, nearBy, "2").hide(nearBy).commit();
+        //fm.beginTransaction().add(R.id.fragment, nearBy, "2").hide(nearBy).commit();
         active = if (accessType == "visitor") {
-            fm.beginTransaction().add(R.id.fragment, needtologin, "1").commit();
-            fm.beginTransaction().add(R.id.fragment, home, "4").hide(home).commit();
-            needtologin
+            //fm.beginTransaction().add(R.id.fragment, needtologin, "1").commit();
+            //fm.beginTransaction().add(R.id.fragment, home, "4").hide(home).commit();
+            fm.beginTransaction().add(R.id.fragment, nearBy, "1").commit();
+            viewDataBinding.floatingActionButton2.setImageResource(R.drawable.ic_nearby)
+          // fm.beginTransaction().add(R.id.fragment, nearBy, "2").hide(nearBy).commit();
+
+            nearBy
         }else{
+            viewDataBinding.floatingActionButton2.setImageResource(R.drawable.ic_icon_home_blue)
             fm.beginTransaction().add(R.id.fragment, home, "1").commit();
-            fm.beginTransaction().add(R.id.fragment, needtologin, "4").hide(needtologin).commit();
+            fm.beginTransaction().add(R.id.fragment, nearBy, "2").hide(nearBy).commit();
+
+
+            //fm.beginTransaction().add(R.id.fragment, needtologin, "4").hide(needtologin).commit();
 
             home
         }
@@ -168,11 +189,18 @@ private var mOnNavigationItemSelectedListener: BottomNavigationView.OnNavigation
             }
             R.id.notificationFragment -> {
 
+                if (accessType == "visitor") {
+                    fm.beginTransaction().hide(active).show(needtologin).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out).commit()
+                    active = needtologin
+                    return@OnNavigationItemSelectedListener true
+                }else{
+                    fm.beginTransaction().hide(active).show(notification).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out).commit()
+                    active = notification
+                    return@OnNavigationItemSelectedListener true
+                }
 
-                fm.beginTransaction().hide(active).show(notification).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out).commit()
-                active = notification
-                return@OnNavigationItemSelectedListener true
             }
 
             R.id.profileFragment -> {

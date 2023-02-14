@@ -8,6 +8,7 @@ import com.app.kera.R
 import com.app.kera.databinding.ItemSchoolsListBinding
 import com.app.kera.schoolsList.SchoolListUIModel
 import com.app.kera.utils.BaseViewHolder
+import com.bumptech.glide.Glide
 
 class SchoolListAdapter(
     var schoolsList: List<SchoolListUIModel.SchoolData>,
@@ -50,6 +51,10 @@ class SchoolListAdapter(
 //            }
 
             item.model = schoolsList[position]
+
+
+
+             Glide.with(itemView.context).load(schoolsList[position].image).into( item.imageView92)
 
             if (schoolsList[position].isLiked.get()){
                 item.imageViewFav.setImageResource(R.drawable.ic_baseline_favorite_24)

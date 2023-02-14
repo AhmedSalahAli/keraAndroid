@@ -163,5 +163,11 @@
     <string name="relative_details">شخص موثوق به قادر على حمل الطفل والتعامل معه.</string>
     <string name="Relationship">صلة</string>
     <string name="home_address">عنوان البيت</string>
+    <string name="guest">زائر</string>
+    <string name="please_insert_login">يرجى إدخال رقم الهاتف الذي تم تسجيله</string>
+
+    <string name="no_address">لا يوجد عنوان</string>
+    <string name="check_in">Check-In</string>
+    <string name="check_out">Check-Out</string>
 
 </resources>

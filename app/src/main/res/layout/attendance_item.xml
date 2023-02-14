@@ -25,35 +25,36 @@
         android:background="@drawable/rounded_stroke_arrival"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:id="@+id/text_time1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
             android:fontFamily="@font/sf_ui_display_black"
             android:text="@{model.arrivalTime}"
             android:textAlignment="center"
-            android:textColor="#2DB7BE"
-            android:textSize="70dp"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="2dp"
+            android:textColor="#0E5CA8"
+            android:textSize="70sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout40"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout40" />
 
         <TextView
             android:id="@+id/text_aaa"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/sf_ui_display_medium"
             android:text="@{model.arrivalAA}"
-            android:textColor="#2DB7BE"
-            android:textSize="18dp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="#0E5CA8"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_time1"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/_30sdp" />
+            app:layout_constraintStart_toEndOf="@+id/text_time1"
+            app:layout_constraintTop_toTopOf="@+id/text_time1" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout40"
             android:layout_width="match_parent"
@@ -66,10 +67,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Arrival"
+                android:text="@string/check_in"
                 android:fontFamily="@font/sf_ui_display_medium"
-                android:textColor="#2DB7BE"
-                android:textSize="18dp"
+                android:textColor="#0E5CA8"
+                android:textSize="18sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
 
@@ -79,9 +80,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{model.date}"
-                android:textSize="12dp"
-                android:textColor="#1A2F50"
-                android:fontFamily="@font/sf_ui_display_light"
+                android:textSize="12sp"
+                android:textColor="#152D4A"
+                android:fontFamily="@font/sf_ui_display_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:drawableStart="@drawable/line_pink_8"
                 android:drawablePadding="@dimen/_6ssp"
@@ -104,35 +105,35 @@
 
         <TextView
             android:id="@+id/text_time"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="2dp"
             android:fontFamily="@font/sf_ui_display_black"
             android:text="@{model.departureTime}"
             android:textAlignment="center"
-            android:textColor="#F2818A"
+            android:textColor="#9F0D15"
             android:textSize="70dp"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
 
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout42"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout42" />
 
         <TextView
             android:id="@+id/text_aa"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2ssp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/sf_ui_display_medium"
             android:text="@{model.departureAA}"
-            android:textColor="#F2818A"
-            android:textSize="18dp"
-            android:layout_marginEnd="@dimen/_16sdp"
-
+            android:textColor="#9F0D15"
+            android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/_30sdp" />
+            app:layout_constraintStart_toEndOf="@+id/text_time"
+            app:layout_constraintTop_toTopOf="@+id/text_time" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout42"
             android:layout_width="match_parent"
@@ -145,9 +146,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Left"
+                android:text="@string/check_out"
                 android:fontFamily="@font/sf_ui_display_medium"
-                android:textColor="#F2818A"
+                android:textColor="#9F0D15"
                 android:textSize="18dp"
                 app:layout_constraintTop_toTopOf="parent"
 
@@ -159,9 +160,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{model.date}"
-                android:textSize="12dp"
-                android:textColor="#1A2F50"
-                android:fontFamily="@font/sf_ui_display_light"
+
+                android:textSize="12sp"
+                android:textColor="#152D4A"
+                android:fontFamily="@font/sf_ui_display_medium"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 android:drawableStart="@drawable/line_pink_8"
                 android:drawablePadding="@dimen/_6ssp"

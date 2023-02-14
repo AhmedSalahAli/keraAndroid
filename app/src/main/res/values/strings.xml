@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Kera</string>
     <string name="the_quick_brown_fox_jumps_over_a_lazy_dog_djs_flock_by_when_mtv_ax_quiz_prog_junk_mtv_quiz_graced_by_fox_whelps_bawds_jog_flick_quartz_vex_nymphs_waltz_bad_nymph_for_quick_jigs_vex_fox_nymphs_grab">Kera is a service for Preschools, and a local Preschools guide, in which you can find what nearby nurseries in your area</string>
-    <string name="sign_in">Sign in</string>
+    <string name="sign_in">Login</string>
     <string name="skip">Skip</string>
     <string name="go">Go</string>
     <string name="phone_number">Phone number</string>
@@ -164,5 +164,10 @@
     <string name="relative_details">Trusted person, able to pick-up the Child, and to deal with.</string>
     <string name="Relationship">Relationship</string>
     <string name="home_address">Home Address</string>
+    <string name="please_insert_login">Please insert your registered phone number at the preschool!</string>
+    <string name="guest">Guest</string>
+    <string name="no_address">No address found</string>
+    <string name="check_in">Check-In</string>
+    <string name="check_out">Check-Out</string>
 
 </resources>
