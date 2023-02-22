@@ -2,7 +2,6 @@
   <library name="Gradle: org.koin:koin-androidx-ext:2.0.1@aar">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/729f7cfd1fd09901288044e6504657a7/jetified-koin-androidx-ext-2.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/729f7cfd1fd09901288044e6504657a7/jetified-koin-androidx-ext-2.0.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/729f7cfd1fd09901288044e6504657a7/jetified-koin-androidx-ext-2.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
