@@ -35,6 +35,8 @@ interface ApiService {
     @GET("portal/{page}")
     suspend fun getSchoolsList(
         @Path("page") page: Int,
+        @Query("latitude") lat: String?,
+        @Query("longitude") lon: String?,
         @Header("v") version: Int
     ): SchoolsListResponseModel
     @GET("portal/events/upcoming/{page}")
@@ -334,5 +336,7 @@ interface ApiService {
     suspend fun getMapData(
        
         @Header("v") version: Int,
+        @Query("latitude") lat: String?,
+        @Query("longitude") lon: String?,
     ): MapListResponseModel
 }

@@ -1,14 +1,19 @@
 package com.app.kera.main.ui
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,18 +26,29 @@ import com.app.kera.app.ForceUpdateChecker
 import com.app.kera.databinding.ActivityMainBinding
 import com.app.kera.home.HomeFragment
 import com.app.kera.navigation.NavigationFragment
+import com.app.kera.navigation.ui.MapFragment
+import com.app.kera.navigation.ui.PermissionFragment
 import com.app.kera.notification.NotificationFragment
 import com.app.kera.profile.ProfileFragment
 import com.app.kera.sideMenu.SideMenuFragment
 import com.app.kera.teacherProfile.TeacherProfileFragment
+import com.app.kera.utils.GPSTracker
 import com.app.kera.visitor.NeedToLogin
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.shape.CornerFamily.ROUNDED
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpdateChecker.OnUpdateNeededListener, ForceUpdateChecker.onUpatePreferedListner{
+class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpdateChecker.OnUpdateNeededListener
+    , ForceUpdateChecker.onUpatePreferedListner, GPSTracker.CallBack{
     var positionSelected = 2
 
     private val mainViewModel: MainViewModel by viewModel()
@@ -49,6 +65,10 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpda
     val teacherProfile: Fragment = TeacherProfileFragment()
     val fm: FragmentManager = supportFragmentManager
     var active: Fragment = home
+
+    var gpsTracker: GPSTracker? = null
+    var location: Location? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,7 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationFragment.CallBack, ForceUpda
         accessType = mainViewModel.getUserType()
 
         mainViewModel.getNurseryData()
-
+        initGPS()
         viewDataBinding.bottomNavigationView.background = null
         if (accessType == "visitor"){
             viewDataBinding.bottomNavigationView.menu.clear(); //clear old inflated items.
@@ -264,6 +284,53 @@ private var mOnNavigationItemSelectedListener: BottomNavigationView.OnNavigation
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse(updateUrl)
         startActivity(i)
+    }
+    private fun initGPS() {
+        ActivityCompat.requestPermissions(
+            this, arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ),
+            GPSTracker.REQUEST_LOCATION_PERMISION
+        )
+
+        gpsTracker = GPSTracker(this, this)
+        location = gpsTracker!!.getLocationPlace()
+
+        location?.let { mainViewModel.saveUserLocation(LatLng(location!!.latitude, location!!.longitude)) }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        location?.let { mainViewModel.saveUserLocation(LatLng(location!!.latitude, location!!.longitude)) }
+
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            GPSTracker.REQUEST_LOCATION_PERMISION -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                ) {
+                    gpsTracker = GPSTracker(this, this)
+                    val location = gpsTracker!!.location
+                    this.location = gpsTracker!!.getLocationPlace()
+
+                    location?.let { mainViewModel.saveUserLocation(LatLng(it.latitude, it.longitude)) }
+
+                }
+            }
+        }
+    }
+
+    override fun onGpsAndNetworkNotEnabled() {
+
     }
 
     override fun onUpdateNeeded(updateUrl: String?) {

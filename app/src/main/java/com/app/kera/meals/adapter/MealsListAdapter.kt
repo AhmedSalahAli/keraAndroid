@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.kera.databinding.ItemMealsBinding
 import com.app.kera.meals.model.MealsItemUIModel
 import com.app.kera.utils.BaseViewHolder
+import com.google.gson.Gson
 
 class MealsListAdapter(
     var mealsList: List<MealsItemUIModel>, var callBack: CallBack

@@ -73,7 +73,7 @@ class MapFragment : Fragment(), LocationListener {
         OnMapReadyCallback { googleMap ->
             mMap = googleMap
             MapStyle()
-
+            getSchools()
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -98,7 +98,6 @@ class MapFragment : Fragment(), LocationListener {
                 mLocationManager =
                     requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
                 setcurrentLocation()
-                viewModel.getSchoolsLocationList()
                 schoolListObserver()
                 mMap!!.uiSettings.isMyLocationButtonEnabled = false
                 mMap!!.uiSettings.isZoomControlsEnabled = false
@@ -112,15 +111,26 @@ class MapFragment : Fragment(), LocationListener {
 
 
                     Handler(Looper.getMainLooper()).postDelayed({
+
                         val myIntent = Intent(requireContext(), SchoolDetailsActivity::class.java)
                         myIntent.putExtra("SchoolID", marker.tag.toString()) //Optional parameters
                         startActivity(myIntent)
+
                     }, 500)
                     false
                 })
             }
         }
+    private fun getSchools() {
 
+        if (viewModel.getUserLocation()!=null){
+            viewModel.getSchoolsLocationList(""+ viewModel.getUserLocation()!!.latitude,""+ viewModel.getUserLocation()!!.longitude)
+
+        }else{
+            viewModel.getSchoolsLocationList(null,null)
+
+        }
+    }
     private fun schoolListObserver() {
         viewModel.schoolsLocations.observe(viewLifecycleOwner) {
             for (school in it) {
@@ -437,6 +447,7 @@ class MapFragment : Fragment(), LocationListener {
                     latLng = LatLng(latitide, longitude)
                     if (mMap!!.isMyLocationEnabled) {
                         if (!isLocationDetected) {
+
                             getZoomLevel(LatLng(location.latitude, location.longitude), 16)
                         }
                     }
@@ -465,6 +476,7 @@ class MapFragment : Fragment(), LocationListener {
                 latLng = LatLng(latitide, longitude)
                 if (mMap!!.isMyLocationEnabled) {
                     if (!isLocationDetected) {
+
                         getZoomLevel(LatLng(location.latitude, location.longitude), 16)
                     }
                 }

@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 class AppSharedPreference constructor(context: Context, var prefName: String) :
     SharedPreference {
 
-    private val mPrefs: SharedPreferences =
+     val mPrefs: SharedPreferences =
         context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
 
     override fun getString(key: String,def:String): String? {

@@ -46,7 +46,7 @@
 
             app:veilFrame_highlightAlpha="0.1"
             app:veilFrame_radius="8dp"
-            android:clipToPadding="false"
+
              />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

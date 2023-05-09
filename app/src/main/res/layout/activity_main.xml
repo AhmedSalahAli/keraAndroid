@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="16dp"
-                app:itemIconSize="@dimen/_20sdp"
+                app:itemIconSize="24dp"
                 android:backgroundTint="@android:color/transparent"
                 app:itemIconTint="@color/bnv_tab_item_foreground"
                 app:itemTextColor="@color/bnv_tab_item_foreground"

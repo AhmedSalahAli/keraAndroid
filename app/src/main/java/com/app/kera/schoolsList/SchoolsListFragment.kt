@@ -67,7 +67,7 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
         //mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
-        viewModel.getSchoolsList(page)
+        getSchools(page)
         viewDataBinding.adapter = SchoolListAdapter(ArrayList(), this, requireContext())
 
         manager = LinearLayoutManager(requireActivity())
@@ -83,10 +83,10 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
         val padding_in_px = (scale + 0.5f).toInt()
         viewDataBinding.recyclerView.getRecyclerView().setPadding(
             0,
-            padding_in_px, 0, 150
+            padding_in_px, 0, 250
         )
         viewDataBinding.recyclerView .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView.getVeiledRecyclerView().setPadding(0, padding_in_px, 0, 150)
+        viewDataBinding.recyclerView.getVeiledRecyclerView().setPadding(0, padding_in_px, 0, 180)
         viewDataBinding.recyclerView .getVeiledRecyclerView().clipToPadding = false
         viewDataBinding.recyclerView.getRecyclerView().addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
@@ -112,7 +112,7 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
 //                        )
                         //  viewDataBinding.recyclerView.veil()
 
-                        viewModel.getSchoolsList(page)
+                       getSchools(page)
                     }
                 }
             }
@@ -136,6 +136,17 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
             viewDataBinding.adapter!!.schoolsList = schoolsList
             viewDataBinding.adapter!!.notifyDataSetChanged()
         })
+    }
+
+    private fun getSchools(page:Int) {
+
+        if (viewModel.getUserLocation()!=null){
+            viewModel.getSchoolsList(page,""+ viewModel.getUserLocation()!!.latitude,""+ viewModel.getUserLocation()!!.longitude)
+
+        }else{
+            viewModel.getSchoolsList(page,null,null)
+
+        }
     }
 
     companion object {

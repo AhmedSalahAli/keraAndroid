@@ -44,4 +44,6 @@
     <string name="no_address">لا يوجد عنوان</string>
     <string name="check_in">Check-In</string>
     <string name="check_out">Check-Out</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="to_get_location_services">You should enable location permission top get all the nursery schools around you </string>
 </resources>

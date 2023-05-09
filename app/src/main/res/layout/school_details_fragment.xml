@@ -84,13 +84,14 @@
 
             <TextView
                 android:id="@+id/textView13"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="38dp"
+                android:fontFamily="@font/sf_ui_display_regular"
                 android:text="@{viewModel.schoolDetails.schoolName}"
                 android:textColor="@color/dark_blue"
                 android:textSize="@dimen/_15ssp"
-                android:fontFamily="@font/sf_ui_display_regular"
+                app:layout_constraintEnd_toStartOf="@+id/imageView84"
                 app:layout_constraintStart_toStartOf="@+id/guideline13"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView"
                 tools:text="@string/preschool_name" />
