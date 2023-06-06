@@ -4,7 +4,7 @@
     android:id="@+id/custom_marker_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/kera_marker">
+    android:background="@drawable/ic_new_marker">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/marker_image"

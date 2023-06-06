@@ -18,29 +18,30 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_alll"
+        android:background="@drawable/background"
         tools:context=".notification.NotificationFragment">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/view"
+            style="@style/CustomCardCorners"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            style="@style/CustomCardCorners"
+            android:outlineAmbientShadowColor="@color/dark_blue"
+            android:outlineSpotShadowColor="@color/dark_blue"
             app:cardElevation="@dimen/_20sdp"
-            android:outlineAmbientShadowColor="@color/blue"
-            android:outlineSpotShadowColor="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageView26"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/kera_box"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
-                android:layout_gravity="center"/>
+                app:layout_constraintBottom_toBottomOf="@+id/view" />
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

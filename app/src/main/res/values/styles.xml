@@ -26,6 +26,10 @@
     <style name="CustomCardCorners" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_corners</item>
     </style>
+    <style name="CustomCardViewCorners" parent="@style/CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_corners</item>
+    </style>
+
 
     <style name="CustomCardCornersOp" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_cornersOp</item>
@@ -98,6 +102,6 @@
     </style>
 
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
-        <item name="android:fontFamily">@font/sf_ui_display_regular</item>
+        <item name="android:fontFamily">@font/sf_ui_diplay_bold</item>
     </style>
 </resources>

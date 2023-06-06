@@ -16,15 +16,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:elevation="5dp"
-            android:background="@drawable/rounded_top_left_right_corners"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            android:layout_marginBottom="@dimen/_50sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/blurLayout"
-            tools:layout_editor_absoluteX="155dp">
+            android:background="@drawable/shadow_blue"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_top_left_right_corners"
+        android:elevation="@dimen/_20sdp"
+
+        android:outlineAmbientShadowColor="@color/blue"
+        android:outlineSpotShadowColor="@color/blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="1.0">
+
+
 
 
             <com.chaos.view.PinView
@@ -33,26 +49,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:cursorVisible="false"
-                android:hint=""
+                android:hint="◍◍◍◍"
                 android:inputType="number"
                 android:padding="10dp"
+                android:layout_marginTop="10dp"
                 android:text="@={viewModel.verifyPhoneRequestModel.code}"
-                android:textColor="#FFBB3B"
+                android:textColor="@color/text_blue"
                 android:textSize="@dimen/_28ssp"
                 android:textStyle="bold"
-                app:cursorColor="@android:color/holo_red_dark"
+                app:cursorColor="#152D4A"
                 app:cursorWidth="2dp"
                 app:hideLineWhenFilled="false"
                 app:itemCount="4"
-                app:itemHeight="48dp"
+                android:textColorHint="@color/hint_blue"
+
+                app:itemHeight="60dp"
                 app:itemSpacing="21dp"
+
                 app:itemWidth="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_resend"
                 app:layout_constraintVertical_bias="0.0"
-                app:lineColor="#FFEFD1"
+                app:lineColor="@color/text_blue"
                 app:lineWidth="5dp"
                 app:viewType="line" />
 
@@ -62,7 +82,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="37dp"
                 android:text="@string/pin_code"
-                android:textColor="#0093DE"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                android:fontFamily="@font/sf_ui_diplay_bold"
                 android:textSize="@dimen/_19ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,8 +96,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/pin_code_sent_via_whatsapp_to"
-                android:textColor="#97B4D8"
+                android:fontFamily="@font/sf_ui_display_medium"
                 android:textSize="@dimen/_11ssp"
+                android:textColor="@color/blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView22" />
@@ -84,8 +107,9 @@
                 android:id="@+id/textView_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#97B4D8"
+                android:fontFamily="@font/sf_ui_display_semibold"
                 android:textSize="@dimen/_11ssp"
+                android:textColor="@color/blue"
                 app:layout_constraintEnd_toEndOf="@+id/textView23"
                 app:layout_constraintStart_toStartOf="@+id/textView23"
                 app:layout_constraintTop_toBottomOf="@+id/textView23"
@@ -97,31 +121,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/resend"
-                android:textColor="#FFBB3B"
+                android:fontFamily="@font/sf_ui_display_regular"
+                android:textColor="@color/dark_blue"
                 android:textSize="@dimen/_11ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_phone" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <io.alterac.blurkit.BlurLayout
-            android:id="@+id/blurLayout"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_240sdp"
-            app:blk_blurRadius="20"
-            app:blk_downscaleFactor="0.4"
-            app:blk_fps="0"
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/_124sdp"
+            android:layout_height="@dimen/_128sdp"
+            android:layout_marginTop="@dimen/_70sdp"
+            android:src="@drawable/kera"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
 
-            <ImageView
-                android:id="@+id/imageView17"
-                android:layout_width="@dimen/_120sdp"
-                android:layout_height="@dimen/_120sdp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/kera" />
-        </io.alterac.blurkit.BlurLayout>
-
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

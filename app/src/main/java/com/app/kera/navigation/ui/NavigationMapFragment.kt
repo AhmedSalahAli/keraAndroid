@@ -237,7 +237,7 @@ class NavigationMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarker
         val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16F))
         map.setOnMarkerClickListener(this)
-        viewModel.getSchoolsLocationList()
+       // viewModel.getSchoolsLocationList()
         schoolListObserver()
         buildGoogleApiClient()
         map.setOnMarkerClickListener(OnMarkerClickListener { marker ->

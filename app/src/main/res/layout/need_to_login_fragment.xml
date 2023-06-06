@@ -16,7 +16,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".visitor.NeedToLogin"
-    android:background="@drawable/background_alll">
+    android:background="@drawable/background">
 
    <RelativeLayout
        android:layout_width="match_parent"

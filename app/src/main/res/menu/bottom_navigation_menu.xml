@@ -17,6 +17,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_notifications"
         app:showAsAction="never"
+
         android:title="@string/notification" />
     <item
         android:id="@+id/textinput_placeholder"

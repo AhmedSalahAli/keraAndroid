@@ -34,4 +34,11 @@
     <string name="relative_details">Trusted person, able to pick-up the Child, and to deal with.</string>
     <string name="Relationship">Relationship</string>
     <string name="home_address">Home Address</string>
+    <string name="please_insert_login">Please insert your registered phone number at the preschool!</string>
+    <string name="guest">Guest</string>
+    <string name="no_address">لا يوجد عنوان</string>
+    <string name="check_in">Check-In</string>
+    <string name="check_out">Check-Out</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="to_get_location_services">You should enable location permission top get all the nursery schools around you</string>
 </resources>

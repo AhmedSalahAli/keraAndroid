@@ -8,6 +8,8 @@ class SideMenuViewModel(val appRepo: AppRepo) : ViewModel() {
     // TODO: Implement the ViewModel
     var loggedOut = MutableLiveData<Boolean>()
 
+
+
     fun logout() {
         appRepo.logOut()
         loggedOut.value = true

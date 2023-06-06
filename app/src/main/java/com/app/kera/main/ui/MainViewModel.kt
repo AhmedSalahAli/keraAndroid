@@ -1,11 +1,13 @@
 package com.app.kera.main.ui
 
+import android.location.Location
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.kera.data.network.AppRepo
 import com.app.kera.home.model.ImagesUIModel
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.launch
 
 class MainViewModel(val appRepo: AppRepo) : ViewModel() {
@@ -41,5 +43,11 @@ class MainViewModel(val appRepo: AppRepo) : ViewModel() {
     }
     private fun saveNurseryLogoToSharedPreference(logo: String?) {
         appRepo.saveNurseryLogoToSharedPreference(logo)
+    }
+     fun saveUserLocation(location: LatLng) {
+        appRepo.saveUserLocation(location)
+    }
+     fun getUserLocation(): LatLng? {
+       return appRepo.getUserLocation()
     }
 }

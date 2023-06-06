@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.webkit.PermissionRequest
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -45,7 +46,7 @@ import com.google.gson.Gson
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
+
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -114,11 +115,13 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
                 }
 
                 override fun onPermissionRationaleShouldBeShown(
-                    permissions: List<PermissionRequest?>?,
-                    token: PermissionToken
+                    permissions: MutableList<com.karumi.dexter.listener.PermissionRequest>?,
+                    token: PermissionToken?
                 ) {
-                    token.continuePermissionRequest()
+                    token?.continuePermissionRequest()
                 }
+
+
             })
             .check()
     }
@@ -259,11 +262,11 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
 
     override fun onStart() {
         super.onStart()
-        viewDataBinding.blurLayout.startBlur()
+
     }
 
     override fun onStop() {
-        viewDataBinding.blurLayout.pauseBlur()
+
         super.onStop()
     }
     companion object {
@@ -277,7 +280,7 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
     }
     override fun onCheckConfigParams(BaseUrl: String?) {
         if (BaseUrl != null) {
-//            Configurations.BASE_URL = BaseUrl+API_PATH
+            //Configurations.BASE_URL = BaseUrl+API_PATH
         Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
             Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
         }

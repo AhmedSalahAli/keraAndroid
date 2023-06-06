@@ -11,7 +11,6 @@
             type="com.app.kera.teacherMedicalReport.model.StudentItemUIModel" />
 
         <import type="android.view.View" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +30,7 @@
             android:fontFamily="@font/sf_ui_display_regular"
             android:text="@{model.name}"
             android:textColor="@color/light_grey_8c99a7"
+
             android:textSize="@dimen/_8ssp"
 
             android:maxEms="10"
@@ -43,8 +43,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout38"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
             android:background="@drawable/oval_white_fcfcfc_yellow_stroke_fed93b"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:image="@{model.image}"
-                android:padding="2dp"
+                android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:scaleType="centerCrop"
@@ -65,8 +65,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_unselected"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
             android:background="@drawable/oval_grey_8c99a7_grey_stroke_c7ced5"
             android:visibility="@{model.selected ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout38"

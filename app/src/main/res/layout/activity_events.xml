@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".events.ui.EventsActivity"
-        android:background="@drawable/background_alll">
+        android:background="@drawable/background">
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/view"
             android:layout_width="match_parent"

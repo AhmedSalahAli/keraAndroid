@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="text_blue">#1279AD</color>
+    <color name="hint_blue">#97B4D8</color>
     <color name="text_selected">#b0003a</color>
     <color name="text_focused">#E91E63</color>
     <color name="text_default">#F8BBD0</color>
@@ -15,7 +17,8 @@
     <color name="line_focused">#3F51B5</color>
     <color name="line_default">#C5CAE9</color>
     <color name="blue">#0093DE</color>
-    <color name="dark_blue">#1A2F50</color>
+    <color name="dark_blue">#152D4A</color>
+    <color name="gray_blue">#A8152D4A</color>
     <color name="light_blue">#C7CED5</color>
     <color name="dark_blue_152D4A">#152D4A</color>
     <color name="light_grey_8c99a7">#8C99A7</color>

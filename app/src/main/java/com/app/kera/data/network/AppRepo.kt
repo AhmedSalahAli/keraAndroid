@@ -1,5 +1,6 @@
 package com.app.kera.data.network
 
+import android.location.Location
 import com.app.kera.attendanceHistory.model.AttendanceResponseModel
 import com.app.kera.dailyReport.model.PublishReplay
 import com.app.kera.data.models.*
@@ -18,6 +19,7 @@ import com.app.kera.preference.SharedPrefKeys
 import com.app.kera.preference.SharedPrefKeys.Companion.APP_LANG
 import com.app.kera.preference.SharedPrefKeys.Companion.CHILD_Data
 import com.app.kera.preference.SharedPrefKeys.Companion.ISUSERLOGGEDIN
+import com.app.kera.preference.SharedPrefKeys.Companion.LOCATION
 import com.app.kera.preference.SharedPrefKeys.Companion.LOGIN_DATA
 import com.app.kera.preference.SharedPrefKeys.Companion.NURSERY_LOGO
 import com.app.kera.preference.SharedPrefKeys.Companion.STUDENTID
@@ -36,6 +38,7 @@ import com.app.kera.teacherDailyReport.model.PublishReportRequestModel
 import com.app.kera.teacherDailyReport.model.UpdateQuestionRequestModel
 import com.app.kera.teacherMedicalReport.model.ImageRequest
 import com.app.kera.teacherProfile.TeacherProfileUIModel
+import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -46,8 +49,8 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         getLang().toString()
     ).getService()
 
-    suspend fun getSchoolsList(page: Int): SchoolsListResponseModel =
-        service.getSchoolsList(page,  1)
+    suspend fun getSchoolsList(page: Int,lat:String?,lon:String?): SchoolsListResponseModel =
+        service.getSchoolsList(page,lat,lon,  1)
     suspend fun getUpcomingEventList(page: Int): ClassUpcomingResponseModel =
         service.getUpcomingEventList(page,  1)
     suspend fun getPreviousEventList(page: Int): ClassUpcomingResponseModel =
@@ -225,7 +228,7 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         service.getHomeNurseryData( 1)
     suspend fun publishAttendanceQrCode(requestModel: QrCodeModel) =
         service.publishAttendanceQrCode( 1, requestModel)
-    suspend fun getMapData() = service.getMapData( 1)
+    suspend fun getMapData(lat:String?,lon:String?) = service.getMapData( 1,lat,lon)
 
 
     fun logOut() {
@@ -246,7 +249,17 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
     fun saveNurseryLogoToSharedPreference(logo: String?) {
         sharedPreference.saveString(NURSERY_LOGO, logo!!)
     }
+    fun saveUserLocation(location :LatLng?) {
+        sharedPreference.saveString(LOCATION, Gson().toJson(location))
+    }
+    fun getUserLocation(): LatLng? {
+        if (sharedPreference.getString(LOCATION,"")!=null){
+            return Gson().fromJson(sharedPreference.getString(LOCATION,""), LatLng::class.java)
 
+        }else{
+            return null
+        }
+    }
     fun getNurseryLogoFromSharedPreference(): String {
         return sharedPreference.getString(NURSERY_LOGO,"")!!
     }

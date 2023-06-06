@@ -20,6 +20,7 @@ import com.app.kera.registration.screen1.Registration1Activity
 import com.app.kera.schoolDetails.adapter.ImagesAdapter
 import com.app.kera.schoolDetails.adapter.PhonesAdapter
 import com.app.kera.schoolDetails.adapter.TagsAdapter
+import com.app.kera.utils.CommonUtils
 import com.stfalcon.frescoimageviewer.ImageViewer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -50,9 +51,8 @@ class SchoolDetailsActivity : AppCompatActivity(), PhonesAdapter.CallBack , Imag
         window.statusBarColor = ContextCompat.getColor(this, R.color.white);
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
-        //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-        viewDataBinding.veilLayout.layoutDirection = View.LAYOUT_DIRECTION_LTR
-        viewDataBinding.veilLayout.veil()
+        mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
+
 
         viewModel.getSchoolsList(intent.getStringExtra("SchoolID")!!)
 
@@ -64,8 +64,9 @@ class SchoolDetailsActivity : AppCompatActivity(), PhonesAdapter.CallBack , Imag
 
 
         viewModel.schoolDetails.observe(this) {
-            // CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.unVeil()
+             CommonUtils.hideLoading(mProgressDialog!!)
+
+
             viewDataBinding.tagsAdapter!!.tags = it.tags
             viewDataBinding.tagsAdapter!!.notifyDataSetChanged()
 
