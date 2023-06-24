@@ -28,6 +28,8 @@ import com.app.kera.data.models.schoolList.FavouriteSchoolRequestModel
 import com.app.kera.databinding.SchoolsListFragmentBinding
 import com.app.kera.schoolDetails.ui.SchoolDetailsActivity
 import com.app.kera.schoolsList.adapter.SchoolListAdapter
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -71,24 +73,23 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
         viewDataBinding.adapter = SchoolListAdapter(ArrayList(), this, requireContext())
 
         manager = LinearLayoutManager(requireActivity())
-        viewDataBinding.recyclerView.setLayoutManager(manager)
-        viewDataBinding.recyclerView.setAdapter(viewDataBinding.adapter) // sets your own adapter
-        viewDataBinding.recyclerView.addVeiledItems(15)
-        viewDataBinding.recyclerView.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+        viewDataBinding.recyclerView.layoutManager = manager
+        viewDataBinding.recyclerView.adapter = viewDataBinding.adapter // sets your own adapter
+        viewDataBinding.recyclerView.loadSkeleton(R.layout.item_schools_list) {
+            itemCount(4)
+            cornerRadius(15f)
 
-        viewDataBinding.recyclerView.veil()
+        }
 
 
         val scale = resources.getDimension(R.dimen._145sdp)
         val padding_in_px = (scale + 0.5f).toInt()
-        viewDataBinding.recyclerView.getRecyclerView().setPadding(
+        viewDataBinding.recyclerView.setPadding(
             0,
             padding_in_px, 0, 250
         )
-        viewDataBinding.recyclerView .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView.getVeiledRecyclerView().setPadding(0, padding_in_px, 0, 180)
-        viewDataBinding.recyclerView .getVeiledRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView.getRecyclerView().addOnScrollListener(object :
+        viewDataBinding.recyclerView .clipToPadding = false
+        viewDataBinding.recyclerView.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -118,24 +119,24 @@ class SchoolsListFragment : Fragment(), SchoolListAdapter.CallBack {
             }
         })
 
-        viewModel.anApiFailed.observe(viewLifecycleOwner, {
+        viewModel.anApiFailed.observe(viewLifecycleOwner) {
             //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.recyclerView.unVeil()
+            viewDataBinding.recyclerView.hideSkeleton()
 
-        })
+        }
 
         messageObserver()
 
-        viewModel.schoolsList.observe(viewLifecycleOwner, {
+        viewModel.schoolsList.observe(viewLifecycleOwner) {
             // CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.recyclerView.unVeil()
+            viewDataBinding.recyclerView.hideSkeleton()
 
             isScrolling = false
             schoolsList.addAll(it.schools)
             totalNumberOfPages = it.pages
             viewDataBinding.adapter!!.schoolsList = schoolsList
             viewDataBinding.adapter!!.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun getSchools(page:Int) {

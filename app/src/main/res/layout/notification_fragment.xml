@@ -55,7 +55,7 @@
             >
 
 
-        <com.skydoves.androidveil.VeilRecyclerFrameView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_notifications"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -63,14 +63,7 @@
 
             android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
 
-            app:veilFrame_layout="@layout/item_notification"
-            app:veilFrame_veiled="true"
-            app:veilFrame_shimmerEnable="true"
-            app:veilLayout_baseColor="@color/light_grey_8c99a7"
-            app:veilFrame_highlightColor="@color/blue_effcff"
-            app:veilFrame_baseAlpha="0.6"
-            app:veilFrame_highlightAlpha="1.0"
-            app:veilFrame_radius="8dp"/>
+          />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <RelativeLayout
             android:id="@+id/rel_no_notifications"

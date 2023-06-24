@@ -177,26 +177,19 @@
                         app:layout_constraintStart_toEndOf="@+id/imageView72"
                         app:layout_constraintTop_toBottomOf="@+id/textView_date" />
 
-                    <com.skydoves.androidveil.VeilRecyclerFrameView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView7"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginTop="8dp"
+                        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
                         android:orientation="horizontal"
                         app:adapter="@{classesAdapter}"
                         app:layout_constraintEnd_toStartOf="@+id/guideline44"
+                        app:layout_constraintHorizontal_bias="0.511"
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
-                        app:layout_constraintTop_toBottomOf="@+id/textView_number_of_classes"
-                        android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
-                        app:veilFrame_layout="@layout/item_teacher_report_classes"
-                        app:veilFrame_veiled="true"
-                        app:veilFrame_shimmerEnable="true"
-                        app:veilLayout_baseColor="@color/light_grey_8c99a7"
-                        app:veilFrame_highlightColor="@color/blue_effcff"
-                        app:veilFrame_baseAlpha="0.6"
-                        app:veilFrame_highlightAlpha="1.0"
-                        app:veilFrame_radius="8dp"
-                        />
+
+                        app:layout_constraintTop_toBottomOf="@+id/textView_number_of_classes" />
 
                     <TextView
                         android:id="@+id/textView120"
@@ -246,7 +239,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <com.skydoves.androidveil.VeilRecyclerFrameView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView9"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_250sdp"
@@ -254,19 +247,12 @@
                         android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
                         android:orientation="horizontal"
                         app:adapter="@{studentsAdapter}"
-
-
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="20"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/guideline43"
                         app:layout_constraintTop_toBottomOf="@+id/search_constraint"
-                        app:veilFrame_baseAlpha="0.6"
-                        app:veilFrame_highlightAlpha="1.0"
-                        app:veilFrame_highlightColor="@color/blue_effcff"
-                        app:veilFrame_layout="@layout/item_student_name_image"
-                        app:veilFrame_radius="8dp"
-                        app:veilFrame_shimmerEnable="true"
-                        app:veilFrame_veiled="true"
-                        app:veilLayout_baseColor="@color/light_grey_8c99a7" />
+                />
 
                     <TextView
                         android:id="@+id/textView_students_selected"

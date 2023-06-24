@@ -18,6 +18,8 @@ import com.app.kera.schoolDetails.adapter.ImagesAdapter
 import com.app.kera.utils.CommonUtils
 import com.smarteist.autoimageslider.SliderAnimations
 import com.stfalcon.frescoimageviewer.ImageViewer
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,ChildrenAdapter.CallBack{
@@ -32,11 +34,13 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val mealID = intent.getStringExtra("MealID")!!
+        val mealID = intent.getStringExtra("MealID")
+        val mealDate = intent.getStringExtra("MealDate")
 
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_meals_details)
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.viewModel = viewModel
+
 
 //        val window: Window = this.window
 //        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -46,9 +50,11 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
+        viewDataBinding.textView100.setText(mealDate?.let { CommonUtils.convertIsoToDate(it) })
+
         accessType = viewModel.getUserType()
 
-        viewModel.getMealDetails(mealID)
+        mealID?.let { viewModel.getMealDetails(it) }
         if (accessType == "teacher") {
 
             viewDataBinding.imageViewExchange.visibility = View.GONE
@@ -59,7 +65,8 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
             viewModel.getProfileData()
             viewDataBinding.imageViewExchange.visibility = View.VISIBLE
             viewDataBinding.imageViewProfile.visibility = View.VISIBLE
-            Glide.with(this).load(viewModel.getSelectedChildDataFromSharedPref()!!.profileImage).into(viewDataBinding.imageViewProfile)
+            CommonUtils.loadImage(viewDataBinding.imageViewProfile,viewModel.getSelectedChildDataFromSharedPref()!!.profileImage)
+            //Glide.with(this).load(viewModel.getSelectedChildDataFromSharedPref()!!.profileImage).into(viewDataBinding.imageViewProfile)
             viewDataBinding.childrenAdapter = ChildrenAdapter(ArrayList(), this,viewModel.getAppRepoInstance())
             viewDataBinding.imageViewExchange.setOnClickListener {
 
@@ -75,7 +82,7 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
 
 
-        viewDataBinding.veilLayout.veil()
+        viewDataBinding.veilLayout.loadSkeleton()
 
 
         viewDataBinding.sendButton.setOnClickListener {
@@ -87,7 +94,7 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
             val mealCommentPostModel = MealCommentPostModel(mealID, comment, studentID)
             viewModel.postComment(mealCommentPostModel)
         }
-        viewModel.postCommentObserver.observe(this, {
+        viewModel.postCommentObserver.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
 
 
@@ -98,22 +105,22 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
             } else {
                 Toast.makeText(this, "Failed to submit comment", Toast.LENGTH_SHORT).show();
             }
-        })
-        viewModel.mealDetails.observe(this, {
-            //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.unVeil()
+        }
+        viewModel.mealDetails.observe(this) {
+//            CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.veilLayout.hideSkeleton()
 
-            val adapter = ImagesAdapter(it.images!!,this,this)
+            val adapter = ImagesAdapter(it.images!!, this, this)
             viewDataBinding.recyclerView.setSliderAdapter(adapter)
             viewDataBinding.recyclerView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
             viewDataBinding.recyclerView.scrollTimeInSec = 4 //set scroll delay in seconds :
             viewDataBinding.recyclerView.startAutoCycle()
-        })
-        viewModel.profileUIModel.observe(this, {
+        }
+        viewModel.profileUIModel.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.childrenAdapter!!.children = it.students!!
             viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
-        })
+        }
         messageObserver()
 
         viewDataBinding.imageViewBack.setOnClickListener {

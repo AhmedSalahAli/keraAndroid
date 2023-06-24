@@ -15,12 +15,12 @@ class AttendanceListItemModel (
         fun convertResponseModelToUIModel(response: AttendanceResponseModel.DataBean?): ArrayList<AttendanceListItemModel> {
             return response?.docs?.map{
                 AttendanceListItemModel(
-                    CommonUtils.convertTimeStampToDate_EEEE_MMM_MM(it.date!!),
+                    CommonUtils.convertIsoToDate(it.date!!),
                     it._id,
-                    it.arrivalTime?.let { it1 -> CommonUtils.convertTimeStampToTime_Am_Pm(it1) },
-                    it.departureTime?.let { it1 -> CommonUtils.convertTimeStampToTime_Am_Pm(it1) },
-                    it.arrivalTime?.let { it1 -> CommonUtils.convertTimeStampTo_Am_Pm(it1) },
-                    it.departureTime?.let { it1 -> CommonUtils.convertTimeStampTo_Am_Pm(it1) }
+                    it.arrivalTime?.let { it1 -> CommonUtils.convertTimeStampToDate(it1,"hh:mm") },
+                    it.departureTime?.let { it1 -> CommonUtils.convertTimeStampToDate(it1,"hh:mm") },
+                    it.arrivalTime?.let { it1 -> CommonUtils.convertTimeStampToDate(it1,"aa") },
+                    it.departureTime?.let { it1 -> CommonUtils.convertTimeStampToDate(it1,"aa") }
                 )
             } as ArrayList
         }

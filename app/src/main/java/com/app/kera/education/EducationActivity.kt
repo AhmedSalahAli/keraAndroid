@@ -20,7 +20,10 @@ import com.app.kera.education.adapter.DateAdapter
 import com.app.kera.education.adapter.EducationListAdapter
 import com.app.kera.profile.StudentsData
 import com.app.kera.profile.adapter.ChildrenAdapter
+import com.app.kera.utils.CommonUtils
 import com.stfalcon.frescoimageviewer.ImageViewer
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,EducationListAdapter.CallBack,ChildrenAdapter.CallBack{
@@ -77,18 +80,15 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
         }
 
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-        viewDataBinding.veilLayout.veil()
 
-        viewDataBinding.veilLayout.veil()
-        viewDataBinding.recyclerEducation.setAdapter(viewDataBinding.listAdapter) // sets your own adapter
-        viewDataBinding.recyclerEducation.setLayoutManager(
-            LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL,false)
-        ) // sets LayoutManager
-        viewDataBinding.recyclerEducation.addVeiledItems(15)
-        viewDataBinding.recyclerEducation.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+        viewDataBinding.recyclerEducation.adapter = viewDataBinding.listAdapter // sets your own adapter
+        viewDataBinding.recyclerEducation.layoutManager = LinearLayoutManager(this,
+            LinearLayoutManager.VERTICAL,false) // sets LayoutManager
+        viewDataBinding.recyclerEducation.loadSkeleton(R.layout.item_education) {
+            itemCount(4)
+            cornerRadius(15f)
 
-        viewDataBinding.recyclerEducation.veil()
+        }
         if (accessType == "teacher") {
             viewModel.getDates(viewModel.getTeacheerProfile().classNumber!!)
             viewDataBinding.imageViewExchange.visibility = View.GONE
@@ -102,54 +102,71 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
 //        viewModel.getDates(viewModel.getSelectedChildDataFromSharedPref()?.classId!!)
         viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this,this)
 
-        viewModel.educationList.observe(this, {
+        viewModel.educationList.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.recyclerEducation.unVeil()
+            viewDataBinding.recyclerEducation.hideSkeleton()
 
-            viewDataBinding.listAdapter = EducationListAdapter(it,this,this)
+            viewDataBinding.listAdapter = EducationListAdapter(it, this, this)
             viewDataBinding.listAdapter!!.notifyDataSetChanged()
-            if (it.size == 0){
+            if (it.size == 0) {
                 showNoData()
 
-            }else{
+            } else {
                 hideNoData()
-                Log.i("ed123","More than 0 ")
+                Log.i("ed123", "More than 0 ")
             }
-        })
-        viewModel.apiError.observe(this, {
-            viewDataBinding.recyclerEducation.unVeil()
+        }
+        viewModel.apiError.observe(this) {
+            viewDataBinding.recyclerEducation.hideSkeleton()
             showNoData()
             viewDataBinding.datesAdapter!!.datesList.clear()
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
-        })
-        viewModel.apiErrorDates.observe(this, {
-            viewDataBinding.veilLayout.unVeil()
+        }
+        viewModel.apiErrorDates.observe(this) {
+
             viewDataBinding.datesAdapter!!.datesList.clear()
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
-        })
+        }
 
 
-        viewModel.datesListLiveData.observe(this, {
+        viewModel.datesListLiveData.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.unVeil()
-            if (it.size >0){
-                viewDataBinding.datesAdapter!!.datesList = it
 
-                Log.i("ed1234","DateObserve")
+            if (it.size > 0) {
+
+                    viewDataBinding.datesAdapter!!.datesList = it
+                    run breaker@{
+                        it.forEach { it1 ->
+                            if (CommonUtils.isTodayTimeStamp(it1.dateTimestamp)) {
+                                viewDataBinding.datesAdapter!!.selectedItem=it.indexOf(it1)
+                                actualeDate = it1.actualDate
+                                viewDataBinding.datesRecycler.smoothScrollToPosition(it.indexOf(it1))
+                                return@breaker
+                            }
+
+                        }
+                    }
+                    if (actualeDate.isNullOrEmpty()){
+                        actualeDate = it[0].actualDate
+                    }
+
                 if (accessType == "teacher") {
-                    viewModel.getEducationList(viewModel.getTeacheerProfile().classNumber!!, it[0].actualDate)
+                    viewModel.getEducationList(
+                        viewModel.getTeacheerProfile().classNumber!!,
+                        actualeDate
+                    )
                 } else {
                     viewModel.getEducationList(
                         viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
-                        it[0].actualDate
+                        actualeDate
                     )
                 }
-                actualeDate=it[0].actualDate
+               //actualeDate = it[0].actualDate
 //            viewModel.getEducationList(
 //                viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
 //                it[0].actualDate
 //            )
-            }else{
+            } else {
                 showNoData()
                 viewDataBinding.datesAdapter!!.datesList.clear()
 
@@ -157,7 +174,7 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
 
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
 
-        })
+        }
         viewDataBinding.imageViewProfile.setOnClickListener {
 
             if (viewDataBinding.childrenFrame.isVisible){
@@ -173,9 +190,9 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
     }
 
     private fun messageObserver() {
-        viewModel.message.observe(this@EducationActivity, {
+        viewModel.message.observe(this@EducationActivity) {
             showMessage(it)
-        })
+        }
     }
 
     private fun showMessage(it: String) {

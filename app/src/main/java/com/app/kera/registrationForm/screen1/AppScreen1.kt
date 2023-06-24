@@ -66,8 +66,8 @@ class AppScreen1 : Fragment() {
         viewDataBinding.viewModel = viewModel
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
 
-        Glide.with(this).load(requireActivity().intent.getStringExtra("SchoolLogo")!!).fitCenter().into(viewDataBinding.imageView18)
-
+       // Glide.with(this).load(requireActivity().intent.getStringExtra("SchoolLogo")!!).fitCenter().into(viewDataBinding.imageView18)
+        CommonUtils.loadThump(viewDataBinding.imageView18,requireActivity().intent.getStringExtra("SchoolLogo")!!)
         viewDataBinding.textView30.textView_selectedCountry.text = ""
         nextButtonClickListener();
         backButtonClickListener()

@@ -87,7 +87,7 @@ class AppRepo(val sharedPreference: AppSharedPreference) {
         fromDate: String,
 
     ): AttendanceResponseModel =
-        service.getAttendanceList(page,  1, fromDate)
+        service.getAttendanceList(page,  1, fromDate,fromDate)
     suspend fun getHomeNews(classID: String, pageNumber: Int): NewsResponseModel =
         service.getHomeNews(classID, pageNumber,  1)
 

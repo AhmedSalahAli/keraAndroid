@@ -43,14 +43,14 @@ class ReportDetails : AppCompatActivity() , CustomDialogClass.CallBack{
         }
         viewModel.response.observe(this) {
             it.dateConverted =
-                CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyyTT(it.date!!)
+                CommonUtils.convertIsoToDate(it.date!!)
             viewDataBinding.textViewReply.setOnClickListener {
 
             }
             var reportID = it.id
             viewDataBinding.textViewDate.text =
-                CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyy(it.date!!)
-            viewDataBinding.textViewTime.text = CommonUtils.convertTimeStampToDate_TT(it.date!!)
+                CommonUtils.convertIsoToDate(it.date!!)
+            viewDataBinding.textViewTime.text = CommonUtils.convertIsoToDate(it.date!!,"hh:mm a")
             viewDataBinding.recycler.adapter = DailyReportAdapter(it.answers)
             viewDataBinding.textViewReply.setOnClickListener(View.OnClickListener {
                 dialog = CustomDialogClass.newInstance(this@ReportDetails, reportID.toString())

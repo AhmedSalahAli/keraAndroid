@@ -29,6 +29,8 @@ import com.app.kera.teacherDailyReport.ui.TeacherDailyReportActivity
 import com.app.kera.teacherMedicalReport.TeacherMedicalReportActivity
 import com.app.kera.utils.CommonUtils
 import com.smarteist.autoimageslider.SliderAnimations
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -79,8 +81,8 @@ class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
         }
 
         //mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
-        viewDataBinding.veilLayout.veil()
 
+        viewDataBinding.veilLayout.loadSkeleton()
         newsList = ArrayList()
 
 
@@ -128,28 +130,28 @@ class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
             }
         })
 
-        viewModel.homeNurseryData.observe(viewLifecycleOwner, {
-          //  CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.unVeil()
+        viewModel.homeNurseryData.observe(viewLifecycleOwner) {
+            //  CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.veilLayout.hideSkeleton()
             it.images.removeIf(String::isEmpty);
-            val adapter = ImagesListAdapter(it.images,requireContext(),this)
+            val adapter = ImagesListAdapter(it.images, requireContext(), this)
             viewDataBinding.recyclerView3.setSliderAdapter(adapter)
             viewDataBinding.recyclerView3.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
             viewDataBinding.recyclerView3.scrollTimeInSec = 4 //set scroll delay in seconds :
             viewDataBinding.recyclerView3.startAutoCycle()
-        })
+        }
 
         messageObserver()
-        viewModel.newsList.observe(viewLifecycleOwner, {
+        viewModel.newsList.observe(viewLifecycleOwner) {
             //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.unVeil()
+            viewDataBinding.veilLayout.hideSkeleton()
 
             newsList.clear()
             newsList.addAll(it.newsList)
             totalNumberOfPages = it.pages
             viewDataBinding.newsAdapter!!.news = newsList
             viewDataBinding.newsAdapter!!.notifyDataSetChanged()
-        })
+        }
 
         viewDataBinding.constraintLayoutDailyReports.setOnClickListener {
             if (accessType == "teacher") {
@@ -190,7 +192,7 @@ class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
 
     private fun showMessage(it: String) {
        // CommonUtils.hideLoading(mProgressDialog!!)
-        viewDataBinding.veilLayout.unVeil()
+        viewDataBinding.veilLayout.hideSkeleton()
 
         Toast.makeText(
             requireContext(), it,
@@ -205,9 +207,9 @@ class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
     }
 
     private fun userProfileDataObservation() {
-        viewModel.profileUIModel.observe(viewLifecycleOwner, {
+        viewModel.profileUIModel.observe(viewLifecycleOwner) {
             //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.unVeil()
+            viewDataBinding.veilLayout.hideSkeleton()
 
             viewModel.saveProfileResponseToSharedPref(it)
             if (viewModel.getSelectedChildDataFromSharedPref() == null) {
@@ -215,18 +217,18 @@ class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
             }
             viewModel.getNewsList(it.associationId!!, page)
 
-        })
+        }
     }
 
 
     private fun teacherProfileDataObservation() {
-        viewModel.teacherProfileUIModel.observe(viewLifecycleOwner, {
-           // CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.unVeil()
+        viewModel.teacherProfileUIModel.observe(viewLifecycleOwner) {
+            // CommonUtils.hideLoading(mProgressDialog!!)
+            viewDataBinding.veilLayout.hideSkeleton()
             viewModel.saveTeacherResponseToSharedPref(it)
 //            viewModel.saveProfileResponseToSharedPref(it)
             viewModel.getNewsList(it.associationId!!, page)
-        })
+        }
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {

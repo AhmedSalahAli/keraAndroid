@@ -15,6 +15,7 @@ import com.app.kera.R
 import com.app.kera.contactUs.ContactUsActivity
 import com.app.kera.databinding.ProfileFragmentBinding
 import com.app.kera.profile.adapter.ChildrenAdapter
+import com.app.kera.utils.CommonUtils
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -87,7 +88,8 @@ class ProfileFragment : Fragment(), ChildrenAdapter.CallBack {
         }
         viewModel.selectedUser.observe(requireActivity(), Observer {
             if (it!=null){
-                Glide.with(this).load(viewModel.selectedUser.value?.profileImage).error(requireContext().resources.getDrawable(R.drawable.ic_person)).into(viewDataBinding.imageView54)
+              //  Glide.with(this).load(viewModel.selectedUser.value?.profileImage).error(requireContext().resources.getDrawable(R.drawable.ic_person)).into(viewDataBinding.imageView54)
+                CommonUtils.loadImage(viewDataBinding.imageView54,viewModel.selectedUser.value?.profileImage)
                 viewModel.selectedUser.value!!.studentCode = "Code:" + (it.studentCode?.replace("Code:","")
                     ?: "")
                 viewModel.selectedUser.value!!.className = "Class:" + it.className?.replace("Class:","")

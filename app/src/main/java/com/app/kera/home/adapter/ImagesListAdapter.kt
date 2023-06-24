@@ -7,6 +7,7 @@ import com.app.kera.databinding.HomeDetailsListItemBinding
 import com.app.kera.databinding.ItemHomeImagesBinding
 import com.app.kera.databinding.SchoolDetailsListItemBinding
 import com.app.kera.schoolDetails.adapter.ImagesAdapter
+import com.app.kera.utils.CommonUtils
 import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderViewAdapter
 
@@ -39,7 +40,8 @@ class ImagesListAdapter(
         fun onBind(position: Int) {
             sliderItemBinding.model = imagesList[position]
             if (!imagesList[position].isEmpty() && imagesList[position] != null) {
-                Glide.with(context).load(imagesList[position]).into(sliderItemBinding.imageSlider)
+                //Glide.with(context).load(imagesList[position]).into(sliderItemBinding.imageSlider)
+                CommonUtils.loadImage(sliderItemBinding.imageSlider,imagesList[position])
             }
 
 

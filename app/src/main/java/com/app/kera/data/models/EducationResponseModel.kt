@@ -23,7 +23,7 @@ class EducationResponseModel {
             @SerializedName("shortDescription")
             var shortDescription: String? = null
 
-            @SerializedName("date")
+            @SerializedName("createdAt")
             var date: String? = null
 
             @SerializedName("_id")

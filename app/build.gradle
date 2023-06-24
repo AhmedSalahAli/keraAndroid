@@ -22,13 +22,13 @@ android {
             keyAlias 'upload'
         }
     }
-    compileSdkVersion 30
+    compileSdkVersion 33
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId 'com.app.kera'
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 24
         versionName "1.2.4"
 
@@ -135,5 +135,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
     implementation 'com.airbnb.android:lottie:3.6.1'
-
+    implementation("com.ericktijerou.koleton:koleton:1.0.0-beta01")
 }

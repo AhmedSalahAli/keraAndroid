@@ -29,7 +29,7 @@ class DisplayMedicalReportResponseModel {
         var docs: ArrayList<DocsBean>? = null
 
         class DocsBean {
-            @SerializedName("date")
+            @SerializedName("createdAt")
             var date: String? = ""
 
             var dateConverted: String? = ""

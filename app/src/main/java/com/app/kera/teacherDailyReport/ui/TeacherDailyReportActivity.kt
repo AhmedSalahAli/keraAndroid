@@ -31,6 +31,8 @@ import com.app.kera.teacherMedicalReport.adapter.LatestReportsListAdapter
 import com.app.kera.teacherMedicalReport.adapter.StudentsListAdapter
 import com.app.kera.teacherMedicalReport.model.LatestReportItemUIModel
 import com.app.kera.utils.CommonUtils
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -80,33 +82,25 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         viewDataBinding.textViewMarkAsAbsent.text = content
 
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-        viewDataBinding.recyclerView9.setLayoutManager(
-            GridLayoutManager(this,
-                3,GridLayoutManager.HORIZONTAL,false)
-        )
+        viewDataBinding.recyclerView9.layoutManager = GridLayoutManager(this,
+            3,GridLayoutManager.HORIZONTAL,false)
 
-        viewDataBinding.recyclerView9.setAdapter(viewDataBinding.studentsAdapter) // sets your own adapter
-        viewDataBinding.recyclerView9.getRecyclerView().setPadding(80,60,60,60)
-        viewDataBinding.recyclerView9 .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView9.getVeiledRecyclerView().setPadding(80,60,60,60)
-        viewDataBinding.recyclerView9 .getVeiledRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView9.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+        viewDataBinding.recyclerView9.adapter = viewDataBinding.studentsAdapter // sets your own adapter
+        viewDataBinding.recyclerView9.setPadding(80,60,60,60)
+        viewDataBinding.recyclerView9.clipToPadding = false
 
-        viewDataBinding.recyclerView9.addVeiledItems(15)
-        viewDataBinding.recyclerView9.veil()
 
-        viewDataBinding.recyclerView7.setLayoutManager(StaggeredGridLayoutManager(1,
-            StaggeredGridLayoutManager.HORIZONTAL)) // sets LayoutManager
-        viewDataBinding.recyclerView7.setAdapter(viewDataBinding.classesAdapter) // sets your own adapter
+        viewDataBinding.recyclerView9.loadSkeleton(R.layout.item_student_name_image) {
+            itemCount(20)
+            cornerRadius(15f)
 
-        viewDataBinding.recyclerView7.getRecyclerView().setPadding(80,60,60,60)
-        viewDataBinding.recyclerView7 .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView7.getVeiledRecyclerView().setPadding(80,60,60,60)
-        viewDataBinding.recyclerView7 .getVeiledRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerView7.addVeiledItems(10)
-        viewDataBinding.recyclerView7.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+        }
 
-        viewDataBinding.recyclerView7.veil()
+        viewDataBinding.recyclerView7.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false) // sets LayoutManager
+
+        viewDataBinding.recyclerView7.setPadding(80,60,60,60)
+        viewDataBinding.recyclerView7 .clipToPadding = false
+
 
         viewDataBinding.recyclerLatestReports.setAdapter(viewDataBinding.latestReportsAdapter) // sets your own adapter
         viewDataBinding.recyclerLatestReports.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)) // sets LayoutManager
@@ -273,7 +267,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     private fun classesListObservation() {
         viewModel.classesList.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.recyclerView7.unVeil()
+
             viewDataBinding.textViewNumberOfClasses.text = "${it.size} classes today"
             viewDataBinding.classesAdapter!!.classesList = it
             viewDataBinding.classesAdapter!!.notifyDataSetChanged()
@@ -283,7 +277,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
     private fun studentsListObservation() {
         viewModel.studentsList.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.recyclerView9.unVeil()
+            viewDataBinding.recyclerView9.hideSkeleton()
             viewDataBinding.studentsAdapter = StudentsListAdapter(it, this, this)
             viewDataBinding.studentsAdapter!!.notifyDataSetChanged()
         }
@@ -319,7 +313,13 @@ class TeacherDailyReportActivity : AppCompatActivity(),
 
     override fun onItemClicked(classID: String?) {
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-        viewDataBinding.recyclerView9.veil()
+        viewDataBinding.recyclerView9.loadSkeleton(R.layout.item_student_name_image) {
+            itemCount(20)
+            cornerRadius(15f)
+
+
+
+        }
 
         selectedStudents.clear()
         for (student in viewDataBinding.studentsAdapter!!.studentsList) {

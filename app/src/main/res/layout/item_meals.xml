@@ -102,7 +102,7 @@
                     android:textColor="#0093DE"
                     android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
-                    android:lines="1"
+                    android:lines="2"
 
                     android:gravity="center"
                     android:maxLines="2"

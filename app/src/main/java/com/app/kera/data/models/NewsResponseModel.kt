@@ -35,7 +35,7 @@ class NewsResponseModel {
             @SerializedName("associationId")
             var associationId: AssociationIdBean? = null
 
-            @SerializedName("date")
+            @SerializedName("createdAt")
             var date: String? = null
 
             @SerializedName("_id")

@@ -41,7 +41,7 @@ class CommentsAdapter(
 
             item.txtDate.text = commentList!![position].createdAt?.let {
                 CommonUtils.convertIsoToDate(
-                    it
+                    it,"hh:mm a EE, MM dd,yyyy"
                 )
             }
 

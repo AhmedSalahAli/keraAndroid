@@ -29,7 +29,7 @@ class AttendanceResponseModel {
         var docs: List<DocsBean>? = null
 
         class DocsBean {
-            @SerializedName("date")
+            @SerializedName("createdAt")
             var date: String? = null
 
             @SerializedName("_id")

@@ -15,6 +15,8 @@ import com.app.kera.attendanceHistory.adapter.AttendanceListAdapter
 import com.app.kera.attendanceHistory.model.AttendanceListItemModel
 import com.app.kera.databinding.ActivityAttendanceHistoryBinding
 import com.app.kera.education.adapter.DateAdapter
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , DateAdapter.ItemClickNavigator{
@@ -38,21 +40,25 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_attendance_history)
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.viewModel = viewModel
-        viewDataBinding.veilLayout.veil()
+
+
+
         viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this,this)
 
         viewModel.getAttendanceList(page,"")
         viewDataBinding.listAdapter = AttendanceListAdapter(ArrayList(), this)
 
         manager = LinearLayoutManager(this)
-        viewDataBinding.recyclerAttendance.setLayoutManager(manager)
-        viewDataBinding.recyclerAttendance.setAdapter(viewDataBinding.listAdapter) // sets your own adapter
-        viewDataBinding.recyclerAttendance.addVeiledItems(15)
-        viewDataBinding.recyclerAttendance.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
+        viewDataBinding.recyclerAttendance.layoutManager = manager
+        viewDataBinding.recyclerAttendance.adapter = viewDataBinding.listAdapter // sets your own adapter
+        viewDataBinding.recyclerAttendance.loadSkeleton(R.layout.attendance_item) {
+            itemCount(4)
+            cornerRadius(15f)
 
-        viewDataBinding.recyclerAttendance.veil()
+        }
 
-        viewDataBinding.recyclerAttendance.getRecyclerView().addOnScrollListener(object :
+
+        viewDataBinding.recyclerAttendance.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -86,7 +92,7 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
         }
         viewModel.attendanceList.observe(this) {
             // CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.recyclerAttendance.unVeil()
+            viewDataBinding.recyclerAttendance.hideSkeleton()
 
             isScrolling = false
 
@@ -97,7 +103,9 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
         }
         viewModel.getDates()
         viewModel.datesListLiveData.observe(this) {
-            viewDataBinding.veilLayout.unVeil()
+
+
+            viewDataBinding.datesRecycler.hideSkeleton()
 
             viewDataBinding.datesAdapter!!.datesList = it
 
@@ -108,7 +116,11 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
     }
 
     override fun onDateClick(position: Int,date: String) {
-        viewDataBinding.recyclerAttendance.veil()
+        viewDataBinding.recyclerAttendance.loadSkeleton(R.layout.attendance_item) {
+            itemCount(4)
+            cornerRadius(15f)
+
+        }
         viewModel.getAttendanceList(page,date)
 
     }

@@ -7,7 +7,6 @@ import com.app.kera.utils.CommonUtils
 
 class MealsItemUIModel(
     var id: String? = "",
-    var date: String? = "",
     var title: String?,
     var images: String?,
     var mealName: String? = "",
@@ -18,7 +17,6 @@ class MealsItemUIModel(
            return response?.map {
                 MealsItemUIModel(
                     it.id,
-                    it.date,
                     it.title,
                     imageChecker(it.images),
                     it.mealName,

@@ -15,7 +15,7 @@ class EducationListItemModel(
             return response?.educations?.map {
                 EducationListItemModel(
                     it.title,
-                    CommonUtils.convertTimeStampToDate_EEEE_MMM_MM(it.date!!),
+                    CommonUtils.convertIsoToDate(it.date!!,"EEEE,MMM dd"),
                     it.shortDescription,
 
                     it.images!!.map {

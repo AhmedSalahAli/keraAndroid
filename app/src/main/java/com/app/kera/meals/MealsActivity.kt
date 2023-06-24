@@ -3,6 +3,7 @@ package com.app.kera.meals
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -13,16 +14,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.kera.R
 import com.app.kera.databinding.ActivityMealsBinding
 import com.app.kera.education.adapter.DateAdapter
 import com.app.kera.meals.adapter.MealsListAdapter
 import com.app.kera.meals.details.MealsDetailsActivity
-import com.app.kera.meals.model.ClassMealsDates
+import com.app.kera.meals.model.MealsItemUIModel
 import com.app.kera.profile.StudentsData
 import com.app.kera.profile.adapter.ChildrenAdapter
+import com.app.kera.utils.CommonUtils
+import com.google.gson.Gson
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
@@ -61,14 +65,19 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
 
         accessType = viewModel.getUserType()
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-        viewDataBinding.veilLayout.veil()
+        viewDataBinding.recyclerMeals.loadSkeleton(R.layout.item_meals) {
+            itemCount(4)
+            cornerRadius(
+                70f)
+
+        }
         viewDataBinding.recyclerMeals.setAdapter(viewDataBinding.mealsAdapter) // sets your own adapter
 
         viewDataBinding.recyclerMeals.setLayoutManager(LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)) // sets LayoutManager
-        viewDataBinding.recyclerMeals.addVeiledItems(15)
-        viewDataBinding.recyclerMeals.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
 
-        viewDataBinding.recyclerMeals.veil()
+        viewDataBinding.recyclerMeals.layoutDirection = View.LAYOUT_DIRECTION_LTR
+
+
 
         if (accessType == "teacher") {
             viewModel.getDates(viewModel.getTeacheerProfile().classNumber!!)
@@ -113,25 +122,26 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
             }
         }
         viewModel.apiError.observe(this) {
-            viewDataBinding.recyclerMeals.unVeil()
+            viewDataBinding.recyclerMeals.hideSkeleton()
             showNoData()
             viewDataBinding.datesAdapter!!.datesList.clear()
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
         }
         viewModel.apiErrorDates.observe(this) {
-            viewDataBinding.veilLayout.unVeil()
+
             viewDataBinding.datesAdapter!!.datesList.clear()
             viewDataBinding.datesAdapter!!.notifyDataSetChanged()
         }
 
         viewModel.datesListLiveData.observe(this) {
+            Log.e("Data_DATE",Gson().toJson(it))
             //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.unVeil()
+
             if (it.size > 0) {
                 viewDataBinding.datesAdapter!!.datesList = it
                 run breaker@{
                     it.forEach { it1 ->
-                        if (it1.dateTimestamp >= System.currentTimeMillis()) {
+                        if (CommonUtils.isTodayTimeStamp(it1.dateTimestamp)) {
                             viewDataBinding.datesAdapter!!.selectedItem=it.indexOf(it1)
                             actualeDate = it1.actualDate
                             viewDataBinding.datesRecycler.smoothScrollToPosition(it.indexOf(it1))
@@ -155,7 +165,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
                         actualeDate
                     )
                 }
-                actualeDate = it[0].actualDate
+           //     actualeDate = it[0].actualDate
 //            viewModel.getMeals(
 //                viewModel.getSelectedChildDataFromSharedPref()!!.classId!!,
 //                it[0].actualDate
@@ -170,7 +180,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
 
         viewModel.mealsList.observe(this) {
             //  CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.recyclerMeals.unVeil()
+            viewDataBinding.recyclerMeals.hideSkeleton()
 
             viewDataBinding.mealsAdapter!!.mealsList = it
 
@@ -195,16 +205,17 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
             }
         }
     }
-    override fun onItemClicked(mealID: String?) {
+    override fun onItemClicked(   meal: MealsItemUIModel) {
         val myIntent = Intent(this@MealsActivity, MealsDetailsActivity::class.java)
-        myIntent.putExtra("MealID", mealID) //Optional parameters
+        myIntent.putExtra("MealID", meal.id) //Optional parameters
+        myIntent.putExtra("MealDate",actualeDate)
         startActivity(myIntent)
     }
 
     private fun messageObserver() {
         viewModel.message.observe(this@MealsActivity) {
             //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.unVeil()
+
             showMessage(it)
         }
     }
@@ -218,7 +229,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
 
     override fun onDateClick(position:Int,date: String) {
       //  mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-        viewDataBinding.recyclerMeals.veil()
+        viewDataBinding.recyclerMeals.hideSkeleton()
         if (accessType == "teacher") {
             viewModel.getMeals(viewModel.getTeacheerProfile().classNumber!!, date)
         } else {

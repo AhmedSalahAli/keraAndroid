@@ -17,6 +17,8 @@ import com.app.kera.databinding.ActivityEventsBinding
 import com.app.kera.events.adapter.PreviousListAdapter
 import com.app.kera.events.adapter.UpcomingListAdapter
 import com.app.kera.events.ui.eventsdetails.EventsDetailsActivity
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EventsActivity : AppCompatActivity() ,UpcomingListAdapter.CallBack,PreviousListAdapter.CallBack{
@@ -59,10 +61,13 @@ class EventsActivity : AppCompatActivity() ,UpcomingListAdapter.CallBack,Previou
 
         viewDataBinding.recyclerView4.veil()
 
-        viewDataBinding.recyclerView3.setLayoutManager(manager)
-        viewDataBinding.recyclerView3.setAdapter(viewDataBinding.previousAdapter) // sets your own adapter
-        viewDataBinding.recyclerView3.addVeiledItems(15)
-        viewDataBinding.recyclerView3.veil()
+        viewDataBinding.recyclerView3.layoutManager = manager
+        viewDataBinding.recyclerView3.adapter = viewDataBinding.previousAdapter // sets your own adapter
+        viewDataBinding.recyclerView3.loadSkeleton(R.layout.item_events_small_image) {
+            itemCount(4)
+            cornerRadius(15f)
+
+        }
 
         val scale = resources.getDimension(R.dimen._20sdp)
         val padding_in_px = (scale + 0.5f).toInt()
@@ -105,13 +110,13 @@ class EventsActivity : AppCompatActivity() ,UpcomingListAdapter.CallBack,Previou
                 }
             }
         })
-        eventsViewModel.upcomingEventList.observe(this, {
+        eventsViewModel.upcomingEventList.observe(this) {
 
             viewDataBinding.recyclerView4.unVeil()
-            if (it.size > 0 ){
+            if (it.size > 0) {
                 viewDataBinding.recyclerView4.visibility = View.VISIBLE
                 viewDataBinding.textView62.visibility = View.VISIBLE
-            }else{
+            } else {
                 viewDataBinding.recyclerView4.visibility = View.GONE
                 viewDataBinding.textView62.visibility = View.GONE
             }
@@ -120,22 +125,22 @@ class EventsActivity : AppCompatActivity() ,UpcomingListAdapter.CallBack,Previou
             viewDataBinding.adapter!!.notifyDataSetChanged()
 
 
-        })
-        eventsViewModel.previousEventList.observe(this, {
+        }
+        eventsViewModel.previousEventList.observe(this) {
 
 
-            viewDataBinding.recyclerView3.unVeil()
+            viewDataBinding.recyclerView3.hideSkeleton()
             viewDataBinding.previousAdapter!!.UpcomingEventList = it
 
             viewDataBinding.previousAdapter!!.notifyDataSetChanged()
 
-        })
-        eventsViewModel.anApiFailed.observe(this, {
+        }
+        eventsViewModel.anApiFailed.observe(this) {
             //CommonUtils.hideLoading(mProgressDialog!!)
             viewDataBinding.recyclerView4.unVeil()
-            Log.e("apiFailed"," FF ")
+            Log.e("apiFailed", " FF ")
 
-        })
+        }
         viewDataBinding.constraintLayoutBack.setOnClickListener {
             finish()
         }

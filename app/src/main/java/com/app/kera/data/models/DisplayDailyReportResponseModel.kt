@@ -32,7 +32,7 @@ class DisplayDailyReportResponseModel {
         var docs: ArrayList<DocsBean>? = null
 
         class DocsBean :Serializable{
-            @SerializedName("date")
+            @SerializedName("createdAt")
             var date: String? = ""
 
             var dateConverted: String? = ""

@@ -109,7 +109,8 @@ interface ApiService {
          @Path("page") page: Int,
         
         @Header("v") version: Int,
-        @Query("fromDate", encoded = true) fromDate: String
+        @Query("fromDate", encoded = true) fromDate: String,
+         @Query("toDate", encoded = true) toDate: String
     ): AttendanceResponseModel
     @PUT("portal/meals/comment")
     suspend fun postMealComment(@Body mealCommentModel: MealCommentPostModel): GeneralResponse

@@ -19,24 +19,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
-        <com.skydoves.androidveil.VeilLayout
-            android:id="@+id/veilLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:veilLayout_veiled="true"
-            app:veilLayout_shimmerEnable="true"
-            app:veilLayout_baseColor="@color/gray_D2DCE8"
-            app:veilLayout_highlightColor="@color/white"
-            app:veilLayout_baseAlpha="0.6"
-            app:veilLayout_highlightAlpha="1.0"
-            app:veilLayout_dropOff="0.5"
-            app:veilLayout_radius="6dp"
 
-            app:layout_constraintTop_toBottomOf="@+id/view"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/veilLayout"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/blue_fcfdfd">
@@ -212,7 +198,6 @@
                     android:layout_marginStart="14dp"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@{viewModel.mealDetails.date}"
                     android:textColor="#5881A4"
                     android:textSize="@dimen/_10ssp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView61"
@@ -310,7 +295,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.skydoves.androidveil.VeilLayout>
+
 
     </androidx.core.widget.NestedScrollView>
 

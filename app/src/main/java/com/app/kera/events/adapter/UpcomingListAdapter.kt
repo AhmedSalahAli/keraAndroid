@@ -40,13 +40,13 @@ class UpcomingListAdapter(
             Log.w("Month Day : ",
                    ""+UpcomingEventList[position].eventDate)
             requestListItemBinding.textView60.text = UpcomingEventList[position].eventDate?.let {
-                CommonUtils.convertTimeStampToEe(
-                    it
+                CommonUtils.convertTimeStampToDate(
+                    it,"MMM"
                 )
             }
             requestListItemBinding.textView61.text = UpcomingEventList[position].eventDate?.let {
-                CommonUtils.convertTimeStampToDd(
-                    it
+                CommonUtils.convertTimeStampToDate(
+                    it,"dd"
                 )
             }
 //            requestListItemBinding.submitButton.setOnClickListener {

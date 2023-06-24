@@ -16,10 +16,16 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.format.DateFormat
+import android.text.format.DateUtils
 import android.util.DisplayMetrics
 import android.util.Log
 import android.util.Patterns
+import android.widget.ImageView
 import androidx.annotation.LayoutRes
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.app.kera.R
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
@@ -75,7 +81,43 @@ object CommonUtils {
             mProgressDialog.hide()
         }
     }
+    fun loadImage(view: ImageView, url: String?) {
 
+        val requestOptions = RequestOptions()
+        val circularProgressDrawable = CircularProgressDrawable(view.context)
+        circularProgressDrawable.setColorSchemeColors(R.color.purple_500, R.color.purple_200, R.color.purple_700);
+
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+
+        circularProgressDrawable.start()
+        Log.e("image","https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
+        Glide.with(view.context)
+            .load("https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
+            .apply(requestOptions)
+           // .error(R.drawable.image_circle_backgroud)
+            .placeholder(circularProgressDrawable)
+            .into(view)
+    }
+    fun loadThump(view: ImageView, url: String?) {
+
+        val requestOptions = RequestOptions()
+        val circularProgressDrawable = CircularProgressDrawable(view.context)
+        circularProgressDrawable.setColorSchemeColors(R.color.purple_500, R.color.purple_200, R.color.purple_700);
+
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+
+        circularProgressDrawable.start()
+        Log.e("image","https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
+        Glide.with(view.context)
+            .load("https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
+            .apply(requestOptions)
+            .fitCenter()
+            // .error(R.drawable.image_circle_backgroud)
+            .placeholder(circularProgressDrawable)
+            .into(view)
+    }
     fun createImageFolder(context: Context): File {
         val storageDir = File(context.filesDir, "Photo")
         if (!storageDir.exists())
@@ -180,82 +222,40 @@ object CommonUtils {
         return spf.format(newDate!!)
     }
 
-    fun convertTimeStampToDate(timestamp: Long): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp
-        val date = DateFormat.format("dd-MM-yyyy", calendar).toString()
-        Log.e("date = ", date)
-        return date
-    }
-
-    fun convertTimeStampToDate_YYYY_MM_DD(timestamp: Long): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp * 1000L
-        val date = DateFormat.format("yyyy-MM-dd", calendar).toString()
-        return date
-    }
-
-    fun convertTimeStampToDate_MMMM_dd_yyyy_Format(timestamp: Long): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp * 1000L
-        val date = DateFormat.format("MMMM dd, yyyy", calendar).toString()
-        return date
-    }
-
-    fun convertTimeStampToDate_EEE_dd_mm_yyyy_Format(timestamp: Long): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp * 1000L
-        return DateFormat.format("EEEE dd/MM/yyyy", calendar).toString()
-    }
-
-    fun getDayOfTheWeek(date: String): String {
-        val format = SimpleDateFormat("yyyy-MM-dd")
-        val dateFormatted = format.parse(date)
-        return DateFormat.format("EEEE", dateFormatted) as String
-    }
-
-    fun convertTimeStampToDate_dd_mm_hh_mm_a_Format(timestamp: Long): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp * 1000L
-        return DateFormat.format("dd MMM hh:mm a", calendar).toString()
-    }
-
-    fun convertTimeStampToDate_dd(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("d", calendar).toString()
-        return date
-    }
-    fun convertTimeStampToDate_EE(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("EEE", calendar).toString()
-        return date
-    }
-    fun convertTimeStampToDate_mm(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("MMM", calendar).toString()
-        return date
-    }
-    fun convertTimeStampToEe(iso: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
 
 
 
-
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+    fun convertIsoToTimeStamp(iso: String): Long {
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        val format =SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
         try {
-             val date = format.parse(iso)
+            val date = format.parse(iso)
             calendar.time = date
 
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-        return     DateFormat.format("MMM", calendar).toString()
+        return     calendar.timeInMillis
 
     }
-    fun convertIsoToDate(iso: String): String {
+
+    fun isTodayIso(iso: String): Boolean {
+        return     DateUtils.isToday(convertIsoToTimeStamp(iso))
+    }
+    fun isTodayTimeStamp(time: Long): Boolean {
+        return     DateUtils.isToday(time)
+    }
+
+
+
+
+    fun convertTimeStampToDate(timestamp: String,dateFormat : String = "hh:mm:ss a EEEE, MMM dd,yyyy"): String {
+        val calendar = Calendar.getInstance(Locale.ENGLISH)
+        calendar.timeInMillis = timestamp.toLong()
+        val date = DateFormat.format(dateFormat, calendar).toString()
+        return date
+    }
+    fun convertIsoToDate(iso: String,dateFormat : String = "hh:mm a EE, MM dd,yyyy"): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         val format =SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
         try {
@@ -265,60 +265,17 @@ object CommonUtils {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-        return     DateFormat.format("MMMM dd, yyyy", calendar).toString()
-    }
-    fun convertTimeStampToDd(iso: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-        try {
-            val date = format.parse(iso)
-            calendar.time = date
-
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-        return     DateFormat.format("dd", calendar).toString()
-    }
-    fun convertTimeStampToDate_mm_dd_yyyy(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("MM/dd/yyyy", calendar).toString()
-        Log.e("utils date = ", date)
-        return date
-    }
-
-    fun convertTimeStampToDate_EEEE_MMM_MM(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("EEEE,MMM dd ", calendar).toString()
-        return date
+        return     DateFormat.format(dateFormat, calendar).toString()
     }
 
 
-    fun convertTimeStampToTime_Am_Pm(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date1 = DateFormat.format("hh:mm", calendar).toString()
-        val date: String = date1.format(Date()).toString()
-        return date
-    }
-    fun convertTimeStampTo_Am_Pm(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date1 = DateFormat.format("aa", calendar).toString()
-        val date: String = date1.format(Date()).toString()
-        return date
-    }
-    fun convertTimeStampToDate_EEE_MMM_MM_yyyyTT(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("hh:mm:ss a   EEEE, MMM dd,yyyy ", calendar).toString()
-        return date
-    }
+
+
+
     fun convertTimeStampToDate_EEE_MMM_yyyy(timestamp: String): String {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("EEE, MMM yy ", calendar).toString()
+        val date = DateFormat.format("EEE, MMM yy", calendar).toString()
         return date
     }
     fun convertTimeStampToDate_EEE_MMM_MM_yyyy(timestamp: String): String {
@@ -327,18 +284,7 @@ object CommonUtils {
         val date = DateFormat.format("EEEE, MMM dd,yyyy ", calendar).toString()
         return date
     }
-    fun convertTimeStampToDate_EEEE_MMM_MM_yyyy(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("EEE, MMM dd,yyyy ", calendar).toString()
-        return date
-    }
-    fun convertTimeStampToDate_TT(timestamp: String): String {
-        val calendar = Calendar.getInstance(Locale.ENGLISH)
-        calendar.timeInMillis = timestamp.toLong()
-        val date = DateFormat.format("hh:mm a", calendar).toString()
-        return date
-    }
+
     fun getTimeDateFromTimeStamp(timestamp: Long): String? {
         return try {
             val dateFormat = java.text.DateFormat.getDateTimeInstance()

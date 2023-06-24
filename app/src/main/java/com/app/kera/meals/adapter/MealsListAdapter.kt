@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.kera.databinding.ItemMealsBinding
 import com.app.kera.meals.model.MealsItemUIModel
 import com.app.kera.utils.BaseViewHolder
-import com.google.gson.Gson
 
 class MealsListAdapter(
     var mealsList: List<MealsItemUIModel>, var callBack: CallBack
@@ -36,7 +35,7 @@ class MealsListAdapter(
         BaseViewHolder(requestListItemBinding.root) {
         override fun onBind(position: Int) {
             requestListItemBinding.model = mealsList[position]
-            requestListItemBinding.view.setOnClickListener { callBack.onItemClicked(mealsList[position].id) }
+            requestListItemBinding.view.setOnClickListener { callBack.onItemClicked(mealsList[position]) }
 //            requestListItemBinding.submitButton.setOnClickListener {
 //                callBack.onItemClicked(optionsListItems[position].tripID)
 //            }
@@ -45,7 +44,7 @@ class MealsListAdapter(
 
     interface CallBack {
         fun onItemClicked(
-            mealID: String?
+            meal: MealsItemUIModel
         )
     }
 }

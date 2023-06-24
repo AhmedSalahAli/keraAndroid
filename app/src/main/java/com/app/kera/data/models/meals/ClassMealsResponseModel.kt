@@ -29,9 +29,9 @@ class ClassMealsResponseModel {
 
             @SerializedName("mainCover")
             var mainCover: String? = null
-
-            @SerializedName("date")
-            var date: String? = null
+//
+//            @SerializedName("date")
+//            var date: String? = null
 
             @SerializedName("_id")
             var id: String? = null

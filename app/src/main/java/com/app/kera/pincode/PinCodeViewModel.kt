@@ -3,6 +3,7 @@ package com.app.kera.pincode
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.kera.BuildConfig
 import com.app.kera.data.models.FcmModelRequest
 import com.app.kera.data.models.LoginRequestModel
 import com.app.kera.data.models.LoginResponseModel
@@ -30,6 +31,9 @@ class PinCodeViewModel(val appRepo: AppRepo) : ViewModel() {
                 }
             } catch (e: Exception) {
                 message.value = "Invalid pinCode"
+                if (BuildConfig.DEBUG){
+                    verifyPhoneObserver.value = true
+                }
             }
         }
     }

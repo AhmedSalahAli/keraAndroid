@@ -1,7 +1,9 @@
 package com.app.kera.meals.model
 
 import com.app.kera.utils.CommonUtils
-import com.app.kera.utils.CommonUtils.convertTimeStampToDate_mm_dd_yyyy
+
+import com.app.kera.utils.CommonUtils.convertIsoToTimeStamp
+
 
 class ClassMealsDates(
     var displayDateDay: String,
@@ -14,11 +16,11 @@ class ClassMealsDates(
         fun convertDate(dates : ArrayList<String>) : ArrayList<ClassMealsDates>{
             return dates.map {
                 ClassMealsDates(
-                    CommonUtils.convertTimeStampToDate_dd(it),
-                    CommonUtils.convertTimeStampToDate_EE(it),
-                    CommonUtils.convertTimeStampToDate_mm(it),
-                    convertTimeStampToDate_mm_dd_yyyy(it),
-                    it.toLong()
+                    CommonUtils.convertIsoToDate(it,"dd"),
+                    CommonUtils.convertIsoToDate(it,"EEE"),
+                    CommonUtils.convertIsoToDate(it,"MMM"),
+                    it,
+                    convertIsoToTimeStamp(it)
                 )
             } as ArrayList
         }

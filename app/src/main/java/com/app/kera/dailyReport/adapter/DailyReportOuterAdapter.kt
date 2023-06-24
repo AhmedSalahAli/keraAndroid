@@ -40,14 +40,14 @@ class DailyReportOuterAdapter(
         override fun onBind(position: Int) {
             binding.model = dailyReportList[position]
             dailyReportList[position].dateConverted =
-                CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyyTT(dailyReportList[position].date!!)
+                CommonUtils.convertIsoToDate(dailyReportList[position].date!!)
 //            binding.recycler.adapter = DailyReportAdapter(dailyReportList[position].answers)
 //            binding.textViewReply.setOnClickListener {
 //                callBack.onReplyClicked(dailyReportList[position].id!!)
 //            }
           //  binding.beforeTextViewDate.text =  CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyyTT(dailyReportList[position].date!!)
-            binding.textViewDate.text =  CommonUtils.convertTimeStampToDate_EEE_MMM_MM_yyyy(dailyReportList[position].date!!)
-            binding.textViewTime.text =  CommonUtils.convertTimeStampToDate_TT(dailyReportList[position].date!!)
+            binding.textViewDate.text =  CommonUtils.convertIsoToDate(dailyReportList[position].date!!)
+            binding.textViewTime.text =  CommonUtils.convertIsoToDate(dailyReportList[position].date!!,"hh:mm a")
             for (it in dailyReportList[position].answers!!){
                 if (it.answer !=null && !it.answer.isNullOrEmpty()){
                     binding.txtDesc.text = it.answer

@@ -19,9 +19,18 @@ class MealsDetailsViewModel(val appRepo: AppRepo) : ViewModel() {
     var profileUIModel = MutableLiveData<ProfileUIModel>()
     fun getMealDetails(classID: String) {
         viewModelScope.launch {
-            val response = appRepo.getClassMealDetails(classID)
-            mealDetails.value = MealsDetailsUIModel.convertResponseModelToUIModel(response.data)
-            Log.e("meal name", mealDetails.value!!.title!!.value!!)
+
+
+            try{
+                val response = appRepo.getClassMealDetails(classID)
+
+                if (response.status == 200) {
+                      mealDetails.postValue(MealsDetailsUIModel.convertResponseModelToUIModel(response.data))
+                }
+            }catch (e : Exception){
+
+
+            }
         }
     }
 

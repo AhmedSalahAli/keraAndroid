@@ -17,18 +17,11 @@
         android:fillViewport="true">
 
 
-    <com.skydoves.androidveil.VeilLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/veilLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:veilLayout_veiled="true"
-        app:veilLayout_shimmerEnable="true"
-        app:veilLayout_baseColor="@color/gray_D2DCE8"
-        app:veilLayout_highlightColor="@color/white"
-        app:veilLayout_baseAlpha="0.6"
-        app:veilLayout_highlightAlpha="1.0"
-        app:veilLayout_dropOff="0.5"
-        app:veilLayout_radius="6dp"
+
 
         app:layout_constraintTop_toBottomOf="@+id/view"
 
@@ -425,7 +418,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.skydoves.androidveil.VeilLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 </layout>

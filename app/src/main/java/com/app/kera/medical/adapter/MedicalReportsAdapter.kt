@@ -43,8 +43,8 @@ class MedicalReportsAdapter(
 
         override fun onBind(position: Int) {
             binding.model = medicalReportList[position]
-            binding.beforeTextViewDate.text =  CommonUtils.convertTimeStampToDate_EEE_MMM_yyyy(medicalReportList[position].date!!)
-            binding.textView116.text =  CommonUtils.convertTimeStampToDate_EEE_MMM_yyyy(medicalReportList[position].date!!)
+            binding.beforeTextViewDate.text =  CommonUtils.convertIsoToDate(medicalReportList[position].date!!)
+            binding.textView116.text =  CommonUtils.convertIsoToDate(medicalReportList[position].date!!)
 
             if (medicalReportList[position].question1!!.isYes){
                 binding.textView114.text = "YES"

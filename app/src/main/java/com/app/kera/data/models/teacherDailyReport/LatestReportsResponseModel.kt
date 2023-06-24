@@ -36,7 +36,7 @@ class LatestReportsResponseModel {
             @SerializedName("profileImage")
             var profileImage: String? = null
 
-            @SerializedName("date")
+            @SerializedName("createdAt")
             var date: String? = null
 
             @SerializedName("sent")

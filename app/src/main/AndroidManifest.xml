@@ -48,7 +48,7 @@
         <service
             android:name=".data.network.MyFirebaseMessagingService"
             android:directBootAware="true"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -130,7 +130,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".splash.ui.SplashActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

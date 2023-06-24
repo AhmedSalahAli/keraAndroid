@@ -28,6 +28,9 @@ import com.app.kera.teacherDailyReport.ui.TeacherDailyReportActivity
 import com.app.kera.teacherDailyReport.writeReport.WriteReportActivity
 import com.app.kera.teacherMedicalReport.TeacherMedicalReportActivity
 import com.app.kera.teacherMedicalReport.writeMedicalReport.WriteMedicalReportActivity
+import com.app.kera.utils.CommonUtils
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -85,27 +88,27 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
         adapter = PostRecyclerAdapter(ArrayList(), requireContext(),this)
         viewDataBinding.adapter =  PostRecyclerAdapter(ArrayList(), requireContext(),this)
 
-        viewDataBinding.recyclerNotifications.setAdapter(adapter) // sets your own adapter
-        viewDataBinding.recyclerNotifications.setLayoutManager(
-            LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.VERTICAL, false
-            )
+        viewDataBinding.recyclerNotifications.adapter = adapter // sets your own adapter
+        viewDataBinding.recyclerNotifications.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL, false
         )
-        viewDataBinding.recyclerNotifications.getRecyclerView().setHasFixedSize(true)
+        viewDataBinding.recyclerNotifications.setHasFixedSize(true)
 
-        viewDataBinding.recyclerNotifications.addVeiledItems(15)
-        viewDataBinding.recyclerNotifications.getRecyclerView().setPadding(0, 50, 0, 200)
-        viewDataBinding.recyclerNotifications .getRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerNotifications.getVeiledRecyclerView().setPadding(0, 50, 0, 200)
-        viewDataBinding.recyclerNotifications .getVeiledRecyclerView().clipToPadding = false
-        viewDataBinding.recyclerNotifications.getVeiledRecyclerView().layoutDirection = View.LAYOUT_DIRECTION_LTR
-        viewDataBinding.recyclerNotifications.veil()
+
+        viewDataBinding.recyclerNotifications.setPadding(0, 50, 0, 200)
+        viewDataBinding.recyclerNotifications .clipToPadding = false
+
+        viewDataBinding.recyclerNotifications.loadSkeleton(R.layout.item_notification) {
+            itemCount(4)
+            cornerRadius(15f)
+
+        }
         manager = LinearLayoutManager(requireContext())
-        viewDataBinding.recyclerNotifications.setLayoutManager(layoutManager)
+        viewDataBinding.recyclerNotifications.layoutManager = layoutManager
 
 
-        viewDataBinding.recyclerNotifications.getRecyclerView().addOnScrollListener(object :
+        viewDataBinding.recyclerNotifications.addOnScrollListener(object :
             PaginationListener(
                 layoutManager
             ) {
@@ -162,7 +165,7 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
 //            }
 //        })
         viewModel.notificationsList.observe(viewLifecycleOwner) {
-            viewDataBinding.recyclerNotifications.unVeil()
+            viewDataBinding.recyclerNotifications.hideSkeleton()
 
             var items: ArrayList<NotificationItemUIModel.NotificationModel> = ArrayList()
             totalPage = it.pages
@@ -227,7 +230,8 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
             if (it == "visitor") {
                 viewDataBinding.imageView26.setImageResource(R.drawable.kera_box)
             } else {
-                Glide.with(this).load(it).into(viewDataBinding.imageView26)
+                CommonUtils.loadImage(viewDataBinding.imageView26,it)
+               // Glide.with(this).load(it).into(viewDataBinding.imageView26)
 
             }
         })
@@ -344,7 +348,7 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
         viewModel.message.observe(
             viewLifecycleOwner,
         ) {
-            viewDataBinding.recyclerNotifications.unVeil()
+            viewDataBinding.recyclerNotifications.hideSkeleton()
             showNoData()
         }
     }
@@ -360,11 +364,16 @@ class NotificationFragment : Fragment(), PostRecyclerAdapter.CallBack , SwipeRef
 
 
     override fun onRefresh() {
+        viewDataBinding.recyclerNotifications.loadSkeleton(R.layout.item_notification) {
+            itemCount(4)
+            cornerRadius(15f)
+
+        }
         itemCount = 0;
         currentPage = PAGE_START;
         isLastPage = false;
         adapter!!.clear();
-        viewDataBinding.recyclerNotifications.veil()
+
         if (viewModel.getUserType() == "user"){
             viewModel.getNotifications(currentPage)
         }else if (viewModel.getUserType() == "teacher"){

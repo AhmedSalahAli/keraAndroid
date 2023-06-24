@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.app.kera.databinding.ItemEducationBinding
 import com.app.kera.education.model.EducationListItemModel
 import com.app.kera.utils.BaseViewHolder
+import com.app.kera.utils.CommonUtils
 
 class EducationListAdapter(
     var list: List<EducationListItemModel>,var callBack: EducationListAdapter.CallBack,var context: Context
@@ -41,22 +42,26 @@ class EducationListAdapter(
 
             if (list[position].images.size > 0) {
                 if ( list[position].images[0] != null){
-                    Glide.with(context).load(list[position].images[0]).into(requestListItemBinding.imgEdu1)
+
+                    CommonUtils.loadImage(requestListItemBinding.imgEdu1,list[position].images[0])
                 }
 
             }
             if (list[position].images.size > 1 ) {
                 if ( list[position].images[1] != null){
-                    Glide.with(context).load(list[position].images[1]).into(requestListItemBinding.imgEdu2)
+
+                    CommonUtils.loadImage(requestListItemBinding.imgEdu2,list[position].images[1])
                 }
 
             }
             if (list[position].images.size > 2 ) {
                 if ( list[position].images[2] != null){
-                    Glide.with(context).load(list[position].images[2]).into(requestListItemBinding.imgEdu3)
+
+                    CommonUtils.loadImage(requestListItemBinding.imgEdu3,list[position].images[2])
                 }
 
             }
+
             requestListItemBinding.roundCornerLayout6.setOnClickListener { callBack.onImageClicked(0,list[position].images) }
             requestListItemBinding.roundCornerLayout7.setOnClickListener { callBack.onImageClicked(1,list[position].images) }
             requestListItemBinding.roundCornerLayout8.setOnClickListener { callBack.onImageClicked(2,list[position].images) }

@@ -20,6 +20,8 @@ import com.app.kera.events.model.EventDetailsResponseModel
 import com.app.kera.schoolDetails.adapter.ImagesAdapter
 import com.app.kera.utils.Constants
 import com.smarteist.autoimageslider.SliderAnimations
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , ChildrenAdapter.CallBack {
@@ -41,9 +43,11 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
         viewDataBinding.adapter = ChildrenAdapter(ArrayList(), this, this)
-        viewDataBinding.veilLayout.veil()
+        viewDataBinding.veilLayout.loadSkeleton()
         eventsDetailsViewModel.getEventDetails(EventID)
-        eventsDetailsViewModel.eventDetails.observe(this, {
+        eventsDetailsViewModel.eventDetails.observe(this
+
+        ) {
             val adapter = ImagesAdapter(it.images!!, this, this)
             viewDataBinding.recyclerView.setSliderAdapter(adapter)
             viewDataBinding.recyclerView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
@@ -53,25 +57,21 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
             if (price == 0.0f || it.eventPrice == null) {
                 viewDataBinding.textView80.text = "Free"
             } else {
-                viewDataBinding.textView80.setText("${it.eventPrice} L.E")
+                viewDataBinding.textView80.text = "${it.eventPrice} L.E"
             }
 
-            viewDataBinding.recyclerView7.setAdapter(viewDataBinding.adapter) // sets your own adapter
-            viewDataBinding.recyclerView7.setLayoutManager(
-                StaggeredGridLayoutManager(
-                    1,
-                    StaggeredGridLayoutManager.HORIZONTAL
-                )
+            viewDataBinding.recyclerView7.adapter = viewDataBinding.adapter // sets your own adapter
+            viewDataBinding.recyclerView7.layoutManager = StaggeredGridLayoutManager(
+                1,
+                StaggeredGridLayoutManager.HORIZONTAL
             )
             viewDataBinding.adapter!!.children = it.students!!
             viewDataBinding.adapter!!.notifyDataSetChanged()
             lat = it.latitude?.value!!
             long = it.longitude?.value!!
-            Constants.moreImages = it.imagesLink?.value!!
-            viewDataBinding.veilLayout.unVeil()
+            Constants.moreImages = it.imagesLink?.value.toString()
+            viewDataBinding.veilLayout.hideSkeleton()
         }
-
-        )
 
 
         viewDataBinding.btnAccept.setOnClickListener {

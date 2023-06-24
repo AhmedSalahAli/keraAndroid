@@ -14,7 +14,7 @@ class MedicalReportResponseModel {
     var data: DataBean? = null
 
     class DataBean {
-        @SerializedName("date")
+        @SerializedName("createdAt")
         var date: String? = ""
 
         var dateConverted: String? = ""

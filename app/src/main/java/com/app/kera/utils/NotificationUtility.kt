@@ -55,7 +55,7 @@ object NotificationUtility {
                 stackBuilder.addParentStack(MainActivity::class.java)
                 stackBuilder.addNextIntent(intent)
                 stackBuilder.addNextIntent(intentReport)
-                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT)
+                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             }else if (notificationModel.type.equals("medical")){
 
 
@@ -69,7 +69,7 @@ object NotificationUtility {
                 stackBuilder.addParentStack(MainActivity::class.java)
                 stackBuilder.addNextIntent(intent)
                 stackBuilder.addNextIntent(intentReport)
-                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT)
+                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
             }else{
 
@@ -82,7 +82,7 @@ object NotificationUtility {
                 )
 
                 stackBuilder.addNextIntent(intentReport)
-                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT)
+                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             }
         }else  if (notificationModel.userType.equals("teacher")){
             if (notificationModel.type.equals("daily")){
@@ -105,7 +105,7 @@ object NotificationUtility {
                 stackBuilder.addNextIntent(intent)
                 stackBuilder.addNextIntent(intentReports)
                 stackBuilder.addNextIntent(intentReportDetails)
-                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT)
+                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             }else if (notificationModel.type.equals("medical")){
 
 
@@ -125,7 +125,7 @@ object NotificationUtility {
                 stackBuilder.addNextIntent(intent)
                 stackBuilder.addNextIntent(intentReports)
                 stackBuilder.addNextIntent(intentReportDetails)
-                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT)
+                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
             }else{
 
@@ -138,7 +138,7 @@ object NotificationUtility {
                 )
 
                 stackBuilder.addNextIntent(intentReport)
-                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT)
+                contentPendingIntent = stackBuilder.getPendingIntent(requestID, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             }
         }
 

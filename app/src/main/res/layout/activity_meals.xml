@@ -98,7 +98,7 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView_profile"
                 app:srcCompat="@drawable/ic_exchange" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <com.skydoves.androidveil.VeilLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/veilLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,107 +117,113 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline31"
             app:layout_constraintStart_toStartOf="@+id/guideline30"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout19">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/dates_constraint"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:background="@drawable/rounded_grey_d2dce8_grey_stroke"
-            android:elevation="10dp"
-          >
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/dates_recycler"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                android:overScrollMode="ifContentScrolls"
-                app:adapter="@{datesAdapter}"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dates_constraint"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:background="@drawable/rounded_grey_d2dce8_grey_stroke"
+                android:elevation="10dp"
+                android:paddingTop="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:spanCount="1"
-                tools:listitem="@layout/calendar_date_item" />
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/dates_recycler"
-                app:layout_constraintStart_toStartOf="@+id/dates_recycler"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.51">
-
-                <TextView
-                    android:id="@+id/textView89"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@string/this_week"
-                    android:textColor="#1A2F50"
-                    android:textSize="@dimen/_9ssp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView92"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@string/days"
-                    android:textColor="#1A2F50"
-                    android:textSize="@dimen/_11ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView89"
-                    app:layout_constraintStart_toEndOf="@+id/textView89"
-                    app:layout_constraintTop_toTopOf="@+id/textView89" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/dates_recycler"
-                app:layout_constraintEnd_toEndOf="@+id/dates_recycler"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textView90"
-                    android:layout_width="26dp"
-                    android:layout_height="17dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dates_recycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@string/next"
-                    android:textColor="#1A2F50"
-                    android:textSize="@dimen/_11ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:orientation="horizontal"
+                    android:overScrollMode="ifContentScrolls"
+                    app:adapter="@{datesAdapter}"
+                    android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
 
-                <TextView
-                    android:id="@+id/textView93"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:spanCount="1"
+                    tools:listitem="@layout/calendar_date_item" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_ui_display_regular"
-                    android:text="@string/the_week"
-                    android:textColor="#1A2F50"
-                    android:textSize="@dimen/_9ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView90"
-                    app:layout_constraintEnd_toStartOf="@+id/textView90"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toTopOf="@+id/dates_recycler"
+                    app:layout_constraintStart_toStartOf="@+id/dates_recycler"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.51">
+
+                    <TextView
+                        android:id="@+id/textView89"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="@string/this_week"
+                        android:textColor="#1A2F50"
+                        android:textSize="@dimen/_9ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView92"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="@string/days"
+                        android:textColor="#1A2F50"
+                        android:textSize="@dimen/_11ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView89"
+                        app:layout_constraintStart_toEndOf="@+id/textView89"
+                        app:layout_constraintTop_toTopOf="@+id/textView89" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/dates_recycler"
+                    app:layout_constraintEnd_toEndOf="@+id/dates_recycler"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView90"
+                        android:layout_width="26dp"
+                        android:layout_height="17dp"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="@string/next"
+                        android:textColor="#1A2F50"
+                        android:textSize="@dimen/_11ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView93"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_ui_display_regular"
+                        android:text="@string/the_week"
+                        android:textColor="#1A2F50"
+                        android:textSize="@dimen/_9ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView90"
+                        app:layout_constraintEnd_toStartOf="@+id/textView90"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.skydoves.androidveil.VeilLayout>
-        <com.skydoves.androidveil.VeilRecyclerFrameView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_meals"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -233,15 +239,7 @@
             app:layout_constraintVertical_bias="1.0"
             app:spanCount="1"
             android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
-            app:veilFrame_layout="@layout/item_meals"
-            app:veilFrame_veiled="true"
-            app:veilFrame_shimmerEnable="true"
 
-            app:veilLayout_baseColor="@color/light_grey_8c99a7"
-            app:veilFrame_highlightColor="@color/blue_effcff"
-            app:veilFrame_baseAlpha="0.6"
-            app:veilFrame_highlightAlpha="1.0"
-            app:veilFrame_radius="8dp"
              />
         <RelativeLayout
             android:id="@+id/rel_no_planned"

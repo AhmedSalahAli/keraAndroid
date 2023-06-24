@@ -34,7 +34,8 @@ object BindingUtils {
     @JvmStatic
     fun bindImage(view: ImageView, url: String?) {
         if (url != null ) {
-            Glide.with(view.context).load(url).into(view)
+            //Glide.with(view.context).load(url).into(view)
+            CommonUtils.loadImage(view,url)
         }
     }
 
