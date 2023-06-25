@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 val apiRepoModule = module {
     factory {
-        AppRepo(get())
+        AppRepo(get(),androidApplication())
     }
     single {
         androidApplication().getSharedPreferences("keraPreference", Context.MODE_PRIVATE)

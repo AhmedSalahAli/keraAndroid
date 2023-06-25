@@ -68,7 +68,7 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
         viewDataBinding.recyclerMeals.loadSkeleton(R.layout.item_meals) {
             itemCount(4)
             cornerRadius(
-                70f)
+                90f)
 
         }
         viewDataBinding.recyclerMeals.setAdapter(viewDataBinding.mealsAdapter) // sets your own adapter
@@ -151,7 +151,11 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.CallBack,
                     }
                 }
                 if (actualeDate.isNullOrEmpty()){
-                    actualeDate = it[0].actualDate
+                    val index =  it.size-1
+                    actualeDate = it[index].actualDate
+                    viewDataBinding.datesAdapter!!.selectedItem=index
+                    viewDataBinding.datesRecycler.smoothScrollToPosition(index)
+
                 }
                 if (accessType == "teacher") {
 

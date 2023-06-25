@@ -1,5 +1,6 @@
 package com.app.kera.data.network
 
+import android.content.Context
 import android.location.Location
 import com.app.kera.attendanceHistory.model.AttendanceResponseModel
 import com.app.kera.dailyReport.model.PublishReplay
@@ -41,12 +42,13 @@ import com.app.kera.teacherProfile.TeacherProfileUIModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlin.coroutines.coroutineContext
 
 
-class AppRepo(val sharedPreference: AppSharedPreference) {
+class AppRepo(val sharedPreference: AppSharedPreference,val context:Context) {
 
     private var service: ApiService = RetrofitClient(sharedPreference.getString(TOKEN,""),
-        getLang().toString()
+        getLang().toString(), context
     ).getService()
 
     suspend fun getSchoolsList(page: Int,lat:String?,lon:String?): SchoolsListResponseModel =

@@ -13,6 +13,7 @@ import com.app.kera.utils.CommonUtils
 
 import com.app.kera.utils.Configurations
 import com.app.kera.utils.Configurations.Companion.API_PATH
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -55,35 +56,54 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
     }
     private fun initFirebaseRemoteConfig() {
         FirebaseApp.initializeApp(this)
-        FirebaseRemoteConfig.getInstance().apply {
-            //set this during development
-            val configSettings = FirebaseRemoteConfigSettings.Builder()
-                .setMinimumFetchIntervalInSeconds(7200)
-                .build()
-            setConfigSettingsAsync(configSettings)
-            //set this during development
+//        FirebaseRemoteConfig.getInstance().apply {
+//            //set this during development
+//            val configSettings = FirebaseRemoteConfigSettings.Builder()
+//                .setMinimumFetchIntervalInSeconds(7200)
+//                .build()
+//            setConfigSettingsAsync(configSettings)
+//            //set this during development
+//
+//
+//            // set in-app defaults
+//            val remoteConfigDefaults: MutableMap<String?, Any?> = HashMap<String?, Any?>()
+//            remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_REQUIRED] = false
+//            remoteConfigDefaults[ForceUpdateChecker.KEY_NORMAL_UPDATE_REQUIRED] = false
+//            remoteConfigDefaults[ForceUpdateChecker.KEY_CURRENT_VERSION] = "1.0.0"
+//            remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_URL] =
+//                "https://drive.google.com/file/d/1yhBp9RIbK8yh5ivtoJWGtLrDCfo2sXkR/view?usp=sharing"
+//            remoteConfigDefaults[ForceUpdateChecker.prod_base_url] =
+//                "https://kera-app.herokuapp.com/"
+//            setDefaultsAsync(remoteConfigDefaults)
+//            fetchAndActivate().addOnCompleteListener { task ->
+//                val updated = task.result
+//                if (task.isSuccessful) {
+//                    Log.d(TAG, "Config params updated: $updated")
+//                } else {
+//                    Log.d(TAG, "Config params updated not success: $updated")
+//                }
+//            }
+//        }
+        val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+
+        // set in-app defaults
+
+        val remoteConfigDefaults: MutableMap<String?, Any?> = HashMap<String?, Any?>()
+        remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_REQUIRED] = false
+        remoteConfigDefaults[ForceUpdateChecker.KEY_CURRENT_VERSION] = "1.0.0"
+        remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_URL] =
+            "https://play.google.com/store/apps/details?id=com.sembozdemir.renstagram"
 
 
-            // set in-app defaults
-            val remoteConfigDefaults: MutableMap<String?, Any?> = HashMap<String?, Any?>()
-            remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_REQUIRED] = false
-            remoteConfigDefaults[ForceUpdateChecker.KEY_NORMAL_UPDATE_REQUIRED] = false
-            remoteConfigDefaults[ForceUpdateChecker.KEY_CURRENT_VERSION] = "1.0.0"
-            remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_URL] =
-                "https://drive.google.com/file/d/1yhBp9RIbK8yh5ivtoJWGtLrDCfo2sXkR/view?usp=sharing"
-            remoteConfigDefaults[ForceUpdateChecker.prod_base_url] =
-                "https://kera-app.herokuapp.com/"
-            setDefaultsAsync(remoteConfigDefaults)
-            fetchAndActivate().addOnCompleteListener { task ->
-                val updated = task.result
-                if (task.isSuccessful) {
-                    Log.d(TAG, "Config params updated: $updated")
-                } else {
-                    Log.d(TAG, "Config params updated not success: $updated")
-                }
+
+
+        firebaseRemoteConfig.setDefaultsAsync(remoteConfigDefaults);
+        firebaseRemoteConfig.fetch(60).addOnCompleteListener(OnCompleteListener {
+            if (it.isSuccessful) {
+                Log.d(TAG, "remote config is fetched.")
+                firebaseRemoteConfig.activate()
             }
-        }
-
+        }) // fetch every minutes
     }
     fun lannguage(newBase: Context?) {
         sharedPreferences = newBase!!.getSharedPreferences("keraPreference", Context.MODE_PRIVATE)
@@ -95,11 +115,11 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
 
     }
     override fun onCheckConfigParams(BaseUrl: String?) {
-        if (BaseUrl != null) {
-         // Configurations.BASE_URL = BaseUrl+API_PATH
-            Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
-            Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
-        }
-        Log.i("BaseUrl","reach listner")
+//        if (BaseUrl != null) {
+//         // Configurations.BASE_URL = BaseUrl+API_PATH
+//            Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
+//            Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
+//        }
+//        Log.i("BaseUrl","reach listner")
     }
 }

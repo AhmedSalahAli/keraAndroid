@@ -51,15 +51,14 @@
                 android:layout_height="wrap_content"
 
 
-                android:layout_marginEnd="16dp"
-                android:textSize="@dimen/_12sdp"
-                android:maxLines="4"
                 android:fontFamily="@font/sf_ui_display_regular"
+                android:maxLines="4"
                 android:textColor="#97B4D8"
-                app:layout_constraintTop_toBottomOf="@+id/textView_date"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView_date"
 
-                />
+                app:layout_constraintTop_toBottomOf="@+id/textView_date" />
 
             <LinearLayout
                 android:id="@+id/date_lay"
@@ -104,7 +103,7 @@
                 android:layout_marginBottom="5dp"
                 app:layout_constraintStart_toStartOf="parent"
 
-                app:layout_constraintTop_toBottomOf="@+id/txt_desc"
+                app:layout_constraintTop_toBottomOf="@+id/view_details"
                 />
 
 
@@ -118,11 +117,12 @@
                 android:fontFamily="@font/sf_ui_display_regular"
                 android:text="View Details"
                 android:textColor="@color/pink_label"
-                android:textStyle="bold"
-
                 android:textSize="@dimen/_8ssp"
+
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/view8"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_desc" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,6 +15,7 @@ import com.app.kera.attendanceHistory.adapter.AttendanceListAdapter
 import com.app.kera.attendanceHistory.model.AttendanceListItemModel
 import com.app.kera.databinding.ActivityAttendanceHistoryBinding
 import com.app.kera.education.adapter.DateAdapter
+import com.app.kera.utils.CommonUtils
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,6 +31,7 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
     var totalNumberOfPages: Int = 1
     var attendanceList = ArrayList<AttendanceListItemModel>()
     lateinit var manager: LinearLayoutManager
+    var actualeDate:String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val window: Window = this.window
@@ -45,7 +47,7 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
 
         viewDataBinding.datesAdapter = DateAdapter(ArrayList(), this,this)
 
-        viewModel.getAttendanceList(page,"")
+
         viewDataBinding.listAdapter = AttendanceListAdapter(ArrayList(), this)
 
         manager = LinearLayoutManager(this)
@@ -105,12 +107,33 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
         viewModel.datesListLiveData.observe(this) {
 
 
-            viewDataBinding.datesRecycler.hideSkeleton()
+            //viewDataBinding.datesRecycler.hideSkeleton()
 
-            viewDataBinding.datesAdapter!!.datesList = it
+          //  viewDataBinding.datesAdapter!!.datesList = it
+            if (it.size > 0) {
+                viewDataBinding.datesAdapter!!.datesList = it
+                run breaker@{
+                    it.forEach { it1 ->
+                        if (CommonUtils.isTodayTimeStamp(it1.dateTimestamp)) {
+                            viewDataBinding.datesAdapter!!.selectedItem = it.indexOf(it1)
+                            actualeDate = it1.actualDate
+                            viewDataBinding.datesRecycler.smoothScrollToPosition(it.indexOf(it1))
+                            return@breaker
+                        }
 
-            viewDataBinding.datesAdapter!!.notifyDataSetChanged()
+                    }
+                }
+                if (actualeDate.isNullOrEmpty()) {
+                    val index = it.size - 1
+                    actualeDate = it[index].actualDate
+                    viewDataBinding.datesAdapter!!.selectedItem = index
+                    viewDataBinding.datesRecycler.smoothScrollToPosition(index)
 
+                }
+                viewModel.getAttendanceList(page,actualeDate)
+                viewDataBinding.datesAdapter!!.notifyDataSetChanged()
+
+            }
         }
 
     }
@@ -121,6 +144,7 @@ class AttendanceHistory : AppCompatActivity(), AttendanceListAdapter.CallBack , 
             cornerRadius(15f)
 
         }
+        actualeDate = date
         viewModel.getAttendanceList(page,date)
 
     }

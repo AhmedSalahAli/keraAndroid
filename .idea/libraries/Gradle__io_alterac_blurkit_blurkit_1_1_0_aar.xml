@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: io.alterac.blurkit:blurkit:1.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/53c608fe838a1e627b180022e8460b90/jetified-blurkit-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/53c608fe838a1e627b180022e8460b90/jetified-blurkit-1.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/53c608fe838a1e627b180022e8460b90/jetified-blurkit-1.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c5d3f03298ebd3bd3d97d2caaab43f7f/jetified-blurkit-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c5d3f03298ebd3bd3d97d2caaab43f7f/jetified-blurkit-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c5d3f03298ebd3bd3d97d2caaab43f7f/jetified-blurkit-1.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

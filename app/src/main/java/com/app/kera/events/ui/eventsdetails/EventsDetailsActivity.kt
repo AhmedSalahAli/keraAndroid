@@ -77,19 +77,15 @@ class EventsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack , Chil
         viewDataBinding.btnAccept.setOnClickListener {
 
             if (viewDataBinding.recyclerView7.isVisible){
-                viewDataBinding.recyclerView7.setAnimation(
-                    AnimationUtils.loadAnimation(
-                        this,
-                        R.anim.slide_out
-                    )
+                viewDataBinding.recyclerView7.animation = AnimationUtils.loadAnimation(
+                    this,
+                    R.anim.slide_out
                 )
                 viewDataBinding.recyclerView7.visibility = View.GONE
             }else{
-                viewDataBinding.recyclerView7.setAnimation(
-                    AnimationUtils.loadAnimation(
-                        this,
-                        R.anim.slide_in
-                    )
+                viewDataBinding.recyclerView7.animation = AnimationUtils.loadAnimation(
+                    this,
+                    R.anim.slide_in
                 )
                 viewDataBinding.recyclerView7.visibility = View.VISIBLE
             }

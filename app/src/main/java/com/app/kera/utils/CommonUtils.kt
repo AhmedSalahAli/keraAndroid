@@ -82,41 +82,46 @@ object CommonUtils {
         }
     }
     fun loadImage(view: ImageView, url: String?) {
+        if (!url.isNullOrEmpty()){
+            val requestOptions = RequestOptions()
+            val circularProgressDrawable = CircularProgressDrawable(view.context)
+            circularProgressDrawable.setColorSchemeColors(R.color.purple_500, R.color.purple_200, R.color.purple_700);
 
-        val requestOptions = RequestOptions()
-        val circularProgressDrawable = CircularProgressDrawable(view.context)
-        circularProgressDrawable.setColorSchemeColors(R.color.purple_500, R.color.purple_200, R.color.purple_700);
+            circularProgressDrawable.strokeWidth = 5f
+            circularProgressDrawable.centerRadius = 30f
 
-        circularProgressDrawable.strokeWidth = 5f
-        circularProgressDrawable.centerRadius = 30f
+            circularProgressDrawable.start()
+            Log.e("image","https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
+            Glide.with(view.context)
+                .load("https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
+                .apply(requestOptions)
+                // .error(R.drawable.image_circle_backgroud)
+                .placeholder(circularProgressDrawable)
+                .into(view)
+        }
 
-        circularProgressDrawable.start()
-        Log.e("image","https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
-        Glide.with(view.context)
-            .load("https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
-            .apply(requestOptions)
-           // .error(R.drawable.image_circle_backgroud)
-            .placeholder(circularProgressDrawable)
-            .into(view)
     }
     fun loadThump(view: ImageView, url: String?) {
 
-        val requestOptions = RequestOptions()
-        val circularProgressDrawable = CircularProgressDrawable(view.context)
-        circularProgressDrawable.setColorSchemeColors(R.color.purple_500, R.color.purple_200, R.color.purple_700);
+        if (!url.isNullOrEmpty()){
+            val requestOptions = RequestOptions()
+            val circularProgressDrawable = CircularProgressDrawable(view.context)
+            circularProgressDrawable.setColorSchemeColors(R.color.purple_500, R.color.purple_200, R.color.purple_700);
 
-        circularProgressDrawable.strokeWidth = 5f
-        circularProgressDrawable.centerRadius = 30f
+            circularProgressDrawable.strokeWidth = 5f
+            circularProgressDrawable.centerRadius = 30f
 
-        circularProgressDrawable.start()
-        Log.e("image","https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
-        Glide.with(view.context)
-            .load("https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
-            .apply(requestOptions)
-            .fitCenter()
-            // .error(R.drawable.image_circle_backgroud)
-            .placeholder(circularProgressDrawable)
-            .into(view)
+            circularProgressDrawable.start()
+            Log.e("image","https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
+            Glide.with(view.context)
+                .load("https://res.cloudinary.com/keraapp/image/upload/"+url?.replace("https://res.cloudinary.com/keraapp/image/upload/",""))
+                .apply(requestOptions)
+                .fitCenter()
+                // .error(R.drawable.image_circle_backgroud)
+                .placeholder(circularProgressDrawable)
+                .into(view)
+        }
+
     }
     fun createImageFolder(context: Context): File {
         val storageDir = File(context.filesDir, "Photo")
@@ -302,7 +307,7 @@ object CommonUtils {
             latitude,
             longitude,
             1
-        ) // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        ) as List<Address> // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
         return if (addresses.isNotEmpty()){
             addresses[0].getAddressLine(0)

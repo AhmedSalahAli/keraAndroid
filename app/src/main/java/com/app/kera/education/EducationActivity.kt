@@ -146,9 +146,13 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
 
                         }
                     }
-                    if (actualeDate.isNullOrEmpty()){
-                        actualeDate = it[0].actualDate
-                    }
+                if (actualeDate.isNullOrEmpty()){
+                    val index =  it.size-1
+                    actualeDate = it[index].actualDate
+                    viewDataBinding.datesAdapter!!.selectedItem=index
+                    viewDataBinding.datesRecycler.smoothScrollToPosition(index)
+
+                }
 
                 if (accessType == "teacher") {
                     viewModel.getEducationList(

@@ -29,7 +29,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="pin_code_sent_via_whatsapp_to">PIN Code sent via WhatsApp to</string>
+    <string name="pin_code_sent_via_whatsapp_to">PIN Code sent via Email to</string>
     <string name="pin_code">PIN Code</string>
     <string name="resend">Resend</string>
     <string name="registration">Registration</string>

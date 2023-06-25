@@ -65,7 +65,7 @@ class EventsActivity : AppCompatActivity() ,UpcomingListAdapter.CallBack,Previou
         viewDataBinding.recyclerView3.adapter = viewDataBinding.previousAdapter // sets your own adapter
         viewDataBinding.recyclerView3.loadSkeleton(R.layout.item_events_small_image) {
             itemCount(4)
-            cornerRadius(15f)
+            cornerRadius(70f)
 
         }
 
