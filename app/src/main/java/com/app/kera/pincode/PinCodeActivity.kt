@@ -64,14 +64,14 @@ class PinCodeActivity : AppCompatActivity() {
         verifyPhoneObserver()
     }
     private fun verifyPhoneObserver(){
-        pinCodeViewModel.verifyPhoneObserver.observe(this, {
+        pinCodeViewModel.verifyPhoneObserver.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
             pinCodeViewModel.saveTokenToSharedPref(token)
             pinCodeViewModel.saveUserLoggedIn()
             pinCodeViewModel.saveUserType(accessType)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        })
+        }
     }
     private fun pinCodeTextWatcher() {
         viewDataBinding.firstPinView.addTextChangedListener {

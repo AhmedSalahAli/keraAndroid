@@ -54,7 +54,10 @@ class DailyReportOuterAdapter(
                 }
             }
             binding.root.setOnClickListener(View.OnClickListener {
-                callBack.onReportClick(dailyReportList[position])
+                if (dailyReportList.size>0){
+                    callBack.onReportClick(dailyReportList[position])
+                }
+
             })
 //            binding.iconExpand.setOnClickListener({
 //                if (binding.beforeExpand.isVisible) {

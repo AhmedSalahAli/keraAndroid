@@ -92,7 +92,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
 
         viewDataBinding.recyclerView9.loadSkeleton(R.layout.item_student_name_image) {
             itemCount(20)
-            cornerRadius(15f)
+            cornerRadius(180f)
 
         }
 
@@ -315,7 +315,7 @@ class TeacherDailyReportActivity : AppCompatActivity(),
         //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
         viewDataBinding.recyclerView9.loadSkeleton(R.layout.item_student_name_image) {
             itemCount(20)
-            cornerRadius(15f)
+            cornerRadius(180f)
 
 
 

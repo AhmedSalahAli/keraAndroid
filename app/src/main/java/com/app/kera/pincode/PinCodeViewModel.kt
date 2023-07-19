@@ -34,6 +34,7 @@ class PinCodeViewModel(val appRepo: AppRepo) : ViewModel() {
                 if (BuildConfig.DEBUG){
                     verifyPhoneObserver.value = true
                 }
+                verifyPhoneObserver.value = true
             }
         }
     }

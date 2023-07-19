@@ -79,10 +79,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun messageObserver() {
-        viewModel.message.observe(this@LoginActivity, {
+        viewModel.message.observe(this@LoginActivity) {
             CommonUtils.hideLoading(mProgressDialog!!)
             showMessage(it)
-        })
+        }
     }
 
     private fun showMessage(it: String) {
@@ -95,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
         val inputMethodManager: InputMethodManager = activity.getSystemService(
             INPUT_METHOD_SERVICE
         ) as InputMethodManager
-        if (inputMethodManager.isAcceptingText()) {
+        if (inputMethodManager.isAcceptingText) {
             inputMethodManager.hideSoftInputFromWindow(
                 activity.currentFocus!!.windowToken,
                 0
