@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import io.alterac.blurkit.BlurKit
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -40,7 +39,7 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
         application = this
         ForceUpdateChecker.with(this).onCheckConfigParams(this).config()
         lannguage(this)
-        BlurKit.init(this);
+//        BlurKit.init(this);
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@MyApp)
@@ -116,7 +115,7 @@ class MyApp : Application(),ForceUpdateChecker.onCheckConfigParamsListner {
     }
     override fun onCheckConfigParams(BaseUrl: String?) {
 //        if (BaseUrl != null) {
-//         // Configurations.BASE_URL = BaseUrl+API_PATH
+        Configurations.BASE_URL = BaseUrl+API_PATH
 //            Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
 //            Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
 //        }

@@ -31,10 +31,10 @@ class PinCodeViewModel(val appRepo: AppRepo) : ViewModel() {
                 }
             } catch (e: Exception) {
                 message.value = "Invalid pinCode"
-                if (BuildConfig.DEBUG){
-                    verifyPhoneObserver.value = true
-                }
-                verifyPhoneObserver.value = true
+//                if (BuildConfig.DEBUG){
+//                    verifyPhoneObserver.value = true
+//                }
+//                verifyPhoneObserver.value = true
             }
         }
     }
