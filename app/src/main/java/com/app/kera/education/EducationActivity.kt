@@ -1,6 +1,7 @@
 package com.app.kera.education
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -18,10 +19,15 @@ import com.app.kera.R
 import com.app.kera.databinding.ActivityEducationBinding
 import com.app.kera.education.adapter.DateAdapter
 import com.app.kera.education.adapter.EducationListAdapter
+import com.app.kera.imageViewer.ImageViewerActivity
 import com.app.kera.profile.StudentsData
 import com.app.kera.profile.adapter.ChildrenAdapter
 import com.app.kera.utils.CommonUtils
+import com.bumptech.glide.Glide
+
+import com.squareup.picasso.Picasso
 import com.stfalcon.frescoimageviewer.ImageViewer
+import com.stfalcon.imageviewer.StfalconImageViewer
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -228,12 +234,42 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
-        ImageViewer.Builder<String>(this, imagesList)
-            .setStartPosition(position)
-            .hideStatusBar(false)
+//        ImageViewer.Builder<String>(this, imagesList)
+//            .setStartPosition(position)
+//            .hideStatusBar(false)
+//            .allowZooming(true)
+//            .allowSwipeToDismiss(true)
+//            .show()
+
+//        val intent = Intent(this, ImageViewerActivity::class.java)
+//        intent.putExtra("location", imagesList)
+//        intent.putExtra("selectedPosition",position)
+//
+//        startActivity(intent)
+
+
+
+        StfalconImageViewer.Builder<String>(this, imagesList) { view, image ->
+//            Picasso.get().load(image).into(view)
+           CommonUtils.loadImage(view,image)
+
+
+        }
+            .withStartPosition(position)
+            .withBackgroundColor(resources.getColor(R.color.black))
+            //.withBackgroundColorResource(R.color.color)
+
+
+            //.withImageMarginPixels(margin)
+
+            //.withContainerPadding(R.dimen.paddingStart, R.dimen.paddingTop, R.dimen.paddingEnd, R.dimen.paddingBottom)
+            //.withContainerPaddingPixels(padding)
+            //.withContainerPaddingPixels(paddingStart, paddingTop, paddingEnd, paddingBottom)
+            .withHiddenStatusBar(true)
             .allowZooming(true)
-            .allowSwipeToDismiss(true)
             .show()
+
+
     }
     fun stateOfChildrenFrame(state:Boolean){
         if (state){

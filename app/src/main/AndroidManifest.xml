@@ -25,7 +25,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:theme="@style/Theme.Fab_Bottom_app_bar.NoActionBar">
-        <activity android:name=".dailyReport.ui.ReportDetails"></activity>
+        <activity
+            android:name=".imageViewer.ImageViewerActivity"
+            android:exported="false" />
+        <activity android:name=".dailyReport.ui.ReportDetails" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -66,8 +69,8 @@
             android:theme="@style/Theme.Fab_Bottom_app_bar.fullscreen" />
         <activity
             android:name=".dailyReport.ui.DailyReportActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -79,8 +82,9 @@
         <activity
             android:name=".teacherDailyReport.writeReport.WriteReportActivity"
             android:label="@string/title_activity_write_report"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" android:launchMode="singleTask" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".events.ui.eventsdetails.EventsDetailsActivity"
             android:screenOrientation="portrait" />
@@ -104,7 +108,9 @@
             android:theme="@style/Theme.Fab_Bottom_app_bar.NoActionBar" />
         <activity
             android:name=".main.ui.MainActivity"
-            android:screenOrientation="portrait" android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.ui.LoginActivity"
             android:screenOrientation="portrait"
@@ -117,7 +123,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".medical.MedicalReportActivity"
-            android:screenOrientation="portrait" android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".education.EducationActivity"
             android:screenOrientation="portrait" />
@@ -130,8 +137,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".splash.ui.SplashActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -140,19 +147,19 @@
         </activity>
         <activity
             android:name=".teacherMedicalReport.TeacherMedicalReportActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".teacherDailyReport.ui.TeacherDailyReportActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".contactUs.ContactUsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".teacherMedicalReport.writeMedicalReport.WriteMedicalReportActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.version"

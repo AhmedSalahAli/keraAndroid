@@ -18,6 +18,7 @@ import com.app.kera.schoolDetails.adapter.ImagesAdapter
 import com.app.kera.utils.CommonUtils
 import com.smarteist.autoimageslider.SliderAnimations
 import com.stfalcon.frescoimageviewer.ImageViewer
+import com.stfalcon.imageviewer.StfalconImageViewer
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -143,11 +144,26 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
 
-        ImageViewer.Builder<String>(this, imagesList)
-            .setStartPosition(position)
+        StfalconImageViewer.Builder<String>(this, imagesList) { view, image ->
+//            Picasso.get().load(image).into(view)
+            CommonUtils.loadImage(view,image)
+
+
+        }
+            .withStartPosition(position)
+            .withBackgroundColor(resources.getColor(R.color.black))
+            //.withBackgroundColorResource(R.color.color)
+
+
+            //.withImageMarginPixels(margin)
+
+            //.withContainerPadding(R.dimen.paddingStart, R.dimen.paddingTop, R.dimen.paddingEnd, R.dimen.paddingBottom)
+            //.withContainerPaddingPixels(padding)
+            //.withContainerPaddingPixels(paddingStart, paddingTop, paddingEnd, paddingBottom)
+            .withHiddenStatusBar(true)
             .allowZooming(true)
-            .allowSwipeToDismiss(true)
             .show()
+
     }
     fun stateOfChildrenFrame(state:Boolean){
         if (state){
