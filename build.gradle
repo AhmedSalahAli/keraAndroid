@@ -6,9 +6,9 @@ buildscript {
         kotlin_version = "1.4.10"
         koin_version = '2.0.1'
         password = 'Kera@Dev11kk'
-        JksFile = 'D:\\Kera\\Kera-JKS\\Kera Release Files\\kera.jks'
+        JksFile = '/Users/mohammadodeh/StudioProjects/JksFiles/KeraReleaseFiles/upload-jks.jks'
         keyAlias = 'key0'
-        JksUpload = 'D:\\Kera\\KeraReleaseFiles\\upload-jks.jks'
+        JksUpload = '/Users/mohammadodeh/StudioProjects/JksFiles/KeraReleaseFiles/upload-jks.jks'
 
     }
     repositories {

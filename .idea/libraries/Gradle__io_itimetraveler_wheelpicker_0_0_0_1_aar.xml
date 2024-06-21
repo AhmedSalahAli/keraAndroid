@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: io.itimetraveler:wheelpicker:0.0.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1786e75990b20b846ff7c72bf13cbf50/jetified-wheelpicker-0.0.0.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1786e75990b20b846ff7c72bf13cbf50/jetified-wheelpicker-0.0.0.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1786e75990b20b846ff7c72bf13cbf50/jetified-wheelpicker-0.0.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1786e75990b20b846ff7c72bf13cbf50/jetified-wheelpicker-0.0.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1786e75990b20b846ff7c72bf13cbf50/jetified-wheelpicker-0.0.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.itimetraveler/wheelpicker/0.0.0.1/5e69f80002d26ec4255a4d76a507b5acfb6e30d0/wheelpicker-0.0.0.1-javadoc.jar!/" />

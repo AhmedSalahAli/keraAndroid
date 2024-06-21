@@ -11,15 +11,15 @@ ext {
 android {
     signingConfigs {
         debug {
-            storeFile file('D:\\Kera\\KeraReleaseFiles\\kera.jks')
+            storeFile file('/Users/mohammadodeh/StudioProjects/JksFiles/Kera-JKS/KeraReleaseFiles')
             storePassword password
             keyAlias 'key0'
             keyPassword password
         }
         release {
-            storeFile file(JksUpload)
-            storePassword password
-            keyPassword password
+            storeFile file('/Users/mohammadodeh/StudioProjects/JksFiles/KeraReleaseFiles/upload-jks.jks')
+            storePassword 'Kera@Dev11kk'
+            keyPassword 'Kera@Dev11kk'
             keyAlias 'upload'
         }
     }
@@ -30,8 +30,8 @@ android {
         applicationId 'com.app.kera'
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 35
-        versionName "1.3.5"
+        versionCode 37
+        versionName "1.3.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
