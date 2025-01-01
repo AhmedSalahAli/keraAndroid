@@ -9,21 +9,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide
+import androidx.viewpager2.widget.ViewPager2
 import com.app.kera.R
 import com.app.kera.databinding.ActivityMealsDetailsBinding
 import com.app.kera.profile.StudentsData
 import com.app.kera.profile.adapter.ChildrenAdapter
 import com.app.kera.schoolDetails.adapter.ImagesAdapter
 import com.app.kera.utils.CommonUtils
-import com.smarteist.autoimageslider.SliderAnimations
-import com.stfalcon.frescoimageviewer.ImageViewer
+import com.google.android.material.tabs.TabLayoutMediator
 import com.stfalcon.imageviewer.StfalconImageViewer
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,ChildrenAdapter.CallBack{
+class MealsDetailsActivity : AppCompatActivity(), ImagesAdapter.CallBack, ChildrenAdapter.CallBack {
+
     val viewModel: MealsDetailsViewModel by viewModel()
     private lateinit var viewDataBinding: ActivityMealsDetailsBinding
     private var mProgressDialog: ProgressDialog? = null
@@ -42,86 +42,73 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.viewModel = viewModel
 
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
-//        val window: Window = this.window
-//        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//        window.statusBarColor = ContextCompat.getColor(this, R.color.white);
-//        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
-        viewDataBinding.textView100.setText(mealDate?.let { CommonUtils.convertIsoToDate(it) })
+        viewDataBinding.textView100.text = mealDate?.let { CommonUtils.convertIsoToDate(it) }
 
         accessType = viewModel.getUserType()
 
         mealID?.let { viewModel.getMealDetails(it) }
-        if (accessType == "teacher") {
 
+        if (accessType == "teacher") {
             viewDataBinding.imageViewExchange.visibility = View.GONE
             viewDataBinding.imageViewProfile.visibility = View.GONE
-
         } else {
-
             viewModel.getProfileData()
             viewDataBinding.imageViewExchange.visibility = View.VISIBLE
             viewDataBinding.imageViewProfile.visibility = View.VISIBLE
-            CommonUtils.loadImage(viewDataBinding.imageViewProfile,viewModel.getSelectedChildDataFromSharedPref()!!.profileImage)
-            //Glide.with(this).load(viewModel.getSelectedChildDataFromSharedPref()!!.profileImage).into(viewDataBinding.imageViewProfile)
-            viewDataBinding.childrenAdapter = ChildrenAdapter(ArrayList(), this,viewModel.getAppRepoInstance())
+            CommonUtils.loadImage(
+                viewDataBinding.imageViewProfile,
+                viewModel.getSelectedChildDataFromSharedPref()?.profileImage
+            )
+            viewDataBinding.childrenAdapter =
+                ChildrenAdapter(ArrayList(), this, viewModel.getAppRepoInstance())
             viewDataBinding.imageViewExchange.setOnClickListener {
-
-                if (viewDataBinding.childrenFrame.isVisible){
+                if (viewDataBinding.childrenFrame.isVisible) {
                     stateOfChildrenFrame(false)
-                }else{
+                } else {
                     stateOfChildrenFrame(true)
                 }
             }
         }
 
-
-        //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-
-
         viewDataBinding.veilLayout.loadSkeleton()
-
 
         viewDataBinding.sendButton.setOnClickListener {
             mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-
-
             val comment = viewDataBinding.commentEt.text.toString()
-            val studentID = viewModel.getSelectedChildDataFromSharedPref()!!.studentId
+            val studentID = viewModel.getSelectedChildDataFromSharedPref()?.studentId
             val mealCommentPostModel = MealCommentPostModel(mealID, comment, studentID)
             viewModel.postComment(mealCommentPostModel)
         }
+
         viewModel.postCommentObserver.observe(this) {
             CommonUtils.hideLoading(mProgressDialog!!)
-
-
             if (it) {
-                Toast.makeText(this, "Comment Posted Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Comment Posted Successfully", Toast.LENGTH_SHORT).show()
                 viewDataBinding.commentEt.setText("")
-
             } else {
-                Toast.makeText(this, "Failed to submit comment", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Failed to submit comment", Toast.LENGTH_SHORT).show()
             }
         }
-        viewModel.mealDetails.observe(this) {
-//            CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.hideSkeleton()
 
-            val adapter = ImagesAdapter(it.images!!, this, this)
-            viewDataBinding.recyclerView.setSliderAdapter(adapter)
-            viewDataBinding.recyclerView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
-            viewDataBinding.recyclerView.scrollTimeInSec = 4 //set scroll delay in seconds :
-            viewDataBinding.recyclerView.startAutoCycle()
+        viewModel.mealDetails.observe(this) {
+            viewDataBinding.veilLayout.hideSkeleton()
+            val adapter = ImagesAdapter(it.images ?: ArrayList(), this, this)
+            viewDataBinding.viewPager.adapter = adapter
+            viewDataBinding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            TabLayoutMediator(viewDataBinding.tabLayout, viewDataBinding.viewPager) { _, _ -> }.attach()
+
         }
+
         viewModel.profileUIModel.observe(this) {
-            //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.childrenAdapter!!.children = it.students!!
+            viewDataBinding.childrenAdapter!!.children = it.students ?: ArrayList()
             viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
         }
+
         messageObserver()
 
         viewDataBinding.imageViewBack.setOnClickListener {
@@ -130,72 +117,48 @@ class MealsDetailsActivity : AppCompatActivity() ,ImagesAdapter.CallBack ,Childr
     }
 
     private fun messageObserver() {
-        viewModel.message.observe(this@MealsDetailsActivity, {
+        viewModel.message.observe(this) {
             showMessage(it)
-        })
+        }
     }
 
     private fun showMessage(it: String) {
-        Toast.makeText(
-            this, it,
-            Toast.LENGTH_LONG
-        ).show();
+        Toast.makeText(this, it, Toast.LENGTH_LONG).show()
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
-
         StfalconImageViewer.Builder<String>(this, imagesList) { view, image ->
-//            Picasso.get().load(image).into(view)
-            CommonUtils.loadImage(view,image)
-
-
+            CommonUtils.loadImage(view, image)
         }
             .withStartPosition(position)
             .withBackgroundColor(resources.getColor(R.color.black))
-            //.withBackgroundColorResource(R.color.color)
-
-
-            //.withImageMarginPixels(margin)
-
-            //.withContainerPadding(R.dimen.paddingStart, R.dimen.paddingTop, R.dimen.paddingEnd, R.dimen.paddingBottom)
-            //.withContainerPaddingPixels(padding)
-            //.withContainerPaddingPixels(paddingStart, paddingTop, paddingEnd, paddingBottom)
             .withHiddenStatusBar(true)
             .allowZooming(true)
             .show()
-
     }
-    fun stateOfChildrenFrame(state:Boolean){
-        if (state){
 
-            viewDataBinding.childrenFrame.setAnimation(
-                AnimationUtils.loadAnimation(
-                    this,
-                    R.anim.fade_in
-                )
+    private fun stateOfChildrenFrame(state: Boolean) {
+        if (state) {
+            viewDataBinding.childrenFrame.startAnimation(
+                AnimationUtils.loadAnimation(this, R.anim.fade_in)
             )
             viewDataBinding.childrenFrame.visibility = View.VISIBLE
-
-        }else{
-            viewDataBinding.childrenFrame.setAnimation(
-                AnimationUtils.loadAnimation(
-                    this,
-                    R.anim.fade_out
-                )
+        } else {
+            viewDataBinding.childrenFrame.startAnimation(
+                AnimationUtils.loadAnimation(this, R.anim.fade_out)
             )
             viewDataBinding.childrenFrame.visibility = View.GONE
         }
     }
+
     override fun onItemClicked(student: StudentsData) {
         stateOfChildrenFrame(false)
         viewModel.saveChildToSharedPref(student)
         viewModel.selectedUser.value = student
-        viewModel.selectedUser.value!!.studentCode = "Code:" + student.studentCode
-        viewModel.selectedUser.value!!.className = "Class:" + student.className
-        //mProgressDialog = CommonUtils.showLoadingDialog(this, R.layout.progress_dialog)
-
-
-        viewDataBinding.childrenAdapter!!.notifyDataSetChanged()
+        viewModel.selectedUser.value?.apply {
+            studentCode = "Code: $studentCode"
+            className = "Class: $className"
+        }
+        viewDataBinding.childrenAdapter?.notifyDataSetChanged()
     }
-
 }

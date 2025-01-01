@@ -21,7 +21,7 @@ import com.app.kera.schoolDetails.adapter.ImagesAdapter
 import com.app.kera.schoolDetails.adapter.PhonesAdapter
 import com.app.kera.schoolDetails.adapter.TagsAdapter
 import com.app.kera.utils.CommonUtils
-import com.stfalcon.frescoimageviewer.ImageViewer
+//import com.stfalcon.frescoimageviewer.ImageViewer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -71,8 +71,8 @@ class SchoolDetailsActivity : AppCompatActivity(), PhonesAdapter.CallBack , Imag
             viewDataBinding.tagsAdapter!!.notifyDataSetChanged()
 
             it.images.removeIf(String::isEmpty)
-            val adapter = ImagesAdapter(it.images, this, this)
-            viewDataBinding.recyclerView.setSliderAdapter(adapter)
+//            val adapter = ImagesAdapter(it.images, this, this)
+//            viewDataBinding.recyclerView.setSliderAdapter(adapter)
 
 
 
@@ -146,12 +146,12 @@ class SchoolDetailsActivity : AppCompatActivity(), PhonesAdapter.CallBack , Imag
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
-        ImageViewer.Builder<String>(this, imagesList)
-            .setStartPosition(position)
-            .hideStatusBar(false)
-            .allowZooming(true)
-            .allowSwipeToDismiss(true)
-            .show()
+//        ImageViewer.Builder<String>(this, imagesList)
+//            .setStartPosition(position)
+//            .hideStatusBar(false)
+//            .allowZooming(true)
+//            .allowSwipeToDismiss(true)
+//            .show()
 //        val share = Intent(Intent.ACTION_SEND)
 //        share.type = "image/jpeg"
 //

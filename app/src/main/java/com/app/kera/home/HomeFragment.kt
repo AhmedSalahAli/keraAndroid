@@ -11,8 +11,10 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.app.kera.R
 import com.app.kera.dailyReport.ui.DailyReportActivity
 import com.app.kera.databinding.HomeFragmentBinding
@@ -28,24 +30,28 @@ import com.app.kera.qrCode.QRActivity
 import com.app.kera.teacherDailyReport.ui.TeacherDailyReportActivity
 import com.app.kera.teacherMedicalReport.TeacherMedicalReportActivity
 import com.app.kera.utils.CommonUtils
-import com.smarteist.autoimageslider.SliderAnimations
+import com.google.android.material.tabs.TabLayoutMediator
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
+class HomeFragment : Fragment(), ImagesListAdapter.CallBack {
 
-    var isScrolling: Boolean = false
-    var currentItems: Int = 0
-    var totalItems: Int = 0
-    var scrollOutItems: Int = 0
-    var page = 1
-    var totalNumberOfPages: Int = 1
-    lateinit var manager: LinearLayoutManager
-    lateinit var newsList: ArrayList<HomeNewsUIModel.NewsList>
-    lateinit var viewDataBinding: HomeFragmentBinding
-    val viewModel: HomeViewModel by viewModel()
+    private var isScrolling: Boolean = false
+    private var currentItems: Int = 0
+    private var totalItems: Int = 0
+    private var scrollOutItems: Int = 0
+    private var page = 1
+    private var totalNumberOfPages: Int = 1
+    private lateinit var manager: LinearLayoutManager
+    private lateinit var newsList: ArrayList<HomeNewsUIModel.NewsList>
+    private lateinit var viewDataBinding: HomeFragmentBinding
+    private val viewModel: HomeViewModel by viewModel()
     private lateinit var accessType: String
     private var mProgressDialog: ProgressDialog? = null
 
@@ -72,6 +78,7 @@ class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
         viewDataBinding.viewModel = viewModel
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
 
+        // Determine user type and fetch profile data
         if (accessType == "teacher") {
             viewDataBinding.imageViewQrCode.visibility = View.VISIBLE
             viewModel.getTeacherProfileData()
@@ -80,25 +87,90 @@ class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
             viewModel.getProfileData("user")
         }
 
-        //mProgressDialog = CommonUtils.showLoadingDialog(requireActivity(), R.layout.progress_dialog)
-
         viewDataBinding.veilLayout.loadSkeleton()
         newsList = ArrayList()
 
-
+        // Fetch nursery data
         viewModel.getNurseryData()
+
+        // Observe profile data and update UI
         userProfileDataObservation()
         teacherProfileDataObservation()
-        val window: Window = requireActivity().window
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+
+        setupViewPagerWithTabLayout()
 
         viewDataBinding.newsAdapter = HomeNewsAdapter(ArrayList())
         manager = LinearLayoutManager(requireActivity())
         viewDataBinding.recyclerViewNews.layoutManager = manager
 
+        setupRecyclerViewScrollListener()
+        observeDataChanges()
+        setupClickListeners()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun setupViewPagerWithTabLayout() {
+        val viewPager = viewDataBinding.viewPager
+        val tabLayout = viewDataBinding.tabLayout
+
+        viewModel.homeNurseryData.observe(viewLifecycleOwner) { data ->
+            viewDataBinding.veilLayout.hideSkeleton()
+            data.images.removeIf(String::isEmpty)
+            val adapter = ImagesListAdapter(data.images, requireContext(), this)
+            viewPager.adapter = adapter
+
+            // Attach TabLayout with ViewPager2
+            TabLayoutMediator(tabLayout, viewPager) { _, _ -> }.attach()
+
+            // Start Auto-Scrolling
+            startAutoScroll(viewPager, data.images.size)
+        }
+    }
+    private var autoScrollJob: Job? = null
+    private var pageChangeCallback: ViewPager2.OnPageChangeCallback? = null
+
+    private fun startAutoScroll(viewPager: ViewPager2, itemCount: Int) {
+        if (itemCount <= 1) return // No need to scroll if only one item exists.
+
+        // Cancel any existing job to prevent duplicates
+        autoScrollJob?.cancel()
+
+        // Start auto-scroll coroutine
+        autoScrollJob = lifecycleScope.launch {
+            while (isActive) {
+                delay(5000) // 5 seconds delay
+                val nextItem = (viewPager.currentItem + 1) % itemCount
+                viewPager.setCurrentItem(nextItem, true)
+            }
+        }
+
+        // Register a single OnPageChangeCallback if not already registered
+        if (pageChangeCallback == null) {
+            pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                    if (state == ViewPager2.SCROLL_STATE_DRAGGING) {
+                        autoScrollJob?.cancel() // Stop auto-scroll during user interaction
+                    } else if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                        if (autoScrollJob?.isActive != true) {
+                            startAutoScroll(viewPager, itemCount) // Resume auto-scroll
+                        }
+                    }
+                }
+            }
+            viewPager.registerOnPageChangeCallback(pageChangeCallback!!)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Cleanup to avoid memory leaks
+        autoScrollJob?.cancel()
+        pageChangeCallback?.let { viewDataBinding.viewPager.unregisterOnPageChangeCallback(it) }
+        pageChangeCallback = null
+    }
+
+    private fun setupRecyclerViewScrollListener() {
         viewDataBinding.recyclerViewNews.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -129,37 +201,48 @@ class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
                 }
             }
         })
+    }
 
-        viewModel.homeNurseryData.observe(viewLifecycleOwner) {
-            //  CommonUtils.hideLoading(mProgressDialog!!)
+    private fun userProfileDataObservation() {
+        viewModel.profileUIModel.observe(viewLifecycleOwner) { profile ->
             viewDataBinding.veilLayout.hideSkeleton()
-            it.images.removeIf(String::isEmpty);
-            val adapter = ImagesListAdapter(it.images, requireContext(), this)
-            viewDataBinding.recyclerView3.setSliderAdapter(adapter)
-            viewDataBinding.recyclerView3.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
-            viewDataBinding.recyclerView3.scrollTimeInSec = 4 //set scroll delay in seconds :
-            viewDataBinding.recyclerView3.startAutoCycle()
+            viewModel.saveProfileResponseToSharedPref(profile)
+            if (viewModel.getSelectedChildDataFromSharedPref() == null) {
+                viewModel.saveChildDataToSharedPref(profile.students!![0])
+            }
+            viewModel.getNewsList(profile.associationId!!, page)
         }
+    }
 
-        messageObserver()
-        viewModel.newsList.observe(viewLifecycleOwner) {
-            //CommonUtils.hideLoading(mProgressDialog!!)
+    private fun teacherProfileDataObservation() {
+        viewModel.teacherProfileUIModel.observe(viewLifecycleOwner) { teacherProfile ->
             viewDataBinding.veilLayout.hideSkeleton()
+            viewModel.saveTeacherResponseToSharedPref(teacherProfile)
+            viewModel.getNewsList(teacherProfile.associationId!!, page)
+        }
+    }
 
+    private fun observeDataChanges() {
+        viewModel.newsList.observe(viewLifecycleOwner) {
+            viewDataBinding.veilLayout.hideSkeleton()
             newsList.clear()
             newsList.addAll(it.newsList)
             totalNumberOfPages = it.pages
             viewDataBinding.newsAdapter!!.news = newsList
             viewDataBinding.newsAdapter!!.notifyDataSetChanged()
         }
+    }
 
+    private fun setupClickListeners() {
         viewDataBinding.constraintLayoutDailyReports.setOnClickListener {
-            if (accessType == "teacher") {
-                startActivity(Intent(context, TeacherDailyReportActivity::class.java))
+            val intent = if (accessType == "teacher") {
+                Intent(context, TeacherDailyReportActivity::class.java)
             } else {
-                startActivity(Intent(context, DailyReportActivity::class.java))
+                Intent(context, DailyReportActivity::class.java)
             }
+            startActivity(intent)
         }
+
         viewDataBinding.constraintLayoutEvents.setOnClickListener {
             startActivity(Intent(context, EventsActivity::class.java))
         }
@@ -169,69 +252,24 @@ class HomeFragment : Fragment() ,ImagesListAdapter.CallBack {
         }
 
         viewDataBinding.constraintLayoutMedical.setOnClickListener {
-            if (accessType == "teacher") {
-                startActivity(Intent(context, TeacherMedicalReportActivity::class.java))
+            val intent = if (accessType == "teacher") {
+                Intent(context, TeacherMedicalReportActivity::class.java)
             } else {
-                startActivity(Intent(context, MedicalReportActivity::class.java))
+                Intent(context, MedicalReportActivity::class.java)
             }
+            startActivity(intent)
         }
 
         viewDataBinding.constraintLayoutEducation.setOnClickListener {
             startActivity(Intent(context, EducationActivity::class.java))
         }
-        viewDataBinding.imageViewQrCode.setOnClickListener(View.OnClickListener {
+
+        viewDataBinding.imageViewQrCode.setOnClickListener {
             startActivity(Intent(context, QRActivity::class.java))
-        })
-    }
-
-    private fun messageObserver() {
-        viewModel.message.observe(viewLifecycleOwner, {
-            showMessage(it)
-        })
-    }
-
-    private fun showMessage(it: String) {
-       // CommonUtils.hideLoading(mProgressDialog!!)
-        viewDataBinding.veilLayout.hideSkeleton()
-
-        Toast.makeText(
-            requireContext(), it,
-            Toast.LENGTH_LONG
-        ).show();
-    }
-
-    fun hideLoading() {
-        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
-            mProgressDialog!!.cancel()
-        }
-    }
-
-    private fun userProfileDataObservation() {
-        viewModel.profileUIModel.observe(viewLifecycleOwner) {
-            //CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.hideSkeleton()
-
-            viewModel.saveProfileResponseToSharedPref(it)
-            if (viewModel.getSelectedChildDataFromSharedPref() == null) {
-                viewModel.saveChildDataToSharedPref(it.students!![0])
-            }
-            viewModel.getNewsList(it.associationId!!, page)
-
-        }
-    }
-
-
-    private fun teacherProfileDataObservation() {
-        viewModel.teacherProfileUIModel.observe(viewLifecycleOwner) {
-            // CommonUtils.hideLoading(mProgressDialog!!)
-            viewDataBinding.veilLayout.hideSkeleton()
-            viewModel.saveTeacherResponseToSharedPref(it)
-//            viewModel.saveProfileResponseToSharedPref(it)
-            viewModel.getNewsList(it.associationId!!, page)
         }
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
-
+        // Handle image click
     }
 }

@@ -8,6 +8,8 @@
             name="model"
             type="com.app.kera.medical.model.DisplayMedicalReportResponseModel.DataBean.DocsBean" />
     </data>
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/outer_report_item"
         android:layout_width="match_parent"

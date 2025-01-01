@@ -39,8 +39,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/roundCornerLayout5"
-            android:layout_width="wrap_content"
-            android:layout_height="210dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
 
 
             app:cardElevation="20dp"
@@ -51,40 +51,56 @@
 
             >
 
-            <com.smarteist.autoimageslider.SliderView
-                android:id="@+id/recyclerView"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="1dp">
 
-                app:sliderAnimationDuration="600"
-                app:sliderAutoCycleDirection="right"
-                app:sliderAutoCycleEnabled="true"
-                app:sliderIndicatorAnimationDuration="600"
-                app:sliderIndicatorGravity="center_horizontal|bottom"
-                app:sliderIndicatorMargin="13dp"
-                app:sliderIndicatorOrientation="horizontal"
-                app:sliderIndicatorPadding="3dp"
-                app:sliderIndicatorRadius="2dp"
-                app:sliderIndicatorSelectedColor="#0093DE"
-                app:sliderIndicatorUnselectedColor="#D2DCE8"
-                app:sliderStartAutoCycle="true" />
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_more_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="#50C4FF"
-                android:clickable="true"
-                app:tint="@color/white"
-                app:elevation="@dimen/_1sdp"
-                android:elevation="5dp"
-                app:srcCompat="@drawable/ic_baseline_image_24"
-                android:alpha="0.9"
-                />
+                    />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    app:tabMode="fixed"
+                    android:layout_margin="10dp"
+                    android:backgroundTint="#00FFFFFF"
+
+                    app:tabBackground="@drawable/tab_pager_selector"
+                    app:tabGravity="center"
+                    android:background="#00FFFFFF"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabPaddingEnd="@dimen/_10sdp"
+                    app:tabPaddingStart="@dimen/_10sdp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_more_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:backgroundTint="#50C4FF"
+                    android:clickable="true"
+                    app:tint="@color/white"
+                    app:elevation="@dimen/_1sdp"
+                    android:elevation="5dp"
+                    app:srcCompat="@drawable/ic_baseline_image_24"
+                    android:alpha="0.9"
+                    />
+
+            </FrameLayout>
+
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline226"
                 android:layout_width="wrap_content"

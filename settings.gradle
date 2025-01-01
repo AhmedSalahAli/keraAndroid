@@ -1,2 +1,4 @@
 include ':app'
 rootProject.name = "Kera"
+include ':pinview'
+include ':code-scanner-master'

@@ -6,6 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Kera.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Kera.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Kera.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Kera.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Kera.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Kera.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pinview/Kera.pinview.iml" filepath="$PROJECT_DIR$/.idea/modules/pinview/Kera.pinview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pinview/Kera.pinview.main.iml" filepath="$PROJECT_DIR$/.idea/modules/pinview/Kera.pinview.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pinview/Kera.pinview.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/pinview/Kera.pinview.unitTest.iml" />
     </modules>
   </component>
 </project>

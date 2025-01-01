@@ -39,9 +39,7 @@ import com.app.kera.teacherMedicalReport.writeMedicalReport.WriteMedicalReportAc
 import com.app.kera.utils.CommonUtils
 import com.app.kera.utils.Configurations
 import com.app.kera.utils.Configurations.Companion.API_PATH
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.core.ImagePipelineConfig
-import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig
+
 import com.google.gson.Gson
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -62,12 +60,12 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
         super.onCreate(savedInstanceState)
         ForceUpdateChecker.with(this).onCheckConfigParams(this).config()
         lannguage(this)
-        val config: ImagePipelineConfig = ImagePipelineConfig.newBuilder(this)
-            .setProgressiveJpegConfig(SimpleProgressiveJpegConfig())
-            .setResizeAndRotateEnabledForNetwork(true)
-            .setDownsampleEnabled(true)
-            .build()
-        Fresco.initialize(this, config)
+//        val config: ImagePipelineConfig = ImagePipelineConfig.newBuilder(this)
+//            .setProgressiveJpegConfig(SimpleProgressiveJpegConfig())
+//            .setResizeAndRotateEnabledForNetwork(true)
+//            .setDownsampleEnabled(true)
+//            .build()
+//        Fresco.initialize(this, config)
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
 
         val window: Window =this.window
@@ -280,8 +278,8 @@ class SplashActivity : AppCompatActivity(),ForceUpdateChecker.onCheckConfigParam
     }
     override fun onCheckConfigParams(BaseUrl: String?) {
         if (BaseUrl != null) {
-            Configurations.BASE_URL = BaseUrl+API_PATH
-       // Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
+//            Configurations.BASE_URL = BaseUrl+API_PATH
+        Configurations.BASE_URL = "https://kera-test-app.herokuapp.com/api/"
             Log.i("BaseUrl","reach baseUrl : "+BaseUrl)
         }
         Log.i("BaseUrl","reach listner")

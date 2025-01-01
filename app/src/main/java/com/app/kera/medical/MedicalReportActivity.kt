@@ -20,7 +20,7 @@ import com.app.kera.medical.model.DisplayMedicalReportResponseModel
 import com.app.kera.profile.StudentsData
 import com.app.kera.profile.adapter.ChildrenAdapter
 import com.app.kera.utils.CommonUtils
-import com.stfalcon.frescoimageviewer.ImageViewer
+import com.stfalcon.imageviewer.StfalconImageViewer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -367,13 +367,17 @@ MedicalReportsAdapter.CallBack{
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
-        ImageViewer.Builder<String>(this, imagesList)
-            .setStartPosition(position)
-            .hideStatusBar(false)
-            .allowZooming(true)
-            .allowSwipeToDismiss(true)
+        StfalconImageViewer.Builder<String>(this, imagesList) { imageView, imageUrl ->
+            CommonUtils.loadImage(imageView, imageUrl) // Replace with your preferred image loading method
+        }
+            .withStartPosition(position)
+            .withBackgroundColor(ContextCompat.getColor(this, R.color.black)) // Set background color
+            .allowZooming(true) // Enable zoom
+            .allowSwipeToDismiss(true) // Allow swipe-to-dismiss functionality
+            .withHiddenStatusBar(true) // Hide the status bar for immersive view
             .show()
     }
+
     private fun showNoData() {
         viewDataBinding.recyclerView10.visibility = View.GONE
         viewDataBinding.noData.visibility = View.VISIBLE

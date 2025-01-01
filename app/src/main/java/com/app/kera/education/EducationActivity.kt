@@ -26,7 +26,6 @@ import com.app.kera.utils.CommonUtils
 import com.bumptech.glide.Glide
 
 import com.squareup.picasso.Picasso
-import com.stfalcon.frescoimageviewer.ImageViewer
 import com.stfalcon.imageviewer.StfalconImageViewer
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton

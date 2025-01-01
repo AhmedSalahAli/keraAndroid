@@ -79,7 +79,7 @@ class NavigationFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
        // fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        viewModel.appRepo.sharedPreference?.mPrefs.registerOnSharedPreferenceChangeListener(listener)
+        viewModel.appRepo.sharedPreference?.mPrefs?.registerOnSharedPreferenceChangeListener(listener)
 
         val window: Window =requireActivity().window
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)

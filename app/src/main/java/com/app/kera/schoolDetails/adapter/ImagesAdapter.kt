@@ -3,52 +3,51 @@ package com.app.kera.schoolDetails.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.app.kera.databinding.SchoolDetailsListItemBinding
 import com.app.kera.utils.CommonUtils
-import com.smarteist.autoimageslider.SliderViewAdapter
 
 class ImagesAdapter(
-    var imagesList: ArrayList<String>, var context:Context,    var callBack: ImagesAdapter.CallBack
-) : SliderViewAdapter<ImagesAdapter.SliderAdapterVH>() {
+    private val imagesList: ArrayList<String>,
+    private val context: Context,
+    private val callBack: CallBack
+) : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup?): ImagesAdapter.SliderAdapterVH {
-        return SliderAdapterVH(
-            SchoolDetailsListItemBinding.inflate(
-                LayoutInflater.from(parent?.context),
-                parent,
-                false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
+        val binding = SchoolDetailsListItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        return ImageViewHolder(binding)
     }
 
-    override fun onBindViewHolder(viewHolder: SliderAdapterVH, position: Int) {
-        viewHolder.onBind(position)
-        viewHolder.itemView.setOnClickListener { callBack.onImageClicked(position,imagesList) }
-
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        holder.bind(position)
     }
 
-    override fun getCount(): Int {
-        return imagesList.size
-    }
+    override fun getItemCount(): Int = imagesList.size
 
-    inner class SliderAdapterVH(var sliderItemBinding: SchoolDetailsListItemBinding) :
-        SliderViewAdapter.ViewHolder(sliderItemBinding.root) {
-        fun onBind(position: Int) {
-            sliderItemBinding.model = imagesList[position]
-            if (!imagesList[position].isEmpty()&&imagesList[position]!=null){
-                //Glide.with(context).load(imagesList[position]).into(sliderItemBinding.imageSlider)
-                CommonUtils.loadImage(sliderItemBinding.imageSlider,imagesList[position])
+    inner class ImageViewHolder(private val binding: SchoolDetailsListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(position: Int) {
+            val imageUrl = imagesList[position]
+            binding.model = imageUrl
+
+            if (imageUrl.isNotEmpty()) {
+                CommonUtils.loadImage(binding.imageSlider, imageUrl)
+                // Alternative: Glide.with(context).load(imageUrl).into(binding.imageSlider)
             }
 
-
-
+            binding.root.setOnClickListener {
+                callBack.onImageClicked(position, imagesList)
+            }
         }
     }
+
     interface CallBack {
-        fun onImageClicked(
-            position: Int,
-            imagesList: ArrayList<String>
-        )
+        fun onImageClicked(position: Int, imagesList: ArrayList<String>)
     }
 }

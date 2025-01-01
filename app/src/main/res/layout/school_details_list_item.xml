@@ -11,21 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="235dp">
+        android:layout_height="match_parent">
 
-        <com.app.kera.utils.RoundCornerLayout
-            android:id="@+id/roundCornerLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:bottomLeftEnabled="true"
-            app:bottomRightEnabled="true"
-            app:cornerRadius="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:topLeftEnabled="false"
-            app:topRightEnabled="false">
+
 
             <ImageView
                 android:id="@+id/image_slider"
@@ -33,7 +21,6 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 />
-        </com.app.kera.utils.RoundCornerLayout>
 
 
 
