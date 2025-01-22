@@ -10,14 +10,14 @@ ext {
 }
 android {
     signingConfigs {
-        debug {
-            storeFile file('/Users/mohammadodeh/StudioProjects/JksFiles/Kera-JKS/KeraReleaseFiles')
-            storePassword password
-            keyAlias 'key0'
-            keyPassword password
-        }
+//        debug {
+//            storeFile file('/Users/mohammadodeh/StudioProjects/JksFiles/Kera-JKS/KeraReleaseFiles')
+//            storePassword password
+//            keyAlias 'key0'
+//            keyPassword password
+//        }
         release {
-            storeFile file('/Users/mohammadodeh/StudioProjects/JksFiles/KeraReleaseFiles/upload-jks.jks')
+            storeFile file('/Volumes/My-Work/projects/Kera/kera-documents/upload-jks.jks')
             storePassword 'Kera@Dev11kk'
             keyPassword 'Kera@Dev11kk'
             keyAlias 'upload'
