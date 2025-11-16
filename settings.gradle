@@ -1,4 +1,15 @@
-include ':app'
 rootProject.name = "Kera"
+
+include ':app'
 include ':pinview'
 include ':code-scanner-master'
+
+// Ensure all dependencies (including JitPack-hosted ones like StfalconImageViewer) can be resolved
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}

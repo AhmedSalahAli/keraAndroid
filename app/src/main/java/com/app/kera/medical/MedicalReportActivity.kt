@@ -1,6 +1,7 @@
 package com.app.kera.medical
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -20,7 +21,7 @@ import com.app.kera.medical.model.DisplayMedicalReportResponseModel
 import com.app.kera.profile.StudentsData
 import com.app.kera.profile.adapter.ChildrenAdapter
 import com.app.kera.utils.CommonUtils
-import com.stfalcon.imageviewer.StfalconImageViewer
+import com.app.kera.imageViewer.ImageViewerActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -367,15 +368,10 @@ MedicalReportsAdapter.CallBack{
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
-        StfalconImageViewer.Builder<String>(this, imagesList) { imageView, imageUrl ->
-            CommonUtils.loadImage(imageView, imageUrl) // Replace with your preferred image loading method
-        }
-            .withStartPosition(position)
-            .withBackgroundColor(ContextCompat.getColor(this, R.color.black)) // Set background color
-            .allowZooming(true) // Enable zoom
-            .allowSwipeToDismiss(true) // Allow swipe-to-dismiss functionality
-            .withHiddenStatusBar(true) // Hide the status bar for immersive view
-            .show()
+        val intent = Intent(this, ImageViewerActivity::class.java)
+        intent.putExtra("location", imagesList)
+        intent.putExtra("Position", position)
+        startActivity(intent)
     }
 
     private fun showNoData() {

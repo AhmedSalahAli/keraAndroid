@@ -26,7 +26,6 @@ import com.app.kera.utils.CommonUtils
 import com.bumptech.glide.Glide
 
 import com.squareup.picasso.Picasso
-import com.stfalcon.imageviewer.StfalconImageViewer
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -248,27 +247,10 @@ class EducationActivity : AppCompatActivity(), DateAdapter.ItemClickNavigator ,E
 
 
 
-        StfalconImageViewer.Builder<String>(this, imagesList) { view, image ->
-//            Picasso.get().load(image).into(view)
-           CommonUtils.loadImage(view,image)
-
-
-        }
-            .withStartPosition(position)
-            .withBackgroundColor(resources.getColor(R.color.black))
-            //.withBackgroundColorResource(R.color.color)
-
-
-            //.withImageMarginPixels(margin)
-
-            //.withContainerPadding(R.dimen.paddingStart, R.dimen.paddingTop, R.dimen.paddingEnd, R.dimen.paddingBottom)
-            //.withContainerPaddingPixels(padding)
-            //.withContainerPaddingPixels(paddingStart, paddingTop, paddingEnd, paddingBottom)
-            .withHiddenStatusBar(true)
-            .allowZooming(true)
-            .show()
-
-
+        val intent = Intent(this, ImageViewerActivity::class.java)
+        intent.putExtra("location", imagesList)
+        intent.putExtra("Position", position)
+        startActivity(intent)
     }
     fun stateOfChildrenFrame(state:Boolean){
         if (state){

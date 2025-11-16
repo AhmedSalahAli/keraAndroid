@@ -1,6 +1,7 @@
 package com.app.kera.meals.details
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -12,12 +13,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.app.kera.R
 import com.app.kera.databinding.ActivityMealsDetailsBinding
+import com.app.kera.imageViewer.ImageViewerActivity
 import com.app.kera.profile.StudentsData
 import com.app.kera.profile.adapter.ChildrenAdapter
 import com.app.kera.schoolDetails.adapter.ImagesAdapter
 import com.app.kera.utils.CommonUtils
 import com.google.android.material.tabs.TabLayoutMediator
-import com.stfalcon.imageviewer.StfalconImageViewer
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -127,14 +128,10 @@ class MealsDetailsActivity : AppCompatActivity(), ImagesAdapter.CallBack, Childr
     }
 
     override fun onImageClicked(position: Int, imagesList: ArrayList<String>) {
-        StfalconImageViewer.Builder<String>(this, imagesList) { view, image ->
-            CommonUtils.loadImage(view, image)
-        }
-            .withStartPosition(position)
-            .withBackgroundColor(resources.getColor(R.color.black))
-            .withHiddenStatusBar(true)
-            .allowZooming(true)
-            .show()
+        val intent = Intent(this, ImageViewerActivity::class.java)
+        intent.putExtra("location", imagesList)
+        intent.putExtra("Position", position)
+        startActivity(intent)
     }
 
     private fun stateOfChildrenFrame(state: Boolean) {

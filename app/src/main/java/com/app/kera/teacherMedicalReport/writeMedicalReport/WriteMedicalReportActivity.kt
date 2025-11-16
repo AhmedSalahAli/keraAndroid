@@ -12,7 +12,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide
 import com.app.kera.R
 import com.app.kera.data.models.teacherMedicalReport.UpdateMedicalRequestModel
 import com.app.kera.databinding.WriteMedicalReportFragmentBinding
@@ -21,7 +20,8 @@ import com.app.kera.teacherMedicalReport.model.ImageRequest
 import com.app.kera.teacherMedicalReport.writeMedicalReport.adapter.WriteReportStudentsAdapter
 import com.app.kera.utils.CommonUtils
 import com.app.kera.utils.CommonUtilsJava
-import com.stfalcon.imageviewer.StfalconImageViewer
+import com.app.kera.imageViewer.ImageViewerActivity
+import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
 
@@ -178,16 +178,10 @@ class WriteMedicalReportActivity : AppCompatActivity() {
 
     private fun showImages(position: Int) {
         if (images.isNotEmpty()) {
-            StfalconImageViewer.Builder<String>(this, images) { imageView, imageUrl ->
-                // Use your preferred image loading library to load the image
-                Glide.with(this).load(imageUrl).into(imageView)
-            }
-                .withStartPosition(position) // Start from the selected image position
-                .allowSwipeToDismiss(true) // Enable swipe-to-dismiss
-                .allowZooming(true) // Enable pinch-to-zoom
-                .withHiddenStatusBar(true) // Hide status bar for immersive view
-                .withBackgroundColor(ContextCompat.getColor(this, R.color.black)) // Set background color
-                .show()
+            val intent = Intent(this, ImageViewerActivity::class.java)
+            intent.putStringArrayListExtra("location", images)
+            intent.putExtra("Position", position)
+            startActivity(intent)
         }
     }
 
